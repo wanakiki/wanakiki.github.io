@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Wanakiki">
+  
+  
+  
+  <link rel="prev" href="https://wanakiki.github.io/2019/zuma-list/" />
+  
+  <link rel="canonical" href="https://wanakiki.github.io/2019/list-adt/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           数据结构作业二 List ADT | Wanakiki`s Blog
+       
+  </title>
+  <meta name="title" content="数据结构作业二 List ADT | Wanakiki`s Blog">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/wanakiki.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "数据结构作业二 List ADT",
+    "headline" : "数据结构作业二 List ADT",
+    "description" : "问题分析 题目要求自行实现list ADT，并在此基础上实现PrintLots函数并且实现懒惰删除功能。对于PrintLots函数，题目要求分析",
+    "inLanguage" : "zh-cn",
+    "author" : "Wanakiki",
+    "creator" : "Wanakiki",
+    "publisher": "Wanakiki",
+    "accountablePerson" : "Wanakiki",
+    "copyrightHolder" : "Wanakiki",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-04-20 20:22:40 \x2b0800 CST",
+    "dateModified" : "2019-04-20 20:22:40 \x2b0800 CST",
+    "url" : "https:\/\/wanakiki.github.io\/2019\/list-adt\/",
+    "wordCount" : "2676",
+    "keywords" : [  "Wanakiki`s Blog"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://wanakiki.github.io">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://wanakiki.github.io">Wanakiki`s Blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">数据结构作业二 List ADT</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://wanakiki.github.io" rel="author">Wanakiki</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2019-04-20 itemprop="datePublished">April 20, 2019</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://wanakiki.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"> 数据结构 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<!-- more -->
+
+<h2 id="问题分析">问题分析</h2>
+
+<p>题目要求自行实现list ADT，并在此基础上实现PrintLots函数并且实现懒惰删除功能。对于PrintLots函数，题目要求分析运行时间；对于懒惰删除功能，除编写实现外，题目还要求列出懒惰删除的优点和缺点。</p>
+
+<p><strong>PrintLots(L,P)</strong>：有两个链表L和P, 他们包含以升序排列的整数，操作PrintLots(L,P)将打印L中那些由P所指定位置上的元素。</p>
+
+<p><strong>懒惰删除（lazy deletion）</strong>：为了删除一个元素，我们只标记上该元素被删除。表中被删除和非被删除元素的个数作为数据结构的一部分被保留。如果被删除元素和非被删除元素一样多，我们遍历整个表，对所有被标记的节点执行标准的删除算法。</p>
+
+<h2 id="解决方案">解决方案</h2>
+
+<p>设计list ADT，准备好PrintLots函数所需要的接口。主文件引用自己编写的list ADT，并在主文件中完成对PrintLots函数的实现，懒惰删除则可以直接封装在ADT中。由于本次实验缺乏示例输入输出，因此还要对输入输出部分稍微加以设计，在此不多赘述。</p>
+
+<h2 id="算法设计">算法设计</h2>
+
+<p>list ADT的实现大体可以按照课本所给的框架来初步构建，之后对其进行丰富，首先实现节点类，再进一步实现List类。考虑到懒惰删除的需要，在实现节点类的时候我在其中加入了是否删除的标志，实现List类时增加了用于统计伪删除元素个数的变量。为了更进一步贴合标准模板库的操作，相对多此一举地加入了迭代器子类。（实践证明，我对迭代器相关知识的了解并不充分&hellip;😕）</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://ws1.sinaimg.cn/large/006bu4XTly1g29dg1ljtgj30pg0gr4qq.jpg" alt="结构示意" class="lazyload"><figcaption class="image-caption">结构示意</figcaption></figure></p>
+
+<h3 id="printlots函数">PrintLots函数</h3>
+
+<p>因为两个链表的元素都是升序排列的，所以L的迭代器可以一直向一个方向移动，整个函数的实现降低了一些难度。定义一个整形变量用来记录当前L的迭代器指向位置的编号，编号若与P的迭代器指向的元素相同则进行输出，同时两个迭代器向后移动。若编号与P当前元素不同，则指向L的迭代器向后移动。函数的终止条件为链表P遍历结束。</p>
+
+<h4 id="复杂度分析">复杂度分析</h4>
+
+<p>从整体上来看，PrintLots函数只是两个链表的单向遍历输出，只是细节方面稍微复杂，但引入的均为常数时间可以完成的操作。因为P的元素个数不可能超过L的元素个数，所以最坏情况便是输出了L的所有元素。时间复杂度为O(n)。</p>
+
+<h3 id="懒惰删除">懒惰删除</h3>
+
+<p>函数参数为指向要删除元素的迭代器，函数通过迭代器访问该元素内部的删除标志，并对其进行修改。修改之后检查当前伪删除元素的总数，大于总元素一般对整个链表进行遍历删除。总体实现相对简单。</p>
+
+<h4 id="懒惰删除优缺点分析">懒惰删除优缺点分析</h4>
+
+<p>优点：误删数据有恢复的空间，未被释放的空间可以进行二次利用，减少了资源消耗较大的删除过程的需求次数（链表中体现不明显）。
+缺点：记录元素伪删除需要额外的操作和空间，被删除的节点不及时释放增加了空间的占用，也提高了部分操作所需的时间。</p>
+
+<h2 id="流程图">流程图</h2>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://ws1.sinaimg.cn/large/006bu4XTly1g29d8m6wuhj30cp0jcq3n.jpg" alt="printlots" class="lazyload"><figcaption class="image-caption">printlots</figcaption></figure></p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://ws1.sinaimg.cn/large/006bu4XTly1g29d8mfr8sj30cr0oddgu.jpg" alt="lazy deletion" class="lazyload"><figcaption class="image-caption">lazy deletion</figcaption></figure></p>
+
+<h2 id="编程实现">编程实现</h2>
+
+<p>共编写了三个文件：listnode.h、my_list.h、main.cpp</p>
+
+<p>1.listnode.h</p>
+
+<pre><code class="language-cpp">    #include&lt;iostream&gt;
+    using namespace std;
+
+    //定义列表的节点
+    template &lt;typename T&gt; struct ListNode
+    {
+        T data;
+        ListNode&lt;T&gt;* pred;
+        ListNode&lt;T&gt;* succ;
+        bool need_remove;   //need_remove为了方便懒惰消除
+
+        ListNode() : need_remove(false) {}
+        ListNode(T e, ListNode&lt;T&gt;* p = NULL, ListNode&lt;T&gt;* s = NULL)
+            : data(e), pred(p), succ(s), need_remove(false) {}
+
+        ListNode&lt;T&gt;* insertAsPred(T const&amp; e);
+        ListNode&lt;T&gt;* insertAsSucc(T const&amp; e);
+    };
+
+    //前插入
+    template &lt;typename T&gt;
+    ListNode&lt;T&gt;* ListNode&lt;T&gt;::insertAsPred(T const&amp; e){
+        ListNode&lt;T&gt;* x = new ListNode(e, pred, this);
+        pred-&gt;succ = x;
+        pred = x;
+        return x;
+    }
+
+    //后插入
+    template &lt;typename T&gt;
+    ListNode&lt;T&gt;* ListNode&lt;T&gt;::insertAsSucc(T const&amp; e){
+        ListNode&lt;T&gt;* x = new ListNode(e, this, succ);
+        succ-&gt;pred = x;
+        succ = x;
+        return x;
+    }
+</code></pre>
+
+<p>2.my_list.h</p>
+
+<pre><code class="language-cpp">#include &quot;listnode.h&quot;
+
+template &lt;typename T&gt;
+class List
+{
+  private:
+    int _size;
+    int _num;
+    ListNode&lt;T&gt; *header;
+    ListNode&lt;T&gt; *trailer;
+
+  protected:
+    void init();
+    void copyNodes(ListNode&lt;T&gt; *, int);
+    //只写出了有可能用到的函数
+
+  public:
+    List() { init(); } //默认构造
+    List(List&lt;T&gt; const &amp;L);
+    List(List&lt;T&gt; const &amp;L, int r, int n);
+    List(ListNode&lt;T&gt; *p, int n);
+    int clear();
+
+    ~List(); //析构
+
+    class Iterator{
+      public:
+        ListNode&lt;T&gt; *ptr;
+
+        Iterator() : ptr(NULL) {}
+        Iterator(ListNode&lt;T&gt; *tmp) : ptr(tmp) {}
+
+        T operator*(){
+            return ptr-&gt;data;
+            //为空时如何抛出错误？
+        }
+
+        bool operator==(Iterator const &amp;x) { return ptr == x.ptr; }
+        bool operator!=(Iterator const &amp;x) { return ptr != x.ptr; }
+        Iterator operator++(int){
+            //不能在这里访问trailer，那么标准的迭代器是怎么操作的呢
+            Iterator tmp(ptr);
+            while(1){
+                if(ptr-&gt;succ != NULL)
+                    ptr = ptr-&gt;succ;
+                if(!ptr-&gt;need_remove)   //不需要继续访问，跳出循环
+                    break;
+            }
+            return tmp;
+        }
+        Iterator operator--(int){
+            Iterator tmp(ptr);
+            while(1){
+                if (ptr-&gt;pred != NULL)
+                    ptr = ptr-&gt;pred;
+                if(!ptr-&gt;need_remove)
+                    break;
+            }
+            return tmp;
+        }
+        Iterator&amp; operator++(){
+            while(1){
+                if(ptr-&gt;succ != NULL)
+                    ptr = ptr-&gt;succ;
+                if(!ptr-&gt;need_remove)   //不需要继续访问，跳出循环
+                    break;
+            }
+            return *this;
+        }
+        Iterator&amp; operator--(){
+            while(1){
+                if (ptr-&gt;pred != NULL)
+                    ptr = ptr-&gt;pred;
+                if(!ptr-&gt;need_remove)
+                    break;
+            }
+            return *this;
+        }
+    };
+
+    bool empty() const { return _size &lt;= 0; }
+    int size() const { return _size-_num; }
+    ListNode&lt;T&gt; *insertAsFirst(T const &amp;e);
+    ListNode&lt;T&gt; *insertAsLast(T const &amp;e);
+    Iterator begin() { return ++Iterator(header); }
+    Iterator end() { return Iterator(trailer); }
+    ListNode&lt;T&gt; *first() const { return header-&gt;succ; } //first和begin完全没必要
+    ListNode&lt;T&gt; *last() const { return trailer-&gt;pred; }
+    T remove(ListNode&lt;T&gt; *p);
+    void lazy_deletion(Iterator i);
+    void show();
+    void Advance(Iterator &amp;i, int n);
+};
+
+template &lt;typename T&gt; //列表初始化
+void List&lt;T&gt;::init()
+{
+    header = new ListNode&lt;T&gt;;
+    trailer = new ListNode&lt;T&gt;;
+    header-&gt;succ = trailer;
+    header-&gt;pred = NULL;
+    trailer-&gt;pred = header;
+    trailer-&gt;succ = NULL;
+    _size = 0;
+    _num = 0;
+}
+
+//复制自p开始的n项
+template &lt;typename T&gt;
+void List&lt;T&gt;::copyNodes(ListNode&lt;T&gt; *p, int n)
+{
+    init();
+    while (n--)
+    {
+        insertASLast(p-&gt;data);
+        p = p-&gt;succ;
+    }
+}
+
+//Clear()
+template &lt;typename T&gt;
+int List&lt;T&gt;::clear()
+{
+    int num = _size;
+    if (_size)
+    {
+        ListNode&lt;T&gt; *p = header-&gt;succ;
+        ListNode&lt;T&gt; *tmp;
+        while (p != trailer)
+        {
+            tmp = p-&gt;succ;
+            delete p;
+            p = tmp;
+        }
+    }
+    _size = 0;
+    _num = 0;
+    return num;
+}
+
+//构造函数
+template &lt;typename T&gt;
+List&lt;T&gt;::List(List&lt;T&gt; const &amp;L) { copyNodes(L.first(), L.size()); }
+
+template &lt;typename T&gt;
+List&lt;T&gt;::List(List&lt;T&gt; const &amp;L, int r, int n)
+{
+    ListNode&lt;T&gt; *tmp = L.first();
+    while (--r)
+        tmp = tmp-&gt;succ;
+    copyNodes(tmp, n);
+}
+
+template &lt;typename T&gt;
+List&lt;T&gt;::List(ListNode&lt;T&gt; *p, int n) { copyNodes(p, n); }
+
+//析构函数
+template &lt;typename T&gt;
+List&lt;T&gt;::~List()
+{
+    clear();
+    delete trailer;
+    delete header;
+}
+
+template &lt;typename T&gt;
+ListNode&lt;T&gt; *List&lt;T&gt;::insertAsFirst(T const &amp;e)
+{
+    _size++;
+    return header-&gt;insertAsSucc(e);
+}
+
+template &lt;typename T&gt;
+ListNode&lt;T&gt; *List&lt;T&gt;::insertAsLast(T const &amp;e)
+{
+    _size++;
+    return trailer-&gt;insertAsPred(e);
+}
+
+//删除
+template &lt;typename T&gt;
+T List&lt;T&gt;::remove(ListNode&lt;T&gt; *p)
+{
+    T tmp= p-&gt;data;
+    _size--;
+    p-&gt;pred-&gt;succ = p-&gt;succ;
+    p-&gt;succ-&gt;pred = p-&gt;pred;
+    delete p;
+    return tmp;
+}
+
+template &lt;typename T&gt;
+void List&lt;T&gt;::lazy_deletion(Iterator i){
+    _num++;
+    ListNode&lt;T&gt;* tmp = i.ptr;
+    tmp-&gt;need_remove = true;
+
+    //数量大于一半开始全部删除
+    if(_num &gt;= _size/2){
+        _num = 0;
+        ListNode&lt;T&gt; *p = header-&gt;succ;
+        while(trailer != p){
+            if(!p-&gt;need_remove){
+                p = p-&gt;succ;
+                continue;
+            }
+                
+            tmp = p-&gt;succ;
+            remove(p);
+            p = tmp;       
+        }
+    }
+    return ;
+}
+
+//输出格式化
+template &lt;typename T&gt;
+void List&lt;T&gt;::show(){
+    if(_size == 0){
+        cout &lt;&lt; &quot;None&quot; &lt;&lt; endl;
+        return ;
+    }
+    ListNode&lt;T&gt;* p = header;
+    while(trailer != (p = p-&gt;succ)){
+        if(p == header-&gt;succ){
+            cout &lt;&lt; p-&gt;data;
+            continue;
+        }
+        if(p-&gt;pred-&gt;need_remove &amp;&amp; p-&gt;need_remove)    cout &lt;&lt; &quot;____&quot;;
+        else if(p-&gt;need_remove)     cout &lt;&lt; &quot;--__&quot;;
+        else if(p-&gt;pred-&gt;need_remove)   cout &lt;&lt; &quot;__-&gt;&quot;;
+        else    cout &lt;&lt; &quot;---&gt;&quot;;
+        cout &lt;&lt; p-&gt;data;
+    }
+    return ;
+}
+
+//用于迭代器的移动
+template &lt;typename T&gt;
+void List&lt;T&gt;::Advance(Iterator &amp; i, int n){
+    if(n &gt;= 0){
+        while(n--)
+            i.ptr = i.ptr-&gt;succ;
+    }
+    else{
+        while(n++)
+            i.ptr = i.ptr-&gt;pred;
+    }
+}
+//如果向容器里面放个pair？
+</code></pre>
+
+<p>3.main.cpp</p>
+
+<pre><code class="language-cpp">#include &quot;my_list.h&quot;
+
+
+void PrintLots(List&lt;int&gt;&amp; L, List&lt;int&gt;&amp; P){
+    int current = 1;
+
+    //是否存在空序列
+    if(L.empty() || P.empty())  {   cout&lt;&lt;&quot;Error, input is empty&quot;&lt;&lt;endl; return ;}
+
+    List&lt;int&gt;::Iterator l = L.begin();
+    List&lt;int&gt;::Iterator p = P.begin();
+    while(1){
+        if(L.size() &lt; *p){  
+            cout &lt;&lt; endl &lt;&lt; &quot;Error, the number of P is bigger than the size of L&quot; &lt;&lt; endl;  
+            break;
+        }
+
+        if(current++ == *p){
+            cout &lt;&lt; *l &lt;&lt; &quot; &quot;;
+            p++;
+        }
+
+        //输出结束
+        if(p == P.end()){  
+                cout &lt;&lt; endl &lt;&lt; &quot;Finished!&quot; &lt;&lt; endl;
+                break;
+        }
+        l++;
+    }
+    return ;
+}
+
+int main(){
+    int m, n, tmp, last;
+    int select = 0;
+    while(1){
+        cout &lt;&lt; &quot;Choose function(0 means lazy_deletion, 1 means PrintLots):&quot;;
+        cin &gt;&gt; select;
+        if(select){
+            List&lt;int&gt; L, P;
+            cout &lt;&lt; &quot;Input the size of L and P: &quot;;
+            cin &gt;&gt; m &gt;&gt; n;
+            cout &lt;&lt; &quot;Input the elements of L: &quot; &lt;&lt; endl;
+            while (m--){
+                cin &gt;&gt; tmp;
+                L.insertAsLast(tmp);
+            }
+            cout &lt;&lt; &quot;Input the elements of P: &quot; &lt;&lt; endl;
+            while (n--){
+                cin &gt;&gt; tmp;
+                P.insertAsLast(tmp);
+            }
+            PrintLots(L, P);
+        }
+        else{
+            List&lt;int&gt; L;
+            cout &lt;&lt; &quot;Input the size of L: &quot;;
+            cin &gt;&gt; m;
+            cout &lt;&lt; &quot;Input the elements of L:&quot; &lt;&lt; endl;
+            for(int j = 0; j &lt; m; j++){
+                cin &gt;&gt; tmp;
+                L.insertAsLast(tmp);
+            }
+            cout &lt;&lt; &quot;L is: &quot;;
+            L.show();
+            cout&lt;&lt;endl;
+
+
+            List&lt;int&gt;::Iterator i = L.begin();
+            last = 1;
+            cout &lt;&lt; &quot;How many elements do you want to delete? &quot;;
+            cin &gt;&gt; n;
+            cout &lt;&lt; &quot;Input them(from 1 to &quot; &lt;&lt; m &lt;&lt; &quot;)&quot; &lt;&lt; endl;
+            while(n--){
+                cin &gt;&gt; tmp;
+                L.Advance(i, tmp-last);
+                last = tmp;
+                L.lazy_deletion(i);
+            }
+            cout &lt;&lt; &quot;Now L is: &quot;;
+            L.show();
+            cout &lt;&lt; endl;
+        } 
+    }
+}
+</code></pre>
+
+<h2 id="结果分析">结果分析</h2>
+
+<p>PrintLots进行了四组测试，从测试结果可以看出对错误情况进行了有效的判断，并且能够处理一般情况。</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://ws1.sinaimg.cn/large/006bu4XTly1g29d8mpjg5j30me0lfn4u.jpg" alt="PrintLots测试" class="lazyload"><figcaption class="image-caption">PrintLots测试</figcaption></figure></p>
+
+<p>为了方便懒惰删除的查看，设置了一个函数用来表现链表当前的情况，同时进行了三种样例的测试，能够代表所有类型的满足要求的输入情况。可以很容易的看出当删除元素过半时按要求完成了操作。</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://ws1.sinaimg.cn/large/006bu4XTly1g29d8mxyvdj30mx0jbaiq.jpg" alt="懒惰删除测试" class="lazyload"><figcaption class="image-caption">懒惰删除测试</figcaption></figure></p>
+
+<h2 id="总结体会">总结体会</h2>
+
+<ol>
+<li>深刻感觉到自己的宏观思维有极大的欠缺，自己设计出的类中的函数不能很好地衔接，编程思维有问题。</li>
+<li>自己写的迭代器可能称不上是迭代器，只是稍微包装了一下指针。自己测试的时候发现在iterator已经被定义，意识到平时所用的迭代器并不是定义在容器的头文件中。</li>
+<li>边界等特殊情况没有得到很好的处理，不过能够保证在输入规范的情况下得到良好的结果，代码总体有待完善。（总之还是对标准模板库特殊情况处理方式不够了解📌</li>
+<li>很多用不到的东西也进行了实现，导致代码量相对较大😓</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Wanakiki </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://wanakiki.github.io/2019/list-adt/>https://wanakiki.github.io/2019/list-adt/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://wanakiki.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://wanakiki.github.io/2019/zuma-list/" class="prev" rel="prev" title="数据结构作业一 Zuma List"><i class="iconfont icon-left"></i>&nbsp;数据结构作业一 Zuma List</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2019</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://wanakiki.github.io">Wanakiki</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

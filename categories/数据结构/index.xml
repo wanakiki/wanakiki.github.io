@@ -6,10 +6,19 @@
     <description>Recent content in 数据结构 on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 20 Apr 2019 19:41:55 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 20 Apr 2019 20:22:40 +0800</lastBuildDate>
     
 	<atom:link href="https://wanakiki.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>数据结构作业二 List ADT</title>
+      <link>https://wanakiki.github.io/2019/list-adt/</link>
+      <pubDate>Sat, 20 Apr 2019 20:22:40 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2019/list-adt/</guid>
+      <description>问题分析 题目要求自行实现list ADT，并在此基础上实现PrintLots函数并且实现懒惰删除功能。对于PrintLots函数，题目要求分析</description>
+    </item>
     
     <item>
       <title>数据结构作业一 Zuma List</title>

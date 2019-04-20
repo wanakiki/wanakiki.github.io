@@ -5,8 +5,467 @@
     <description>Recent content in Wanakiki`s Blog on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 20 Apr 2019 19:41:55 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 20 Apr 2019 20:22:40 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>数据结构作业二 List ADT</title>
+      <link>https://wanakiki.github.io/2019/list-adt/</link>
+      <pubDate>Sat, 20 Apr 2019 20:22:40 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2019/list-adt/</guid>
+      <description>
+
+&lt;!-- more --&gt;
+
+&lt;h2 id=&#34;问题分析&#34;&gt;问题分析&lt;/h2&gt;
+
+&lt;p&gt;题目要求自行实现list ADT，并在此基础上实现PrintLots函数并且实现懒惰删除功能。对于PrintLots函数，题目要求分析运行时间；对于懒惰删除功能，除编写实现外，题目还要求列出懒惰删除的优点和缺点。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PrintLots(L,P)&lt;/strong&gt;：有两个链表L和P, 他们包含以升序排列的整数，操作PrintLots(L,P)将打印L中那些由P所指定位置上的元素。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;懒惰删除（lazy deletion）&lt;/strong&gt;：为了删除一个元素，我们只标记上该元素被删除。表中被删除和非被删除元素的个数作为数据结构的一部分被保留。如果被删除元素和非被删除元素一样多，我们遍历整个表，对所有被标记的节点执行标准的删除算法。&lt;/p&gt;
+
+&lt;h2 id=&#34;解决方案&#34;&gt;解决方案&lt;/h2&gt;
+
+&lt;p&gt;设计list ADT，准备好PrintLots函数所需要的接口。主文件引用自己编写的list ADT，并在主文件中完成对PrintLots函数的实现，懒惰删除则可以直接封装在ADT中。由于本次实验缺乏示例输入输出，因此还要对输入输出部分稍微加以设计，在此不多赘述。&lt;/p&gt;
+
+&lt;h2 id=&#34;算法设计&#34;&gt;算法设计&lt;/h2&gt;
+
+&lt;p&gt;list ADT的实现大体可以按照课本所给的框架来初步构建，之后对其进行丰富，首先实现节点类，再进一步实现List类。考虑到懒惰删除的需要，在实现节点类的时候我在其中加入了是否删除的标志，实现List类时增加了用于统计伪删除元素个数的变量。为了更进一步贴合标准模板库的操作，相对多此一举地加入了迭代器子类。（实践证明，我对迭代器相关知识的了解并不充分&amp;hellip;😕）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ws1.sinaimg.cn/large/006bu4XTly1g29dg1ljtgj30pg0gr4qq.jpg&#34; alt=&#34;结构示意&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;printlots函数&#34;&gt;PrintLots函数&lt;/h3&gt;
+
+&lt;p&gt;因为两个链表的元素都是升序排列的，所以L的迭代器可以一直向一个方向移动，整个函数的实现降低了一些难度。定义一个整形变量用来记录当前L的迭代器指向位置的编号，编号若与P的迭代器指向的元素相同则进行输出，同时两个迭代器向后移动。若编号与P当前元素不同，则指向L的迭代器向后移动。函数的终止条件为链表P遍历结束。&lt;/p&gt;
+
+&lt;h4 id=&#34;复杂度分析&#34;&gt;复杂度分析&lt;/h4&gt;
+
+&lt;p&gt;从整体上来看，PrintLots函数只是两个链表的单向遍历输出，只是细节方面稍微复杂，但引入的均为常数时间可以完成的操作。因为P的元素个数不可能超过L的元素个数，所以最坏情况便是输出了L的所有元素。时间复杂度为O(n)。&lt;/p&gt;
+
+&lt;h3 id=&#34;懒惰删除&#34;&gt;懒惰删除&lt;/h3&gt;
+
+&lt;p&gt;函数参数为指向要删除元素的迭代器，函数通过迭代器访问该元素内部的删除标志，并对其进行修改。修改之后检查当前伪删除元素的总数，大于总元素一般对整个链表进行遍历删除。总体实现相对简单。&lt;/p&gt;
+
+&lt;h4 id=&#34;懒惰删除优缺点分析&#34;&gt;懒惰删除优缺点分析&lt;/h4&gt;
+
+&lt;p&gt;优点：误删数据有恢复的空间，未被释放的空间可以进行二次利用，减少了资源消耗较大的删除过程的需求次数（链表中体现不明显）。
+缺点：记录元素伪删除需要额外的操作和空间，被删除的节点不及时释放增加了空间的占用，也提高了部分操作所需的时间。&lt;/p&gt;
+
+&lt;h2 id=&#34;流程图&#34;&gt;流程图&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ws1.sinaimg.cn/large/006bu4XTly1g29d8m6wuhj30cp0jcq3n.jpg&#34; alt=&#34;printlots&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ws1.sinaimg.cn/large/006bu4XTly1g29d8mfr8sj30cr0oddgu.jpg&#34; alt=&#34;lazy deletion&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;编程实现&#34;&gt;编程实现&lt;/h2&gt;
+
+&lt;p&gt;共编写了三个文件：listnode.h、my_list.h、main.cpp&lt;/p&gt;
+
+&lt;p&gt;1.listnode.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;    #include&amp;lt;iostream&amp;gt;
+    using namespace std;
+
+    //定义列表的节点
+    template &amp;lt;typename T&amp;gt; struct ListNode
+    {
+        T data;
+        ListNode&amp;lt;T&amp;gt;* pred;
+        ListNode&amp;lt;T&amp;gt;* succ;
+        bool need_remove;   //need_remove为了方便懒惰消除
+
+        ListNode() : need_remove(false) {}
+        ListNode(T e, ListNode&amp;lt;T&amp;gt;* p = NULL, ListNode&amp;lt;T&amp;gt;* s = NULL)
+            : data(e), pred(p), succ(s), need_remove(false) {}
+
+        ListNode&amp;lt;T&amp;gt;* insertAsPred(T const&amp;amp; e);
+        ListNode&amp;lt;T&amp;gt;* insertAsSucc(T const&amp;amp; e);
+    };
+
+    //前插入
+    template &amp;lt;typename T&amp;gt;
+    ListNode&amp;lt;T&amp;gt;* ListNode&amp;lt;T&amp;gt;::insertAsPred(T const&amp;amp; e){
+        ListNode&amp;lt;T&amp;gt;* x = new ListNode(e, pred, this);
+        pred-&amp;gt;succ = x;
+        pred = x;
+        return x;
+    }
+
+    //后插入
+    template &amp;lt;typename T&amp;gt;
+    ListNode&amp;lt;T&amp;gt;* ListNode&amp;lt;T&amp;gt;::insertAsSucc(T const&amp;amp; e){
+        ListNode&amp;lt;T&amp;gt;* x = new ListNode(e, this, succ);
+        succ-&amp;gt;pred = x;
+        succ = x;
+        return x;
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;2.my_list.h&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include &amp;quot;listnode.h&amp;quot;
+
+template &amp;lt;typename T&amp;gt;
+class List
+{
+  private:
+    int _size;
+    int _num;
+    ListNode&amp;lt;T&amp;gt; *header;
+    ListNode&amp;lt;T&amp;gt; *trailer;
+
+  protected:
+    void init();
+    void copyNodes(ListNode&amp;lt;T&amp;gt; *, int);
+    //只写出了有可能用到的函数
+
+  public:
+    List() { init(); } //默认构造
+    List(List&amp;lt;T&amp;gt; const &amp;amp;L);
+    List(List&amp;lt;T&amp;gt; const &amp;amp;L, int r, int n);
+    List(ListNode&amp;lt;T&amp;gt; *p, int n);
+    int clear();
+
+    ~List(); //析构
+
+    class Iterator{
+      public:
+        ListNode&amp;lt;T&amp;gt; *ptr;
+
+        Iterator() : ptr(NULL) {}
+        Iterator(ListNode&amp;lt;T&amp;gt; *tmp) : ptr(tmp) {}
+
+        T operator*(){
+            return ptr-&amp;gt;data;
+            //为空时如何抛出错误？
+        }
+
+        bool operator==(Iterator const &amp;amp;x) { return ptr == x.ptr; }
+        bool operator!=(Iterator const &amp;amp;x) { return ptr != x.ptr; }
+        Iterator operator++(int){
+            //不能在这里访问trailer，那么标准的迭代器是怎么操作的呢
+            Iterator tmp(ptr);
+            while(1){
+                if(ptr-&amp;gt;succ != NULL)
+                    ptr = ptr-&amp;gt;succ;
+                if(!ptr-&amp;gt;need_remove)   //不需要继续访问，跳出循环
+                    break;
+            }
+            return tmp;
+        }
+        Iterator operator--(int){
+            Iterator tmp(ptr);
+            while(1){
+                if (ptr-&amp;gt;pred != NULL)
+                    ptr = ptr-&amp;gt;pred;
+                if(!ptr-&amp;gt;need_remove)
+                    break;
+            }
+            return tmp;
+        }
+        Iterator&amp;amp; operator++(){
+            while(1){
+                if(ptr-&amp;gt;succ != NULL)
+                    ptr = ptr-&amp;gt;succ;
+                if(!ptr-&amp;gt;need_remove)   //不需要继续访问，跳出循环
+                    break;
+            }
+            return *this;
+        }
+        Iterator&amp;amp; operator--(){
+            while(1){
+                if (ptr-&amp;gt;pred != NULL)
+                    ptr = ptr-&amp;gt;pred;
+                if(!ptr-&amp;gt;need_remove)
+                    break;
+            }
+            return *this;
+        }
+    };
+
+    bool empty() const { return _size &amp;lt;= 0; }
+    int size() const { return _size-_num; }
+    ListNode&amp;lt;T&amp;gt; *insertAsFirst(T const &amp;amp;e);
+    ListNode&amp;lt;T&amp;gt; *insertAsLast(T const &amp;amp;e);
+    Iterator begin() { return ++Iterator(header); }
+    Iterator end() { return Iterator(trailer); }
+    ListNode&amp;lt;T&amp;gt; *first() const { return header-&amp;gt;succ; } //first和begin完全没必要
+    ListNode&amp;lt;T&amp;gt; *last() const { return trailer-&amp;gt;pred; }
+    T remove(ListNode&amp;lt;T&amp;gt; *p);
+    void lazy_deletion(Iterator i);
+    void show();
+    void Advance(Iterator &amp;amp;i, int n);
+};
+
+template &amp;lt;typename T&amp;gt; //列表初始化
+void List&amp;lt;T&amp;gt;::init()
+{
+    header = new ListNode&amp;lt;T&amp;gt;;
+    trailer = new ListNode&amp;lt;T&amp;gt;;
+    header-&amp;gt;succ = trailer;
+    header-&amp;gt;pred = NULL;
+    trailer-&amp;gt;pred = header;
+    trailer-&amp;gt;succ = NULL;
+    _size = 0;
+    _num = 0;
+}
+
+//复制自p开始的n项
+template &amp;lt;typename T&amp;gt;
+void List&amp;lt;T&amp;gt;::copyNodes(ListNode&amp;lt;T&amp;gt; *p, int n)
+{
+    init();
+    while (n--)
+    {
+        insertASLast(p-&amp;gt;data);
+        p = p-&amp;gt;succ;
+    }
+}
+
+//Clear()
+template &amp;lt;typename T&amp;gt;
+int List&amp;lt;T&amp;gt;::clear()
+{
+    int num = _size;
+    if (_size)
+    {
+        ListNode&amp;lt;T&amp;gt; *p = header-&amp;gt;succ;
+        ListNode&amp;lt;T&amp;gt; *tmp;
+        while (p != trailer)
+        {
+            tmp = p-&amp;gt;succ;
+            delete p;
+            p = tmp;
+        }
+    }
+    _size = 0;
+    _num = 0;
+    return num;
+}
+
+//构造函数
+template &amp;lt;typename T&amp;gt;
+List&amp;lt;T&amp;gt;::List(List&amp;lt;T&amp;gt; const &amp;amp;L) { copyNodes(L.first(), L.size()); }
+
+template &amp;lt;typename T&amp;gt;
+List&amp;lt;T&amp;gt;::List(List&amp;lt;T&amp;gt; const &amp;amp;L, int r, int n)
+{
+    ListNode&amp;lt;T&amp;gt; *tmp = L.first();
+    while (--r)
+        tmp = tmp-&amp;gt;succ;
+    copyNodes(tmp, n);
+}
+
+template &amp;lt;typename T&amp;gt;
+List&amp;lt;T&amp;gt;::List(ListNode&amp;lt;T&amp;gt; *p, int n) { copyNodes(p, n); }
+
+//析构函数
+template &amp;lt;typename T&amp;gt;
+List&amp;lt;T&amp;gt;::~List()
+{
+    clear();
+    delete trailer;
+    delete header;
+}
+
+template &amp;lt;typename T&amp;gt;
+ListNode&amp;lt;T&amp;gt; *List&amp;lt;T&amp;gt;::insertAsFirst(T const &amp;amp;e)
+{
+    _size++;
+    return header-&amp;gt;insertAsSucc(e);
+}
+
+template &amp;lt;typename T&amp;gt;
+ListNode&amp;lt;T&amp;gt; *List&amp;lt;T&amp;gt;::insertAsLast(T const &amp;amp;e)
+{
+    _size++;
+    return trailer-&amp;gt;insertAsPred(e);
+}
+
+//删除
+template &amp;lt;typename T&amp;gt;
+T List&amp;lt;T&amp;gt;::remove(ListNode&amp;lt;T&amp;gt; *p)
+{
+    T tmp= p-&amp;gt;data;
+    _size--;
+    p-&amp;gt;pred-&amp;gt;succ = p-&amp;gt;succ;
+    p-&amp;gt;succ-&amp;gt;pred = p-&amp;gt;pred;
+    delete p;
+    return tmp;
+}
+
+template &amp;lt;typename T&amp;gt;
+void List&amp;lt;T&amp;gt;::lazy_deletion(Iterator i){
+    _num++;
+    ListNode&amp;lt;T&amp;gt;* tmp = i.ptr;
+    tmp-&amp;gt;need_remove = true;
+
+    //数量大于一半开始全部删除
+    if(_num &amp;gt;= _size/2){
+        _num = 0;
+        ListNode&amp;lt;T&amp;gt; *p = header-&amp;gt;succ;
+        while(trailer != p){
+            if(!p-&amp;gt;need_remove){
+                p = p-&amp;gt;succ;
+                continue;
+            }
+                
+            tmp = p-&amp;gt;succ;
+            remove(p);
+            p = tmp;       
+        }
+    }
+    return ;
+}
+
+//输出格式化
+template &amp;lt;typename T&amp;gt;
+void List&amp;lt;T&amp;gt;::show(){
+    if(_size == 0){
+        cout &amp;lt;&amp;lt; &amp;quot;None&amp;quot; &amp;lt;&amp;lt; endl;
+        return ;
+    }
+    ListNode&amp;lt;T&amp;gt;* p = header;
+    while(trailer != (p = p-&amp;gt;succ)){
+        if(p == header-&amp;gt;succ){
+            cout &amp;lt;&amp;lt; p-&amp;gt;data;
+            continue;
+        }
+        if(p-&amp;gt;pred-&amp;gt;need_remove &amp;amp;&amp;amp; p-&amp;gt;need_remove)    cout &amp;lt;&amp;lt; &amp;quot;____&amp;quot;;
+        else if(p-&amp;gt;need_remove)     cout &amp;lt;&amp;lt; &amp;quot;--__&amp;quot;;
+        else if(p-&amp;gt;pred-&amp;gt;need_remove)   cout &amp;lt;&amp;lt; &amp;quot;__-&amp;gt;&amp;quot;;
+        else    cout &amp;lt;&amp;lt; &amp;quot;---&amp;gt;&amp;quot;;
+        cout &amp;lt;&amp;lt; p-&amp;gt;data;
+    }
+    return ;
+}
+
+//用于迭代器的移动
+template &amp;lt;typename T&amp;gt;
+void List&amp;lt;T&amp;gt;::Advance(Iterator &amp;amp; i, int n){
+    if(n &amp;gt;= 0){
+        while(n--)
+            i.ptr = i.ptr-&amp;gt;succ;
+    }
+    else{
+        while(n++)
+            i.ptr = i.ptr-&amp;gt;pred;
+    }
+}
+//如果向容器里面放个pair？
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;3.main.cpp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include &amp;quot;my_list.h&amp;quot;
+
+
+void PrintLots(List&amp;lt;int&amp;gt;&amp;amp; L, List&amp;lt;int&amp;gt;&amp;amp; P){
+    int current = 1;
+
+    //是否存在空序列
+    if(L.empty() || P.empty())  {   cout&amp;lt;&amp;lt;&amp;quot;Error, input is empty&amp;quot;&amp;lt;&amp;lt;endl; return ;}
+
+    List&amp;lt;int&amp;gt;::Iterator l = L.begin();
+    List&amp;lt;int&amp;gt;::Iterator p = P.begin();
+    while(1){
+        if(L.size() &amp;lt; *p){  
+            cout &amp;lt;&amp;lt; endl &amp;lt;&amp;lt; &amp;quot;Error, the number of P is bigger than the size of L&amp;quot; &amp;lt;&amp;lt; endl;  
+            break;
+        }
+
+        if(current++ == *p){
+            cout &amp;lt;&amp;lt; *l &amp;lt;&amp;lt; &amp;quot; &amp;quot;;
+            p++;
+        }
+
+        //输出结束
+        if(p == P.end()){  
+                cout &amp;lt;&amp;lt; endl &amp;lt;&amp;lt; &amp;quot;Finished!&amp;quot; &amp;lt;&amp;lt; endl;
+                break;
+        }
+        l++;
+    }
+    return ;
+}
+
+int main(){
+    int m, n, tmp, last;
+    int select = 0;
+    while(1){
+        cout &amp;lt;&amp;lt; &amp;quot;Choose function(0 means lazy_deletion, 1 means PrintLots):&amp;quot;;
+        cin &amp;gt;&amp;gt; select;
+        if(select){
+            List&amp;lt;int&amp;gt; L, P;
+            cout &amp;lt;&amp;lt; &amp;quot;Input the size of L and P: &amp;quot;;
+            cin &amp;gt;&amp;gt; m &amp;gt;&amp;gt; n;
+            cout &amp;lt;&amp;lt; &amp;quot;Input the elements of L: &amp;quot; &amp;lt;&amp;lt; endl;
+            while (m--){
+                cin &amp;gt;&amp;gt; tmp;
+                L.insertAsLast(tmp);
+            }
+            cout &amp;lt;&amp;lt; &amp;quot;Input the elements of P: &amp;quot; &amp;lt;&amp;lt; endl;
+            while (n--){
+                cin &amp;gt;&amp;gt; tmp;
+                P.insertAsLast(tmp);
+            }
+            PrintLots(L, P);
+        }
+        else{
+            List&amp;lt;int&amp;gt; L;
+            cout &amp;lt;&amp;lt; &amp;quot;Input the size of L: &amp;quot;;
+            cin &amp;gt;&amp;gt; m;
+            cout &amp;lt;&amp;lt; &amp;quot;Input the elements of L:&amp;quot; &amp;lt;&amp;lt; endl;
+            for(int j = 0; j &amp;lt; m; j++){
+                cin &amp;gt;&amp;gt; tmp;
+                L.insertAsLast(tmp);
+            }
+            cout &amp;lt;&amp;lt; &amp;quot;L is: &amp;quot;;
+            L.show();
+            cout&amp;lt;&amp;lt;endl;
+
+
+            List&amp;lt;int&amp;gt;::Iterator i = L.begin();
+            last = 1;
+            cout &amp;lt;&amp;lt; &amp;quot;How many elements do you want to delete? &amp;quot;;
+            cin &amp;gt;&amp;gt; n;
+            cout &amp;lt;&amp;lt; &amp;quot;Input them(from 1 to &amp;quot; &amp;lt;&amp;lt; m &amp;lt;&amp;lt; &amp;quot;)&amp;quot; &amp;lt;&amp;lt; endl;
+            while(n--){
+                cin &amp;gt;&amp;gt; tmp;
+                L.Advance(i, tmp-last);
+                last = tmp;
+                L.lazy_deletion(i);
+            }
+            cout &amp;lt;&amp;lt; &amp;quot;Now L is: &amp;quot;;
+            L.show();
+            cout &amp;lt;&amp;lt; endl;
+        } 
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;结果分析&#34;&gt;结果分析&lt;/h2&gt;
+
+&lt;p&gt;PrintLots进行了四组测试，从测试结果可以看出对错误情况进行了有效的判断，并且能够处理一般情况。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ws1.sinaimg.cn/large/006bu4XTly1g29d8mpjg5j30me0lfn4u.jpg&#34; alt=&#34;PrintLots测试&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;为了方便懒惰删除的查看，设置了一个函数用来表现链表当前的情况，同时进行了三种样例的测试，能够代表所有类型的满足要求的输入情况。可以很容易的看出当删除元素过半时按要求完成了操作。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ws1.sinaimg.cn/large/006bu4XTly1g29d8mxyvdj30mx0jbaiq.jpg&#34; alt=&#34;懒惰删除测试&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;总结体会&#34;&gt;总结体会&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;深刻感觉到自己的宏观思维有极大的欠缺，自己设计出的类中的函数不能很好地衔接，编程思维有问题。&lt;/li&gt;
+&lt;li&gt;自己写的迭代器可能称不上是迭代器，只是稍微包装了一下指针。自己测试的时候发现在iterator已经被定义，意识到平时所用的迭代器并不是定义在容器的头文件中。&lt;/li&gt;
+&lt;li&gt;边界等特殊情况没有得到很好的处理，不过能够保证在输入规范的情况下得到良好的结果，代码总体有待完善。（总之还是对标准模板库特殊情况处理方式不够了解📌&lt;/li&gt;
+&lt;li&gt;很多用不到的东西也进行了实现，导致代码量相对较大😓&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
     
     <item>
       <title>数据结构作业一 Zuma List</title>
