@@ -10,10 +10,10 @@
     
     <item>
       <title>括号匹配</title>
-      <link>https://wanakiki.github.io/post/%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D/</link>
+      <link>https://wanakiki.github.io/2019/kuohao/</link>
       <pubDate>Sat, 20 Apr 2019 14:36:43 +0800</pubDate>
       
-      <guid>https://wanakiki.github.io/post/%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D/</guid>
+      <guid>https://wanakiki.github.io/2019/kuohao/</guid>
       <description>
 
 &lt;p&gt;这个学期开始学数据结构，第一节课老师又提出了这个经典的问题。&lt;/p&gt;
@@ -23,7 +23,7 @@
 &lt;p&gt;给出一个只包含&amp;rsquo;(&amp;lsquo;和&amp;rsquo;)&amp;lsquo;的字符串，判断该字符串中的括号是否匹配。并将匹配的括号用&amp;rsquo;_&amp;lsquo;代替，不匹配的括号用&amp;rsquo;$&amp;lsquo;标出。
 例如：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;输入：
+&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;输入：
 (())()))
 输出：
 (())()))
