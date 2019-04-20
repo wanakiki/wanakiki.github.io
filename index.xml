@@ -14,7 +14,10 @@
       <pubDate>Sat, 20 Apr 2019 13:54:01 +0800</pubDate>
       
       <guid>https://wanakiki.github.io/about/</guid>
-      <description></description>
+      <description>&lt;p&gt;趁着运动会的假期把GitHub上面博客的生成方式从hexo换到了hugo，希望今后能够坚持下去😀，另外之前没有写多少博文，迁移过来并不会造成太多的麻烦。&lt;/p&gt;
+
+&lt;p&gt;新方式的配置主要参考了&lt;a href=&#34;https://mogeko.me/2018/018/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Mogeko的博客&lt;/a&gt;，在此对他表示感谢。&lt;/p&gt;
+</description>
     </item>
     
   </channel>
