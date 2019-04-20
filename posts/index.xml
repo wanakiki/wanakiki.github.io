@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 20 Apr 2019 14:36:43 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 20 Apr 2019 19:41:55 +0800</lastBuildDate>
     
 	<atom:link href="https://wanakiki.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>数据结构作业一 Zuma List</title>
+      <link>https://wanakiki.github.io/2019/zuma-list/</link>
+      <pubDate>Sat, 20 Apr 2019 19:41:55 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2019/zuma-list/</guid>
+      <description>数据结构第一次作业。 问题分析 题目要求书写程序对祖玛消除过程进行回放，输入为原始珠子序列以及玩家所做的一系列操作，要求我们按照游戏规则计算出每</description>
+    </item>
     
     <item>
       <title>括号匹配</title>

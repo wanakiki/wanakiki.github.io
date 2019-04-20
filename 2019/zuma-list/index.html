@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Wanakiki">
+  
+  
+  
+  <link rel="prev" href="https://wanakiki.github.io/2019/kuohao/" />
+  
+  <link rel="canonical" href="https://wanakiki.github.io/2019/zuma-list/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           数据结构作业一 Zuma List | Wanakiki`s Blog
+       
+  </title>
+  <meta name="title" content="数据结构作业一 Zuma List | Wanakiki`s Blog">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/wanakiki.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "数据结构作业一 Zuma List",
+    "headline" : "数据结构作业一 Zuma List",
+    "description" : "数据结构第一次作业。 问题分析 题目要求书写程序对祖玛消除过程进行回放，输入为原始珠子序列以及玩家所做的一系列操作，要求我们按照游戏规则计算出每",
+    "inLanguage" : "zh-cn",
+    "author" : "Wanakiki",
+    "creator" : "Wanakiki",
+    "publisher": "Wanakiki",
+    "accountablePerson" : "Wanakiki",
+    "copyrightHolder" : "Wanakiki",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-04-20 19:41:55 \x2b0800 CST",
+    "dateModified" : "2019-04-20 19:41:55 \x2b0800 CST",
+    "url" : "https:\/\/wanakiki.github.io\/2019\/zuma-list\/",
+    "wordCount" : "1216",
+    "keywords" : [  "Wanakiki`s Blog"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://wanakiki.github.io">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://wanakiki.github.io">Wanakiki`s Blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">数据结构作业一 Zuma List</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://wanakiki.github.io" rel="author">Wanakiki</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2019-04-20 itemprop="datePublished">April 20, 2019</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://wanakiki.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"> 数据结构 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>数据结构第一次作业。</p>
+
+<!-- more -->
+
+<h2 id="问题分析">问题分析</h2>
+
+<p>题目要求书写程序对祖玛消除过程进行回放，输入为原始珠子序列以及玩家所做的一系列操作，要求我们按照游戏规则计算出每次操作后的珠子序列并进行输出。</p>
+
+<p>祖玛游戏规则：有三个或更多同色珠子变成相邻就会立即消失，并且可能会发生连锁反应。<strong>需要注意，原始情况中出现的三个或更多相邻同色珠子，在没有新珠子或者连锁反应影响时是不会消除的。</strong></p>
+
+<h2 id="解决方案">解决方案</h2>
+
+<p>将新的珠子插入到原有序列，在插入位置向两侧判断同色珠子个数，满足条件则进行删除。考虑到删除后的连锁反应，需要将判断的过程循环执行到无法继续删除。</p>
+
+<h2 id="算法设计">算法设计</h2>
+
+<p>考虑到整个过程需要多次插入删除的操作，并且查找过程只需要从插入的具体位置向两侧进行判断，所以使用list对珠子序列进行存储。</p>
+
+<p>插入过程只需要简单的insert函数与advance函数相配合就可以了，使用advance函数使迭代器指到插入位置，之后再用insert函数进行插入。</p>
+
+<p>比较难的地方在于是否消除的判断上，考虑到迭代器的特殊性，为了避免不必要的麻烦，当list中的元素少于三个的时候直接不进行判断。对三个以上的元素判断时，需要从插入元素的位置向两侧查找相同颜色，可以用<code>end()</code>和<code>begin()</code>来判断是否到达了查找的两端，当然，如果在查找过程中就发现了不同的珠子就可以直接停止查找过程。查找结束之后直接对查找到的区间进行删除，同时保留左开右闭区间的右端点作为下次查找过程的起始位置。</p>
+
+<p>数据的输入和结果输出过程按照题目的要求进行编写即可。</p>
+
+<h2 id="流程图">流程图</h2>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://ws1.sinaimg.cn/large/006bu4XTly1g29c8oqxjoj30rv0zpn06.jpg" alt="流程图" class="lazyload"><figcaption class="image-caption">流程图</figcaption></figure></p>
+
+<h2 id="编程实现">编程实现</h2>
+
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;list&gt;
+#include &lt;string&gt;
+using namespace std;
+
+void bang(list&lt;char&gt; &amp; beads, int id, char bead){
+    list&lt;char&gt;::iterator i, r, l;
+    int num = 0;    /*计数*/
+    i = beads.begin();
+    advance(i, id);
+    beads.insert(i, bead);  /*插入元素*/
+
+    /*考虑到多次消除的可能，使用while循环进行消除*/
+    while(1){
+        if(beads.size() &lt; 3)
+            break;
+        
+        num = 0;
+        r = i--;    
+        /*这步操作之后r指向被插入元素以后，i指向被插入元素*/
+        
+        for(; r != beads.end(); r++){
+            if(*r == *i)    num ++;
+            else    break;
+        }           /*向右判断*/
+
+        l = i;          
+        /*if(i != beads.begin()){
+            l--;
+            while (1){
+                if(*l != *i){   l++;break;} //l需要加加
+                else    num ++;
+                
+                if(l == beads.begin())  break;
+                else    l--;    
+            }
+        }   //向左判断*/
+
+        /*由流程图发现的简化方法*/
+        while(l != beads.begin()){
+            l--;
+            if(*l != *i){   l++; break;}
+            else    num++;
+        }
+
+
+        /*删除部分*/
+        if(num &gt; 1){
+            beads.erase(l, r);
+            i = r;
+        }
+        else
+            break;
+    }
+
+
+    /*输出*/
+    if(beads.empty())
+        cout &lt;&lt; '-' &lt;&lt; endl;
+    else{
+        for(i = beads.begin(); i != beads.end(); i++)
+            cout &lt;&lt; *i;
+        cout &lt;&lt; endl;
+    }
+    return ;
+}
+int main(){
+    int n, id;
+    char bead;
+    string initial_beads;
+    list&lt;char&gt; beads;
+
+    getline(cin, initial_beads);
+    for(int i = 0; i &lt; initial_beads.size(); i++){
+        beads.push_back(initial_beads[i]);
+    }
+    /*构造初始状态*/
+
+    cin &gt;&gt; n;
+    while(n--){
+        cin &gt;&gt; id &gt;&gt; bead;
+        bang(beads, id, bead);
+    }
+    return 0;
+}
+</code></pre>
+
+<h2 id="结果分析">结果分析</h2>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://ws1.sinaimg.cn/large/006bu4XTly1g29c8i4jcrj30gi08o750.jpg" alt="测试1" class="lazyload"><figcaption class="image-caption">测试1</figcaption></figure></p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://ws1.sinaimg.cn/large/006bu4XTly1g29c7vdgspj30hg061dg9.jpg" alt="测试2" class="lazyload"><figcaption class="image-caption">测试2</figcaption></figure></p>
+
+<p>如上，经过测试，程序完成要求，并且能够处理初始序列为空的情况。👍</p>
+
+<h2 id="总结体会">总结体会</h2>
+
+<ol>
+<li>增加了对erase函数的了解：
+
+<ol>
+<li>当参数只有一个的时候，原迭代器指向的位置被删除，迭代器无效化，不能对其继续进行操作，否则会造成错误，但函数会返回原位置之后的迭代器，所以可以利用这个特性进行区间删除（省略++步骤）。</li>
+<li>当有两个参数的时候，函数结束之后前一个迭代器会无效化，而后一个迭代器因为删除区间为左闭右开的特点，其指向的位置不会被删除。</li>
+</ol></li>
+<li>迭代器是一个很玄学的东西，使用不规范很容易带来错误，查错的时候可以优先考虑。</li>
+<li>流程图可以帮忙理清逻辑结构！！！😀</li>
+<li>写程序尽量一次性写完&hellip;&hellip;🤧</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Wanakiki </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://wanakiki.github.io/2019/zuma-list/>https://wanakiki.github.io/2019/zuma-list/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://wanakiki.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://wanakiki.github.io/2019/kuohao/" class="prev" rel="prev" title="括号匹配"><i class="iconfont icon-left"></i>&nbsp;括号匹配</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2019</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://wanakiki.github.io">Wanakiki</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>
