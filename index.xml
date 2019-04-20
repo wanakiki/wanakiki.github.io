@@ -5,8 +5,106 @@
     <description>Recent content in Wanakiki`s Blog on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 20 Apr 2019 13:54:01 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 20 Apr 2019 14:36:43 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>括号匹配</title>
+      <link>https://wanakiki.github.io/post/%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D/</link>
+      <pubDate>Sat, 20 Apr 2019 14:36:43 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/post/%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D/</guid>
+      <description>
+
+&lt;p&gt;这个学期开始学数据结构，第一节课老师又提出了这个经典的问题。&lt;/p&gt;
+
+&lt;h2 id=&#34;问题描述&#34;&gt;问题描述&lt;/h2&gt;
+
+&lt;p&gt;给出一个只包含&amp;rsquo;(&amp;lsquo;和&amp;rsquo;)&amp;lsquo;的字符串，判断该字符串中的括号是否匹配。并将匹配的括号用&amp;rsquo;_&amp;lsquo;代替，不匹配的括号用&amp;rsquo;$&amp;lsquo;标出。
+例如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;输入：
+(())()))
+输出：
+(())()))
+______$$
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;简单解法&#34;&gt;简单解法&lt;/h2&gt;
+
+&lt;p&gt;括号匹配问题是刚开始学习C语言的时候就接触的问题，当时老师引入这个问题的原因可能是为了介绍栈的概念，但是当时班上大多数人都采取了直接用数组模拟的方法。把整个字符串录入，之后遍历整个字符串，遇到右括号就向前寻找是否存在对应的左括号，进行判断。C++代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;string&amp;gt;
+using namespace std;
+int main(){
+    string str, tmp;    
+    //tmp用于保留原来的字符串，为了方便直接用string输入
+    cin &amp;gt;&amp;gt; str;
+    tmp = str;
+    for(int i = 0; i &amp;lt; str.length(); i++){
+        if(str[i] == &#39;)&#39;){
+            for(int j = i - 1; j &amp;gt;= 0; j--){
+                if(str[j] == &#39;(&#39;){
+                    str[i] = str[j] = &#39;_&#39;;
+                    break;
+                }
+            }
+        }
+    }
+    for(int i = 0; i &amp;lt; str.length(); i++){
+        if(str[i] != &#39;_&#39;)
+            str[i] = &#39;$&#39;;   //找出不匹配的括号
+    }
+    cout &amp;lt;&amp;lt; tmp &amp;lt;&amp;lt; endl &amp;lt;&amp;lt; str;
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;使用栈来解决&#34;&gt;使用栈来解决&lt;/h2&gt;
+
+&lt;p&gt;首先忽略掉不匹配括号的标记问题，聚焦于判断整个字符串是否存在不匹配的括号。要看字符串是否匹配，只要看左括号是否有对应的右括号，或者右括号是否有对应的左括号，问题解决方法是相同的。&lt;/p&gt;
+
+&lt;p&gt;读入一个左括号我们就可以把它压入栈中，遇到右括号就弹出栈中的左括号。如果所有的右括号都读取完，栈中还有左括号，或者读入一个右括号栈中已经没有了括号，就意味着该字符串中的括号不匹配。C++代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;stack&amp;gt;
+#include&amp;lt;string&amp;gt;
+using namespace std;
+int main(){
+    stack&amp;lt;char&amp;gt; s;
+    string tmp;
+    cin &amp;gt;&amp;gt; tmp;
+    for(int i = 0; i &amp;lt; tmp.length(); i++){
+        if(tmp[i] == &#39;(&#39;)
+            s.push(tmp[i]);
+        else
+        {
+            if(s.empty())
+                cout &amp;lt;&amp;lt; &amp;quot;FALSE&amp;quot;;
+            else
+            {
+                s.pop();
+            }
+            
+        }
+        
+    }
+    if(!s.empty())
+        cout &amp;lt;&amp;lt; &amp;quot;FALSE&amp;quot;;
+    else
+    {
+        cout &amp;lt;&amp;lt; &amp;quot;TRUE&amp;quot;;
+    }
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面这段代码完全可以不用栈，设置一个变量来记录当前拥有的左括号的数量就可以大大简化代码。&lt;/p&gt;
+
+&lt;p&gt;如果我们想要知道是哪几个字符不匹配，我的想法是直接将字符的索引压入栈中，因为只有一种括号，把字符压入栈中实际上是不必要之举。将上面的代码输出错误的地方改成记录错误的下标，就可以将出错字符的下标记录下来，当所有的右括号都判断完之后，栈中剩余的所有左括号下标也同样要记录下来。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>About</title>
