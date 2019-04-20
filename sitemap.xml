@@ -2,7 +2,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
+      <loc>https://wanakiki.github.io/categories/</loc>
+      
+      <lastmod>2019-04-20T14:36:43+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
       <loc>https://wanakiki.github.io/posts/</loc>
+      
+      <lastmod>2019-04-20T14:36:43+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://wanakiki.github.io/tags/</loc>
       
       <lastmod>2019-04-20T14:36:43+08:00</lastmod>
       
@@ -36,31 +60,35 @@
     </url>
   
     <url>
+      <loc>https://wanakiki.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
+      
+      <lastmod>2019-04-20T14:36:43+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://wanakiki.github.io/tags/%E7%AE%97%E6%B3%95/</loc>
+      
+      <lastmod>2019-04-20T14:36:43+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
       <loc>https://wanakiki.github.io/about/</loc>
       
       <lastmod>2019-04-20T13:54:01+08:00</lastmod>
       
       
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://wanakiki.github.io/categories/</loc>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://wanakiki.github.io/tags/</loc>
-      
-      
-      
-      <priority>0</priority>
       
       
     </url>
