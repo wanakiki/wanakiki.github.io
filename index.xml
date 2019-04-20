@@ -18,6 +18,8 @@
 
 &lt;p&gt;这个学期开始学数据结构，第一节课老师又提出了这个经典的问题。&lt;/p&gt;
 
+&lt;!-- more --&gt;
+
 &lt;h2 id=&#34;问题描述&#34;&gt;问题描述&lt;/h2&gt;
 
 &lt;p&gt;给出一个只包含&amp;rsquo;(&amp;lsquo;和&amp;rsquo;)&amp;lsquo;的字符串，判断该字符串中的括号是否匹配。并将匹配的括号用&amp;rsquo;_&amp;lsquo;代替，不匹配的括号用&amp;rsquo;$&amp;lsquo;标出。
