@@ -5,8 +5,125 @@
     <description>Recent content in Wanakiki`s Blog on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 20 Apr 2019 20:22:40 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 21 Apr 2019 10:41:45 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>数据结构作业三 列车调度</title>
+      <link>https://wanakiki.github.io/2019/train/</link>
+      <pubDate>Sun, 21 Apr 2019 10:41:45 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2019/train/</guid>
+      <description>
+
+&lt;p&gt;本次作业不需提交报告。
+&lt;!-- more --&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
+
+&lt;p&gt;Input&lt;/p&gt;
+
+&lt;p&gt;共两行。&lt;/p&gt;
+
+&lt;p&gt;第一行为两个整数n，m。&lt;/p&gt;
+
+&lt;p&gt;第二行为以空格分隔的n个整数，保证为{1, 2, &amp;hellip;, n}的一个排列，表示待判断可行性的驶出序列{a1，a2，&amp;hellip;，an}。&lt;/p&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+
+&lt;p&gt;若驶出序列可行，则输出操作序列，其中push表示车厢从A进入S，pop表示车厢从S进入B，每个操作占一行。&lt;/p&gt;
+
+&lt;p&gt;若不可行，则输出No。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;Sample Input 1 
+
+5 2
+1 2 3 5 4
+Sample Output 1
+
+push
+pop
+push
+pop
+push
+pop
+push
+push
+pop
+pop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;代码&#34;&gt;代码&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;stack&amp;gt;
+using namespace std;
+
+int main(){
+    int n, m;
+    int B[10000];   //B队列
+    bool step[20005];   //记录操作 0压入 1弹出
+    bool flag = false;  //标记是否出现错误
+    cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; m;
+    stack&amp;lt;int&amp;gt; s;   //代表中转端
+    
+    for(int i = 0; i &amp;lt; n; i++){
+        cin &amp;gt;&amp;gt; B[i];
+    }
+
+    int i = 1, j = 0, k = 0;  //当前数字i 操作步骤标记j B队列索引k
+    while(i &amp;lt;= n){
+        if(s.empty()){
+            s.push(i++);
+            step[j++] = 0;
+        }
+        else{
+            if(s.top() == B[k]){
+                s.pop();
+                step[j++] = 1;
+                k++;
+            }
+            else{
+                s.push(i++);
+                step[j++] = 0;
+                if(s.size() &amp;gt; m){
+                    flag = 1;
+                    break;
+                }
+            }
+        }
+    }
+
+    //剩余元素的弹出讨论
+    while(!s.empty()){
+        if(s.top() != B[k]){
+            flag = 1;
+            break;
+        }
+        else{
+            s.pop();
+            step[j++] = 1;
+            k++;
+        }
+    }
+
+    if(flag)
+        cout &amp;lt;&amp;lt; &amp;quot;no&amp;quot;;
+    else{
+        for(int l = 0; l &amp;lt; j; l++){
+            if(step[l])
+                cout &amp;lt;&amp;lt; &amp;quot;pop&amp;quot;;
+            else
+                cout &amp;lt;&amp;lt; &amp;quot;push&amp;quot;;
+            cout &amp;lt;&amp;lt; endl;
+        }
+    }
+    
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>数据结构作业二 List ADT</title>
