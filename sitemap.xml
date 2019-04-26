@@ -2,6 +2,18 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
+      <loc>https://wanakiki.github.io/categories/</loc>
+      
+      <lastmod>2019-04-21T10:41:45+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
       <loc>https://wanakiki.github.io/posts/</loc>
       
       <lastmod>2019-04-21T10:41:45+08:00</lastmod>
@@ -26,35 +38,23 @@
     </url>
   
     <url>
-      <loc>https://wanakiki.github.io/2019/train/</loc>
+      <loc>https://wanakiki.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
       
       <lastmod>2019-04-21T10:41:45+08:00</lastmod>
       
       
       
-      
-    </url>
-  
-    <url>
-      <loc>https://wanakiki.github.io/categories/</loc>
-      
-      <lastmod>2019-04-20T20:22:40+08:00</lastmod>
-      
-      
-      
       <priority>0</priority>
       
       
     </url>
   
     <url>
-      <loc>https://wanakiki.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
+      <loc>https://wanakiki.github.io/2019/train/</loc>
       
-      <lastmod>2019-04-20T20:22:40+08:00</lastmod>
+      <lastmod>2019-04-21T10:41:45+08:00</lastmod>
       
       
-      
-      <priority>0</priority>
       
       
     </url>

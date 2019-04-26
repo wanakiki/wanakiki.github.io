@@ -6,10 +6,19 @@
     <description>Recent content in 数据结构 on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 20 Apr 2019 20:22:40 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 21 Apr 2019 10:41:45 +0800</lastBuildDate>
     
 	<atom:link href="https://wanakiki.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>数据结构作业三 列车调度</title>
+      <link>https://wanakiki.github.io/2019/train/</link>
+      <pubDate>Sun, 21 Apr 2019 10:41:45 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2019/train/</guid>
+      <description>本次作业不需提交报告。 题目描述 Input 共两行。 第一行为两个整数n，m。 第二行为以空格分隔的n个整数，保证为{1, 2, &amp;hellip;, n}的一个排列，表示待判断可行</description>
+    </item>
     
     <item>
       <title>数据结构作业二 List ADT</title>
