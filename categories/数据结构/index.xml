@@ -6,10 +6,19 @@
     <description>Recent content in 数据结构 on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 21 Apr 2019 10:41:45 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 03 May 2019 14:00:51 +0800</lastBuildDate>
     
 	<atom:link href="https://wanakiki.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>数据结构作业四 Compression</title>
+      <link>https://wanakiki.github.io/2019/compression/</link>
+      <pubDate>Fri, 03 May 2019 14:00:51 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2019/compression/</guid>
+      <description>图片有损压缩大作业 问题分析 &amp;amp; 解决方案 本次编程任务给出了一个纯英文的PDF文件，较为详细地介绍了图像有损压缩算法的实现方式，通过二叉树的树剪枝</description>
+    </item>
     
     <item>
       <title>数据结构作业三 列车调度</title>

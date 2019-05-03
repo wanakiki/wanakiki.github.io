@@ -166,7 +166,7 @@
 
 <p>list ADT的实现大体可以按照课本所给的框架来初步构建，之后对其进行丰富，首先实现节点类，再进一步实现List类。考虑到懒惰删除的需要，在实现节点类的时候我在其中加入了是否删除的标志，实现List类时增加了用于统计伪删除元素个数的变量。为了更进一步贴合标准模板库的操作，相对多此一举地加入了迭代器子类。（实践证明，我对迭代器相关知识的了解并不充分&hellip;😕）</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://ws1.sinaimg.cn/large/006bu4XTly1g29dg1ljtgj30pg0gr4qq.jpg" alt="结构示意" class="lazyload"><figcaption class="image-caption">结构示意</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://i.loli.net/2019/05/03/5ccbb39389ad9.jpg" alt="结构示意" class="lazyload"><figcaption class="image-caption">结构示意</figcaption></figure></p>
 
 <h3 id="printlots函数">PrintLots函数</h3>
 
@@ -187,9 +187,7 @@
 
 <h2 id="流程图">流程图</h2>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://ws1.sinaimg.cn/large/006bu4XTly1g29d8m6wuhj30cp0jcq3n.jpg" alt="printlots" class="lazyload"><figcaption class="image-caption">printlots</figcaption></figure></p>
-
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://ws1.sinaimg.cn/large/006bu4XTly1g29d8mfr8sj30cr0oddgu.jpg" alt="lazy deletion" class="lazyload"><figcaption class="image-caption">lazy deletion</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://i.loli.net/2019/05/03/5ccbb3959aa95.jpg" alt="lazy deletion" class="lazyload"><figcaption class="image-caption">lazy deletion</figcaption></figure></p>
 
 <h2 id="编程实现">编程实现</h2>
 
@@ -582,11 +580,11 @@ int main(){
 
 <p>PrintLots进行了四组测试，从测试结果可以看出对错误情况进行了有效的判断，并且能够处理一般情况。</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://ws1.sinaimg.cn/large/006bu4XTly1g29d8mpjg5j30me0lfn4u.jpg" alt="PrintLots测试" class="lazyload"><figcaption class="image-caption">PrintLots测试</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://i.loli.net/2019/05/03/5ccbb396983b0.jpg" alt="PrintLots测试" class="lazyload"><figcaption class="image-caption">PrintLots测试</figcaption></figure></p>
 
 <p>为了方便懒惰删除的查看，设置了一个函数用来表现链表当前的情况，同时进行了三种样例的测试，能够代表所有类型的满足要求的输入情况。可以很容易的看出当删除元素过半时按要求完成了操作。</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://ws1.sinaimg.cn/large/006bu4XTly1g29d8mxyvdj30mx0jbaiq.jpg" alt="懒惰删除测试" class="lazyload"><figcaption class="image-caption">懒惰删除测试</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://i.loli.net/2019/05/03/5ccbb3979a5b2.jpg" alt="懒惰删除测试" class="lazyload"><figcaption class="image-caption">懒惰删除测试</figcaption></figure></p>
 
 <h2 id="总结体会">总结体会</h2>
 

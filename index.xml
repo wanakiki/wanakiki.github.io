@@ -5,8 +5,472 @@
     <description>Recent content in Wanakiki`s Blog on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 21 Apr 2019 10:41:45 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 03 May 2019 14:00:51 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>数据结构作业四 Compression</title>
+      <link>https://wanakiki.github.io/2019/compression/</link>
+      <pubDate>Fri, 03 May 2019 14:00:51 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2019/compression/</guid>
+      <description>
+
+&lt;p&gt;图片有损压缩大作业&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;h2 id=&#34;问题分析-解决方案&#34;&gt;问题分析 &amp;amp; 解决方案&lt;/h2&gt;
+
+&lt;p&gt;本次编程任务给出了一个纯英文的PDF文件，较为详细地介绍了图像有损压缩算法的实现方式，通过二叉树的树剪枝达到保留图片细节的目的。任务要求达到的效果如下图所示，可以看出较为复杂的图腾部分得到了很好的保留，而树叶和远处的背景则被明显地压缩成了像素区块。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/wanakiki/photo/master/20190503134525.jpg&#34; alt=&#34;示例&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;和编程任务一同给出的源码包中已经实现了绝大部分代码，我们需要按照给出的方法对缺失的代码进行补充，从这方面来讲，整个编程任务相当于一个稍微复杂的程序填空题。另外不得不提的一点是，所给的源码格式较为规范，仔细研究代码的整体框架对日后的编程也有一定的好处，也正因其规范性，代码整体阅读难度较低。&lt;/p&gt;
+
+&lt;p&gt;总体来看，整个工程由五个部分组成，其从属关系为：PNG类包含RGBAPixel类，并且通过loadpng中的函数对图片进行最底层的读写。twoDtree通过一个PNG类进行构建，stats在构建的过程中起到辅助作用，加快整个构建过程。程序的宏观框架大致如此，stats中的所有函数都要我们对其进行具体实现，twoDtree中的大部分关键代码都要我们对其进行补充，而其余的三个文件在了解了类的定义方式及大致的成员函数的用法之后便可不必深究。&lt;/p&gt;
+
+&lt;p&gt;不难看出，任务只要求对twoDtree和stats两个部分进行补充，刚好将整个任务分为两个部分，由于twoDtree对stats有一定依赖性，首先处理stats的部分。&lt;/p&gt;
+
+&lt;h2 id=&#34;算法设计&#34;&gt;算法设计&lt;/h2&gt;
+
+&lt;p&gt;此前已经叙述清楚，任务可以被分为两个部分，接下来对两个部分算法的设计进行说明。&lt;/p&gt;
+
+&lt;h3 id=&#34;stats类函数的实现&#34;&gt;stats类函数的实现&lt;/h3&gt;
+
+&lt;p&gt;从任务说明中可以了解到，stats类是通过对图片各个通道的像素值进行预计算，使生成二叉树时每种分割情况下计算variability measurement 的复杂度降到常数时间，并能够返回指定小矩阵的多种信息。其中最大的难点便是如何进行预计算使下面的公式降低到常数时间。这里，为了计算方便我们使用等式右边的公式。&lt;/p&gt;
+
+&lt;p&gt;$$\sum(x-\bar x)^{2}=\sum x^{2}-\frac{(\sum x)^{2}}{\left| R \right|}$$&lt;/p&gt;
+
+&lt;p&gt;结合stats中已经定义的六个二维矩阵不难想到对整个图片各个通道的颜色值及其平方进行累加，如果我们采用当前点的值等于位于该点上方和左侧的两个值及自身三个值累加的方式对整个图片进行递推计算的话，算到最终结果之后会发现很难对这个生成的二维向量进行高效的利用，因为多次累了重复值，起初不明显，等到面积增大之后就会变成很难处理的问题。&lt;/p&gt;
+
+&lt;p&gt;稍加思考（hhh，花了将近一个小时）之后我们得到了另外的一种方法，既然我们之前的问题是每计算一个点的值都会导致之前的值被重复计算，为了解决它，我们在计算的时候直接减去会被重复计算的点，这样，最终生成的二维向量中的每个值都等于以原点和当前点确定的矩形中的所有点的累加。&lt;/p&gt;
+
+&lt;p&gt;具体实现为：在计算一个点的值的时候，除了加上其上方和左侧的两个点，还要减去左上方的点，按照这个规则进行递推计算，最终的结果就是我们想要的情况。&lt;/p&gt;
+
+&lt;p&gt;对于生成矩阵的利用我们用图形进行解释：如图所示，我们已经得到了我们所需的累加和矩阵，矩阵中的每个点的值都等于该点与原点确定的矩形中所有点的累加和。现在我们想要计算出图中绿色矩形所对应的累加和。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/wanakiki/photo/master/compression/20190503135249.png&#34; alt=&#34;示例图&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;直观来看，sum = 整体 - 蓝色 - 橙色 - 红色
+已知: 整体 = D, 蓝色 = B - A，橙色 = C - A，红色 = A
+则不难推出，sum = D - B - C + A
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;按照上述公式我们便可以在常数时间内计算出任何子矩阵对应的累加和。为了方便后续的计算，我在处理矩阵的时候多开辟了额外的空间并存上零，简化了代码。&lt;/p&gt;
+
+&lt;h3 id=&#34;twodtree的探索&#34;&gt;twoDtree的探索&lt;/h3&gt;
+
+&lt;p&gt;twoDtree中主要让我们实现的功能有两个，建树和剪枝，至于从树还原到图片和树的基础操作函数是相对基本的内容，通过课上的学习以及对程序框架的理解应该可以很轻松地写出来，在这里不浪费笔墨一个个进行阐述。&lt;/p&gt;
+
+&lt;h4 id=&#34;建树函数buildtree&#34;&gt;建树函数buildTree&lt;/h4&gt;
+
+&lt;p&gt;通过对程序的阅读我们可以了解到，二叉树是从图片构建来的，而buildTree便是构造树的关键函数，我们可以把树的一般初始化先在构造函数内写出来，提前准备好该函数需要的参数，之后在构造函数中对其进行调用，生成整个树的框架。&lt;/p&gt;
+
+&lt;p&gt;首先审视一下作业PDF中对树的构造方法的解释，我理解的方法是：父节点对应于一个大矩形，如果这个大矩形内有大于两个的像素值，我们就要对它进行分割，划为两个矩形，使两个子矩阵的色彩多样性（我反正这么叫）之和达到最小，这两个矩形就分别对应于左右孩子，这里需要注意左右孩子的顺序。这个过程需要一直执行下去，直到图片中的每个像素都对应于树的叶子节点。&lt;strong&gt;需要注意，由于我们不是对称切分，所以最终生成的树并不会是理想结构，我们只能保证的一点是，这个树是一个真二叉树。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;这样我们要做的事情就很清楚了，无非就是从根节点开始这个过程，每到一个节点都假设一条虚拟的线，对这个矩形进行切割，分别计算两个矩形的色彩多样性之和，考虑完所有的横纵情况后选择最好的那种。按着这条线切割后继续进行这个过程，直到分为单个像素点。关于如何在常数时间内计算出一个矩形的色彩多样性，我们在stats相关内容中已经进行了说明。&lt;/p&gt;
+
+&lt;h4 id=&#34;剪枝函数prune&#34;&gt;剪枝函数prune&lt;/h4&gt;
+
+&lt;p&gt;在我看来，这个函数是整个问题最难的点，因为我想不到一个高效的算法只遍历一遍叶子节点。&lt;/p&gt;
+
+&lt;p&gt;如何剪枝？一个子树的根节点像素值便是这个子树对应矩形所有像素值的平均，我们要做的事情是计算出这个矩形中和各通道色值与平均值差的平方的和小于等于tolerance的个数，然后计算这一部分像素占像素总个数的比例，如果大于给定值，就代表这个矩形中像素之间的差异不大，我们就可以将这个子树的枝叶剪掉，只留下根节点。反映到图形上来，就是将这个矩形的颜色涂成了平均值。&lt;/p&gt;
+
+&lt;p&gt;最终的实现方法很简单，先进行层序遍历，对遍历到的每个节点再进行一次遍历，统计满足条件叶子的个数，最后计算比例，判断是否需要删除。但是这个程序中有这么一句话，让我以为有超级简单的算法可以实现这个过程。但是很不幸，最终还是没有找到。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Pruning criteria should be evaluated on the original tree, not on a pruned subtree. (we only expect that trees would be pruned once.)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;流程图&#34;&gt;流程图&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/wanakiki/photo/master/20190503134502.png&#34; alt=&#34;stats&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/wanakiki/photo/master/20190503134518.png&#34; alt=&#34;建树&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;编程实现&#34;&gt;编程实现&lt;/h2&gt;
+
+&lt;p&gt;stats.cpp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;quot;stats.h&amp;quot;
+using namespace std;
+using namespace cs221util;
+
+stats::stats(PNG &amp;amp;im){
+    //resize
+    unsigned width = im.width();
+    unsigned height = im.height();
+    sumRed.resize(width+1, vector&amp;lt;long&amp;gt;(height+1, 0));
+    sumGreen.resize(width+1, vector&amp;lt;long&amp;gt;(height+1, 0));
+    sumBlue.resize(width+1, vector&amp;lt;long&amp;gt;(height+1, 0));
+    sumsqRed.resize(width+1, vector&amp;lt;long&amp;gt;(height+1, 0));
+    sumsqGreen.resize(width+1, vector&amp;lt;long&amp;gt;(height+1, 0));
+    sumsqBlue.resize(width+1, vector&amp;lt;long&amp;gt;(height+1, 0));
+
+    RGBAPixel *tmp ;
+    // sumRed[0][0] = int(tmp-&amp;gt;r);
+    // sumGreen[0][0] = int(tmp-&amp;gt;g);
+    // sumBlue[0][0] = int(tmp-&amp;gt;b);
+    // sumsqRed[0][0] = int(tmp-&amp;gt;r)*int(tmp-&amp;gt;r);
+    // sumsqBlue[0][0] = int(tmp-&amp;gt;b)*int(tmp-&amp;gt;b);
+    // sumsqGreen[0][0] = int(tmp-&amp;gt;g)*int(tmp-&amp;gt;g);
+
+    // for(int i = 1; i &amp;lt; im.width; i++){
+    //     tmp = im.getPixel(i,0);    
+    //     sumRed[i][0] = int(tmp-&amp;gt;r);
+    //     sumGreen[i][0] = int(tmp-&amp;gt;g);
+    //     sumBlue[i][0] = int(tmp-&amp;gt;b);
+    //     sumsqRed[i][0] = int(tmp-&amp;gt;r)*int(tmp-&amp;gt;r);
+    //     sumsqBlue[i][0] = int(tmp-&amp;gt;b)*int(tmp-&amp;gt;b);
+    //     sumsqGreen[i][0] = int(tmp-&amp;gt;g)*int(tmp-&amp;gt;g);
+    // }
+    // for(int i = 1; i &amp;lt; im.height; i++){
+    //     tmp = im.getPixel(0, i);
+    //     sumRed[0][i] = int(tmp-&amp;gt;r);
+    //     sumGreen[0][i] = int(tmp-&amp;gt;g);
+    //     sumBlue[0][i] = int(tmp-&amp;gt;b);
+    //     sumsqRed[0][i] = int(tmp-&amp;gt;r)*int(tmp-&amp;gt;r);
+    //     sumsqBlue[0][i] = int(tmp-&amp;gt;b)*int(tmp-&amp;gt;b);
+    //     sumsqGreen[0][i] = int(tmp-&amp;gt;g)*int(tmp-&amp;gt;g);
+    // }
+
+    for(unsigned int i = 1; i &amp;lt;= width; i++)
+    for(unsigned int j = 1; j &amp;lt;= height; j++){
+        tmp = im.getPixel(i-1, j-1);
+        sumRed[i][j] = (int)(tmp-&amp;gt;r) + sumRed[i-1][j] + sumRed[i][j-1] - sumRed[i-1][j-1];
+        sumGreen[i][j] = (int)(tmp-&amp;gt;g) + sumGreen[i-1][j] + sumGreen[i][j-1] - sumGreen[i-1][j-1];
+        sumBlue[i][j] = (int)(tmp-&amp;gt;b) + sumBlue[i-1][j] + sumBlue[i][j-1] - sumBlue[i-1][j-1];
+        sumsqRed[i][j] = (int)(tmp-&amp;gt;r)*(int)(tmp-&amp;gt;r) + sumsqRed[i-1][j] + sumsqRed[i][j-1] - sumsqRed[i-1][j-1];
+        sumsqBlue[i][j] = (int)(tmp-&amp;gt;b)*(int)(tmp-&amp;gt;b) + sumsqBlue[i-1][j] + sumsqBlue[i][j-1] - sumsqBlue[i-1][j-1];
+        sumsqGreen[i][j] = (int)(tmp-&amp;gt;g)*(int)(tmp-&amp;gt;g) + sumsqGreen[i-1][j] + sumsqGreen[i][j-1] - sumsqGreen[i-1][j-1];
+    }
+    //没有必要强转为int...
+}
+
+long stats::getSum(char channel, pair&amp;lt;int, int&amp;gt; ul, pair&amp;lt;int, int&amp;gt; lr){
+    long ans = 0;
+    switch (channel)
+    {
+    case &#39;r&#39;:
+        /* code */
+        ans = sumRed[lr.first+1][lr.second+1];
+        ans -= sumRed[ul.first][lr.second+1];
+        ans -= sumRed[lr.first+1][ul.second];
+        ans += sumRed[ul.first][ul.second];
+        break;
+    case &#39;g&#39;:
+        ans = sumGreen[lr.first+1][lr.second+1];
+        ans -= sumGreen[ul.first][lr.second+1];
+        ans -= sumGreen[lr.first+1][ul.second];
+        ans += sumGreen[ul.first][ul.second];
+        break;
+    case &#39;b&#39;:
+        ans = sumBlue[lr.first+1][lr.second+1];
+        ans -= sumBlue[ul.first][lr.second+1];
+        ans -= sumBlue[lr.first+1][ul.second];
+        ans += sumBlue[ul.first][ul.second];
+        break;
+    default:
+        break;
+    }
+    return ans;
+}
+
+long stats::getSumSq(char channel, pair&amp;lt;int,int&amp;gt; ul, pair&amp;lt;int,int&amp;gt; lr){
+    long ans = 0;
+    switch (channel)
+    {
+    case &#39;r&#39;:
+        /* code */
+        ans = sumsqRed[lr.first+1][lr.second+1];
+        ans -= sumsqRed[ul.first][lr.second+1];
+        ans -= sumsqRed[lr.first+1][ul.second];
+        ans += sumsqRed[ul.first][ul.second];
+        break;
+    case &#39;g&#39;:
+        ans = sumsqGreen[lr.first+1][lr.second+1];
+        ans -= sumsqGreen[ul.first][lr.second+1];
+        ans -= sumsqGreen[lr.first+1][ul.second];
+        ans += sumsqGreen[ul.first][ul.second];
+        break;
+    case &#39;b&#39;:
+        ans = sumsqBlue[lr.first+1][lr.second+1];
+        ans -= sumsqBlue[ul.first][lr.second+1];
+        ans -= sumsqBlue[lr.first+1][ul.second];
+        ans += sumsqBlue[ul.first][ul.second];
+        break;
+    default:
+        break;
+    }
+    return ans;
+}
+
+long stats::rectArea(pair&amp;lt;int,int&amp;gt; ul, pair&amp;lt;int,int&amp;gt; lr){
+    return (lr.first-ul.first+1)*(lr.second-ul.second+1);
+}
+
+RGBAPixel stats::getAvg(pair&amp;lt;int,int&amp;gt; ul, pair&amp;lt;int,int&amp;gt; lr){
+    long sum = rectArea(ul, lr);
+    long sum_r, sum_g, sum_b;
+    sum_r = getSum(&#39;r&#39;, ul, lr) / sum;
+    sum_g = getSum(&#39;g&#39;, ul, lr) / sum;
+    sum_b = getSum(&#39;b&#39;, ul, lr) / sum;
+    return RGBAPixel(sum_r, sum_g, sum_b);
+}
+
+long stats::getScore(pair&amp;lt;int,int&amp;gt; ul, pair&amp;lt;int,int&amp;gt; lr){
+    long sum = rectArea(ul, lr);
+    long sum_r, sum_g, sum_b;
+    long sumsq_r, sumsq_g, sumsq_b;
+    sum_r = getSum(&#39;r&#39;, ul, lr);
+    sum_g = getSum(&#39;g&#39;, ul, lr);
+    sum_b = getSum(&#39;b&#39;, ul, lr);
+    sumsq_r = getSumSq(&#39;r&#39;, ul, lr);
+    sumsq_g = getSumSq(&#39;g&#39;, ul, lr);
+    sumsq_b = getSumSq(&#39;b&#39;, ul, lr);
+
+    //alpha置一？
+    //是否考虑溢出？
+    sum_r = sum_r * sum_r / sum;
+    sum_g = sum_g * sum_g / sum;
+    sum_b = sum_b * sum_b / sum;
+    sumsq_r -= sum_r;
+    sumsq_g -= sum_g;
+    sumsq_b -= sum_b;
+    return sumsq_r + sumsq_g + sumsq_b;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;twoDtree.cpp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;/**
+ *
+ * twoDtree (pa3)
+ * slight modification of a Kd tree of dimension 2.
+ * twoDtree.cpp
+ * This file will be used for grading.
+ *
+ */
+
+#include &amp;quot;twoDtree.h&amp;quot;
+#include &amp;lt;stack&amp;gt;
+#include &amp;lt;queue&amp;gt;
+
+/* given */
+twoDtree::Node::Node(pair&amp;lt;int,int&amp;gt; ul, pair&amp;lt;int,int&amp;gt; lr, RGBAPixel a)
+    :upLeft(ul),lowRight(lr),avg(a),left(NULL),right(NULL)
+    {}
+
+/* given */
+twoDtree::~twoDtree(){
+    clear();
+}
+
+/* given */
+twoDtree::twoDtree(const twoDtree &amp;amp; other) {
+    copy(other);
+}
+
+/* given */
+twoDtree &amp;amp; twoDtree::operator=(const twoDtree &amp;amp; rhs){
+    if (this != &amp;amp;rhs) {
+        clear();
+        copy(rhs);
+    }
+    return *this;
+}
+
+twoDtree::twoDtree(PNG &amp;amp; imIn){ 
+    /* your code here */
+    height = imIn.height();
+    width = imIn.width();
+    stats my_stat(imIn);
+    pair&amp;lt;int, int&amp;gt; cur_ul, cur_lr;
+    cur_ul = make_pair(0,0);
+    cur_lr = make_pair(width-1, height-1);  
+    //注意坐标从零开始
+    
+    root = buildTree(my_stat, cur_ul, cur_lr);
+}
+
+twoDtree::Node * twoDtree::buildTree(stats &amp;amp; s, pair&amp;lt;int,int&amp;gt; ul, pair&amp;lt;int,int&amp;gt; lr) {
+    /* your code here */
+    Node *cur = new Node(ul, lr, s.getAvg(ul, lr));
+
+    //遍历所有情况
+    //if(s.rectArea(ul,lr) &amp;gt; 1){    条件导致死循环
+    if(ul != lr){
+        bool flag = 1;  //1 means horizontal 0 means vertical
+        int line = 0;
+        long tmp;
+        long Min = 9999999999;
+        for(int i = ul.second; i &amp;lt; lr.second; i++){
+            tmp = s.getScore(ul, pair&amp;lt;int,int&amp;gt; (lr.first, i)) + s.getScore(pair&amp;lt;int,int&amp;gt; (ul.first, i+1),lr);
+            if(tmp &amp;lt; Min){
+                Min = tmp;
+                line = i;
+            }
+        }
+
+        for(int i = ul.first; i &amp;lt; lr.first; i++){
+            tmp = s.getScore(ul, pair&amp;lt;int,int&amp;gt; (i,lr.second)) + s.getScore(pair&amp;lt;int,int&amp;gt;(i+1, ul.second), lr);
+            if((i == ul.first &amp;amp;&amp;amp; ul.second == ul.first) || tmp &amp;lt; Min){
+                flag = 0;
+                Min = tmp;
+                line = i;
+            }
+        }
+        
+        if(flag){
+            cur-&amp;gt;left = buildTree(s, ul, pair&amp;lt;int,int&amp;gt;(lr.first, line));
+            cur-&amp;gt;right = buildTree(s, pair&amp;lt;int,int&amp;gt;(ul.first, line+1), lr);
+        }
+        else{
+            cur-&amp;gt;left = buildTree(s, ul, pair&amp;lt;int,int&amp;gt;(line, lr.second));
+            cur-&amp;gt;right = buildTree(s, pair&amp;lt;int,int&amp;gt;(line+1,ul.second), lr);
+        }
+    }
+    else{
+        cur-&amp;gt;left = NULL;
+        cur-&amp;gt;right = NULL;
+    }
+    return cur;
+}
+
+PNG twoDtree::render(){
+    /* your code here */
+    PNG res(width, height);
+    renderHelper(res, root);
+    return res;
+}
+
+void twoDtree::renderHelper(PNG&amp;amp; res, Node* cur_node){
+    if(!cur_node) return;   //稍微多余
+
+    if(cur_node-&amp;gt;left == cur_node-&amp;gt;right){
+        //只有两个都是空也就是叶子节点才会进行操作
+        for(int i = cur_node-&amp;gt;upLeft.first; i &amp;lt;= cur_node-&amp;gt;lowRight.first; i++)
+        for(int j = cur_node-&amp;gt;upLeft.second; j &amp;lt;= cur_node-&amp;gt;lowRight.second; j++){
+            *res.getPixel(i, j) = cur_node-&amp;gt;avg;
+        }
+        return ;
+    }
+    else{
+        renderHelper(res, cur_node-&amp;gt;left);
+        renderHelper(res, cur_node-&amp;gt;right);
+    }
+}
+
+
+
+
+void twoDtree::prune(double pct, int tol){
+    /* your code here */
+    //先逐层遍历，对每个节点判断是否需要剪枝
+    queue&amp;lt;Node*&amp;gt; traverse_save;
+    Node* cur;
+    int sum, total; //小于tol个数，矩形像素数
+    double rate;
+    traverse_save.push(root);
+    while(!traverse_save.empty()){
+        cur = traverse_save.front();
+        traverse_save.pop();
+
+        if(cur == NULL)
+            continue;
+        sum = pruneHelper(cur, tol, cur-&amp;gt;avg);
+        total = (cur-&amp;gt;lowRight.first-cur-&amp;gt;upLeft.first+1)*(cur-&amp;gt;lowRight.second-cur-&amp;gt;upLeft.second+1);
+        rate = sum / total;
+
+        if(rate &amp;gt;= pct){
+            removeNode(cur-&amp;gt;left);
+            cur-&amp;gt;left = NULL;
+            removeNode(cur-&amp;gt;right);
+            cur-&amp;gt;right = NULL;
+        }
+        else{
+            traverse_save.push(cur-&amp;gt;left);
+            traverse_save.push(cur-&amp;gt;right);
+        }
+    }
+}
+
+int twoDtree::pruneHelper(Node* cur, int tol, RGBAPixel avg){
+    if(!cur)
+        return 0;
+    
+    //只计算叶子
+    if(cur-&amp;gt;left == NULL &amp;amp;&amp;amp; cur-&amp;gt;right == NULL){
+        long diff = (avg.r - cur-&amp;gt;avg.r)*(avg.r - cur-&amp;gt;avg.r) + (avg.g - cur-&amp;gt;avg.g)*(avg.g - cur-&amp;gt;avg.g) + (avg.b - cur-&amp;gt;avg.b);
+        if(diff &amp;lt;= tol)
+            return 1;
+        else return 0;
+    }
+    return pruneHelper(cur-&amp;gt;left, tol, avg) + pruneHelper(cur-&amp;gt;right, tol, avg);
+}
+void twoDtree::clear() {
+    /* your code here */
+    removeNode(root);
+    root = NULL;
+}
+
+void twoDtree::removeNode(Node * x){
+    if(!x) return ;
+    removeNode(x-&amp;gt;left);
+    removeNode(x-&amp;gt;right);
+    delete x;
+    return ;
+}
+
+void twoDtree::copy(const twoDtree &amp;amp; orig){
+    /* your code here */
+    //已经对copy进行了说明，不需要进行空间释放
+    //本程序中仅有两次调用，调用之前都保证空间已经被初始化
+    height = orig.height;
+    width = orig.width;
+    root = copyNode(orig.root);
+}
+
+twoDtree::Node*  twoDtree::copyNode(const Node* x){
+    if(!x) return NULL;
+    Node *tmp = new Node(x-&amp;gt;upLeft, x-&amp;gt;lowRight, x-&amp;gt;avg);
+    tmp-&amp;gt;left = copyNode(x-&amp;gt;left);
+    tmp-&amp;gt;right = copyNode(x-&amp;gt;right);
+    return tmp;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;结果分析&#34;&gt;结果分析&lt;/h2&gt;
+
+&lt;p&gt;程序在wsl下编译完成，在main函数中添加了显示时间的部分代码，从编译到程序结束的整个过程如下图，对wsl用户名进行了一下处理，不过不影响观察。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/wanakiki/photo/master/20190503134416.png&#34; alt=&#34;编译运行&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;下面简单说一下图片的生成情况，自己程序生成的图片和示例图片取得了大体一致的效果，但在细节保留方面以及图片美观程度上稍逊一筹。两个人像画都能做到近乎一致的保留，但稍加观察便可发现细节保留上的差距，下图右侧嘴唇部分处理远不如左侧（效果示例）。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/wanakiki/photo/master/20190503134507.png&#34; alt=&#34;人像对比&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;两组图腾的图片，细节较多的图片效果直在几处微小处出现了不同，因为大多数像素都被保留不具备较大的对比价值，在这里不进行详细对比。而另一张则表现出了极大的差别。很容易看出，树丛的细节在我的程序中删除的程度较重，误差最大的一部分甚至直接出现了较大的单色矩形块。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/wanakiki/photo/master/compression/20190503142116.png&#34; alt=&#34;图腾对比&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;简单分析&#34;&gt;简单分析&lt;/h3&gt;
+
+&lt;p&gt;我个人认为我的代码实现没有太大的问题，都满足了题目的要求。所给代码中给定的pct和tol值可能适合于跑出示例图片的代码，对我的代码达到不了较好的保存程度。这点是可以理解的。&lt;/p&gt;
+
+&lt;p&gt;不同人有不同的实现方式，不同的实现会带来不同的效果，横切还是竖切的选择，数据的计算表达式的书写方式等因素都会带来影响，涉及到浮点数，计算机内部采用的是近似计算，起初微小的误差经历后续计算之后可能会放大很多倍。所以效果有偏差是情理之中的事情。&lt;/p&gt;
+
+&lt;p&gt;对于最后图腾图片的较大色块问题，假如参数真的一致，那就应该是我的算法有一些漏洞，细节处理时有一定的问题。&lt;/p&gt;
+
+&lt;h2 id=&#34;总结体会&#34;&gt;总结体会&lt;/h2&gt;
+
+&lt;p&gt;我用了一周的时间去想高效的剪枝遍历解决方式，失败之后采用我起初认为最笨最麻烦的方式实现了剪枝函数，最终的运行时间另我很意外，我感觉我一直都在低估自己电脑的运算能力，大多数情况都只停留于感觉，没有进行较为科学的判断和推理，今后应该加强自己这方面的估算能力。另外如果可以的话，我想知道有没有更高效的算法，因为四张图片17秒的速度还是很慢。😕&lt;/p&gt;
+
+&lt;p&gt;另外在帮别人调试代码的时候发现了win和linux下long型所占内存的不同，这导致两种环境下long型对应的最大值也不同，在win下编译出来的程序在计算过程中会直接越界，需要换用long long 类型。这次编程因为之前没有用vscode建过工程所以使用wsl进行的编译。程序中有部分代码直接在win下编译也会有一点点小问题，这难道也是linux的优势🐎？&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>数据结构作业三 列车调度</title>
@@ -123,7 +587,7 @@ int main(){
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/wanakiki/photo/master/2018-05-01.png&#34; alt=&#34;测试&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/05/03/5ccbb39a396b3.png&#34; alt=&#34;测试&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -151,7 +615,7 @@ int main(){
 
 &lt;p&gt;list ADT的实现大体可以按照课本所给的框架来初步构建，之后对其进行丰富，首先实现节点类，再进一步实现List类。考虑到懒惰删除的需要，在实现节点类的时候我在其中加入了是否删除的标志，实现List类时增加了用于统计伪删除元素个数的变量。为了更进一步贴合标准模板库的操作，相对多此一举地加入了迭代器子类。（实践证明，我对迭代器相关知识的了解并不充分&amp;hellip;😕）&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://ws1.sinaimg.cn/large/006bu4XTly1g29dg1ljtgj30pg0gr4qq.jpg&#34; alt=&#34;结构示意&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/05/03/5ccbb39389ad9.jpg&#34; alt=&#34;结构示意&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;printlots函数&#34;&gt;PrintLots函数&lt;/h3&gt;
 
@@ -172,9 +636,7 @@ int main(){
 
 &lt;h2 id=&#34;流程图&#34;&gt;流程图&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://ws1.sinaimg.cn/large/006bu4XTly1g29d8m6wuhj30cp0jcq3n.jpg&#34; alt=&#34;printlots&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://ws1.sinaimg.cn/large/006bu4XTly1g29d8mfr8sj30cr0oddgu.jpg&#34; alt=&#34;lazy deletion&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/05/03/5ccbb3959aa95.jpg&#34; alt=&#34;lazy deletion&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;编程实现&#34;&gt;编程实现&lt;/h2&gt;
 
@@ -567,11 +1029,11 @@ int main(){
 
 &lt;p&gt;PrintLots进行了四组测试，从测试结果可以看出对错误情况进行了有效的判断，并且能够处理一般情况。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://ws1.sinaimg.cn/large/006bu4XTly1g29d8mpjg5j30me0lfn4u.jpg&#34; alt=&#34;PrintLots测试&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/05/03/5ccbb396983b0.jpg&#34; alt=&#34;PrintLots测试&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;为了方便懒惰删除的查看，设置了一个函数用来表现链表当前的情况，同时进行了三种样例的测试，能够代表所有类型的满足要求的输入情况。可以很容易的看出当删除元素过半时按要求完成了操作。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://ws1.sinaimg.cn/large/006bu4XTly1g29d8mxyvdj30mx0jbaiq.jpg&#34; alt=&#34;懒惰删除测试&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/05/03/5ccbb3979a5b2.jpg&#34; alt=&#34;懒惰删除测试&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;总结体会&#34;&gt;总结体会&lt;/h2&gt;
 
@@ -618,7 +1080,7 @@ int main(){
 
 &lt;h2 id=&#34;流程图&#34;&gt;流程图&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://ws1.sinaimg.cn/large/006bu4XTly1g29c8oqxjoj30rv0zpn06.jpg&#34; alt=&#34;流程图&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/05/03/5ccbb38e8cb30.jpg&#34; alt=&#34;流程图&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;编程实现&#34;&gt;编程实现&lt;/h2&gt;
 
@@ -711,9 +1173,9 @@ int main(){
 
 &lt;h2 id=&#34;结果分析&#34;&gt;结果分析&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://ws1.sinaimg.cn/large/006bu4XTly1g29c8i4jcrj30gi08o750.jpg&#34; alt=&#34;测试1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/05/03/5ccbb38f267db.jpg&#34; alt=&#34;测试1&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://ws1.sinaimg.cn/large/006bu4XTly1g29c7vdgspj30hg061dg9.jpg&#34; alt=&#34;测试2&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/05/03/5ccbb39060e21.jpg&#34; alt=&#34;测试2&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;如上，经过测试，程序完成要求，并且能够处理初始序列为空的情况。👍&lt;/p&gt;
 
