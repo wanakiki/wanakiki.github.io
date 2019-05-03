@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Wanakiki">
+  
+  
+  
+  <link rel="prev" href="https://wanakiki.github.io/2019/compression/" />
+  
+  <link rel="canonical" href="https://wanakiki.github.io/2019/bin-tree/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           数据结构作业四 表达式树 | Wanakiki`s Blog
+       
+  </title>
+  <meta name="title" content="数据结构作业四 表达式树 | Wanakiki`s Blog">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/wanakiki.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "数据结构作业四 表达式树",
+    "headline" : "数据结构作业四 表达式树",
+    "description" : "从中缀表达式构建二叉树 问题分析 \x26amp; 解决方案 题目要求输入一个中缀表达式，构建其相应的表达式树，并输出验证。 表达式树的特点是操作符所对应的两个操作",
+    "inLanguage" : "zh-cn",
+    "author" : "Wanakiki",
+    "creator" : "Wanakiki",
+    "publisher": "Wanakiki",
+    "accountablePerson" : "Wanakiki",
+    "copyrightHolder" : "Wanakiki",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-05-03 18:56:50 \x2b0800 CST",
+    "dateModified" : "2019-05-03 18:56:50 \x2b0800 CST",
+    "url" : "https:\/\/wanakiki.github.io\/2019\/bin-tree\/",
+    "wordCount" : "3226",
+    "keywords" : [  "Wanakiki`s Blog"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://wanakiki.github.io">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://wanakiki.github.io">Wanakiki`s Blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">数据结构作业四 表达式树</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://wanakiki.github.io" rel="author">Wanakiki</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2019-05-03 itemprop="datePublished">May 3, 2019</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://wanakiki.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"> 数据结构 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>从中缀表达式构建二叉树
+<!-- more --></p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://raw.githubusercontent.com/wanakiki/photo/master/bin-tree/20190503190146.jpg" alt="题目要求" class="lazyload"><figcaption class="image-caption">题目要求</figcaption></figure></p>
+
+<h2 id="问题分析-解决方案">问题分析 &amp; 解决方案</h2>
+
+<p>题目要求输入一个中缀表达式，构建其相应的表达式树，并输出验证。</p>
+
+<p>表达式树的特点是操作符所对应的两个操作数分别对应于操作符的左孩子和右孩子。直接从中缀表达式构建相对困难，考虑此前已经有过从中缀表达式构建后缀表达式的经验，以及后缀表达式运算符位于操作数之后的特点，可以从后缀表达式入手解决该问题。</p>
+
+<p>通过对表达式树和后缀表达式的观察不难得出可以通过以下方法从后缀表达式得到表达式树：后缀表达式自后向前遍历，在右节点优先级高于左节点的前提下根据当前遍历元素类型进行以下两种操作：</p>
+
+<ol>
+<li>当前元素为运算符，将运算符构建为树的一个节点，若为右孩子则将操作节点压栈。无论是左孩子还是右孩子，之后操作节点转移到新建节点。</li>
+<li>当前元素为操作数，将运算符构建为树的一个节点，若为左孩子则操作节点转移到栈顶节点，栈弹出。</li>
+</ol>
+
+<p>最终解决方案为：将输入的中缀表达式转化为后缀表达式，再按照上述规则构建整个表达式树。同时还要注意最终树形的输出。</p>
+
+<h2 id="算法设计">算法设计</h2>
+
+<p>参照课本，构建节点类、二叉树类，并对其中的相关函数进行实现，另外准备一个函数将中缀表达式构建为后缀表达式，并进行树的构建。</p>
+
+<p>课本中并没有节点深度这个属性，但终端输出时节点如果具有深度属性会非常方便，于是对其进行了补充，并添加了相关的函数对节点的深度进行更新，与高度更新一致调用。这里需要注意，高度的更新是自下向上，深度的更新则是自上而下，需要一个遍历的过程，我在具体实现的过程中采用了层遍历的方式。</p>
+
+<h3 id="终端输出的思考">终端输出的思考</h3>
+
+<p>如何在终端中输出是一个比较困难的问题。因为终端输出一行后不能回退到上一行，如果不对各个元素提前保存，就要在遍历的时候进行一些小操作。同时输出时空格的控制也需要细节处理。在这里简单介绍一下我的做法。</p>
+
+<p>我采用的方法是使用层遍历的方法，同时为每一个节点增加横坐标，遍历节点的同时更新节点的横坐标，根据横坐标和深度的情况判断是否需要换行和需要输出空格的数量。伴随着二叉树深度的增加，每层的节点呈指数级增长，如果一开始输出的节点之间的间隔控制的不好，后续的输出就会变得困难。</p>
+
+<p>高度为n的满二叉树，最底层有2^n个节点，考虑到底层节点不能直接相邻（至少隔一个空格），所以最底层所占字符总长为2^(n+1)个。现假设我们按照满二叉树的形式对整个树进行输出，输出区域为长为2^(n+1)个字符，高为n行的矩形，根节点位于整个图形的对称轴上，故根节点的横坐标为2^n，同理可推得根节点的左孩子的横坐标为2^(n-1)。考虑到在满二叉树的情况下每层节点之间的间隔是一定值，且为该层最左侧节点的横坐标，故在已知一个节点的横坐标及下一层的固定节点间隔的情况下，可以更新出该节点两个孩子的横坐标。</p>
+
+<p>按照上述方法在进行层遍历的同时对节点横坐标进行更新，记录上一个节点的横坐标，即使二叉树不是完全二叉树也能够正常输出形状。当然，因为终端的宽度一定，当层数大到最后一排无法显示的时候形状一定会发生改变。</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://raw.githubusercontent.com/wanakiki/photo/master/bin-tree/20190503190620.png" alt="结构示意" class="lazyload"><figcaption class="image-caption">结构示意</figcaption></figure></p>
+
+<h2 id="流程图">流程图</h2>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://raw.githubusercontent.com/wanakiki/photo/master/bin-tree/20190503190145.jpg" alt="中缀表达式变为逆波兰表达式" class="lazyload"><figcaption class="image-caption">中缀表达式变为逆波兰表达式</figcaption></figure></p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://raw.githubusercontent.com/wanakiki/photo/master/bin-tree/20190503190144.jpg" alt="从逆波兰表达式构建树" class="lazyload"><figcaption class="image-caption">从逆波兰表达式构建树</figcaption></figure></p>
+
+<h2 id="编程实现">编程实现</h2>
+
+<p>共编写了三个文件：node.h、Bintree.h、main.cpp</p>
+
+<p>1.node.h</p>
+
+<pre><code class="language-cpp">#define stature(p) ((p) ? (p)-&gt;height : -1)
+
+//节点指针的判断
+#define IsLc(x) ((x)-&gt;parent &amp;&amp; ((x) == (x)-&gt;parent-&gt;l_c))
+#define IsRc(x) ((x)-&gt;parent &amp;&amp; ((x) == (x)-&gt;parent-&gt;r_c))
+
+#include &lt;iostream&gt;
+using namespace std;
+//NULL 在何处定义？
+
+template &lt;typename T&gt;
+struct node{
+    T data;
+    node&lt;T&gt;* parent;
+    node&lt;T&gt;* l_c;
+    node&lt;T&gt;* r_c;
+    int height;
+    int axis;  //打印时空格
+    int depth;  //深度非常重要！
+    
+    //构造函数
+    node():parent(NULL), l_c(NULL), r_c(NULL), height(0), axis(0), depth(0){}
+    node(T e, node&lt;T&gt;* p=NULL, node&lt;T&gt;* lc=NULL, node&lt;T&gt;* rc = NULL, int h=0):data(e),parent(p),l_c(lc),r_c(rc),height(h),axis(0),depth(0){}
+
+    node&lt;T&gt;* insertLc(T const&amp;);
+    node&lt;T&gt;* insertRc(T const&amp;);
+};
+
+//两个插入的实现
+template &lt;typename T&gt;
+node&lt;T&gt;* node&lt;T&gt;::insertLc(T const&amp; e){
+    return l_c = new node(e, this);
+}
+
+template &lt;typename T&gt;
+node&lt;T&gt;* node&lt;T&gt;::insertRc(T const&amp; e){
+    return r_c = new node(e, this);
+}
+</code></pre>
+
+<p>2.bintree.h</p>
+
+<pre><code class="language-cpp">#include &quot;node.h&quot;
+#include &lt;queue&gt;
+
+template &lt;typename T&gt;
+class Bintree{
+    node&lt;T&gt;* _root;
+    int _size;
+
+public:
+    //构造
+    Bintree():_root(NULL),_size(0){}
+
+    //更新高度、深度
+    void updateHight(node&lt;T&gt; *x);
+    void updateDepth(node&lt;T&gt;* x);
+    void updateHD(node&lt;T&gt; *x);
+
+    //节点插入e
+    node&lt;T&gt;* insertAsRoot (T const&amp; e);
+    node&lt;T&gt;* insertAsLc(node&lt;T&gt;* x, T const&amp; e);
+    node&lt;T&gt;* insertAsRc(node&lt;T&gt;* x, T const&amp; e); 
+
+    //获得节点指针
+    node&lt;T&gt;* getRoot();
+    // node&lt;T&gt;* getLc(node&lt;T&gt;* x);
+    // node&lt;T&gt;* getRc(node&lt;T&gt;* x);
+    //上面这两个没有用了....
+
+    //大小
+    int size(){ return _size;}
+
+    //表达
+    void treeShow();
+
+    // void createBlank(int n);
+};
+
+
+
+template &lt;typename T&gt;
+void Bintree&lt;T&gt;::updateHight(node&lt;T&gt;* x){
+    x-&gt;height = 1 + (stature(x-&gt;l_c) &gt; stature(x-&gt;r_c) ? stature(x-&gt;l_c) : stature(x-&gt;r_c));
+}
+
+template &lt;typename T&gt;
+void Bintree&lt;T&gt;::updateDepth(node&lt;T&gt;* x){
+    if(x == _root)  return;
+    x-&gt;depth = 1 + x-&gt;parent-&gt;depth;
+    
+}
+template &lt;typename T&gt;
+void Bintree&lt;T&gt;::updateHD(node&lt;T&gt;* x){
+    node&lt;T&gt;* y = x;
+    while(x){
+        updateHight(x);
+        x = x-&gt;parent;
+    }
+    queue&lt; node&lt;T&gt;* &gt; tmp;
+    if(y){
+        tmp.push(y);
+        while(!tmp.empty()){
+            updateDepth(tmp.front());
+            if(tmp.front()-&gt;l_c)
+                tmp.push(tmp.front()-&gt;l_c);
+            if(tmp.front()-&gt;r_c)
+                tmp.push(tmp.front()-&gt;r_c);
+            tmp.pop();
+        }
+    }
+}
+
+template &lt;typename T&gt;
+node&lt;T&gt;* Bintree&lt;T&gt;::insertAsRoot(T const&amp; e){
+    _size = 1;
+    return _root = new node&lt;T&gt;(e);
+}
+
+template &lt;typename T&gt;
+node&lt;T&gt;* Bintree&lt;T&gt;::insertAsLc(node&lt;T&gt;* x, T const&amp; e){
+    _size++;
+    x-&gt;insertLc(e);
+    updateHD(x);
+    return x-&gt;l_c;
+}   
+
+template &lt;typename T&gt;
+node&lt;T&gt;* Bintree&lt;T&gt;::insertAsRc(node&lt;T&gt;* x, T const&amp; e){
+    _size++;
+    x-&gt;insertRc(e);
+    updateHD(x);
+    return x-&gt;r_c;
+}
+
+template &lt;typename T&gt;
+node&lt;T&gt;* Bintree&lt;T&gt;::getRoot(){
+    return _root;
+}
+
+template &lt;typename T&gt;
+void Bintree&lt;T&gt;::treeShow(){
+    int num = 1;
+    int  n = _root-&gt;height;  //获得高度
+    while(n--){ num *= 2;}
+
+    //层遍历
+    queue&lt; node&lt;T&gt;* &gt; tmp;
+    node&lt;T&gt;* curr;
+    int last_axis = 0, last_depth = 0;
+    if(_root)
+        tmp.push(_root);
+    while(!tmp.empty()){
+        // if(last != tmp.front()-&gt;parent){
+        //     num /=2;
+        //     cout &lt;&lt; endl;
+        //     for(int i = 0; i &lt; num; i++)
+        //         cout &lt;&lt; ' ';
+        // }
+        // else
+        //     for(int i = 0; i &lt; 2*num-1; i++)
+        //         cout &lt;&lt; ' ';
+        //改为从父亲那里得到横坐标
+
+        //新的一层 改变num 同时last_axis清零  (通过比较深度)
+        curr = tmp.front();
+        if(last_depth != curr-&gt;depth){
+            num/=2;
+            last_axis = 0;
+            cout &lt;&lt; endl;
+        }
+            
+        if(curr == _root)
+            _root-&gt;axis = num;
+        else{
+            if(IsLc(curr))
+                curr-&gt;axis = curr-&gt;parent-&gt;axis - num;
+            else
+                curr-&gt;axis = curr-&gt;parent-&gt;axis + num; 
+        }
+
+
+        //输出空格 需要减一
+        for(int i = 0; i &lt; curr-&gt;axis - last_axis - 1; i++) 
+            cout &lt;&lt; ' ';
+        cout &lt;&lt; curr-&gt;data;
+        last_depth = curr-&gt;depth;
+        last_axis = curr-&gt;axis;
+
+        if(curr -&gt; l_c)
+            tmp.push(curr-&gt;l_c);
+        if(curr -&gt; r_c)
+            tmp.push(curr-&gt;r_c);
+        tmp.pop();
+    }
+
+    return ;
+}
+
+// template &lt;typename T&gt;
+// void Bintree&lt;T&gt;::createBlank(int n){
+//     while(n--)
+//         cout &lt;&lt; ' ';
+//     return ;
+// }
+</code></pre>
+
+<p>3.main.cpp</p>
+
+<pre><code class="language-cpp">#include &quot;bintree.h&quot;
+#include &lt;string&gt;
+#include &lt;stack&gt;
+
+
+//从中缀表达式构建
+void create_from_infix(Bintree&lt;char&gt;&amp; my_tree){
+    string strs, res;
+    stack&lt;char&gt; tmp;    //运算符
+    
+    cout &lt;&lt; &quot;Input infix expression :&quot; &lt;&lt; endl;
+    cin &gt;&gt; strs;
+    
+
+    for(int i = 0; i &lt; strs.size(); i++){
+        if(strs[i] &gt;= '0')
+            res += strs[i];
+        else if(strs[i] == '(')
+            tmp.push(strs[i]);
+        else if(strs[i] == ')'){
+            while(tmp.top() != '('){
+                res += tmp.top();
+                tmp.pop();
+            }
+            tmp.pop();  //清除多余的'('
+        }
+        else if(strs[i] == '+' || strs[i] == '-'){
+            while(!tmp.empty()){
+                if(tmp.top() == '(')
+                    break;  //左括号额外注意
+                res += tmp.top();
+                tmp.pop();
+            }
+            tmp.push(strs[i]);     //当前操作的运算符入栈
+        }
+        else if(strs[i] == '*' || strs[i] == '/'){
+            while(!tmp.empty()){
+                if(tmp.top() == '(' || tmp.top()  == '+' || tmp.top()  == '-')
+                    break;  //不能全部输出
+                res += tmp.top();
+                tmp.pop();
+            }
+            tmp.push(strs[i]);     //入栈当前运算符
+        }
+    }
+
+    //栈中多余运算符
+    while(!tmp.empty()){
+        res += tmp.top();
+        tmp.pop();
+    }
+
+    cout &lt;&lt; &quot;Postfix expression is :&quot; &lt;&lt; endl;
+    cout &lt;&lt; res &lt;&lt; endl;
+
+    //开始造树
+    my_tree.insertAsRoot(res[res.size()-1]);
+    node&lt;char&gt;* x = my_tree.getRoot();
+    stack&lt;node&lt;char&gt;*&gt; nodes;
+    nodes.push(x);  //防止最后一个操作数访问错误
+    for(int i = res.size()-2; i &gt;= 0; i--){
+        if(res[i] &gt;= '0'){
+            //数字或者字母作为左孩子插入时需要向上返回
+            if(x-&gt;r_c){
+                my_tree.insertAsLc(x, res[i]);
+                x = nodes.top();
+                nodes.pop();
+            }
+            else
+                my_tree.insertAsRc(x, res[i]);
+        }
+        else{
+            //字符一定会移动
+            
+            if(x-&gt;r_c)
+                x = my_tree.insertAsLc(x, res[i]);
+            else{
+                nodes.push(x);
+                x = my_tree.insertAsRc(x, res[i]);
+            }
+        }
+    }
+}
+
+
+int main(){
+    Bintree&lt;char&gt; my_tree;
+    create_from_infix(my_tree);
+    cout &lt;&lt; &quot;Tree is:&quot;&lt;&lt;endl;
+    my_tree.treeShow();
+}
+
+//封装的意义只是为了自动更新高度？删除更加方便？
+</code></pre>
+
+<h2 id="qt图形化界面">QT图形化界面</h2>
+
+<p>初次接触QT，花费了较多的时间来了解Qt的使用。对QpaintEvent理解的不是很透彻，实现的时候参考了网上的一些代码。程序使用了此前编写的二叉树类，中缀表达式转化为二叉树部分也与控制台程序一致。</p>
+
+<h3 id="程序实现">程序实现</h3>
+
+<p>Qt项目使用了此前编写的二叉树头文件，draw.cpp、main.cpp、draw.h实现如下：</p>
+
+<p>1.draw.h</p>
+
+<pre><code class="language-cpp">#ifndef DRAW_H
+#define DRAW_H
+
+#include &lt;QMainWindow&gt;
+#include &lt;QPaintEvent&gt;
+#include &quot;bintree.h&quot;
+
+namespace Ui {
+class draw;
+}
+
+class draw : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    Bintree&lt;char&gt; my_tree;
+    QPaintEvent * tmp;
+    explicit draw(QWidget *parent = nullptr);
+    ~draw();
+    void createTree();
+    void paintEvent(QPaintEvent *);
+
+private:
+    Ui::draw *ui;
+signals:
+
+public slots:
+//    void paintEvent(QPaintEvent *);
+//    void createTree();
+    //void showTree(bool checked);
+    void createClicked();
+
+};
+
+#endif // DRAW_H
+</code></pre>
+
+<p>2.draw.cpp</p>
+
+<pre><code class="language-cpp">#include &quot;draw.h&quot;
+#include &quot;ui_draw.h&quot;
+#include &lt;QPainter&gt;
+#include &lt;string&gt;
+#include &lt;stack&gt;
+#include &lt;QString&gt;
+#include &lt;QtDebug&gt;
+#include &lt;QChar&gt;
+#include &lt;QtCore&gt;
+
+draw::draw(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::draw)
+{
+
+    ui-&gt;setupUi(this);
+    //this-&gt;connect(ui-&gt;pushButton, SIGNAL(clicked(bool)), this, SLOT(createTree()));
+    this-&gt;connect(ui-&gt;huizhi, SIGNAL(clicked(bool)), this, SLOT(createClicked()));
+}
+
+draw::~draw()
+{
+    delete ui;
+}
+
+void draw::createClicked(){
+    createTree();
+    paintEvent(tmp);
+    update();
+
+}
+void draw::paintEvent(QPaintEvent *)
+{
+    QPainter painter(this);
+    node&lt;char&gt;* x = my_tree.getRoot();
+    node&lt;char&gt;* curr;
+    if(x){
+        //层遍历第一遍
+        int last_axis = 0, last_depth = 0;
+        int num = 1, n = x-&gt;height;
+        while(n--)  num *= 2;
+
+        queue&lt;node&lt;char&gt;* &gt; tmp;
+
+        //画线
+        tmp.push(x);
+        while(!tmp.empty()){
+            curr = tmp.front();
+            if(last_depth != curr-&gt;depth){
+                        num/=2;
+                        last_axis = 0;
+             }
+            if(curr == x)
+                        curr-&gt;axis = num;
+             else{
+                        if(IsLc(curr))
+                            curr-&gt;axis = curr-&gt;parent-&gt;axis - num;
+                        else
+                            curr-&gt;axis = curr-&gt;parent-&gt;axis + num;
+             }
+
+            last_depth = curr-&gt;depth;
+            last_axis = curr-&gt;axis;
+            if(curr-&gt;l_c)
+                tmp.push(curr-&gt;l_c);
+            if(curr-&gt;r_c)
+                tmp.push(curr-&gt;r_c);
+            tmp.pop();
+
+            if(x == curr)
+                continue;   //根节点不用画线
+            painter.drawLine(30*curr-&gt;axis+30, 130+100*curr-&gt;depth, 30*curr-&gt;parent-&gt;axis+30, 130+100*curr-&gt;parent-&gt;depth);
+
+       }
+
+        //层遍历第二遍 画节点
+        tmp.push(x);
+        while(!tmp.empty()){
+            curr = tmp.front();
+            painter.setBrush(Qt::green);
+            painter.drawEllipse(30*curr-&gt;axis, 100+100*curr-&gt;depth,60,60);
+            painter.drawText(30*curr-&gt;axis+25, 100*curr-&gt;depth+135, QChar(curr-&gt;data));
+            qDebug()&lt;&lt;QChar(curr-&gt;data)&lt;&lt;endl;
+
+            if(curr-&gt;l_c)
+                tmp.push(curr-&gt;l_c);
+            if(curr-&gt;r_c)
+                tmp.push(curr-&gt;r_c);
+            tmp.pop();
+        }
+    }
+}
+
+void draw::createTree()
+{
+    //QString str = ui-&gt;line-&gt;toPlainText().toStdString().data();    //我佛了
+      QString str = ui-&gt;line-&gt;text();
+//    QString res;
+    std::string res;
+    std::string strs = str.toStdString();
+    stack&lt;char&gt; tmp;
+
+    for(int i = 0; i &lt; strs.size(); i++){
+            if(strs[i] &gt;= '0')
+                res += strs[i];
+            else if(strs[i] == '(')
+                tmp.push( strs[i]);
+            else if(strs[i] == ')'){
+                while(tmp.top() != '('){
+                    res += tmp.top();
+                    tmp.pop();
+                }
+                tmp.pop();  //清除多余的'('
+            }
+            else if(strs[i] == '+' || strs[i] == '-'){
+                while(!tmp.empty()){
+                    if(tmp.top() == '(')
+                        break;  //左括号额外注意
+                    res += tmp.top();
+                    tmp.pop();
+                }
+                tmp.push(strs[i]);     //当前操作的运算符入栈
+            }
+            else if(strs[i] == '*' || strs[i] == '/'){
+                while(!tmp.empty()){
+                    if(tmp.top() == '(' || tmp.top()  == '+' || tmp.top()  == '-')
+                        break;  //不能全部输出
+                    res += tmp.top();
+                    tmp.pop();
+                }
+                tmp.push(strs[i]);     //入栈当前运算符
+            }
+        }
+
+        //栈中多余运算符
+        while(!tmp.empty()){
+            res += tmp.top();
+            tmp.pop();
+        }
+
+        //开始造树
+        my_tree.insertAsRoot(res[res.size()-1]);
+            node&lt;char&gt;* x = my_tree.getRoot();
+            stack&lt;node&lt;char&gt;*&gt; nodes;
+            nodes.push(x);
+            for(int i = res.size()-2; i &gt;= 0; i--){
+                if(res[i] &gt;= '0'){
+                    //数字或者字母作为左孩子插入时需要向上返回
+                    if(x-&gt;r_c){
+                        my_tree.insertAsLc(x, res[i]);
+                        x = nodes.top();
+                        nodes.pop();
+                    }
+                    else
+                        my_tree.insertAsRc(x, res[i]);
+                }
+                else{
+                    //字符一定会移动
+
+                    if(x-&gt;r_c)
+                        x = my_tree.insertAsLc(x, res[i]);
+                    else{
+                        nodes.push(x);
+                        x = my_tree.insertAsRc(x, res[i]);
+                    }
+                }
+            }
+}
+</code></pre>
+
+<p>3.main.cpp</p>
+
+<pre><code class="language-cpp">#include &quot;draw.h&quot;
+#include &lt;QApplication&gt;
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    draw w;
+    w.show();
+
+    return a.exec();
+}
+</code></pre>
+
+<h3 id="运行效果">运行效果</h3>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://raw.githubusercontent.com/wanakiki/photo/master/bin-tree/20190503190211.jpg" alt="样例" class="lazyload"><figcaption class="image-caption">样例</figcaption></figure></p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://raw.githubusercontent.com/wanakiki/photo/master/bin-tree/20190503190213.jpg" alt="非对称树" class="lazyload"><figcaption class="image-caption">非对称树</figcaption></figure></p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://raw.githubusercontent.com/wanakiki/photo/master/bin-tree/20190503190212.jpg" alt="一般情况" class="lazyload"><figcaption class="image-caption">一般情况</figcaption></figure></p>
+
+<p>两个参考链接：</p>
+
+<ol>
+<li><p><a href="https://www.itread01.com/content/1541521344.html" rel="nofollow noreferrer" target="_blank">https://www.itread01.com/content/1541521344.html</a></p></li>
+
+<li><p><a href="http://www.yalewoo.com/2016/01/14/binary_tree_graphical_display/" rel="nofollow noreferrer" target="_blank">http://www.yalewoo.com/2016/01/14/binary_tree_graphical_display/</a></p></li>
+</ol>
+
+<h2 id="总结体会">总结体会</h2>
+
+<p>这次作业因为事先没有考虑到横坐标的问题，遍历更新横坐标的代码写了两遍，其实这个部分完全可以作为一个成员函数写在类中，不过当我发现这个问题的时候第二遍已经写了一半多了，所以就没有改。大部分时间都去研究Qt了，所以构建树的部分可能会有漏洞。由于时间紧迫Qt程序就没有多做细节处理，另外报告撰写的质量也较低。</p>
+
+<p>Qt程序不是生成图片，而是调用画笔，所以当深度过大之后会有很大部分看不到，而且经某人测试，层数达到十几层之后程序会直接bug，具体是那个地方越界还没有时间判断。现在有一个无限画布的想法但是还没有尝试去实现。总之收获还是蛮大的。</p>
+
+<ol>
+<li>有时候先画出来流程图简化过程之后再写代码效率会更高。</li>
+<li>面对新领域而又不需要实现特别困难的功能时：犹豫，就会败北，头铁，就会白给。</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Wanakiki </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://wanakiki.github.io/2019/bin-tree/>https://wanakiki.github.io/2019/bin-tree/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://wanakiki.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://wanakiki.github.io/2019/compression/" class="prev" rel="prev" title="数据结构作业五 Compression"><i class="iconfont icon-left"></i>&nbsp;数据结构作业五 Compression</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2019</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://wanakiki.github.io">Wanakiki</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

@@ -6,13 +6,22 @@
     <description>Recent content in Posts on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 03 May 2019 14:00:51 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 03 May 2019 18:56:50 +0800</lastBuildDate>
     
 	<atom:link href="https://wanakiki.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>数据结构作业四 Compression</title>
+      <title>数据结构作业四 表达式树</title>
+      <link>https://wanakiki.github.io/2019/bin-tree/</link>
+      <pubDate>Fri, 03 May 2019 18:56:50 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2019/bin-tree/</guid>
+      <description>从中缀表达式构建二叉树 问题分析 &amp;amp; 解决方案 题目要求输入一个中缀表达式，构建其相应的表达式树，并输出验证。 表达式树的特点是操作符所对应的两个操作</description>
+    </item>
+    
+    <item>
+      <title>数据结构作业五 Compression</title>
       <link>https://wanakiki.github.io/2019/compression/</link>
       <pubDate>Fri, 03 May 2019 14:00:51 +0800</pubDate>
       
