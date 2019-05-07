@@ -5,8 +5,126 @@
     <description>Recent content in Wanakiki`s Blog on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 03 May 2019 18:56:50 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 07 May 2019 23:55:50 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>数据结构作业六 旅行商（TSP）</title>
+      <link>https://wanakiki.github.io/2019/tsp/</link>
+      <pubDate>Tue, 07 May 2019 23:55:50 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2019/tsp/</guid>
+      <description>
+
+&lt;p&gt;图论第一次作业，不需要提交报告，在OJ上提交。&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;h2 id=&#34;描述&#34;&gt;描述&lt;/h2&gt;
+
+&lt;p&gt;Shrek是一个大山里的邮递员，每天负责给所在地区的n个村庄派发信件。但杯具的是，由于道路狭窄，年久失修，村庄间的道路都只能单向通过，甚至有些村庄无法从任意一个村庄到达。这样我们只能希望尽可能多的村庄可以收到投递的信件。&lt;/p&gt;
+
+&lt;p&gt;Shrek希望知道如何选定一个村庄A作为起点（我们将他空投到该村庄），依次经过尽可能多的村庄，路途中的每个村庄都经过仅一次，最终到达终点村庄B，完成整个送信过程。这个任务交给你来完成。&lt;/p&gt;
+
+&lt;h3 id=&#34;输入&#34;&gt;输入&lt;/h3&gt;
+
+&lt;p&gt;第一行包括两个整数n，m，分别表示村庄的个数以及可以通行的道路的数目。&lt;/p&gt;
+
+&lt;p&gt;以下共m行，每行用两个整数v1和v2表示一条道路，两个整数分别为道路连接的村庄号，道路的方向为从v1至v2，n个村庄编号为[1, n]。&lt;/p&gt;
+
+&lt;p&gt;1 ≤ n ≤ 1,000,000&lt;/p&gt;
+
+&lt;p&gt;0 ≤ m ≤ 1,000,000&lt;/p&gt;
+
+&lt;p&gt;输入保证道路之间没有形成环&lt;/p&gt;
+
+&lt;h3 id=&#34;输出&#34;&gt;输出&lt;/h3&gt;
+
+&lt;p&gt;输出一个数字，表示符合条件的最长道路经过的村庄数。&lt;/p&gt;
+
+&lt;h3 id=&#34;输入样例-1&#34;&gt;输入样例 1&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;4 3
+1 4
+2 4
+4 3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;输出样例-1&#34;&gt;输出样例 1&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;代码&#34;&gt;代码&lt;/h2&gt;
+
+&lt;p&gt;先进性拓扑排序，之后dp找到最大值。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include&amp;lt;iostream&amp;gt;
+using namespace std;
+#define myMax(x,y) ((x) &amp;gt; (y) ? (x) : (y))
+int inDeg[1000005] = {0};   //入度 用于拓扑排序
+int tpSorted[1000005] = {0};    //拓扑排序的顺序
+
+//单个村庄
+struct village{
+    int id;
+    village * next_village;
+    village(int _id, village* next = NULL):id(_id),next_village(next){}
+};
+
+struct villages{
+    village* _next;
+    int dp; //直接写入属性
+    villages():_next(NULL), dp(1){}
+    void add(int next_id);
+}Villages[1000005];
+
+void villages::add(int next_id){
+    inDeg[next_id] ++;
+    if(!_next){
+        _next = new village(next_id);
+    }
+    else{
+        _next = new village(next_id, _next);
+    }
+}
+
+//全局变量真好用...
+int topologicalSort(int n){
+    int res = 0;    //记录最大值
+    int size = 0;   //拓扑数组长度
+    for(int i = 1; i &amp;lt;= n; i++)
+        if(!inDeg[i])
+            tpSorted[size++] = i;
+    
+    //对数组进行操作
+    for(int i = 0; i &amp;lt; size; i++){
+        village* cur = Villages[tpSorted[i]]._next;
+        while(cur){
+            Villages[cur-&amp;gt;id].dp = myMax(Villages[tpSorted[i]].dp+1, Villages[cur-&amp;gt;id].dp);
+            res = myMax(Villages[cur-&amp;gt;id].dp, res);
+
+            inDeg[cur-&amp;gt;id]--;
+            if(!inDeg[cur-&amp;gt;id])
+                tpSorted[size++] = cur-&amp;gt;id;
+            cur = cur-&amp;gt;next_village;
+        }
+    }
+    return res;
+}
+int main(){
+    int n, m, v1, v2;
+    cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; m;
+    while(m--){
+        cin &amp;gt;&amp;gt; v1 &amp;gt;&amp;gt; v2;
+        Villages[v1].add(v2);        
+    }
+    cout &amp;lt;&amp;lt; topologicalSort(n) &amp;lt;&amp;lt; endl;
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>数据结构作业四 表达式树</title>
