@@ -5,8 +5,60 @@
     <description>Recent content in Wanakiki`s Blog on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 07 May 2019 23:55:50 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 12 May 2019 23:24:12 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>2019年山东省省赛回顾</title>
+      <link>https://wanakiki.github.io/2019/shengsai-2019/</link>
+      <pubDate>Sun, 12 May 2019 23:24:12 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2019/shengsai-2019/</guid>
+      <description>
+
+&lt;p&gt;2019年5月11-12号山东省ACM竞赛回顾（想起来什么写什么，绝大部分内容和比赛内容无关）
+&lt;!-- more --&gt;&lt;/p&gt;
+
+&lt;p&gt;第一天中午到济南大学，开幕式之后开始热身赛（开幕式上那个山东大学的老师再一次提到了山大夺冠的问题）。&lt;/p&gt;
+
+&lt;h2 id=&#34;热身赛&#34;&gt;热身赛&lt;/h2&gt;
+
+&lt;p&gt;今年的操作环境是64位win7，题目编译环境还是Linux。电脑上面自带的IDE是codeblocks和DevC++，比较令我意外的是，他们居然还有VSCode。在热身赛开始前稍微鼓捣了一下VSCode，发现只装了一个C++高亮的插件，也没有给好的debug配置文件。我们队只有我平时用VSCode写代码，但我发现我还是不会整配置文件，毕竟原来自己用的时候折腾好了之后就一直用下去，当时也是在别人文件的基础上修改的，有时间的话，还得研究一下这个文件怎么写。&lt;/p&gt;
+
+&lt;p&gt;热身赛只有四个题，前三个都是挺简单的，如果日常有刷题的话应该很快就能做出来。为什么这么说呢，因为我们周围的人很快就把三个题搞定了。但是很不幸，我们到最后只做出来一个，好慌啊。&lt;br /&gt;
+第一题是签到题，很简单，第二题我们看不懂题目（么的词典），第三题是当初校选出的题，我们也没有补😔。总之到最后就很尴尬的走出去了。&lt;/p&gt;
+
+&lt;p&gt;热身赛给人印象最深刻的是最后一个题目，让我们认出21个二次元角色，并输出题目要的那几个。没有算法，只要你够死宅就可以了！&lt;/p&gt;
+
+&lt;h2 id=&#34;正式赛&#34;&gt;正式赛&lt;/h2&gt;
+
+&lt;p&gt;这次比赛题目比去年多，一共有十三道，虽然题目变多，但是绝大部分人能做出来的只有五道，我们就是&amp;hellip;如果能六道就是银牌。&lt;/p&gt;
+
+&lt;p&gt;最后一题带了之狼的图片，我先看的这个，是一道简单的签到，没有很难的点，只要注意一点优化就可以。第一发WA了，zzc提醒了一下改了改就过了。整个过程就打了这一个题。&lt;/p&gt;
+
+&lt;p&gt;djr打了我们剩下的四个题，A题日历，他看了之后直接打了，接着去做的石头，两个题都WA了一次，剩下的两个人帮忙改了改就过了。zzc说图比较简单，所以他们就直接开的那个，这个时候我看的机器人。图也是错了几次才改出来，然后zzc和我研究机器人的解法，让他实现的时候代码出现了很大的漏洞，商量之后换djr交了。&lt;/p&gt;
+
+&lt;p&gt;剩下的两个小时，我们就一直研究其他题目，我花了很久的时间看H，但是到最后还是没搞定，而且中间还有短时间有想法写不出来，太垃圾了。整个比赛的时候变成了喷喷怪，把吐沫喷到别人身上好几次，我佛了🙃&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/wanakiki/photo/master/shengsai/20190513000941.png&#34; alt=&#34;final&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;最终的结果是铜，这是题目的链接，不知道什么时候才能补一下。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://vjudge.net/problem#OJId=ZOJ&amp;amp;probNum=&amp;amp;title=&amp;amp;source=The%2010th%20Shandong&amp;amp;category=all?tdsourcetag=s_pctim_aiomsg&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://vjudge.net/problem#OJId=ZOJ&amp;amp;probNum=&amp;amp;title=&amp;amp;source=The%2010th%20Shandong&amp;amp;category=all?tdsourcetag=s_pctim_aiomsg&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;others&#34;&gt;Others&lt;/h2&gt;
+
+&lt;p&gt;第一天晚上没有出去，一直在旅馆呆着了，很无聊，把奇异人生最后一章的大部分看完了，剩下的一点在回来的车上看完的。我还以为那个男生是真心对歌露尔好的，没想到还真就是和日记里面写的那样，就只是想泡她！&lt;/p&gt;
+
+&lt;p&gt;因为热身赛有一道题搞不清自己的算法错在哪了，所以晚上还折腾了一段时间的对拍。用Termux写的，不会shell所以使用的python，基本能跑程序了，但是还需要稍微整合一下。&lt;/p&gt;
+
+&lt;p&gt;省赛金牌会发实习offer，我觉得学弟学妹们需要的话可以往这个方向稍微用点力，当然我也一样😂&lt;/p&gt;
+
+&lt;p&gt;最后的比赛冠军是烟台大学，山东大学占了二三名🤔&lt;/p&gt;
+
+&lt;p&gt;最后来的时候刮起了大风，一上车就开始下雨了，去上车的路上沙子眯眼了好几次😒，这感觉，的确挺亲切的&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>数据结构作业六 旅行商（TSP）</title>

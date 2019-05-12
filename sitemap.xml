@@ -2,9 +2,19 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
-      <loc>https://wanakiki.github.io/categories/</loc>
+      <loc>https://wanakiki.github.io/2019/shengsai-2019/</loc>
       
-      <lastmod>2019-05-07T23:55:50+08:00</lastmod>
+      <lastmod>2019-05-12T23:24:12+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://wanakiki.github.io/tags/acm/</loc>
+      
+      <lastmod>2019-05-12T23:24:12+08:00</lastmod>
       
       
       
@@ -16,7 +26,19 @@
     <url>
       <loc>https://wanakiki.github.io/posts/</loc>
       
-      <lastmod>2019-05-07T23:55:50+08:00</lastmod>
+      <lastmod>2019-05-12T23:24:12+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://wanakiki.github.io/tags/</loc>
+      
+      <lastmod>2019-05-12T23:24:12+08:00</lastmod>
       
       
       
@@ -27,6 +49,18 @@
   
     <url>
       <loc>https://wanakiki.github.io/</loc>
+      
+      <lastmod>2019-05-12T23:24:12+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://wanakiki.github.io/categories/</loc>
       
       <lastmod>2019-05-07T23:55:50+08:00</lastmod>
       
@@ -105,18 +139,6 @@
       <lastmod>2019-04-20T19:41:55+08:00</lastmod>
       
       
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://wanakiki.github.io/tags/</loc>
-      
-      <lastmod>2019-04-20T14:36:43+08:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
       
       
     </url>

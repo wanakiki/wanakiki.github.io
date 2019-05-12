@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 07 May 2019 23:55:50 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 12 May 2019 23:24:12 +0800</lastBuildDate>
     
 	<atom:link href="https://wanakiki.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2019年山东省省赛回顾</title>
+      <link>https://wanakiki.github.io/2019/shengsai-2019/</link>
+      <pubDate>Sun, 12 May 2019 23:24:12 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2019/shengsai-2019/</guid>
+      <description>2019年5月11-12号山东省ACM竞赛回顾（想起来什么写什么，绝大部分内容和比赛内容无关） 第一天中午到济南大学，开幕式之后开始热身赛（开</description>
+    </item>
     
     <item>
       <title>数据结构作业六 旅行商（TSP）</title>
