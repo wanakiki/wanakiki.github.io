@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 17 May 2019 09:47:43 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 14 Jun 2019 23:22:50 +0800</lastBuildDate>
     
 	<atom:link href="https://wanakiki.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Latex 插入图片方式整理</title>
+      <link>https://wanakiki.github.io/2019/latex-img/</link>
+      <pubDate>Fri, 14 Jun 2019 23:22:50 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2019/latex-img/</guid>
+      <description>又到期末，承担了帮别人排版论文的工作。因为自己不熟悉图片的插入方式拖慢了进度，趁今天有时间整理一下。当然，最大的目的还是备忘。 新建一个.te</description>
+    </item>
     
     <item>
       <title>数据结构作业七 Transport</title>
