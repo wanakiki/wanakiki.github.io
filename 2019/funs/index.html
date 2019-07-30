@@ -9,9 +9,9 @@
   
   
   
-  <link rel="prev" href="https://wanakiki.github.io/2019/bin-tree/" />
-  <link rel="next" href="https://wanakiki.github.io/2019/funs/" />
-  <link rel="canonical" href="https://wanakiki.github.io/2019/tsp/" />
+  <link rel="prev" href="https://wanakiki.github.io/2019/tsp/" />
+  <link rel="next" href="https://wanakiki.github.io/2019/shengsai-2019/" />
+  <link rel="canonical" href="https://wanakiki.github.io/2019/funs/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -22,10 +22,10 @@
   <title>
        
        
-           数据结构作业六 旅行商（TSP） | Wanakiki`s Blog
+           函数对象和函数指针 | Wanakiki`s Blog
        
   </title>
-  <meta name="title" content="数据结构作业六 旅行商（TSP） | Wanakiki`s Blog">
+  <meta name="title" content="函数对象和函数指针 | Wanakiki`s Blog">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,9 +44,9 @@
          "@id": "https:\/\/wanakiki.github.io"
     },
     "articleSection" : "posts",
-    "name" : "数据结构作业六 旅行商（TSP）",
-    "headline" : "数据结构作业六 旅行商（TSP）",
-    "description" : "图论第一次作业，不需要提交报告，在OJ上提交。 描述 Shrek是一个大山里的邮递员，每天负责给所在地区的n个村庄派发信件。但杯具的是，由于道路",
+    "name" : "函数对象和函数指针",
+    "headline" : "函数对象和函数指针",
+    "description" : "简单复习一下函数对象和函数指针。 函数指针 函数指针，简单点来理解就是一个指向函数的的指针变量，函数指针所指的是一个函数的入口地址。 函数指针主要",
     "inLanguage" : "zh-cn",
     "author" : "Wanakiki",
     "creator" : "Wanakiki",
@@ -54,10 +54,10 @@
     "accountablePerson" : "Wanakiki",
     "copyrightHolder" : "Wanakiki",
     "copyrightYear" : "2019",
-    "datePublished": "2019-05-07 23:55:50 \x2b0800 CST",
-    "dateModified" : "2019-05-07 23:55:50 \x2b0800 CST",
-    "url" : "https:\/\/wanakiki.github.io\/2019\/tsp\/",
-    "wordCount" : "640",
+    "datePublished": "2019-05-08 21:21:26 \x2b0800 CST",
+    "dateModified" : "2019-05-08 21:21:26 \x2b0800 CST",
+    "url" : "https:\/\/wanakiki.github.io\/2019\/funs\/",
+    "wordCount" : "709",
     "keywords" : [  "Wanakiki`s Blog"]
 }
 </script>
@@ -116,11 +116,11 @@
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">数据结构作业六 旅行商（TSP）</h1>
+        <h1 class="post-title" itemprop="name headline">函数对象和函数指针</h1>
         <div class="post-meta">
                 Written by <a itemprop="name" href="https://wanakiki.github.io" rel="author">Wanakiki</a> with ♥ 
                 <span class="post-time">
-                on <time datetime=2019-05-07 itemprop="datePublished">May 7, 2019</time>
+                on <time datetime=2019-05-08 itemprop="datePublished">May 8, 2019</time>
                 </span>
                 in
                 <i class="iconfont icon-folder"></i>
@@ -148,111 +148,104 @@
 
           
 
-<p>图论第一次作业，不需要提交报告，在OJ上提交。</p>
+<p>简单复习一下函数对象和函数指针。
+<!-- more --></p>
 
-<!-- more -->
+<h2 id="函数指针">函数指针</h2>
 
-<h2 id="描述">描述</h2>
+<p>函数指针，简单点来理解就是一个指向函数的的指针变量，函数指针所指的是一个函数的入口地址。</p>
 
-<p>Shrek是一个大山里的邮递员，每天负责给所在地区的n个村庄派发信件。但杯具的是，由于道路狭窄，年久失修，村庄间的道路都只能单向通过，甚至有些村庄无法从任意一个村庄到达。这样我们只能希望尽可能多的村庄可以收到投递的信件。</p>
+<p>函数指针主要有两个作用：用来调用函数和作为函数的参数。</p>
 
-<p>Shrek希望知道如何选定一个村庄A作为起点（我们将他空投到该村庄），依次经过尽可能多的村庄，路途中的每个村庄都经过仅一次，最终到达终点村庄B，完成整个送信过程。这个任务交给你来完成。</p>
+<h3 id="函数指针的声明方法及赋值">函数指针的声明方法及赋值</h3>
 
-<h3 id="输入">输入</h3>
+<p>声明方式： 数据类型标识符 (指针变量名) (形参列表)<br />
+例如： <code>int (*fun) (int x);</code></p>
 
-<p>第一行包括两个整数n，m，分别表示村庄的个数以及可以通行的道路的数目。</p>
+<p>其中需要注意一点，指针变量名一定要用括号括起来，因为如果不加括号，我们的编译器就会默认其为返回值为指针的一个函数。</p>
 
-<p>以下共m行，每行用两个整数v1和v2表示一条道路，两个整数分别为道路连接的村庄号，道路的方向为从v1至v2，n个村庄编号为[1, n]。</p>
+<p>为了方便我们的使用，我们可以用typedef进行声明。之后定义函数指针就会方便许多。例如：</p>
 
-<p>1 ≤ n ≤ 1,000,000</p>
-
-<p>0 ≤ m ≤ 1,000,000</p>
-
-<p>输入保证道路之间没有形成环</p>
-
-<h3 id="输出">输出</h3>
-
-<p>输出一个数字，表示符合条件的最长道路经过的村庄数。</p>
-
-<h3 id="输入样例-1">输入样例 1</h3>
-
-<pre><code class="language-no">4 3
-1 4
-2 4
-4 3
+<pre><code class="language-cpp">typedef int(*PF) (int x);
+PF pf;
 </code></pre>
 
-<h3 id="输出样例-1">输出样例 1</h3>
+<p>对一个函数指针赋值我们不需要使用取地址符，因为一个函数的函数名就是该函数的入口指针，我们可以直接对函数指针赋值。</p>
 
-<pre><code class="language-no">3
-</code></pre>
+<p>另外，我认为定义（或者说声明）函数指针时就只是相当于声明一个函数，所以函数指针定义时形参的变量名可以省略，<br />
+即 <code>int (*fun) (int x);</code> 和 <code>int (*fun) (int);</code> 效果是一样的。</p>
 
-<h2 id="代码">代码</h2>
+<h3 id="调用方法及测试">调用方法及测试</h3>
 
-<p>先进性拓扑排序，之后dp找到最大值。</p>
+<p>用函数指针调用函数时有两种调用方式：<code>fun(x)</code> 和 <code>(*fun)(x)</code>。<br />
+而函数指针作为函数参数时，只需要在函数定义时将其写在函数的形参中，函数内部可以直接使用函数指针指向的函数。</p>
 
-<pre><code class="language-cpp">#include&lt;iostream&gt;
+<p>测试程序：</p>
+
+<pre><code class="language-cpp">#include &lt;iostream&gt;
 using namespace std;
-#define myMax(x,y) ((x) &gt; (y) ? (x) : (y))
-int inDeg[1000005] = {0};   //入度 用于拓扑排序
-int tpSorted[1000005] = {0};    //拓扑排序的顺序
 
-//单个村庄
-struct village{
-    int id;
-    village * next_village;
-    village(int _id, village* next = NULL):id(_id),next_village(next){}
+typedef void (*PF) (int);
+
+void visit(int x){
+    cout &lt;&lt; x &lt;&lt; endl;
+}
+
+void visit_usePf(int x, void (*pf)(int)){
+    pf(x);
+}
+
+int main(){
+    PF pf1;
+    void (*pf2) (int);
+    void (*pf3) (int x);
+
+    //typedef 声明测试
+    pf1 = visit;
+    pf1(1);
+    (*pf1)(2);
+
+    //第一种定义测试
+    pf2 = visit;
+    pf2(3);
+    visit_usePf(4, pf2);
+
+    //第二种定义测试
+    pf3 = visit;
+    pf3(5);
+    visit_usePf(6, pf3);
+}
+</code></pre>
+
+<h2 id="函数对象">函数对象</h2>
+
+<p>在C++中，实现了<code>operator()</code>的类或者结构体，都可被称为函数对象并进行直接调用。在学习数据结构时图的优先级遍历所使用的优先级更新器便是一个函数对象。sort函数所需要的比较器也是一个函数对象。</p>
+
+<p>示例：</p>
+
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+class funA{
+    public:
+    void operator()(){
+        cout &lt;&lt; &quot;Function Object&quot; &lt;&lt; endl;
+    }
 };
 
-struct villages{
-    village* _next;
-    int dp; //直接写入属性
-    villages():_next(NULL), dp(1){}
-    void add(int next_id);
-}Villages[1000005];
-
-void villages::add(int next_id){
-    inDeg[next_id] ++;
-    if(!_next){
-        _next = new village(next_id);
+class funB{
+    public:
+    //函数输出两个数的和
+    int operator()(int a, int b){
+        return a + b;
     }
-    else{
-        _next = new village(next_id, _next);
-    }
-}
+};
 
-//全局变量真好用...
-int topologicalSort(int n){
-    int res = 0;    //记录最大值
-    int size = 0;   //拓扑数组长度
-    for(int i = 1; i &lt;= n; i++)
-        if(!inDeg[i])
-            tpSorted[size++] = i;
-    
-    //对数组进行操作
-    for(int i = 0; i &lt; size; i++){
-        village* cur = Villages[tpSorted[i]]._next;
-        while(cur){
-            Villages[cur-&gt;id].dp = myMax(Villages[tpSorted[i]].dp+1, Villages[cur-&gt;id].dp);
-            res = myMax(Villages[cur-&gt;id].dp, res);
-
-            inDeg[cur-&gt;id]--;
-            if(!inDeg[cur-&gt;id])
-                tpSorted[size++] = cur-&gt;id;
-            cur = cur-&gt;next_village;
-        }
-    }
-    return res;
-}
 int main(){
-    int n, m, v1, v2;
-    cin &gt;&gt; n &gt;&gt; m;
-    while(m--){
-        cin &gt;&gt; v1 &gt;&gt; v2;
-        Villages[v1].add(v2);        
-    }
-    cout &lt;&lt; topologicalSort(n) &lt;&lt; endl;
-    return 0;
+    funA hello;
+    funB sum;
+    hello();
+    cout &lt;&lt; sum(1, 2) &lt;&lt; endl;
 }
 </code></pre>
 
@@ -269,7 +262,7 @@ int main(){
              
             <p class="copyright-item">
                     <span>Link:</span>
-                    <a href=https://wanakiki.github.io/2019/tsp/>https://wanakiki.github.io/2019/tsp/</span>
+                    <a href=https://wanakiki.github.io/2019/funs/>https://wanakiki.github.io/2019/funs/</span>
             </p>
             
              
@@ -290,10 +283,10 @@ int main(){
 
     <div class="post-nav">
         
-        <a href="https://wanakiki.github.io/2019/bin-tree/" class="prev" rel="prev" title="数据结构作业四 表达式树"><i class="iconfont icon-left"></i>&nbsp;数据结构作业四 表达式树</a>
+        <a href="https://wanakiki.github.io/2019/tsp/" class="prev" rel="prev" title="数据结构作业六 旅行商（TSP）"><i class="iconfont icon-left"></i>&nbsp;数据结构作业六 旅行商（TSP）</a>
          
         
-        <a href="https://wanakiki.github.io/2019/funs/" class="next" rel="next" title="函数对象和函数指针">函数对象和函数指针&nbsp;<i class="iconfont icon-right"></i></a>
+        <a href="https://wanakiki.github.io/2019/shengsai-2019/" class="next" rel="next" title="2019年山东省省赛回顾">2019年山东省省赛回顾&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 

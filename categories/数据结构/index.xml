@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>函数对象和函数指针</title>
+      <link>https://wanakiki.github.io/2019/funs/</link>
+      <pubDate>Wed, 08 May 2019 21:21:26 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2019/funs/</guid>
+      <description>简单复习一下函数对象和函数指针。 函数指针 函数指针，简单点来理解就是一个指向函数的的指针变量，函数指针所指的是一个函数的入口地址。 函数指针主要</description>
+    </item>
+    
+    <item>
       <title>数据结构作业六 旅行商（TSP）</title>
       <link>https://wanakiki.github.io/2019/tsp/</link>
       <pubDate>Tue, 07 May 2019 23:55:50 +0800</pubDate>
