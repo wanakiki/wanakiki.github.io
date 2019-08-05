@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Wanakiki">
+  
+  
+  
+  <link rel="prev" href="https://wanakiki.github.io/2019/latex-img/" />
+  
+  <link rel="canonical" href="https://wanakiki.github.io/2019/python-assignment/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           PY4E 题目整理（上） | Wanakiki`s Blog
+       
+  </title>
+  <meta name="title" content="PY4E 题目整理（上） | Wanakiki`s Blog">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/wanakiki.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "PY4E 题目整理（上）",
+    "headline" : "PY4E 题目整理（上）",
+    "description" : "Coursera中python教程同步题目整理，因为旁听课程不能直接对每章的编程作业进行提交，学到中期之后才发现py4e上有几乎所有题目的在",
+    "inLanguage" : "zh-cn",
+    "author" : "Wanakiki",
+    "creator" : "Wanakiki",
+    "publisher": "Wanakiki",
+    "accountablePerson" : "Wanakiki",
+    "copyrightHolder" : "Wanakiki",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-08-04 17:39:49 \x2b0800 CST",
+    "dateModified" : "2019-08-04 17:39:49 \x2b0800 CST",
+    "url" : "https:\/\/wanakiki.github.io\/2019\/python-assignment\/",
+    "wordCount" : "2801",
+    "keywords" : [ "python","Coursera", "Wanakiki`s Blog"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://wanakiki.github.io">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://wanakiki.github.io">Wanakiki`s Blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">PY4E 题目整理（上）</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://wanakiki.github.io" rel="author">Wanakiki</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2019-08-04 itemprop="datePublished">August 4, 2019</time>
+                </span>
+                in
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>Coursera中python教程同步题目整理，因为旁听课程不能直接对每章的编程作业进行提交，学到中期之后才发现<a href="https://www.py4e.com/" rel="nofollow noreferrer" target="_blank">py4e</a>上有几乎所有题目的在线测试环境，在看完所有的教学视频之后重新刷题，回顾知识点，在此进行整理。分为基础部分和网络及数据库编程部分。</p>
+
+<!-- more -->
+
+<h2 id="hello-world">Hello world</h2>
+
+<h3 id="problem">Problem</h3>
+
+<p>Write a program that uses a print statement to say &lsquo;hello world&rsquo; as shown in &lsquo;Desired Output&rsquo;.</p>
+
+<h3 id="code">Code</h3>
+
+<pre><code class="language-python"> print('hello world')
+</code></pre>
+
+<h3 id="回顾">回顾</h3>
+
+<p>Python中字符串可以用四种引号组合进行标注：<code>' &quot; ''' &quot;&quot;&quot;</code>，其中单独的单引或者双引可以使引号内部不同的引号不需要进行转义，如<code>&quot;this is 'a' test&quot;</code>中的单引号就不需要进行转义。三个单引号和双引号具有相同的作用，可以保证被定义的字符串原封不动地输出（一般定义多行），在后面执行SQL语句时有用到。同时其中的单引号或者双引号不需要转义。</p>
+
+<h2 id="2-3">2-3</h2>
+
+<h3 id="problem-1">Problem</h3>
+
+<p>Write a program to prompt the user for hours and rate per hour using input to compute gross pay. Use 35 hours and a rate of 2.75 per hour to test the program (the pay should be 96.25). You should use input to read a string and float() to convert the string to a number. Do not worry about error checking or bad user data.</p>
+
+<p>根据输入的时间和工资标准计算总工资，并输出。假定时间为35小时，工资标准为2.75每小时，标准结果应为96.25。</p>
+
+<h3 id="desired-output">Desired Output</h3>
+
+<pre><code class="language-no">Pay: 96.25
+</code></pre>
+
+<h3 id="code-1">Code</h3>
+
+<pre><code class="language-python"># This first line is provided for you
+
+hrs = input(&quot;Enter Hours:&quot;)
+hrs = float(hrs)
+
+rate = float(input(&quot;Enter Rate:&quot;))
+print('Pay:', hrs * rate)
+</code></pre>
+
+<h2 id="3-1">3-1</h2>
+
+<h3 id="problem-2">Problem</h3>
+
+<p>Write a program to prompt the user for hours and rate per hour using input to compute gross pay. Pay the hourly rate for the hours up to 40 and 1.5 times the hourly rate for all hours worked above 40 hours. Use 45 hours and a rate of 10.50 per hour to test the program (the pay should be 498.75). You should use input to read a string and float() to convert the string to a number. Do not worry about error checking the user input - assume the user types numbers properly.</p>
+
+<p>根据时长和工资标准计算工资，工作时间大于40小时的部分需要付1.5倍工资，标准输入为45，10.5，标准输出为498.75。</p>
+
+<h3 id="code-2">Code</h3>
+
+<pre><code class="language-python">hrs = input(&quot;Enter Hours:&quot;)
+h = float(hrs)
+
+rate = float(input(&quot;Enter Rates:&quot;))
+if h &gt; 40:
+    res = 40 * rate + (h - 40) * rate * 1.5
+else:
+    res = rate * 40
+print(res)
+</code></pre>
+
+<h2 id="3-3">3-3</h2>
+
+<h3 id="program">Program</h3>
+
+<p>Write a program to prompt for a score between 0.0 and 1.0. If the score is out of range, print an error. If the score is between 0.0 and 1.0, print a grade using the following table:</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">Score</th>
+<th align="center">Grade</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">&gt;= 0.9</td>
+<td align="center">A</td>
+</tr>
+
+<tr>
+<td align="center">&gt;= 0.8</td>
+<td align="center">B</td>
+</tr>
+
+<tr>
+<td align="center">&gt;= 0.7</td>
+<td align="center">C</td>
+</tr>
+
+<tr>
+<td align="center">&gt;= 0.6</td>
+<td align="center">D</td>
+</tr>
+
+<tr>
+<td align="center">&lt; 0.6</td>
+<td align="center">F</td>
+</tr>
+</tbody>
+</table>
+
+<p>If the user enters a value out of range, print a suitable error message and exit. For the test, enter a score of 0.85.</p>
+
+<p>按照表格输出对应的级别，要求输入在0到1，越界输出错误信息，假定输入为0.85。</p>
+
+<h3 id="code-3">Code</h3>
+
+<pre><code class="language-py">score = input(&quot;Enter Score: &quot;)
+grade = ['D','C','B','A']
+
+try:
+    score = float(score)
+except:
+    print('输入不是浮点数')
+    quit()
+
+if score &lt; 0 or score &gt; 1:
+    print('输入不在指定范围')
+    quit()
+
+score = int(score * 10)
+
+if score &lt; 6:
+    print('F')
+elif score &gt; 9:
+    print('A')
+else:
+    print(grade[score-6])
+</code></pre>
+
+<p>没有用那么多的判断，使用了一个list。</p>
+
+<h2 id="4-6">4-6</h2>
+
+<h3 id="problem-3">Problem</h3>
+
+<p>Write a program to prompt the user for hours and rate per hour using input to compute gross pay. Pay should be the normal rate for hours up to 40 and time-and-a-half for the hourly rate for all hours worked above 40 hours. Put the logic to do the computation of pay in a function called computepay() and use the function to do the computation. The function should return a value. Use 45 hours and a rate of 10.50 per hour to test the program (the pay should be 498.75). You should use input to read a string and float() to convert the string to a number. Do not worry about error checking the user input unless you want to - you can assume the user types numbers properly. Do not name your variable sum or use the sum() function.</p>
+
+<p>使用函数计算<a href="#3-1">3-1问题</a>，假定输入规范，测试输入为45h，10.5，标准结果为498.75。</p>
+
+<h3 id="code-4">Code</h3>
+
+<pre><code class="language-python">def computepay(h, r):
+    if h &lt;= 40:
+        return h * r
+    else:
+        return 40 * r + (h - 40) * r * 1.5
+
+
+hrs = input(&quot;Enter Hours:&quot;)
+hrs = float(hrs)
+rat = float(input(&quot;Enter Rates:&quot;))
+
+p = computepay(hrs, rat)
+print(p)
+</code></pre>
+
+<h2 id="5-2">5-2</h2>
+
+<h3 id="problem-4">Problem</h3>
+
+<p>Write a program that repeatedly prompts a user for integer numbers until the user enters &lsquo;done&rsquo;. Once &lsquo;done&rsquo; is entered, print out the largest and smallest of the numbers. If the user enters anything other than a valid number catch it with a try/except and put out an appropriate message and ignore the number. Enter 7, 2, bob, 10, and 4 and match the output below.</p>
+
+<p>写一个程序监测用户输入的整数，直到用户输入“done”程序停止，之后程序输出这批数字的最大值和最小值。需要对输入进行检测，对于不合法的输入需要输出<code>Invalid input</code>。</p>
+
+<h3 id="code-5">Code</h3>
+
+<pre><code class="language-python">largest = None
+smallest = None
+while True:
+    num = input(&quot;Enter a number: &quot;)
+    if num == &quot;done&quot;:
+        break
+
+    try:
+        num = int(num)
+    except:
+        print('Invalid input')
+        continue
+
+    if largest is None:
+        largest = num
+        smallest = num
+    else:
+        if largest &lt; num:
+            largest = num
+        if smallest &gt; num:
+            smallest = num
+
+print(&quot;Maximum is&quot;, largest)
+print(&quot;Minimum is&quot;, smallest)
+</code></pre>
+
+<h2 id="6-5">6-5</h2>
+
+<p>Write code using find() and string slicing (see section 6.10) to extract the number at the end of the line below. Convert the extracted value to a floating point number and print it out.</p>
+
+<p>通过find和切片截取字符串中的浮点数。</p>
+
+<pre><code class="language-python">text = &quot;X-DSPAM-Confidence:    0.8475&quot;
+index = text.find('0')
+
+res = float(text[index:])
+print(res)
+</code></pre>
+
+<h2 id="7-2">7-2</h2>
+
+<p>Write a program that prompts for a file name, then opens that file and reads through the file, looking for lines of the form:</p>
+
+<pre><code class="language-no">X-DSPAM-Confidence:    0.8475
+</code></pre>
+
+<p>Count these lines and extract the floating point values from each of the lines and compute the average of those values and produce an output as shown below. Do not use the sum() function or a variable named sum in your solution.</p>
+
+<p>You can download the sample data at <a href="http://www.py4e.com/code3/mbox-short.txt" rel="nofollow noreferrer" target="_blank">http://www.py4e.com/code3/mbox-short.txt</a> when you are testing below enter mbox-short.txt as the file name.</p>
+
+<p>文件操作，提取指定格式行的数据，并计算平均值。标准输出为<code>Average spam confidence: 0.750718518519</code></p>
+
+<pre><code class="language-python">def getNumber(line : str):
+    index = line.find(':') + 1  #查找冒号更加合适
+    return float(line[index:])
+
+# Use the file name mbox-short.txt as the file name
+fname = input(&quot;Enter file name: &quot;)
+if len(fname) &lt; 1:
+    fname = 'mbox-short.txt'
+fh = open(fname)
+
+Sum = 0
+num = 0
+for line in fh:
+    if not line.startswith(&quot;X-DSPAM-Confidence:&quot;):
+        continue
+    Sum = Sum + getNumber(line.rstrip())
+    num = num + 1
+
+print('Average spam confidence:', Sum / num)
+</code></pre>
+
+<h2 id="8-4">8-4</h2>
+
+<p>Open the file romeo.txt and read it line by line. For each line, split the line into a list of words using the split() method. The program should build a list of words. For each word on each line check to see if the word is already in the list and if not append it to the list. When the program completes, sort and print the resulting words in alphabetical order.</p>
+
+<p>You can download the sample data at <a href="http://www.py4e.com/code3/romeo.txt" rel="nofollow noreferrer" target="_blank">http://www.py4e.com/code3/romeo.txt</a></p>
+
+<p>读取文件，统计其中出现过的单词，按字典序输出。</p>
+
+<pre><code class="language-python">fname = input(&quot;Enter file name: &quot;)
+if len(fname) &lt; 1:
+    fname = 'romeo.txt'
+fh = open(fname)
+lst = list()
+
+for line in fh:
+    line = line.rstrip()
+    words = line.split()
+
+    for word in words:
+        if word not in lst:
+            lst.append(word)
+
+lst.sort()
+print(lst)
+</code></pre>
+
+<h2 id="8-5">8-5</h2>
+
+<p>Open the file mbox-short.txt and read it line by line. When you find a line that starts with &lsquo;From &rsquo; like the following line:</p>
+
+<pre><code class="language-no">From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008
+</code></pre>
+
+<p>You will parse the From line using split() and print out the second word in the line (i.e. the entire address of the person who sent the message). Then print out a count at the end.</p>
+
+<p>Hint: make sure not to include the lines that start with &lsquo;From:&lsquo;.</p>
+
+<p>You can download the sample data at <a href="http://www.py4e.com/code3/mbox-short.txt" rel="nofollow noreferrer" target="_blank">http://www.py4e.com/code3/mbox-short.txt</a></p>
+
+<p>读文件，对其中<code>From</code>开始的行，输出邮件来源并统计个数，在最后输出统计结果。</p>
+
+<pre><code class="language-python">fname = input(&quot;Enter file name: &quot;)
+if len(fname) &lt; 1:
+    fname = &quot;mbox-short.txt&quot;
+
+fh = open(fname)
+count = 0
+
+for line in fh:
+    if not line.startswith('From '):
+        continue
+    line = line.split()
+    print(line[1])
+    count = count + 1
+
+print(&quot;There were&quot;, count, &quot;lines in the file with From as the first word&quot;)
+</code></pre>
+
+<h2 id="9-4">9-4</h2>
+
+<p>Write a program to read through the mbox-short.txt and figure out who has sent the greatest number of mail messages. The program looks for &lsquo;From &rsquo; lines and takes the second word of those lines as the person who sent the mail. The program creates a Python dictionary that maps the sender&rsquo;s mail address to a count of the number of times they appear in the file. After the dictionary is produced, the program reads through the dictionary using a maximum loop to find the most prolific committer.</p>
+
+<p>统计文件中的发信人行，使用字典存储每个人发送邮件的数目。最后使用一个最大for循环，查找到发送最多邮件的人。</p>
+
+<pre><code class="language-python">name = input(&quot;Enter file:&quot;)
+if len(name) &lt; 1:
+    name = &quot;mbox-short.txt&quot;
+handle = open(name)
+res = dict()
+
+for line in handle:
+    if not line.startswith('From '):
+        continue
+
+    line = line.split()
+    author = line[1]
+    res[author] = res.get(author, 0) + 1
+
+name = None
+count = None
+for k, v in res.items():
+    if count is None or v &gt; count:
+        count = v
+        name = k
+
+print(name, count)
+</code></pre>
+
+<h2 id="10-2">10-2</h2>
+
+<p>Write a program to read through the mbox-short.txt and figure out the distribution by hour of the day for each of the messages. You can pull the hour out from the &lsquo;From &rsquo; line by finding the time and then splitting the string a second time using a colon.</p>
+
+<pre><code class="language-no">From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008
+</code></pre>
+
+<p>Once you have accumulated the counts for each hour, print out the counts, sorted by hour as shown below.</p>
+
+<p>统计各个时段中邮件的数目，存储到字典之中，最后按照时间顺序输出各个时间段对应的邮件数。（需要对dict进行排序）</p>
+
+<pre><code class="language-python">name = input(&quot;Enter file:&quot;)
+if len(name) &lt; 1 : name = &quot;mbox-short.txt&quot;
+handle = open(name)
+
+status = {}
+for line in handle:
+    if not line.startswith('From '):
+        continue
+
+    # 抓取时间
+    line = line.split()
+    line = line[5]
+    line = line.split(':')
+
+    # 截取时间
+    tim = line[0]
+    if tim in status:
+        status[tim] = status[tim] + 1
+    else:
+        status[tim] = 1
+
+res = sorted([(k, v) for (k, v) in status.items()])
+for k, v in res:
+    print(k, v)
+</code></pre>
+
+<p>上面将dict转化为list的步骤利用了python的特性。</p>
+
+<h2 id="regular-expressions">Regular Expressions</h2>
+
+<h3 id="finding-numbers-in-a-haystack">Finding Numbers in a Haystack</h3>
+
+<p>In this assignment you will read through and parse a file with text and numbers. You will extract all the numbers in the file and compute the sum of the numbers.</p>
+
+<h3 id="data-files">Data Files</h3>
+
+<p>We provide two files for this assignment. One is a sample file where we give you the sum for your testing and the other is the actual data you need to process for the assignment.</p>
+
+<ul>
+<li>Sample data: <a href="http://py4e-data.dr-chuck.net/regex_sum_42.txt" rel="nofollow noreferrer" target="_blank">http://py4e-data.dr-chuck.net/regex_sum_42.txt</a> (There are 90 values with a sum=445833)</li>
+<li>Actual data: <a href="http://py4e-data.dr-chuck.net/regex_sum_275911.txt" rel="nofollow noreferrer" target="_blank">http://py4e-data.dr-chuck.net/regex_sum_275911.txt</a> (There are 92 values and the sum ends with 76)</li>
+</ul>
+
+<p>These links open in a new window. Make sure to save the file into the same folder as you will be writing your Python program. Note: Each student will have a distinct data file for the assignment - so only use your own data file for analysis.</p>
+
+<h3 id="data-format">Data Format</h3>
+
+<p>The file contains much of the text from the introduction of the textbook except that random numbers are inserted throughout the text. Here is a sample of the output you might see:</p>
+
+<pre><code class="language-no">Why should you learn to write programs? 7746
+12 1929 8827
+Writing programs (or programming) is a very creative
+7 and rewarding activity.  You can write programs for
+many reasons, ranging from making your living to solving
+8837 a difficult data analysis problem to having fun to helping 128
+someone else solve a problem.  This book assumes that
+everyone needs to know how to program ...
+</code></pre>
+
+<p>The sum for the sample text above is 27486. The numbers can appear anywhere in the line. There can be any number of numbers in each line (including none).</p>
+
+<h3 id="handling-the-data">Handling The Data</h3>
+
+<p>The basic outline of this problem is to read the file, look for integers using the re.findall(), looking for a regular expression of &lsquo;[0-9]+&rsquo; and then converting the extracted strings to integers and summing up the integers.</p>
+
+<h3 id="my-code">My Code</h3>
+
+<pre><code class="language-python"># 统计文件中数字的总和
+import re
+
+filename = input('Input filename:')
+if len(filename) &lt; 1:
+    filename = 'regex_sum_275911.txt'
+
+res = 0
+fh = open(filename)
+for line in fh:
+    tmp = re.findall('[0-9]+', line)
+
+    # 计算一行中数字的和
+    for x in tmp:
+        res = res + int(x)
+
+print(res)
+</code></pre>
+
+<p><strong>两行代码解决问题</strong>（好熟悉&hellip;</p>
+
+<pre><code class="language-python">Python 2
+import re
+print sum( [ ****** *** * in **********('[0-9]+',**************************.read()) ] )
+
+Python 3:
+import re
+print( sum( [ ****** *** * in **********('[0-9]+',**************************.read()) ] ) )
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Wanakiki </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://wanakiki.github.io/2019/python-assignment/>https://wanakiki.github.io/2019/python-assignment/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://wanakiki.github.io/tags/python/">
+                    #python</a></span>
+            
+            <span class="tag"><a href="https://wanakiki.github.io/tags/coursera/">
+                    #Coursera</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://wanakiki.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://wanakiki.github.io/2019/latex-img/" class="prev" rel="prev" title="Latex 插入图片方式整理"><i class="iconfont icon-left"></i>&nbsp;Latex 插入图片方式整理</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2019</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://wanakiki.github.io">Wanakiki</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

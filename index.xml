@@ -5,8 +5,459 @@
     <description>Recent content in Wanakiki`s Blog on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 14 Jun 2019 23:22:50 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 04 Aug 2019 17:39:49 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>PY4E 题目整理（上）</title>
+      <link>https://wanakiki.github.io/2019/python-assignment/</link>
+      <pubDate>Sun, 04 Aug 2019 17:39:49 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2019/python-assignment/</guid>
+      <description>
+
+&lt;p&gt;Coursera中python教程同步题目整理，因为旁听课程不能直接对每章的编程作业进行提交，学到中期之后才发现&lt;a href=&#34;https://www.py4e.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;py4e&lt;/a&gt;上有几乎所有题目的在线测试环境，在看完所有的教学视频之后重新刷题，回顾知识点，在此进行整理。分为基础部分和网络及数据库编程部分。&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;h2 id=&#34;hello-world&#34;&gt;Hello world&lt;/h2&gt;
+
+&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
+
+&lt;p&gt;Write a program that uses a print statement to say &amp;lsquo;hello world&amp;rsquo; as shown in &amp;lsquo;Desired Output&amp;rsquo;.&lt;/p&gt;
+
+&lt;h3 id=&#34;code&#34;&gt;Code&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt; print(&#39;hello world&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;回顾&#34;&gt;回顾&lt;/h3&gt;
+
+&lt;p&gt;Python中字符串可以用四种引号组合进行标注：&lt;code&gt;&#39; &amp;quot; &#39;&#39;&#39; &amp;quot;&amp;quot;&amp;quot;&lt;/code&gt;，其中单独的单引或者双引可以使引号内部不同的引号不需要进行转义，如&lt;code&gt;&amp;quot;this is &#39;a&#39; test&amp;quot;&lt;/code&gt;中的单引号就不需要进行转义。三个单引号和双引号具有相同的作用，可以保证被定义的字符串原封不动地输出（一般定义多行），在后面执行SQL语句时有用到。同时其中的单引号或者双引号不需要转义。&lt;/p&gt;
+
+&lt;h2 id=&#34;2-3&#34;&gt;2-3&lt;/h2&gt;
+
+&lt;h3 id=&#34;problem-1&#34;&gt;Problem&lt;/h3&gt;
+
+&lt;p&gt;Write a program to prompt the user for hours and rate per hour using input to compute gross pay. Use 35 hours and a rate of 2.75 per hour to test the program (the pay should be 96.25). You should use input to read a string and float() to convert the string to a number. Do not worry about error checking or bad user data.&lt;/p&gt;
+
+&lt;p&gt;根据输入的时间和工资标准计算总工资，并输出。假定时间为35小时，工资标准为2.75每小时，标准结果应为96.25。&lt;/p&gt;
+
+&lt;h3 id=&#34;desired-output&#34;&gt;Desired Output&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;Pay: 96.25
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;code-1&#34;&gt;Code&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# This first line is provided for you
+
+hrs = input(&amp;quot;Enter Hours:&amp;quot;)
+hrs = float(hrs)
+
+rate = float(input(&amp;quot;Enter Rate:&amp;quot;))
+print(&#39;Pay:&#39;, hrs * rate)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;3-1&#34;&gt;3-1&lt;/h2&gt;
+
+&lt;h3 id=&#34;problem-2&#34;&gt;Problem&lt;/h3&gt;
+
+&lt;p&gt;Write a program to prompt the user for hours and rate per hour using input to compute gross pay. Pay the hourly rate for the hours up to 40 and 1.5 times the hourly rate for all hours worked above 40 hours. Use 45 hours and a rate of 10.50 per hour to test the program (the pay should be 498.75). You should use input to read a string and float() to convert the string to a number. Do not worry about error checking the user input - assume the user types numbers properly.&lt;/p&gt;
+
+&lt;p&gt;根据时长和工资标准计算工资，工作时间大于40小时的部分需要付1.5倍工资，标准输入为45，10.5，标准输出为498.75。&lt;/p&gt;
+
+&lt;h3 id=&#34;code-2&#34;&gt;Code&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;hrs = input(&amp;quot;Enter Hours:&amp;quot;)
+h = float(hrs)
+
+rate = float(input(&amp;quot;Enter Rates:&amp;quot;))
+if h &amp;gt; 40:
+    res = 40 * rate + (h - 40) * rate * 1.5
+else:
+    res = rate * 40
+print(res)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;3-3&#34;&gt;3-3&lt;/h2&gt;
+
+&lt;h3 id=&#34;program&#34;&gt;Program&lt;/h3&gt;
+
+&lt;p&gt;Write a program to prompt for a score between 0.0 and 1.0. If the score is out of range, print an error. If the score is between 0.0 and 1.0, print a grade using the following table:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;Score&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Grade&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&amp;gt;= 0.9&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;A&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&amp;gt;= 0.8&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;B&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&amp;gt;= 0.7&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;C&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&amp;gt;= 0.6&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;D&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&amp;lt; 0.6&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;F&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;If the user enters a value out of range, print a suitable error message and exit. For the test, enter a score of 0.85.&lt;/p&gt;
+
+&lt;p&gt;按照表格输出对应的级别，要求输入在0到1，越界输出错误信息，假定输入为0.85。&lt;/p&gt;
+
+&lt;h3 id=&#34;code-3&#34;&gt;Code&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-py&#34;&gt;score = input(&amp;quot;Enter Score: &amp;quot;)
+grade = [&#39;D&#39;,&#39;C&#39;,&#39;B&#39;,&#39;A&#39;]
+
+try:
+    score = float(score)
+except:
+    print(&#39;输入不是浮点数&#39;)
+    quit()
+
+if score &amp;lt; 0 or score &amp;gt; 1:
+    print(&#39;输入不在指定范围&#39;)
+    quit()
+
+score = int(score * 10)
+
+if score &amp;lt; 6:
+    print(&#39;F&#39;)
+elif score &amp;gt; 9:
+    print(&#39;A&#39;)
+else:
+    print(grade[score-6])
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;没有用那么多的判断，使用了一个list。&lt;/p&gt;
+
+&lt;h2 id=&#34;4-6&#34;&gt;4-6&lt;/h2&gt;
+
+&lt;h3 id=&#34;problem-3&#34;&gt;Problem&lt;/h3&gt;
+
+&lt;p&gt;Write a program to prompt the user for hours and rate per hour using input to compute gross pay. Pay should be the normal rate for hours up to 40 and time-and-a-half for the hourly rate for all hours worked above 40 hours. Put the logic to do the computation of pay in a function called computepay() and use the function to do the computation. The function should return a value. Use 45 hours and a rate of 10.50 per hour to test the program (the pay should be 498.75). You should use input to read a string and float() to convert the string to a number. Do not worry about error checking the user input unless you want to - you can assume the user types numbers properly. Do not name your variable sum or use the sum() function.&lt;/p&gt;
+
+&lt;p&gt;使用函数计算&lt;a href=&#34;#3-1&#34;&gt;3-1问题&lt;/a&gt;，假定输入规范，测试输入为45h，10.5，标准结果为498.75。&lt;/p&gt;
+
+&lt;h3 id=&#34;code-4&#34;&gt;Code&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def computepay(h, r):
+    if h &amp;lt;= 40:
+        return h * r
+    else:
+        return 40 * r + (h - 40) * r * 1.5
+
+
+hrs = input(&amp;quot;Enter Hours:&amp;quot;)
+hrs = float(hrs)
+rat = float(input(&amp;quot;Enter Rates:&amp;quot;))
+
+p = computepay(hrs, rat)
+print(p)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;5-2&#34;&gt;5-2&lt;/h2&gt;
+
+&lt;h3 id=&#34;problem-4&#34;&gt;Problem&lt;/h3&gt;
+
+&lt;p&gt;Write a program that repeatedly prompts a user for integer numbers until the user enters &amp;lsquo;done&amp;rsquo;. Once &amp;lsquo;done&amp;rsquo; is entered, print out the largest and smallest of the numbers. If the user enters anything other than a valid number catch it with a try/except and put out an appropriate message and ignore the number. Enter 7, 2, bob, 10, and 4 and match the output below.&lt;/p&gt;
+
+&lt;p&gt;写一个程序监测用户输入的整数，直到用户输入“done”程序停止，之后程序输出这批数字的最大值和最小值。需要对输入进行检测，对于不合法的输入需要输出&lt;code&gt;Invalid input&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h3 id=&#34;code-5&#34;&gt;Code&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;largest = None
+smallest = None
+while True:
+    num = input(&amp;quot;Enter a number: &amp;quot;)
+    if num == &amp;quot;done&amp;quot;:
+        break
+
+    try:
+        num = int(num)
+    except:
+        print(&#39;Invalid input&#39;)
+        continue
+
+    if largest is None:
+        largest = num
+        smallest = num
+    else:
+        if largest &amp;lt; num:
+            largest = num
+        if smallest &amp;gt; num:
+            smallest = num
+
+print(&amp;quot;Maximum is&amp;quot;, largest)
+print(&amp;quot;Minimum is&amp;quot;, smallest)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;6-5&#34;&gt;6-5&lt;/h2&gt;
+
+&lt;p&gt;Write code using find() and string slicing (see section 6.10) to extract the number at the end of the line below. Convert the extracted value to a floating point number and print it out.&lt;/p&gt;
+
+&lt;p&gt;通过find和切片截取字符串中的浮点数。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;text = &amp;quot;X-DSPAM-Confidence:    0.8475&amp;quot;
+index = text.find(&#39;0&#39;)
+
+res = float(text[index:])
+print(res)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;7-2&#34;&gt;7-2&lt;/h2&gt;
+
+&lt;p&gt;Write a program that prompts for a file name, then opens that file and reads through the file, looking for lines of the form:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;X-DSPAM-Confidence:    0.8475
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Count these lines and extract the floating point values from each of the lines and compute the average of those values and produce an output as shown below. Do not use the sum() function or a variable named sum in your solution.&lt;/p&gt;
+
+&lt;p&gt;You can download the sample data at &lt;a href=&#34;http://www.py4e.com/code3/mbox-short.txt&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/mbox-short.txt&lt;/a&gt; when you are testing below enter mbox-short.txt as the file name.&lt;/p&gt;
+
+&lt;p&gt;文件操作，提取指定格式行的数据，并计算平均值。标准输出为&lt;code&gt;Average spam confidence: 0.750718518519&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def getNumber(line : str):
+    index = line.find(&#39;:&#39;) + 1  #查找冒号更加合适
+    return float(line[index:])
+
+# Use the file name mbox-short.txt as the file name
+fname = input(&amp;quot;Enter file name: &amp;quot;)
+if len(fname) &amp;lt; 1:
+    fname = &#39;mbox-short.txt&#39;
+fh = open(fname)
+
+Sum = 0
+num = 0
+for line in fh:
+    if not line.startswith(&amp;quot;X-DSPAM-Confidence:&amp;quot;):
+        continue
+    Sum = Sum + getNumber(line.rstrip())
+    num = num + 1
+
+print(&#39;Average spam confidence:&#39;, Sum / num)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;8-4&#34;&gt;8-4&lt;/h2&gt;
+
+&lt;p&gt;Open the file romeo.txt and read it line by line. For each line, split the line into a list of words using the split() method. The program should build a list of words. For each word on each line check to see if the word is already in the list and if not append it to the list. When the program completes, sort and print the resulting words in alphabetical order.&lt;/p&gt;
+
+&lt;p&gt;You can download the sample data at &lt;a href=&#34;http://www.py4e.com/code3/romeo.txt&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/romeo.txt&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;读取文件，统计其中出现过的单词，按字典序输出。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fname = input(&amp;quot;Enter file name: &amp;quot;)
+if len(fname) &amp;lt; 1:
+    fname = &#39;romeo.txt&#39;
+fh = open(fname)
+lst = list()
+
+for line in fh:
+    line = line.rstrip()
+    words = line.split()
+
+    for word in words:
+        if word not in lst:
+            lst.append(word)
+
+lst.sort()
+print(lst)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;8-5&#34;&gt;8-5&lt;/h2&gt;
+
+&lt;p&gt;Open the file mbox-short.txt and read it line by line. When you find a line that starts with &amp;lsquo;From &amp;rsquo; like the following line:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You will parse the From line using split() and print out the second word in the line (i.e. the entire address of the person who sent the message). Then print out a count at the end.&lt;/p&gt;
+
+&lt;p&gt;Hint: make sure not to include the lines that start with &amp;lsquo;From:&amp;lsquo;.&lt;/p&gt;
+
+&lt;p&gt;You can download the sample data at &lt;a href=&#34;http://www.py4e.com/code3/mbox-short.txt&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/mbox-short.txt&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;读文件，对其中&lt;code&gt;From&lt;/code&gt;开始的行，输出邮件来源并统计个数，在最后输出统计结果。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fname = input(&amp;quot;Enter file name: &amp;quot;)
+if len(fname) &amp;lt; 1:
+    fname = &amp;quot;mbox-short.txt&amp;quot;
+
+fh = open(fname)
+count = 0
+
+for line in fh:
+    if not line.startswith(&#39;From &#39;):
+        continue
+    line = line.split()
+    print(line[1])
+    count = count + 1
+
+print(&amp;quot;There were&amp;quot;, count, &amp;quot;lines in the file with From as the first word&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;9-4&#34;&gt;9-4&lt;/h2&gt;
+
+&lt;p&gt;Write a program to read through the mbox-short.txt and figure out who has sent the greatest number of mail messages. The program looks for &amp;lsquo;From &amp;rsquo; lines and takes the second word of those lines as the person who sent the mail. The program creates a Python dictionary that maps the sender&amp;rsquo;s mail address to a count of the number of times they appear in the file. After the dictionary is produced, the program reads through the dictionary using a maximum loop to find the most prolific committer.&lt;/p&gt;
+
+&lt;p&gt;统计文件中的发信人行，使用字典存储每个人发送邮件的数目。最后使用一个最大for循环，查找到发送最多邮件的人。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;name = input(&amp;quot;Enter file:&amp;quot;)
+if len(name) &amp;lt; 1:
+    name = &amp;quot;mbox-short.txt&amp;quot;
+handle = open(name)
+res = dict()
+
+for line in handle:
+    if not line.startswith(&#39;From &#39;):
+        continue
+
+    line = line.split()
+    author = line[1]
+    res[author] = res.get(author, 0) + 1
+
+name = None
+count = None
+for k, v in res.items():
+    if count is None or v &amp;gt; count:
+        count = v
+        name = k
+
+print(name, count)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;10-2&#34;&gt;10-2&lt;/h2&gt;
+
+&lt;p&gt;Write a program to read through the mbox-short.txt and figure out the distribution by hour of the day for each of the messages. You can pull the hour out from the &amp;lsquo;From &amp;rsquo; line by finding the time and then splitting the string a second time using a colon.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once you have accumulated the counts for each hour, print out the counts, sorted by hour as shown below.&lt;/p&gt;
+
+&lt;p&gt;统计各个时段中邮件的数目，存储到字典之中，最后按照时间顺序输出各个时间段对应的邮件数。（需要对dict进行排序）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;name = input(&amp;quot;Enter file:&amp;quot;)
+if len(name) &amp;lt; 1 : name = &amp;quot;mbox-short.txt&amp;quot;
+handle = open(name)
+
+status = {}
+for line in handle:
+    if not line.startswith(&#39;From &#39;):
+        continue
+
+    # 抓取时间
+    line = line.split()
+    line = line[5]
+    line = line.split(&#39;:&#39;)
+
+    # 截取时间
+    tim = line[0]
+    if tim in status:
+        status[tim] = status[tim] + 1
+    else:
+        status[tim] = 1
+
+res = sorted([(k, v) for (k, v) in status.items()])
+for k, v in res:
+    print(k, v)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面将dict转化为list的步骤利用了python的特性。&lt;/p&gt;
+
+&lt;h2 id=&#34;regular-expressions&#34;&gt;Regular Expressions&lt;/h2&gt;
+
+&lt;h3 id=&#34;finding-numbers-in-a-haystack&#34;&gt;Finding Numbers in a Haystack&lt;/h3&gt;
+
+&lt;p&gt;In this assignment you will read through and parse a file with text and numbers. You will extract all the numbers in the file and compute the sum of the numbers.&lt;/p&gt;
+
+&lt;h3 id=&#34;data-files&#34;&gt;Data Files&lt;/h3&gt;
+
+&lt;p&gt;We provide two files for this assignment. One is a sample file where we give you the sum for your testing and the other is the actual data you need to process for the assignment.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Sample data: &lt;a href=&#34;http://py4e-data.dr-chuck.net/regex_sum_42.txt&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://py4e-data.dr-chuck.net/regex_sum_42.txt&lt;/a&gt; (There are 90 values with a sum=445833)&lt;/li&gt;
+&lt;li&gt;Actual data: &lt;a href=&#34;http://py4e-data.dr-chuck.net/regex_sum_275911.txt&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://py4e-data.dr-chuck.net/regex_sum_275911.txt&lt;/a&gt; (There are 92 values and the sum ends with 76)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These links open in a new window. Make sure to save the file into the same folder as you will be writing your Python program. Note: Each student will have a distinct data file for the assignment - so only use your own data file for analysis.&lt;/p&gt;
+
+&lt;h3 id=&#34;data-format&#34;&gt;Data Format&lt;/h3&gt;
+
+&lt;p&gt;The file contains much of the text from the introduction of the textbook except that random numbers are inserted throughout the text. Here is a sample of the output you might see:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;Why should you learn to write programs? 7746
+12 1929 8827
+Writing programs (or programming) is a very creative
+7 and rewarding activity.  You can write programs for
+many reasons, ranging from making your living to solving
+8837 a difficult data analysis problem to having fun to helping 128
+someone else solve a problem.  This book assumes that
+everyone needs to know how to program ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The sum for the sample text above is 27486. The numbers can appear anywhere in the line. There can be any number of numbers in each line (including none).&lt;/p&gt;
+
+&lt;h3 id=&#34;handling-the-data&#34;&gt;Handling The Data&lt;/h3&gt;
+
+&lt;p&gt;The basic outline of this problem is to read the file, look for integers using the re.findall(), looking for a regular expression of &amp;lsquo;[0-9]+&amp;rsquo; and then converting the extracted strings to integers and summing up the integers.&lt;/p&gt;
+
+&lt;h3 id=&#34;my-code&#34;&gt;My Code&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# 统计文件中数字的总和
+import re
+
+filename = input(&#39;Input filename:&#39;)
+if len(filename) &amp;lt; 1:
+    filename = &#39;regex_sum_275911.txt&#39;
+
+res = 0
+fh = open(filename)
+for line in fh:
+    tmp = re.findall(&#39;[0-9]+&#39;, line)
+
+    # 计算一行中数字的和
+    for x in tmp:
+        res = res + int(x)
+
+print(res)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;两行代码解决问题&lt;/strong&gt;（好熟悉&amp;hellip;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;Python 2
+import re
+print sum( [ ****** *** * in **********(&#39;[0-9]+&#39;,**************************.read()) ] )
+
+Python 3:
+import re
+print( sum( [ ****** *** * in **********(&#39;[0-9]+&#39;,**************************.read()) ] ) )
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Latex 插入图片方式整理</title>
