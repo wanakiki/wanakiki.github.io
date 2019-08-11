@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 04 Aug 2019 17:39:49 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 05 Aug 2019 18:29:25 +0800</lastBuildDate>
     
 	<atom:link href="https://wanakiki.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>PY4E 题目整理（下）</title>
+      <link>https://wanakiki.github.io/2019/python-assignments/</link>
+      <pubDate>Mon, 05 Aug 2019 18:29:25 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2019/python-assignments/</guid>
+      <description>Coursera中python教程同步题目整理，涉及到网络和数据库编程部分。题目地址：py4e。 打开网页的操作步骤，导入urllib库，ur</description>
+    </item>
     
     <item>
       <title>PY4E 题目整理（上）</title>

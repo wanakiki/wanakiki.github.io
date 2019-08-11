@@ -5,8 +5,689 @@
     <description>Recent content in Wanakiki`s Blog on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 04 Aug 2019 17:39:49 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 05 Aug 2019 18:29:25 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>PY4E 题目整理（下）</title>
+      <link>https://wanakiki.github.io/2019/python-assignments/</link>
+      <pubDate>Mon, 05 Aug 2019 18:29:25 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2019/python-assignments/</guid>
+      <description>
+
+&lt;p&gt;Coursera中python教程同步题目整理，涉及到网络和数据库编程部分。题目地址：&lt;a href=&#34;https://www.py4e.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;py4e&lt;/a&gt;。&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;打开网页的操作步骤，导入urllib库，urllib.requert.urlopen(url).read()&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;exploring-the-hypert-ext-transport-protocol-探索超文本传输协议&#34;&gt;Exploring the HyperT ext Transport Protocol（探索超文本传输协议）&lt;/h2&gt;
+
+&lt;p&gt;You are to retrieve the following document using the HTTP protocol in a way that you can examine the HTTP Response headers.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://data.pr4e.org/intro-short.txt&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://data.pr4e.org/intro-short.txt&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There are three ways that you might retrieve this web page and look at the response headers:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Preferred: Modify the socket1.py program to retrieve the above URL and print out the headers and data. Make sure to change the code to retrieve the above URL - the values are different for each URL.&lt;/li&gt;
+&lt;li&gt;Open the URL in a web browser with a developer console or FireBug and manually examine the headers that are returned.&lt;/li&gt;
+&lt;li&gt;Use the telnet program as shown in lecture to retrieve the headers and content.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Enter the header values in each of the fields below and press &amp;ldquo;Submit&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;有三种方式查看相应头文件，第一种方式是使用Python脚本，第二种方式是用浏览器打开URL，在控制台查看，第三种方式是使用telnet程序。仅列出了第一种的脚本。&lt;/p&gt;
+
+&lt;p&gt;由于网络的原因这段代码没有成功进行测试，在设定socket命令时的&lt;code&gt;\r\n&lt;/code&gt;也不清楚具体的含义。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import socket
+
+mysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+mysock.connect((&#39;data.pr4e.org&#39;, 80))
+print(&#39;connected&#39;)
+cmd = &#39;GET http://data.pr4e.org/intro-short.txt HTTP/1.0\r\n\r\n&#39;.encode()
+mysock.send(cmd)
+
+while True:
+    data = mysock.recv(512)
+    if len(data) &amp;lt; 1:
+        break
+    print(data.decode(), end=&#39;&#39;)
+mysock.close()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;scraping-numbers-from-html-using-beautifulsoup&#34;&gt;Scraping Numbers from HTML using BeautifulSoup&lt;/h2&gt;
+
+&lt;p&gt;In this assignment you will write a Python program similar to &lt;a href=&#34;http://www.py4e.com/code3/urllink2.py&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/urllink2.py&lt;/a&gt;. The program will use urllib to read the HTML from the data files below, and parse the data, extracting numbers and compute the sum of the numbers in the file.&lt;/p&gt;
+
+&lt;p&gt;We provide two files for this assignment. One is a sample file where we give you the sum for your testing and the other is the actual data you need to process for the assignment.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Sample data: &lt;a href=&#34;http://py4e-data.dr-chuck.net/comments_42.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://py4e-data.dr-chuck.net/comments_42.html&lt;/a&gt; (Sum=2553)&lt;/li&gt;
+&lt;li&gt;Actual data: &lt;a href=&#34;http://py4e-data.dr-chuck.net/comments_275913.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://py4e-data.dr-chuck.net/comments_275913.html&lt;/a&gt; (Sum ends with 37)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You do not need to save these files to your folder since your program will read the data directly from the URL.&lt;/p&gt;
+
+&lt;h3 id=&#34;data-format&#34;&gt;Data Format&lt;/h3&gt;
+
+&lt;p&gt;The file is a table of names and comment counts. You can ignore most of the data in the file except for lines like the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;Modu&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;lt;span class=&amp;quot;comments&amp;quot;&amp;gt;90&amp;lt;/span&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;Kenzie&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;lt;span class=&amp;quot;comments&amp;quot;&amp;gt;88&amp;lt;/span&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;Hubert&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;lt;span class=&amp;quot;comments&amp;quot;&amp;gt;87&amp;lt;/span&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;解析网页，计算网页中数字的总和。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# 抓取网站中的数据并计算数据总和
+import urllib.request
+import urllib.parse
+import urllib.error
+from bs4 import BeautifulSoup
+
+
+url = &#39;http://python-data.dr-chuck.net/comments_275913.html&#39;
+html = urllib.request.urlopen(url).read()
+soup = BeautifulSoup(html, &#39;html.parser&#39;)
+
+span = soup(&#39;span&#39;)
+res = 0
+for aspan in span:
+    res = res + int(aspan.get_text())
+
+print(&#39;结果为&#39;, res)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;following-links-in-python&#34;&gt;Following Links in Python&lt;/h2&gt;
+
+&lt;p&gt;In this assignment you will write a Python program that expands on &lt;a href=&#34;http://www.py4e.com/code3/urllinks.py&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/urllinks.py&lt;/a&gt;. The program will use urllib to read the HTML from the data files below, extract the href= vaues from the anchor tags, scan for a tag that is in a particular position relative to the first name in the list, follow that link and repeat the process a number of times and report the last name you find.&lt;/p&gt;
+
+&lt;p&gt;We provide two files for this assignment. One is a sample file where we give you the name for your testing and the other is the actual data you need to process for the assignment&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Sample problem: Start at &lt;a href=&#34;http://py4e-data.dr-chuck.net/known_by_Fikret.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://py4e-data.dr-chuck.net/known_by_Fikret.html&lt;/a&gt;
+Find the link at position 3 (the first name is 1). Follow that link. Repeat this process 4 times. The answer is the last name that you retrieve.
+Sequence of names: Fikret Montgomery Mhairade Butchi Anayah
+Last name in sequence: Anayah&lt;/li&gt;
+&lt;li&gt;Actual problem: Start at: &lt;a href=&#34;http://py4e-data.dr-chuck.net/known_by_Cohen.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://py4e-data.dr-chuck.net/known_by_Cohen.html&lt;/a&gt;
+Find the link at position 18 (the first name is 1). Follow that link. Repeat this process 7 times. The answer is the last name that you retrieve.
+Hint: The first character of the name of the last page that you will load is: A&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;strategy&#34;&gt;Strategy&lt;/h3&gt;
+
+&lt;p&gt;The web pages tweak the height between the links and hide the page after a few seconds to make it difficult for you to do the assignment without writing a Python program. But frankly with a little effort and patience you can overcome these attempts to make it a little harder to complete the assignment without writing a Python program. But that is not the point. The point is to write a clever Python program to solve the program.&lt;/p&gt;
+
+&lt;h3 id=&#34;sample-execution&#34;&gt;Sample execution&lt;/h3&gt;
+
+&lt;p&gt;Here is a sample execution of a solution:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;$ python3 solution.py
+Enter URL: http://py4e-data.dr-chuck.net/known_by_Fikret.html
+Enter count: 4
+Enter position: 3
+Retrieving: http://py4e-data.dr-chuck.net/known_by_Fikret.html
+Retrieving: http://py4e-data.dr-chuck.net/known_by_Montgomery.html
+Retrieving: http://py4e-data.dr-chuck.net/known_by_Mhairade.html
+Retrieving: http://py4e-data.dr-chuck.net/known_by_Butchi.html
+Retrieving: http://py4e-data.dr-chuck.net/known_by_Anayah.html
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The answer to the assignment for this execution is &amp;ldquo;Anayah&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;程序要求：从指定的链接开始，解析html页面，获取所有的herf标签，找到指定位置（position）的链接，重复这个过程指定次数（count)。最终输出找到的人名。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# 跟踪超链接，找到目标
+import urllib.request
+import urllib.parse
+import urllib.error
+from bs4 import BeautifulSoup
+
+# 假定输入规范
+count = int(input(&#39;Enter Count:&#39;))
+position = int(input(&#39;Enter Position:&#39;)) - 1    #从1开始计算位置
+flag = int(input(&#39;&#39;&#39;Select Url:
+1: http://py4e-data.dr-chuck.net/known_by_Fikret.html
+2: http://py4e-data.dr-chuck.net/known_by_Cohen.html
+&#39;&#39;&#39;))
+
+if flag == 1:
+    url = &#39;http://py4e-data.dr-chuck.net/known_by_Fikret.html&#39;
+else:
+    url = &#39;http://py4e-data.dr-chuck.net/known_by_Cohen.html&#39;
+
+while True:
+    html = urllib.request.urlopen(url).read()   #打开界面
+    soup = BeautifulSoup(html, &#39;html.parser&#39;)   #界面解析
+
+
+    #界面链接的格式为 ``&amp;lt;a href = &amp;quot;xx.com&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;``
+    #应该提取a标签
+    a_coll = soup(&#39;a&#39;)    #获取a标签集合 属于beautiful soup中的类型，应该是重载了括号，print(a_coll[0])支持这种访问
+    href = a_coll[position].get(&#39;href&#39;, None)
+    if href is None:
+        print(&#39;runtime error&#39;)
+        quit()
+
+    if count &amp;gt; 1:
+        count = count - 1
+        url = href  # 更新url 以进一步抓取
+    else:
+        res = a_coll[position].get_text()   #获取内容
+        break
+
+print(res)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;extracting-data-from-xml&#34;&gt;Extracting Data from XML&lt;/h2&gt;
+
+&lt;p&gt;In this assignment you will write a Python program somewhat similar to &lt;a href=&#34;http://www.py4e.com/code3/geoxml.py&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/geoxml.py&lt;/a&gt;. The program will prompt for a URL, read the XML data from that URL using urllib and then parse and extract the comment counts from the XML data, compute the sum of the numbers in the file.&lt;/p&gt;
+
+&lt;p&gt;We provide two files for this assignment. One is a sample file where we give you the sum for your testing and the other is the actual data you need to process for the assignment.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Sample data: &lt;a href=&#34;http://py4e-data.dr-chuck.net/comments_42.xml&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://py4e-data.dr-chuck.net/comments_42.xml&lt;/a&gt; (Sum=2553)&lt;/li&gt;
+&lt;li&gt;Actual data: &lt;a href=&#34;http://py4e-data.dr-chuck.net/comments_275915.xml&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://py4e-data.dr-chuck.net/comments_275915.xml&lt;/a&gt; (Sum ends with 24)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You do not need to save these files to your folder since your program will read the data directly from the URL. Note: Each student will have a distinct data url for the assignment - so only use your own data url for analysis.&lt;/p&gt;
+
+&lt;h3 id=&#34;data-format-and-approach&#34;&gt;Data Format and Approach&lt;/h3&gt;
+
+&lt;p&gt;The data consists of a number of names and comment counts in XML as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;&amp;lt;comment&amp;gt;
+  &amp;lt;name&amp;gt;Matthias&amp;lt;/name&amp;gt;
+  &amp;lt;count&amp;gt;97&amp;lt;/count&amp;gt;
+&amp;lt;/comment&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You are to look through all the &lt;code&gt;&amp;lt;comment&amp;gt;&lt;/code&gt; tags and find the &lt;code&gt;&amp;lt;count&amp;gt;&lt;/code&gt; values sum the numbers. The closest sample code that shows how to parse XML is geoxml.py. But since the nesting of the elements in our data is different than the data we are parsing in that sample code you will have to make real changes to the code.&lt;/p&gt;
+
+&lt;p&gt;To make the code a little simpler, you can use an XPath selector string to look through the entire tree of XML for any tag named &amp;lsquo;count&amp;rsquo; with the following line of code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;counts = tree.findall(&#39;.//count&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Take a look at the Python ElementTree documentation and look for the supported XPath syntax for details. You could also work from the top of the XML down to the comments node and then loop through the child nodes of the comments node.&lt;/p&gt;
+
+&lt;h3 id=&#34;sample-execution-1&#34;&gt;Sample Execution&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;$ python3 solution.py
+Enter location: http://py4e-data.dr-chuck.net/comments_42.xml
+Retrieving http://py4e-data.dr-chuck.net/comments_42.xml
+Retrieved 4189 characters
+Count: 50
+Sum: 2...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;程序要求：解析XML文件，计算整个文件中count标签的总和。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import xml.etree.ElementTree as ET
+import urllib.request
+import urllib.parse
+import urllib.error
+
+url = &#39;http://py4e-data.dr-chuck.net/comments_275915.xml&#39;   # 指定URL
+uh = urllib.request.urlopen(url)
+data = uh.read()    #获取网页数据
+
+print(&#39;Retrived&#39;, len(data), &#39;characters&#39;)
+tree = ET.fromstring(data)
+counts = tree.findall(&#39;.//count&#39;)   #查找count标签
+# counts = tree.findall(&#39;comments/comment/count&#39;)
+# 查找count可以使用上面这行语句
+
+print(&#39;Count:&#39;, len(counts))
+
+res = 0
+for count in counts:
+    res = res + int(count.text)
+
+print(&#39;Sum:&#39;, res)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;extracting-data-from-json&#34;&gt;Extracting Data from JSON&lt;/h2&gt;
+
+&lt;p&gt;In this assignment you will write a Python program somewhat similar to &lt;a href=&#34;http://www.py4e.com/code3/json2.py&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/json2.py&lt;/a&gt;. The program will prompt for a URL, read the JSON data from that URL using urllib and then parse and extract the comment counts from the JSON data, compute the sum of the numbers in the file and enter the sum below:&lt;/p&gt;
+
+&lt;p&gt;We provide two files for this assignment. One is a sample file where we give you the sum for your testing and the other is the actual data you need to process for the assignment.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Sample data: &lt;a href=&#34;http://py4e-data.dr-chuck.net/comments_42.json&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://py4e-data.dr-chuck.net/comments_42.json&lt;/a&gt; (Sum=2553)&lt;/li&gt;
+&lt;li&gt;Actual data: &lt;a href=&#34;http://py4e-data.dr-chuck.net/comments_275916.json&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://py4e-data.dr-chuck.net/comments_275916.json&lt;/a&gt; (Sum ends with 15)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You do not need to save these files to your folder since your program will read the data directly from the URL. Note: Each student will have a distinct data url for the assignment - so only use your own data url for analysis.&lt;/p&gt;
+
+&lt;h3 id=&#34;data-format-1&#34;&gt;Data Format&lt;/h3&gt;
+
+&lt;p&gt;The data consists of a number of names and comment counts in JSON as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+  comments: [
+    {
+      name: &amp;quot;Matthias&amp;quot;
+      count: 97
+    },
+    {
+      name: &amp;quot;Geomer&amp;quot;
+      count: 97
+    }
+    ...
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The closest sample code that shows how to parse JSON and extract a list is json2.py. You might also want to look at geoxml.py to see how to prompt for a URL and retrieve data from a URL.&lt;/p&gt;
+
+&lt;h3 id=&#34;sample-execution-2&#34;&gt;Sample Execution&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;$ python3 solution.py
+Enter location: http://py4e-data.dr-chuck.net/comments_42.json
+Retrieving http://py4e-data.dr-chuck.net/comments_42.json
+Retrieved 2733 characters
+Count: 50
+Sum: 2...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;解析JSON文件，获得count的总和。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import urllib.request, urllib.error, urllib.parse
+import json     #导入json
+
+# - Sample data: http://py4e-data.dr-chuck.net/comments_42.json (Sum=2553)
+# - Actual data: http://py4e-data.dr-chuck.net/comments_275916.json (Sum ends with 15)
+
+url = input(&#39;Enter url &#39;)
+print(&#39;Retriving&#39;, url)
+uh = urllib.request.urlopen(url).read()
+print(&#39;Retrived&#39;, len(uh), &#39;characters&#39;)
+
+js = json.loads(uh)
+# 观察文档结构，js为字典，js[&#39;comments&#39;]为由字典组成的list
+
+res = 0
+for comment in js[&#39;comments&#39;]:
+    res = res + comment[&#39;count&#39;]
+
+print(&#39;Sum:&#39;, res)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;calling-a-json-api&#34;&gt;Calling a JSON API&lt;/h2&gt;
+
+&lt;p&gt;In this assignment you will write a Python program somewhat similar to &lt;a href=&#34;http://www.py4e.com/code3/geojson.py&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/geojson.py&lt;/a&gt;. The program will prompt for a location, contact a web service and retrieve JSON for the web service and parse that data, and retrieve the first place_id from the JSON. A place ID is a textual identifier that uniquely identifies a place as within Google Maps.&lt;/p&gt;
+
+&lt;h3 id=&#34;api-end-points&#34;&gt;API End Points&lt;/h3&gt;
+
+&lt;p&gt;To complete this assignment, you should use this API endpoint that has a static subset of the Google Data:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;http://py4e-data.dr-chuck.net/json?
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This API uses the same parameter (address) as the Google API. This API also has no rate limit so you can test as often as you like. If you visit the URL with no parameters, you get &amp;ldquo;No address&amp;hellip;&amp;rdquo; response.&lt;/p&gt;
+
+&lt;p&gt;To call the API, you need to provide the address that you are requesting as the address= parameter that is properly URL encoded using the urllib.parse.urlencode() function as shown in &lt;a href=&#34;http://www.py4e.com/code3/geojson.py&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/geojson.py&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;test-data-sample-execution&#34;&gt;Test Data / Sample Execution&lt;/h3&gt;
+
+&lt;p&gt;You can test to see if your program is working with a location of &amp;ldquo;South Federal University&amp;rdquo; which will have a place_id of &amp;ldquo;ChIJ9e_QQm0sDogRhUPatldEFxw&amp;rdquo;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;$ python3 solution.py
+Enter location: South Federal University
+Retrieving http://...
+Retrieved 2291 characters
+Place id ChIJ9e_QQm0sDogRhUPatldEFxw
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;调用谷歌API查询指定地点的&lt;code&gt;place id&lt;/code&gt;，因为谷歌地图API现在需要验证，所以最好使用PY4E提供的副本。需要注意，使用py4e提供的副本时，需要额外传递一个key参数，这点在作业说明中没有指出，查看代码包中的代码之后才发现这个值为42，&lt;a href=&#34;http://www.py4e.com/code3/geojson.py&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/geojson.py&lt;/a&gt; 具体见这个链接。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import urllib.error, urllib.request, urllib.parse
+import json
+
+target = &#39;http://py4e-data.dr-chuck.net/json?&#39;  #使用这个接口，需要 key参数且值为42
+local = input(&#39;Enter location: &#39;)
+
+url = target + urllib.parse.urlencode({&#39;address&#39;: local, &#39;key&#39; : 42})
+#对字符串进行url编码，直接传递参数和值构成的字典
+print(&#39;Retriving&#39;, url)
+
+data = urllib.request.urlopen(url).read()
+print(&#39;Retrived&#39;, len(data), &#39;characters&#39;)
+
+js = json.loads(data)
+# print(json.dumps(js, indent = 4)) #查看接收到的文件结构
+print(&#39;Place id&#39;, js[&#39;results&#39;][0][&#39;place_id&#39;])
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;counting-organizations&#34;&gt;Counting Organizations&lt;/h2&gt;
+
+&lt;p&gt;This application will read the mailbox data (mbox.txt) and count the number of email messages per organization (i.e. domain name of the email address) using a database with the following schema to maintain the counts.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;CREATE TABLE Counts (org TEXT, count INTEGER)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When you have run the program on mbox.txt upload the resulting database file above for grading.&lt;/p&gt;
+
+&lt;p&gt;If you run the program multiple times in testing or with dfferent files, make sure to empty out the data before each run.&lt;/p&gt;
+
+&lt;p&gt;You can use this code as a starting point for your application: &lt;a href=&#34;http://www.py4e.com/code3/emaildb.py&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/emaildb.py&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The data file for this application is the same as in previous assignments: &lt;a href=&#34;http://www.py4e.com/code3/mbox.txt&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/mbox.txt&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Because the sample code is using an UPDATE statement and committing the results to the database as each record is read in the loop, it might take as long as a few minutes to process all the data. The commit insists on completely writing all the data to disk every time it is called.&lt;/p&gt;
+
+&lt;p&gt;The program can be speeded up greatly by moving the commit operation outside of the loop. In any database program, there is a balance between the number of operations you execute between commits and the importance of not losing the results of operations that have not yet been committed.&lt;/p&gt;
+
+&lt;p&gt;此前做过的统计文本文件中每个人发送的邮件数目的升级版，统计各个公司服务器域名发送的邮件总数，将最终找到的结果保存到了数据库中。需要注意，提交sql查询时为了加快速度要放在循环外部。如何使用SQL可见&lt;a href=&#34;https://docs.python.org/zh-cn/3/library/sqlite3.html#module-sqlite3&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;官方文档&lt;/a&gt;。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import sqlite3
+
+conn = sqlite3.connect(&#39;mail-count.sqlite&#39;)
+cur = conn.cursor()
+
+cur.execute(&#39;DROP TABLE IF EXISTS Counts&#39;)  # 如果存在就提前删除表
+cur.execute(&#39;&#39;&#39;CREATE TABLE Counts (org TEXT, count INTEGER)&#39;&#39;&#39;)    # 创建表
+
+fh = open(&#39;mbox.txt&#39;)
+for line in fh:
+    if not line.startswith(&#39;From:&#39;):
+        continue
+    mail = line.split()[1]
+    index = mail.find(&#39;@&#39;)+1
+    org = mail[index:]
+
+    # 针对org执行sql后续操作，先查询再决定更新还是插入
+    cur.execute(&#39;&#39;&#39;SELECT count FROM Counts WHERE org = ?&#39;&#39;&#39;, (org,) ) #execute函数第二个参数需要是元组
+    num = cur.fetchone()    #返回list，查询不到时返回None
+
+    if num is None:
+        cur.execute(&#39;INSERT INTO Counts(org, count) VALUES(?, 1)&#39;, (org, ))
+    else:
+        cur.execute(&#39;UPDATE Counts SET count = ? WHERE org = ?&#39;, (num[0] + 1, org))
+        # 在进行更新时可以直接 count = count + 1
+
+conn.commit()   #提交放在循环外加速
+cur.execute(&#39;SELECT * FROM Counts ORDER BY count DESC LIMIT 1&#39;)
+print(cur.fetchone())
+cur.close()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;musical-track-database&#34;&gt;Musical Track Database&lt;/h2&gt;
+
+&lt;p&gt;This application will read an iTunes export file in XML and produce a properly normalized database with this structure:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;CREATE TABLE Artist (
+    id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+    name    TEXT UNIQUE
+);
+
+CREATE TABLE Genre (
+    id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+    name    TEXT UNIQUE
+);
+
+CREATE TABLE Album (
+    id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+    artist_id  INTEGER,
+    title   TEXT UNIQUE
+);
+
+CREATE TABLE Track (
+    id  INTEGER NOT NULL PRIMARY KEY
+        AUTOINCREMENT UNIQUE,
+    title TEXT  UNIQUE,
+    album_id  INTEGER,
+    genre_id  INTEGER,
+    len INTEGER, rating INTEGER, count INTEGER
+);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you run the program multiple times in testing or with different files, make sure to empty out the data before each run.&lt;/p&gt;
+
+&lt;p&gt;You can use this code as a starting point for your application: &lt;a href=&#34;http://www.py4e.com/code3/tracks.zip&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/tracks.zip&lt;/a&gt;. The ZIP file contains the Library.xml file to be used for this assignment. You can export your own tracks from iTunes and create a database, but for the database that you turn in for this assignment, only use the Library.xml data that is provided.&lt;/p&gt;
+
+&lt;p&gt;To grade this assignment, the program will run a query like this on your uploaded database and look for the data it expects to see:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;SELECT Track.title, Artist.name, Album.title, Genre.name
+    FROM Track JOIN Genre JOIN Album JOIN Artist
+    ON Track.genre_id = Genre.ID and Track.album_id = Album.id
+        AND Album.artist_id = Artist.id
+    ORDER BY Artist.name LIMIT 3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The expected result of the modified query on your database is: (shown here as a simple HTML table with titles)&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;Track&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Artist&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Album&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Genre&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Chase the Ace&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;AC/DC&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Who Made Who&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Rock&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;D.T.&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;AC/DC&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Who Made Who&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Rock&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;For Those About To Rock (We Salute You)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;AC/DC&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Who Made Who&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Rock&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import sqlite3
+import xml.etree.ElementTree as ET
+
+conn = sqlite3.connect(&#39;music.sqlite&#39;)
+cur = conn.cursor()
+
+cur.executescript(&#39;&#39;&#39;
+DROP TABLE IF EXISTS Artist;
+DROP TABLE IF EXISTS Genre;
+DROP TABLE IF EXISTS Album;
+DROP TABLE IF EXISTS Track;&#39;&#39;&#39;) 
+#如果存在就先删除表
+# 执行多条查询需要 executescript
+
+cur.executescript(&#39;&#39;&#39;CREATE TABLE Artist (
+    id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+    name    TEXT UNIQUE
+);
+
+CREATE TABLE Genre (
+    id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+    name    TEXT UNIQUE
+);
+
+CREATE TABLE Album (
+    id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+    artist_id  INTEGER,
+    title   TEXT UNIQUE
+);
+
+CREATE TABLE Track (
+    id  INTEGER NOT NULL PRIMARY KEY 
+        AUTOINCREMENT UNIQUE,
+    title TEXT  UNIQUE,
+    album_id  INTEGER,
+    genre_id  INTEGER,
+    len INTEGER, rating INTEGER, count INTEGER
+);&#39;&#39;&#39;)  # 执行多行时注意使用三个引号
+
+file_name = &#39;Library.xml&#39;
+fh = open(file_name)
+tree = ET.fromstring(fh.read())
+dicts = tree.findall(&#39;./dict/dict/dict&#39;)
+
+# 查看xml文件，分析目录树结构 需要在/dict/dict/dict内查找字段
+# 定义查找函数
+def lookup(pare, aim):
+    flag = False
+    for child in pare:
+        if flag:
+            return child.text
+        if child.tag == &#39;key&#39; and child.text == aim:
+            flag = True
+    return None
+
+# 通过构建的数据库情况，需要查找的字段为
+# Track ID   Name    Artist     Album   Play Count  Rating  Total Time
+
+for entry in dicts:
+    if(lookup(entry, &#39;Track ID&#39;) is None):  continue
+    name = lookup(entry, &#39;Name&#39;)
+    artist = lookup(entry, &#39;Artist&#39;)
+    album = lookup(entry, &#39;Album&#39;)
+    count = lookup(entry, &#39;Play Count&#39;)
+    rating = lookup(entry, &#39;Rating&#39;)
+    length = lookup(entry, &#39;Total Time&#39;)
+    genre = lookup(entry, &#39;Genre&#39;)
+
+    if name is None or artist is None or album is None or genre is None:
+        continue
+    print(name, artist, album, count, rating, length)
+
+    # 根据建立数据库的顺序进行插入，并获取外键对应的id值
+    # 注意对于唯一元素插入时使用ignore
+    cur.execute(&#39;&#39;&#39;INSERT OR IGNORE INTO Artist(name) VALUES(?)&#39;&#39;&#39;, (artist,))
+    cur.execute(&#39;SELECT id FROM Artist WHERE name = ?&#39;, (artist,))
+    artist_id = cur.fetchone()[0]   # 查询返回的是数组
+
+    cur.execute(&#39;INSERT OR IGNORE INTO Genre(name) VALUES(?)&#39;, (genre,))
+    cur.execute(&#39;SELECT id FROM Genre WHERE name = ?&#39;,(genre,))
+    genre_id = cur.fetchone()[0]
+
+    cur.execute(&#39;INSERT OR IGNORE INTO Album(artist_id, title) VALUES(?, ?)&#39;,(artist_id, album))
+    cur.execute(&#39;SELECT id FROM Album WHERE title = ?&#39;, (album,))
+    album_id = cur.fetchone()[0]
+
+    # 至于这里为什么要用replace原因不知
+    cur.execute(&#39;&#39;&#39;INSERT OR REPLACE INTO Track(title, album_id, genre_id, len, rating, count) 
+    VALUES(?, ?, ?, ?, ?, ?)&#39;&#39;&#39;,(name, album_id, genre_id, length, rating, count))
+
+conn.commit()
+cur.execute(&#39;&#39;&#39;SELECT Track.title, Artist.name, Album.title, Genre.name
+    FROM Track JOIN Genre JOIN Album JOIN Artist
+    ON Track.genre_id = Genre.ID and Track.album_id = Album.id
+        AND Album.artist_id = Artist.id
+    ORDER BY Artist.name LIMIT 3&#39;&#39;&#39;)
+res = cur.fetchall()
+for line in res:
+    print(line)
+cur.close()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;虽然执行之后结果和示例结果不一样，但是个人认为程序没有错误。&lt;/p&gt;
+
+&lt;h2 id=&#34;make-database-from-json&#34;&gt;Make database from JSON&lt;/h2&gt;
+
+&lt;p&gt;This application will read roster data in JSON format, parse the file, and then produce an SQLite database that contains a User, Course, and Member table and populate the tables from the data file.&lt;/p&gt;
+
+&lt;p&gt;You can base your solution on this code: &lt;a href=&#34;http://www.py4e.com/code3/roster/roster.py&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/roster/roster.py&lt;/a&gt; - this code is incomplete as you need to modify the program to store the &lt;strong&gt;role&lt;/strong&gt; column in the &lt;strong&gt;Member&lt;/strong&gt; table to complete the assignment.&lt;/p&gt;
+
+&lt;p&gt;Each student gets their own file for the assignment. Download this file and save it as &lt;code&gt;roster_data.json&lt;/code&gt;. Move the downloaded file into the same folder as your &lt;code&gt;roster.py&lt;/code&gt; program.&lt;/p&gt;
+
+&lt;p&gt;Once you have made the necessary changes to the program and it has been run successfully reading the above JSON data, run the following SQL command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;SELECT hex(User.name || Course.title || Member.role ) AS X FROM
+    User JOIN Member JOIN Course
+    ON User.id = Member.user_id AND Member.course_id = Course.id
+    ORDER BY X
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Find the first row in the resulting record set and enter the long string that looks like 53656C696E613333.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import json
+import sqlite3
+
+conn = sqlite3.connect(&#39;rosterdb.sqlite&#39;)
+cur = conn.cursor()
+
+# 建立数据库
+cur.executescript(&#39;&#39;&#39;
+DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS Member;
+DROP TABLE IF EXISTS Course;
+
+CREATE TABLE User (
+    id     INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+    name   TEXT UNIQUE
+);
+
+CREATE TABLE Course (
+    id     INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+    title  TEXT UNIQUE
+);
+
+CREATE TABLE Member (
+    user_id     INTEGER,
+    course_id   INTEGER,
+    role        INTEGER,
+    PRIMARY KEY (user_id, course_id)
+)
+&#39;&#39;&#39;)
+
+
+file_name = input(&#39;Enter filename: &#39;)
+if(len(file_name) &amp;lt; 1):
+    file_name = &#39;roster_data.json&#39;
+fh = open(file_name).read()
+js = json.loads(fh)
+
+for record in js:
+    name = record[0]
+    title = record[1]
+    role = record[2]
+
+    cur.execute(&#39;INSERT OR IGNORE INTO User(name) VALUES(?)&#39;, (name,))
+    cur.execute(&#39;SELECT id FROM User WHERE name = ?&#39;, (name,))
+    user_id = cur.fetchone()[0]
+
+    cur.execute(&#39;INSERT OR IGNORE INTO Course(title) VALUES(?)&#39;, (title,))
+    cur.execute(&#39;SELECT id FROM Course WHERE title = ?&#39;, (title,))
+    course_id = cur.fetchone()[0]
+
+    cur.execute(&#39;INSERT OR REPLACE INTO Member(user_id, course_id, role) VALUES(?,?,?)&#39;, (user_id, course_id, role))
+
+cur.execute(&#39;&#39;&#39;SELECT hex(User.name || Course.title || Member.role ) AS X FROM 
+    User JOIN Member JOIN Course 
+    ON User.id = Member.user_id AND Member.course_id = Course.id
+    ORDER BY X LIMIT 5&#39;&#39;&#39;)
+res = cur.fetchall()
+for line in res:
+    print(line)
+
+conn.commit()
+cur.close()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;多对多关系示例。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>PY4E 题目整理（上）</title>
