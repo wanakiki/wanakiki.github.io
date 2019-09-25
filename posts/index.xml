@@ -6,10 +6,28 @@
     <description>Recent content in Posts on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 30 Aug 2019 22:54:12 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 25 Sep 2019 19:23:03 +0800</lastBuildDate>
     
 	<atom:link href="https://wanakiki.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>利用Termux群发短信</title>
+      <link>https://wanakiki.github.io/2019/termux-sms/</link>
+      <pubDate>Wed, 25 Sep 2019 19:23:03 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2019/termux-sms/</guid>
+      <description>Termux的简单应用，为了让群发短信有更便捷高效的解决方案。 前言 Termux是一个Android下一个高级的终端模拟器，开源且不需要roo</description>
+    </item>
+    
+    <item>
+      <title>提取小米云服务短信</title>
+      <link>https://wanakiki.github.io/2019/short-message/</link>
+      <pubDate>Thu, 05 Sep 2019 12:16:09 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2019/short-message/</guid>
+      <description>最近手机刷了AOSIP，原来的短信都没有同步，去小米云服务官网发现没有导出按钮，稍微折腾了下达到了目的，简单记录。 登陆小米云服务，进入短信界</description>
+    </item>
     
     <item>
       <title>新生の大学分享</title>

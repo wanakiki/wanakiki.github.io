@@ -4,7 +4,7 @@
     <url>
       <loc>https://wanakiki.github.io/posts/</loc>
       
-      <lastmod>2019-08-30T22:54:12+08:00</lastmod>
+      <lastmod>2019-09-25T19:23:03+08:00</lastmod>
       
       
       
@@ -16,7 +16,7 @@
     <url>
       <loc>https://wanakiki.github.io/tags/</loc>
       
-      <lastmod>2019-08-30T22:54:12+08:00</lastmod>
+      <lastmod>2019-09-25T19:23:03+08:00</lastmod>
       
       
       
@@ -28,11 +28,43 @@
     <url>
       <loc>https://wanakiki.github.io/</loc>
       
-      <lastmod>2019-08-30T22:54:12+08:00</lastmod>
+      <lastmod>2019-09-25T19:23:03+08:00</lastmod>
       
       
       
       <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://wanakiki.github.io/tags/termux/</loc>
+      
+      <lastmod>2019-09-25T19:23:03+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://wanakiki.github.io/2019/termux-sms/</loc>
+      
+      <lastmod>2019-09-25T19:23:03+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://wanakiki.github.io/2019/short-message/</loc>
+      
+      <lastmod>2019-09-05T12:16:09+08:00</lastmod>
+      
+      
       
       
     </url>
