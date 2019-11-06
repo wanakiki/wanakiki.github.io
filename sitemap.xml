@@ -2,9 +2,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
+      <loc>https://wanakiki.github.io/categories/</loc>
+      
+      <lastmod>2019-11-06T23:04:39+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
       <loc>https://wanakiki.github.io/posts/</loc>
       
-      <lastmod>2019-09-25T19:23:03+08:00</lastmod>
+      <lastmod>2019-11-06T23:04:39+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://wanakiki.github.io/tags/srdp/</loc>
+      
+      <lastmod>2019-11-06T23:04:39+08:00</lastmod>
       
       
       
@@ -16,7 +40,7 @@
     <url>
       <loc>https://wanakiki.github.io/tags/</loc>
       
-      <lastmod>2019-09-25T19:23:03+08:00</lastmod>
+      <lastmod>2019-11-06T23:04:39+08:00</lastmod>
       
       
       
@@ -28,11 +52,33 @@
     <url>
       <loc>https://wanakiki.github.io/</loc>
       
-      <lastmod>2019-09-25T19:23:03+08:00</lastmod>
+      <lastmod>2019-11-06T23:04:39+08:00</lastmod>
       
       
       
       <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://wanakiki.github.io/categories/idea/</loc>
+      
+      <lastmod>2019-11-06T23:04:39+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://wanakiki.github.io/2019/website/</loc>
+      
+      <lastmod>2019-11-06T23:04:39+08:00</lastmod>
+      
+      
       
       
     </url>
@@ -149,18 +195,6 @@
       <loc>https://wanakiki.github.io/tags/latex/</loc>
       
       <lastmod>2019-06-14T23:22:50+08:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://wanakiki.github.io/categories/</loc>
-      
-      <lastmod>2019-05-17T09:47:43+08:00</lastmod>
       
       
       

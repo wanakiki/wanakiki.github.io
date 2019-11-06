@@ -5,8 +5,86 @@
     <description>Recent content in Wanakiki`s Blog on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 25 Sep 2019 19:23:03 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 06 Nov 2019 23:04:39 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>🏠班级网站项目</title>
+      <link>https://wanakiki.github.io/2019/website/</link>
+      <pubDate>Wed, 06 Nov 2019 23:04:39 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2019/website/</guid>
+      <description>
+
+&lt;!-- more --&gt;
+
+&lt;h2 id=&#34;起因&#34;&gt;起因💡&lt;/h2&gt;
+
+&lt;p&gt;本人有两年大学班委的经验，发现学校团委给班级的一般都是信息整理相关的工作。但现在已经是21世纪，完全没有必要因为收集一些个人信息让每个人都填写一遍excel表再发给班委进行汇总。我之前曾经试过利用腾讯文档进行信息收集，但大部分人都不是很适应，加上&lt;strong&gt;目前市面上找不到从excel生成在线表单的工具，每次问卷都需要花一定时间准备&lt;/strong&gt;，于是我有了写一个自己的网站的想法。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;进一步挖掘&#34;&gt;进一步挖掘🤔&lt;/h2&gt;
+
+&lt;h3 id=&#34;更多功能&#34;&gt;更多功能？&lt;/h3&gt;
+
+&lt;p&gt;在这个生成表单的基础上，我进行深入挖掘，又发现了其他的需要：
+1. 班级投票、活动报名统计
+2. 发布班级公告
+3. 班级活动记录
+4. 每个学期可有可无的课表统计
+5. 需要以班级为单位提交的各种实验报告的收集（虽然邮箱也可以）
+6. 对于某一项需要个人完成的班级工作，实时更新的进度排行（可以直观了解到还有哪些人没有完成任务，另外可以根据每次的时间排行计算班级活动参与度，用做学年素质测评的量化指标）&lt;/p&gt;
+
+&lt;h3 id=&#34;网站的诱惑力&#34;&gt;网站的诱惑力？&lt;/h3&gt;
+
+&lt;p&gt;那么为了让同学登陆这个网站，这个网站对普通班级成员又能提供什么帮助？我目前认为有以下几点：
+1. 提供课表，能够查到本学年所有专业课老师的开课时间
+2. 提供海大的教务信息（直接爬虫动态更新）
+3. 作业提醒（人工添加记录，到期自动删除）
+4. 全海大竞赛信息提供（如果能够做到微信爬虫的话&amp;hellip;）&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;大体规划&#34;&gt;大体规划✨&lt;/h2&gt;
+
+&lt;h4 id=&#34;flask后端&#34;&gt;FLASK后端&lt;/h4&gt;
+
+&lt;p&gt;因为本人没有接触过java，考虑自己有一定的python基础以及python容易上手的特点，抛弃了LAMP架构，后端采用python的flask框架进行搭建。多人合作时难度也相对较低。&lt;/p&gt;
+
+&lt;h4 id=&#34;vue前端框架&#34;&gt;VUE前端框架&lt;/h4&gt;
+
+&lt;p&gt;本人前端知识了解很少，只知道传统的html+css+js，但是查找之后发现VUE是比较流行的解决方案，所有的都要学，那就学个大部分人都说好的。&lt;/p&gt;
+
+&lt;h4 id=&#34;python爬虫&#34;&gt;Python爬虫&lt;/h4&gt;
+
+&lt;p&gt;因为会涉及到一些教务信息，人工进行更新成本较大，还是用爬虫来实现比较方便，而且只爬教务信息的链接的话，实现起来非常简单。微信爬虫实现难度较大，短期不做考虑。&lt;/p&gt;
+
+&lt;h4 id=&#34;数据库&#34;&gt;数据库&lt;/h4&gt;
+
+&lt;p&gt;上面提供的功能根本离不开数据库，个人只会基础的sql查询，具体选用什么数据库还没有进行更深一步的了解。&lt;/p&gt;
+
+&lt;h4 id=&#34;内网搭建&#34;&gt;内网搭建&lt;/h4&gt;
+
+&lt;p&gt;网站主要是服务班级人数较少，初期计划部署在树莓派上，直接用海大校园内网IP地址进行访问。因为个人没有建站经验，无法准确估计出实现上述功能所需要的性能，这是整个项目中比较难解决的问题，也是必须解决的问题。&lt;/p&gt;
+
+&lt;p&gt;内网搭建还需要解决两个问题：如何获取固定IP、如何保证供电&lt;/p&gt;
+
+&lt;h4 id=&#34;one-more-thing&#34;&gt;One more thing&lt;/h4&gt;
+
+&lt;p&gt;APP or 微信小程序，如果能做出来的话，是对自己的一个锻炼😁&lt;/p&gt;
+
+&lt;p&gt;回头看一下自己想要实现的这些功能，基本和目前市面上存在的一些APP的功能类似，但毕竟自己的专业不在这个方面，又需要额外的时间和精力，不能保证最终能够实现。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;总结&#34;&gt;总结😊&lt;/h2&gt;
+
+&lt;p&gt;在真正动手写这份报告的时候，我就清楚地感受到，这个网站其实没有特别大的实用性，也没有什么颠覆的点。对于我来说，更大的意义让自己学一点东西，详细了解一下怎么建立网站、怎么写web服务程序。&lt;/p&gt;
+
+&lt;p&gt;再从宏观一点的角度来考虑，这个所谓的项目划分成几个部分后实现的功能其实并不复杂，实现的难度也不是很高，所以我认为这个网站想法可以作为SRDP项目来申请，锻炼自己的实践能力。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>利用Termux群发短信</title>
@@ -3732,155 +3810,6 @@ int main(){
 &lt;li&gt;自己写的迭代器可能称不上是迭代器，只是稍微包装了一下指针。自己测试的时候发现在iterator已经被定义，意识到平时所用的迭代器并不是定义在容器的头文件中。&lt;/li&gt;
 &lt;li&gt;边界等特殊情况没有得到很好的处理，不过能够保证在输入规范的情况下得到良好的结果，代码总体有待完善。（总之还是对标准模板库特殊情况处理方式不够了解📌&lt;/li&gt;
 &lt;li&gt;很多用不到的东西也进行了实现，导致代码量相对较大😓&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>数据结构作业一 Zuma List</title>
-      <link>https://wanakiki.github.io/2019/zuma-list/</link>
-      <pubDate>Sat, 20 Apr 2019 19:41:55 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/zuma-list/</guid>
-      <description>
-
-&lt;p&gt;数据结构第一次作业。&lt;/p&gt;
-
-&lt;!-- more --&gt;
-
-&lt;h2 id=&#34;问题分析&#34;&gt;问题分析&lt;/h2&gt;
-
-&lt;p&gt;题目要求书写程序对祖玛消除过程进行回放，输入为原始珠子序列以及玩家所做的一系列操作，要求我们按照游戏规则计算出每次操作后的珠子序列并进行输出。&lt;/p&gt;
-
-&lt;p&gt;祖玛游戏规则：有三个或更多同色珠子变成相邻就会立即消失，并且可能会发生连锁反应。&lt;strong&gt;需要注意，原始情况中出现的三个或更多相邻同色珠子，在没有新珠子或者连锁反应影响时是不会消除的。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;解决方案&#34;&gt;解决方案&lt;/h2&gt;
-
-&lt;p&gt;将新的珠子插入到原有序列，在插入位置向两侧判断同色珠子个数，满足条件则进行删除。考虑到删除后的连锁反应，需要将判断的过程循环执行到无法继续删除。&lt;/p&gt;
-
-&lt;h2 id=&#34;算法设计&#34;&gt;算法设计&lt;/h2&gt;
-
-&lt;p&gt;考虑到整个过程需要多次插入删除的操作，并且查找过程只需要从插入的具体位置向两侧进行判断，所以使用list对珠子序列进行存储。&lt;/p&gt;
-
-&lt;p&gt;插入过程只需要简单的insert函数与advance函数相配合就可以了，使用advance函数使迭代器指到插入位置，之后再用insert函数进行插入。&lt;/p&gt;
-
-&lt;p&gt;比较难的地方在于是否消除的判断上，考虑到迭代器的特殊性，为了避免不必要的麻烦，当list中的元素少于三个的时候直接不进行判断。对三个以上的元素判断时，需要从插入元素的位置向两侧查找相同颜色，可以用&lt;code&gt;end()&lt;/code&gt;和&lt;code&gt;begin()&lt;/code&gt;来判断是否到达了查找的两端，当然，如果在查找过程中就发现了不同的珠子就可以直接停止查找过程。查找结束之后直接对查找到的区间进行删除，同时保留左开右闭区间的右端点作为下次查找过程的起始位置。&lt;/p&gt;
-
-&lt;p&gt;数据的输入和结果输出过程按照题目的要求进行编写即可。&lt;/p&gt;
-
-&lt;h2 id=&#34;流程图&#34;&gt;流程图&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/05/03/5ccbb38e8cb30.jpg&#34; alt=&#34;流程图&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;编程实现&#34;&gt;编程实现&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include &amp;lt;iostream&amp;gt;
-#include &amp;lt;list&amp;gt;
-#include &amp;lt;string&amp;gt;
-using namespace std;
-
-void bang(list&amp;lt;char&amp;gt; &amp;amp; beads, int id, char bead){
-    list&amp;lt;char&amp;gt;::iterator i, r, l;
-    int num = 0;    /*计数*/
-    i = beads.begin();
-    advance(i, id);
-    beads.insert(i, bead);  /*插入元素*/
-
-    /*考虑到多次消除的可能，使用while循环进行消除*/
-    while(1){
-        if(beads.size() &amp;lt; 3)
-            break;
-        
-        num = 0;
-        r = i--;    
-        /*这步操作之后r指向被插入元素以后，i指向被插入元素*/
-        
-        for(; r != beads.end(); r++){
-            if(*r == *i)    num ++;
-            else    break;
-        }           /*向右判断*/
-
-        l = i;          
-        /*if(i != beads.begin()){
-            l--;
-            while (1){
-                if(*l != *i){   l++;break;} //l需要加加
-                else    num ++;
-                
-                if(l == beads.begin())  break;
-                else    l--;    
-            }
-        }   //向左判断*/
-
-        /*由流程图发现的简化方法*/
-        while(l != beads.begin()){
-            l--;
-            if(*l != *i){   l++; break;}
-            else    num++;
-        }
-
-
-        /*删除部分*/
-        if(num &amp;gt; 1){
-            beads.erase(l, r);
-            i = r;
-        }
-        else
-            break;
-    }
-
-
-    /*输出*/
-    if(beads.empty())
-        cout &amp;lt;&amp;lt; &#39;-&#39; &amp;lt;&amp;lt; endl;
-    else{
-        for(i = beads.begin(); i != beads.end(); i++)
-            cout &amp;lt;&amp;lt; *i;
-        cout &amp;lt;&amp;lt; endl;
-    }
-    return ;
-}
-int main(){
-    int n, id;
-    char bead;
-    string initial_beads;
-    list&amp;lt;char&amp;gt; beads;
-
-    getline(cin, initial_beads);
-    for(int i = 0; i &amp;lt; initial_beads.size(); i++){
-        beads.push_back(initial_beads[i]);
-    }
-    /*构造初始状态*/
-
-    cin &amp;gt;&amp;gt; n;
-    while(n--){
-        cin &amp;gt;&amp;gt; id &amp;gt;&amp;gt; bead;
-        bang(beads, id, bead);
-    }
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;结果分析&#34;&gt;结果分析&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/05/03/5ccbb38f267db.jpg&#34; alt=&#34;测试1&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/05/03/5ccbb39060e21.jpg&#34; alt=&#34;测试2&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;如上，经过测试，程序完成要求，并且能够处理初始序列为空的情况。👍&lt;/p&gt;
-
-&lt;h2 id=&#34;总结体会&#34;&gt;总结体会&lt;/h2&gt;
-
-&lt;ol&gt;
-&lt;li&gt;增加了对erase函数的了解：
-
-&lt;ol&gt;
-&lt;li&gt;当参数只有一个的时候，原迭代器指向的位置被删除，迭代器无效化，不能对其继续进行操作，否则会造成错误，但函数会返回原位置之后的迭代器，所以可以利用这个特性进行区间删除（省略++步骤）。&lt;/li&gt;
-&lt;li&gt;当有两个参数的时候，函数结束之后前一个迭代器会无效化，而后一个迭代器因为删除区间为左闭右开的特点，其指向的位置不会被删除。&lt;/li&gt;
-&lt;/ol&gt;&lt;/li&gt;
-&lt;li&gt;迭代器是一个很玄学的东西，使用不规范很容易带来错误，查错的时候可以优先考虑。&lt;/li&gt;
-&lt;li&gt;流程图可以帮忙理清逻辑结构！！！😀&lt;/li&gt;
-&lt;li&gt;写程序尽量一次性写完&amp;hellip;&amp;hellip;🤧&lt;/li&gt;
 &lt;/ol&gt;
 </description>
     </item>
