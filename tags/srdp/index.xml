@@ -6,10 +6,19 @@
     <description>Recent content in SRDP on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 06 Nov 2019 23:04:39 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 25 Nov 2019 16:15:58 +0800</lastBuildDate>
     
 	<atom:link href="https://wanakiki.github.io/tags/srdp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Git 及 Github 上手</title>
+      <link>https://wanakiki.github.io/2019/use-github/</link>
+      <pubDate>Mon, 25 Nov 2019 16:15:58 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2019/use-github/</guid>
+      <description>记录使用git及GitHub的过程 准备工作 在GitHub官网注册账号，之后去Git官网下载git并安装。安装完成后打开终端，输入下面的命令，</description>
+    </item>
     
     <item>
       <title>🏠班级网站项目</title>

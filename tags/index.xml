@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 06 Nov 2019 23:04:39 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 25 Nov 2019 16:15:58 +0800</lastBuildDate>
     
 	<atom:link href="https://wanakiki.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,18 @@
     <item>
       <title>SRDP</title>
       <link>https://wanakiki.github.io/tags/srdp/</link>
-      <pubDate>Wed, 06 Nov 2019 23:04:39 +0800</pubDate>
+      <pubDate>Mon, 25 Nov 2019 16:15:58 +0800</pubDate>
       
       <guid>https://wanakiki.github.io/tags/srdp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>https://wanakiki.github.io/tags/git/</link>
+      <pubDate>Mon, 25 Nov 2019 16:15:58 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/tags/git/</guid>
       <description></description>
     </item>
     

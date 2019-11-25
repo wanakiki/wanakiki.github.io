@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Wanakiki">
+  
+  
+  
+  <link rel="prev" href="https://wanakiki.github.io/2019/website/" />
+  
+  <link rel="canonical" href="https://wanakiki.github.io/2019/use-github/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Git 及 Github 上手 | Wanakiki`s Blog
+       
+  </title>
+  <meta name="title" content="Git 及 Github 上手 | Wanakiki`s Blog">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/wanakiki.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "Git 及 Github 上手",
+    "headline" : "Git 及 Github 上手",
+    "description" : "记录使用git及GitHub的过程 准备工作 在GitHub官网注册账号，之后去Git官网下载git并安装。安装完成后打开终端，输入下面的命令，",
+    "inLanguage" : "zh-cn",
+    "author" : "Wanakiki",
+    "creator" : "Wanakiki",
+    "publisher": "Wanakiki",
+    "accountablePerson" : "Wanakiki",
+    "copyrightHolder" : "Wanakiki",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-11-25 16:15:58 \x2b0800 CST",
+    "dateModified" : "2019-11-25 16:15:58 \x2b0800 CST",
+    "url" : "https:\/\/wanakiki.github.io\/2019\/use-github\/",
+    "wordCount" : "631",
+    "keywords" : [ "git","SRDP", "Wanakiki`s Blog"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://wanakiki.github.io">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://wanakiki.github.io">Wanakiki`s Blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Git 及 Github 上手</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://wanakiki.github.io" rel="author">Wanakiki</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2019-11-25 itemprop="datePublished">November 25, 2019</time>
+                </span>
+                in
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>记录使用git及GitHub的过程
+<!-- more --></p>
+
+<h2 id="准备工作">准备工作</h2>
+
+<p>在<a href="https://github.com/" rel="nofollow noreferrer" target="_blank">GitHub官网</a>注册账号，之后去<a href="https://git-scm.com/" rel="nofollow noreferrer" target="_blank">Git官网</a>下载git并安装。安装完成后打开终端，输入下面的命令，在电脑上设置github邮箱和账户名</p>
+
+<pre><code class="language-shell">git config --global user.name &quot;用户名&quot;
+git config --global user.email &quot;邮箱&quot;
+</code></pre>
+
+<p>之后，输入下面的命令生成SSH key，完成后将公钥添加到GitHub上</p>
+
+<pre><code class="language-shell">ssh-keygen -t rsa -C &quot;邮箱&quot;
+</code></pre>
+
+<h2 id="存储库的创建">存储库的创建</h2>
+
+<p>在个人界面，点击<code>new repository</code>即可进入创建界面，如下图所示。</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://raw.githubusercontent.com/wanakiki/photo/master/use-github/20191125170027.png" alt="创建界面" class="lazyload"><figcaption class="image-caption">创建界面</figcaption></figure></p>
+
+<p>名称为必填项，存储库的描述为可选项。存储库可分为私有和公有，暂时不做解释。需要注意的是<code>Initialize this repository with a README</code>选项，假如你想要将本地已经存在的存储库导入进来的话不需要勾选。因为我现在要从零创建一个存储库，所以勾上了这个选项。下方的添加gitignore和license暂时不需要了解。</p>
+
+<p>完成之后点击创建就会出现下面的界面，整个存储库只有一个<code>README.md</code>文件，至此创建完成。</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://raw.githubusercontent.com/wanakiki/photo/master/use-github/20191125170036.png" alt="创建完成" class="lazyload"><figcaption class="image-caption">创建完成</figcaption></figure></p>
+
+<h2 id="代码操作">代码操作</h2>
+
+<h3 id="克隆存储库">克隆存储库</h3>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://raw.githubusercontent.com/wanakiki/photo/master/use-github/20191125170041.png" alt="位置" class="lazyload"><figcaption class="image-caption">位置</figcaption></figure></p>
+
+<p>如上图所示，点击<code>Clone or download</code>按钮会出现一个新窗口，复制窗口中的链接，切换到你想要保存存储库的文件夹，打开终端，输入下面的命令即可完成存储库的下载。默认使用ssh，当然也可以使用https。</p>
+
+<pre><code class="language-shell">git clone git@github.com:wanakiki/BiFang.git
+</code></pre>
+
+<h3 id="修改及上传">修改及上传</h3>
+
+<p><code>git status</code>查看存储库状态<br />
+<code>git add -A</code>提交所有文件<br />
+<code>git commit -m &quot;xxx&quot;</code>进行提交，其中xxx是对本次更改的说明<br />
+<code>git push</code>将提交的更改推送到远程库</p>
+
+<p>输入完上述代码之后即可更新远程仓库。</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Wanakiki </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://wanakiki.github.io/2019/use-github/>https://wanakiki.github.io/2019/use-github/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://wanakiki.github.io/tags/git/">
+                    #git</a></span>
+            
+            <span class="tag"><a href="https://wanakiki.github.io/tags/srdp/">
+                    #SRDP</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://wanakiki.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://wanakiki.github.io/2019/website/" class="prev" rel="prev" title="🏠班级网站项目"><i class="iconfont icon-left"></i>&nbsp;🏠班级网站项目</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2019</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://wanakiki.github.io">Wanakiki</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>
