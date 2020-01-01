@@ -5,8 +5,639 @@
     <description>Recent content in Wanakiki`s Blog on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 25 Nov 2019 16:15:58 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jan 2020 21:50:14 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>VHDL设计 秒表</title>
+      <link>https://wanakiki.github.io/2020/vhdl-miaobiao/</link>
+      <pubDate>Wed, 01 Jan 2020 21:50:14 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2020/vhdl-miaobiao/</guid>
+      <description>
+
+&lt;p&gt;VHDL课程作业，设计一个带存储功能的秒表。&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;p&gt;演示视频：&lt;a href=&#34;https://www.bilibili.com/video/av79725799/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://www.bilibili.com/video/av79725799/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;秒表由以下模块组成：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;按键消抖 xd&lt;/li&gt;
+&lt;li&gt;分频器 clock_gen&lt;/li&gt;
+&lt;li&gt;计数器 cnt&lt;/li&gt;
+&lt;li&gt;译码器 dec&lt;/li&gt;
+&lt;li&gt;串行扫描 scan&lt;/li&gt;
+&lt;li&gt;寄存器 reg&lt;/li&gt;
+&lt;li&gt;蜂鸣器 ling&lt;/li&gt;
+&lt;li&gt;顶层秒表 miaobiao&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;连接示意图，画的很垃圾😑&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/wanakiki/photo/master/vhdl/20200101215905.png&#34; alt=&#34;示意图&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;引脚分配图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/wanakiki/photo/master/vhdl/20200101220658.jpg&#34; alt=&#34;引脚分配图&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;顶层模块&#34;&gt;顶层模块&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vhdl&#34;&gt;library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+
+entity miaobiao is
+    port(
+        clk, k1, k2, k3: in std_logic;
+        selector: out std_logic_vector(3 downto 0);
+        num: out std_logic_vector(7 downto 0);
+        ling_out: out std_logic
+    );
+end entity miaobiao;
+
+architecture rtl of miaobiao is
+    
+    component clock_gen is
+        port(
+            clk     : IN STD_LOGIC; 
+            clk_us     : OUT STD_LOGIC;
+            clk_ms 	   : OUT STD_LOGIC;
+            clk_10ms   : OUT STD_LOGIC;
+            clk_100ms 	   : OUT STD_LOGIC;
+            clk_500ms   : OUT STD_LOGIC;
+            clk_second : OUT STD_LOGIC
+        );
+    end component;
+
+    component cnt is
+        port(
+            reset, clk: in std_logic;
+            carry: out std_logic;
+            nums: out std_logic_vector(3 downto 0)
+        );
+    end component cnt;
+
+    component cnt6 is
+        port(
+            reset, clk: in std_logic;
+            carry: out std_logic;
+            nums: out std_logic_vector(3 downto 0)
+        );
+    end component cnt6;
+
+    component dec is
+        port(
+            nums : in std_logic_vector(3 downto 0);
+            res : out std_logic_vector(7 downto 0)
+        );
+    end component dec;
+
+    component dec_node is
+        port(
+            nums : in std_logic_vector(3 downto 0);
+            res : out std_logic_vector(7 downto 0)
+        );
+    end component dec_node;
+
+    component ling is
+        port(
+            enable, clk1, clk2: in std_logic;
+            clk_out : out std_logic
+        );
+    end component;
+
+    component reg is
+        port(
+            clk, clear, enable, st:in std_logic;
+            data: in std_logic_vector(15 downto 0);
+            l_st: out std_logic;
+            out_num0, out_num1, out_num2, out_num3: out std_logic_vector(3 downto 0)
+        );
+    end component reg;
+
+    component scan is
+        port(
+            num0, num1, num2, num3: in std_logic_vector(7 downto 0);
+            clk, clk_l, st: in std_logic;
+            selector : out std_logic_vector(3 downto 0);
+            nums: out std_logic_vector(7 downto 0)
+        );
+    end component scan;
+
+    component xd is
+        generic(n:integer:=30);
+        port(clk,k1:in std_logic;
+             y :out std_logic);
+    end component xd;
+--===================================================
+    signal vcc, st, clear: std_logic;
+    signal k1_xd, k2_xd, k3_xd, clk_10ms, clk_l, clk_xd, clk_cnt: std_logic;
+    signal c0, c1, c2, c3: std_logic;       --cnt
+	 signal num0, num1, num2, num3: std_logic_vector(3 downto 0);
+    signal nums:std_logic_vector(15 downto 0);      --reg
+    signal di_num0, di_num1, di_num2, di_num3: std_logic_vector(3 downto 0);      --decoder
+    signal sc_num0, sc_num1, sc_num2, sc_num3: std_logic_vector(7 downto 0);   --scan
+	 signal l_st:std_logic;
+    signal push: std_logic;
+begin
+    vcc &amp;lt;= &#39;1&#39;;
+    u0: clock_gen port map(clk=&amp;gt;clk, clk_10ms=&amp;gt;clk_cnt, clk_us=&amp;gt;open, clk_ms=&amp;gt;clk_xd, clk_100ms=&amp;gt;clk_l, clk_500ms=&amp;gt;open, clk_second=&amp;gt;open);
+    u1: xd port map(clk=&amp;gt;clk_xd, k1=&amp;gt;k1, y=&amp;gt;k1_xd);
+    u2: xd port map(clk=&amp;gt;clk_xd, k1=&amp;gt;k2, y=&amp;gt;k2_xd);
+    u3: xd port map(clk=&amp;gt;clk_xd, k1=&amp;gt;k3, y=&amp;gt;k3_xd);
+    
+    c0 &amp;lt;= clk_cnt and st;
+    clear &amp;lt;= st or k2_xd;
+    u4: cnt port map(reset=&amp;gt;clear, clk=&amp;gt;c0, carry=&amp;gt;c1, nums=&amp;gt;num0);
+    u5: cnt port map(reset=&amp;gt;clear, clk=&amp;gt;c1, carry=&amp;gt;c2, nums=&amp;gt;num1);
+    u6: cnt port map(reset=&amp;gt;clear, clk=&amp;gt;c2, carry=&amp;gt;c3, nums=&amp;gt;num2);
+    u7: cnt6 port map(reset=&amp;gt;clear, clk=&amp;gt;c3, carry=&amp;gt;open, nums=&amp;gt;num3);
+
+    nums&amp;lt;= num3 &amp;amp; num2 &amp;amp; num1 &amp;amp; num0;
+    u8: reg port map(clk=&amp;gt;k3_xd, clear=&amp;gt;clear, enable=&amp;gt;vcc, st=&amp;gt;st, data=&amp;gt;nums, l_st=&amp;gt;l_st,out_num0=&amp;gt;di_num0, out_num1=&amp;gt;di_num1, out_num2=&amp;gt;di_num2, out_num3=&amp;gt;di_num3);
+    
+    u9: dec port map(nums=&amp;gt;di_num0, res=&amp;gt;sc_num0);
+    u10: dec port map(nums=&amp;gt;di_num1, res=&amp;gt;sc_num1);
+    u11: dec_node port map(nums=&amp;gt;di_num2, res=&amp;gt;sc_num2);
+    u12: dec port map(nums=&amp;gt;di_num3, res=&amp;gt;sc_num3);
+    
+    u13: scan port map(num0=&amp;gt;sc_num0, num1=&amp;gt;sc_num1, num2=&amp;gt;sc_num2, num3=&amp;gt;sc_num3, clk=&amp;gt;clk_xd, clk_l=&amp;gt;clk_l, st=&amp;gt;l_st, selector=&amp;gt;selector, nums=&amp;gt;num);
+    
+    push &amp;lt;= k1_xd and k2_xd and k3_xd;
+    u14: ling port map(enable=&amp;gt; push, clk1=&amp;gt;clk_l, clk2=&amp;gt;clk_xd, clk_out=&amp;gt;ling_out);
+    
+    --zhuangtaikongzhi
+    process(k1_xd)
+    begin
+        if k1_xd&#39;event and k1_xd = &#39;0&#39; then
+            if st = &#39;0&#39; then
+                st &amp;lt;= &#39;1&#39;;
+            else
+                st &amp;lt;= &#39;0&#39;;
+            end if;
+        end if;
+    end process;
+end architecture rtl;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;消抖模块&#34;&gt;消抖模块&lt;/h2&gt;
+
+&lt;p&gt;通常情况下，消抖时间为20ms。以下代码同样由老师提供，时钟输入为1ms。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vhdl&#34;&gt;library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+
+entity xd is
+generic(n:integer:=30);
+port(clk,k1:in std_logic;
+     y :out std_logic);
+end xd;
+
+architecture a of xd is
+begin
+process(clk)
+variable sum:integer range 1 to n;
+begin
+if clk&#39;event and clk = &#39;0&#39; then 
+	if k1=&#39;0&#39; then 
+		if sum=n then 
+			sum:=sum; 
+		else
+			sum:=sum+1;
+		end if;
+		
+		if sum=n then 
+			y&amp;lt;=&#39;0&#39;;
+		else 
+			y&amp;lt;=&#39;1&#39;;
+		end if;
+		
+	else 
+		sum:=1;
+		y&amp;lt;=&#39;1&#39;;
+	end if;
+end if;
+end process;
+end;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;分频器模块&#34;&gt;分频器模块&lt;/h2&gt;
+
+&lt;p&gt;由老师直接提供，能够产生的频率见引脚定义处。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vhdl&#34;&gt;LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE ieee.std_logic_unsigned.all;
+USE ieee.STD_LOGIC_ARITH.all;
+
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+ENTITY clock_gen IS
+PORT(
+	clk     : IN STD_LOGIC; 
+	clk_us     : OUT STD_LOGIC;
+	clk_ms 	   : OUT STD_LOGIC;
+	clk_10ms   : OUT STD_LOGIC;
+	clk_100ms 	   : OUT STD_LOGIC;
+	clk_500ms   : OUT STD_LOGIC;
+	clk_second : OUT STD_LOGIC
+	);
+END clock_gen;
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+ARCHITECTURE  behav OF clock_gen IS
+    CONSTANT shake_constant :integer:=10;    -- shake wait for shake_constant us
+    signal q_1us :integer range 0 to 50;    --us��Ƶϵ��
+	signal q_1ms :integer range 0 to 1000;  --ms��Ƶϵ��
+	signal q_10ms:integer range 0 to 10;    --10ms��Ƶϵ��
+	signal q_100ms :integer range 0 to 10;  --100ms��Ƶϵ��
+	signal q_500ms:integer range 0 to 5;    --500ms��Ƶϵ��	
+	signal q_1s :integer range 0 to 1;   --����Ƶϵ��
+	
+	SIGNAL sig_second : STD_LOGIC;
+	SIGNAL sig_500ms : STD_LOGIC;	
+	SIGNAL sig_100ms : STD_LOGIC;	
+	SIGNAL sig_ms : STD_LOGIC;
+	SIGNAL sig_10ms : STD_LOGIC;
+	SIGNAL sig_us : STD_LOGIC;
+    
+-------------------------------------------------------------------------------------------
+begin
+
+output_clock:process(clk)                     
+begin	
+	if 	clk&#39;event and clk=&#39;1&#39; then
+		clk_us     &amp;lt;= sig_us;	
+		clk_ms     &amp;lt;= sig_ms;
+		clk_10ms   &amp;lt;= sig_10ms;clk_100ms   &amp;lt;= sig_100ms;
+		clk_second &amp;lt;= sig_second;
+	end if;
+
+end process;
+
+-------------------------------------------------------------------------------------------
+----**************��Ƶ�� 1 us clock*******************	
+u_second:process(clk)         
+begin	
+	if 	clk&#39;event and clk=&#39;1&#39; then
+        if  q_1us &amp;lt; 49	then
+			q_1us &amp;lt;=  q_1us+1;
+			sig_us &amp;lt;= &#39;0&#39;;
+		else  
+			q_1us &amp;lt;= 0;
+			sig_us &amp;lt;= &#39;1&#39;;
+			
+		end if;
+	end if;
+end process;
+-------------------------------------------------------------------------------------------
+----**************��Ƶ�� 1 ms clock*******************
+m_second:process(sig_us)                    
+begin
+	if sig_us&#39;event and sig_us=&#39;1&#39; then
+		if  q_1ms &amp;lt; 999 then
+			q_1ms &amp;lt;=  q_1ms+1;
+			sig_ms &amp;lt;= &#39;0&#39;;
+		else
+			q_1ms &amp;lt;= 0;
+			sig_ms &amp;lt;= &#39;1&#39;; 
+		end if;
+	end if;
+end process;
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+----**************��Ƶ�� 10 ms clock*******************
+m_second10:process(sig_ms)                    
+begin
+	if sig_ms&#39;event and sig_ms=&#39;1&#39; then
+		if  q_10ms &amp;lt; 9 then
+			q_10ms &amp;lt;=  q_10ms+1;
+			sig_10ms &amp;lt;= &#39;0&#39;;
+		else
+			q_10ms &amp;lt;= 0;
+			sig_10ms &amp;lt;= &#39;1&#39;; 
+		end if;
+	end if;
+end process;
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+----**************��Ƶ�� 100 ms clock*******************
+m_second100:process(sig_10ms)                    
+begin
+	if sig_10ms&#39;event and sig_10ms=&#39;1&#39; then
+		if  q_100ms &amp;lt; 9 then
+			q_100ms &amp;lt;=  q_100ms+1;
+			sig_100ms &amp;lt;= &#39;0&#39;;
+		else
+			q_100ms &amp;lt;= 0;
+			sig_100ms &amp;lt;= &#39;1&#39;; 
+		end if;
+	end if;
+end process;
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+----**************��Ƶ�� 500 ms clock*******************
+m_second500:process(sig_100ms)                    
+begin
+	if sig_100ms&#39;event and sig_100ms=&#39;1&#39; then
+		if  q_500ms &amp;lt; 4 then
+			q_500ms &amp;lt;=  q_500ms+1;
+			sig_500ms &amp;lt;= &#39;0&#39;;
+		else
+			q_500ms &amp;lt;= 0;
+			sig_500ms &amp;lt;= &#39;1&#39;; 
+		end if;
+	end if;
+end process;
+
+-------------------------------------------------------------------------
+----**************��Ƶ�� 1 second clock*******************
+second:process(sig_500ms)                    
+begin
+	if 	sig_500ms&#39;event and sig_500ms=&#39;1&#39; then
+		if  q_1s &amp;lt; 1 then
+			q_1s &amp;lt;= q_1s+1;
+			sig_second &amp;lt;= &#39;0&#39;;
+		else
+			q_1s &amp;lt;= 0;
+			sig_second &amp;lt;= &#39;1&#39;; 
+		end if;
+	end if;
+end process;
+-------------------------------------------------------------------------
+END behav;
+------------------------------------------------------------------------------------------	
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;计数器模块&#34;&gt;计数器模块&lt;/h2&gt;
+
+&lt;p&gt;十进制计数器，带有复位端、进位端。在实现秒表时，需要将最后一个计数器改为六进制。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vhdl&#34;&gt;library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+entity cnt is
+	port(
+		reset, clk: in std_logic;
+		carry: out std_logic;
+		nums: out std_logic_vector(3 downto 0)
+	);
+end entity cnt;
+
+architecture rtl of cnt is
+begin
+	process(clk, reset)
+	variable temp : std_logic_vector(3 downto 0);
+	begin
+		if reset = &#39;0&#39; then
+			temp := (others =&amp;gt; &#39;0&#39;);
+		elsif clk&#39;event and clk = &#39;1&#39; then
+			if temp &amp;gt;= &amp;quot;1001&amp;quot; then
+				temp := (others =&amp;gt; &#39;0&#39;);
+				carry &amp;lt;= &#39;1&#39;;
+			else
+				temp := temp + 1;
+				carry &amp;lt;= &#39;0&#39;;
+			end if;
+		end if;
+		nums &amp;lt;= temp;
+	end process;
+end architecture rtl;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;译码器模块&#34;&gt;译码器模块&lt;/h2&gt;
+
+&lt;p&gt;输入为四位二进制数，输出为对应的七段译码管数组。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vhdl&#34;&gt;library ieee;
+use ieee.std_logic_1164.all;
+
+entity dec is
+	port(
+		nums : in std_logic_vector(3 downto 0);
+		res : out std_logic_vector(7 downto 0)
+	);
+end entity dec;
+
+architecture rtl of dec is
+begin
+	process(nums)
+	begin
+		case nums is
+			when &amp;quot;0000&amp;quot; =&amp;gt; res &amp;lt;= B&amp;quot;1100_0000&amp;quot;;
+			when &amp;quot;0001&amp;quot; =&amp;gt; res &amp;lt;= B&amp;quot;1111_1001&amp;quot;;
+			when &amp;quot;0010&amp;quot; =&amp;gt; res &amp;lt;= B&amp;quot;1010_0100&amp;quot;;
+			when &amp;quot;0011&amp;quot; =&amp;gt; res &amp;lt;= B&amp;quot;1011_0000&amp;quot;;
+			when &amp;quot;0100&amp;quot; =&amp;gt; res &amp;lt;= B&amp;quot;1001_1001&amp;quot;;
+			when &amp;quot;0101&amp;quot; =&amp;gt; res &amp;lt;= B&amp;quot;1001_0010&amp;quot;;
+			when &amp;quot;0110&amp;quot; =&amp;gt; res &amp;lt;= B&amp;quot;1000_0011&amp;quot;;
+			when &amp;quot;0111&amp;quot; =&amp;gt; res &amp;lt;= B&amp;quot;1111_1000&amp;quot;;
+			when &amp;quot;1000&amp;quot; =&amp;gt; res &amp;lt;= B&amp;quot;1000_0000&amp;quot;;
+			when &amp;quot;1001&amp;quot; =&amp;gt; res &amp;lt;= B&amp;quot;1001_1000&amp;quot;;
+			when others =&amp;gt; res &amp;lt;= B&amp;quot;1111_1111&amp;quot;;
+		end case;
+	end process;
+end architecture rtl;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;串行扫描模块&#34;&gt;串行扫描模块&lt;/h2&gt;
+
+&lt;p&gt;实现串行扫描功能，当st为零时会进入闪烁状态。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vhdl&#34;&gt;library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+
+entity scan is
+	port(
+		num0, num1, num2, num3: in std_logic_vector(7 downto 0);
+		clk, clk_l, st: in std_logic;
+		selector : out std_logic_vector(3 downto 0);
+		nums: out std_logic_vector(7 downto 0)
+	);
+end entity scan;
+
+architecture rtl of scan is
+	signal flag :std_logic;
+begin
+	process(clk_l)
+	begin
+		if clk_l&#39;event and clk_l = &#39;1&#39; then
+			if flag = &#39;1&#39; and  st = &#39;0&#39; then
+				flag &amp;lt;= &#39;0&#39;;
+			else
+				flag &amp;lt;= &#39;1&#39;;
+			end if;
+		end if;
+	end process;
+	
+	process(clk)
+	variable cur : std_logic_vector(1 downto 0);
+	begin
+		if flag = &#39;1&#39; then
+		if clk&#39;event and clk = &#39;1&#39; then
+			case cur is
+				when &amp;quot;00&amp;quot; =&amp;gt;
+					selector &amp;lt;= &amp;quot;1110&amp;quot;;
+					nums &amp;lt;= num0;
+				when &amp;quot;01&amp;quot; =&amp;gt;
+					selector &amp;lt;= &amp;quot;1101&amp;quot;;
+					nums &amp;lt;= num1;
+				when &amp;quot;10&amp;quot; =&amp;gt;
+					selector &amp;lt;= &amp;quot;1011&amp;quot;;
+					nums &amp;lt;= num2;
+				when others =&amp;gt;
+					selector &amp;lt;= &amp;quot;0111&amp;quot;;
+					nums &amp;lt;= num3;
+			end case;
+			cur := cur + 1;
+		end if;
+		else
+			selector &amp;lt;= &amp;quot;1111&amp;quot;;
+		end if;
+	end process;
+end architecture rtl;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;寄存器模块&#34;&gt;寄存器模块&lt;/h2&gt;
+
+&lt;p&gt;当秒表处于计时状态时，按下寄存器控制按键会将秒表当前的时间保存到计数器当中。当秒表处于暂停状态时，按下寄存器控制按键会将寄存器保存的数据逐个显示，在显示寄存器内部数据时，要求串行扫描闪烁。&lt;/p&gt;
+
+&lt;p&gt;寄存器的输入为四个计数器当前的状态，内部能够根据秒表当下工作状态选择对应的数据交给译码器，设计相对复杂。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vhdl&#34;&gt;library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+
+entity reg is
+	port(
+		clk, clear, enable, st:in std_logic;
+		data: in std_logic_vector(15 downto 0);
+		l_st: out std_logic;
+		out_num0, out_num1, out_num2, out_num3: out std_logic_vector(3 downto 0)
+	);
+end entity reg;
+
+architecture rtl of reg is
+	signal num0, num1, num2:std_logic_vector(15 downto 0);
+begin
+	process(clk, clear)
+        variable status: integer range 0 to 3;
+	begin		
+		if clear = &#39;0&#39; then
+			num0 &amp;lt;= (others =&amp;gt; &#39;0&#39;);
+			num1 &amp;lt;= (others =&amp;gt; &#39;0&#39;);
+			num2 &amp;lt;= (others =&amp;gt; &#39;0&#39;);
+			status := 0;
+		elsif enable = &#39;1&#39; then
+            if(clk&#39;event and clk=&#39;1&#39;) then
+					if st = &#39;1&#39; then
+						num2 &amp;lt;= num1;
+						num1 &amp;lt;= num0;
+						num0 &amp;lt;= data;
+					else
+						if status &amp;gt;= 3 then
+							status := 0;
+						else
+							status := status + 1;
+						end if;
+					end if;
+				end if;
+		end if;
+		
+		if st = &#39;1&#39; then
+			status := 0;
+		end if;
+		
+		case status is
+			when 0 =&amp;gt;
+				out_num3 &amp;lt;= data(15 downto 12);
+				out_num2 &amp;lt;= data(11 downto 8);
+				out_num1 &amp;lt;= data(7 downto 4);
+				out_num0 &amp;lt;= data(3 downto 0);
+				l_st &amp;lt;= &#39;1&#39;;
+			when 1 =&amp;gt;
+				out_num3 &amp;lt;= num0(15 downto 12);
+				out_num2 &amp;lt;= num0(11 downto 8);
+				out_num1 &amp;lt;= num0(7 downto 4);
+				out_num0 &amp;lt;= num0(3 downto 0);
+				l_st &amp;lt;= &#39;0&#39;;
+			when 2 =&amp;gt;
+				out_num3 &amp;lt;= num1(15 downto 12);
+				out_num2 &amp;lt;= num1(11 downto 8);
+				out_num1 &amp;lt;= num1(7 downto 4);
+				out_num0 &amp;lt;= num1(3 downto 0);
+				l_st &amp;lt;= &#39;0&#39;;
+			when 3 =&amp;gt;
+				out_num3 &amp;lt;= num2(15 downto 12);
+				out_num2 &amp;lt;= num2(11 downto 8);
+				out_num1 &amp;lt;= num2(7 downto 4);
+				out_num0 &amp;lt;= num2(3 downto 0);
+				l_st &amp;lt;= &#39;0&#39;;
+			when others=&amp;gt;
+				out_num3 &amp;lt;= data(15 downto 12);
+				out_num2 &amp;lt;= data(11 downto 8);
+				out_num1 &amp;lt;= data(7 downto 4);
+				out_num0 &amp;lt;= data(3 downto 0);
+				l_st &amp;lt;= &#39;1&#39;;
+		end case;
+	end process;
+end rtl;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;蜂鸣器&#34;&gt;蜂鸣器&lt;/h2&gt;
+
+&lt;p&gt;蜂鸣器的工作方式是当按键按下时鸣叫，当按键松开后，鸣叫会持续0.2秒。在我的设计当中，蜂鸣器使用了两个时钟输入，clk1用于控制蜂鸣器的发声频率，clk2（100ms）用来进行按键松开后的计时。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vhdl&#34;&gt;library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+
+entity ling is
+	port(
+		enable, clk1, clk2: in std_logic;
+		clk_out : out std_logic
+	);
+end entity;
+
+architecture rtl of ling is
+	signal flag: std_logic;
+begin
+	process(clk2, flag)
+	begin
+		if flag = &#39;1&#39; then
+			clk_out &amp;lt;= clk2;
+		end if;
+	end process;
+	
+	process(clk1,enable, clk2)
+		variable num: integer range 0 to 2000;
+	begin	
+		if enable = &#39;0&#39; then
+			flag &amp;lt;= &#39;1&#39;;
+			num := 0;
+        
+		elsif clk1&#39;event and clk1 = &#39;1&#39; then
+			if flag = &#39;1&#39; then
+				if num &amp;gt;= 2 then
+					flag &amp;lt;= &#39;0&#39;;
+				else
+					num := num + 1;
+				end if;
+			end if;
+		end if;
+	end process;
+end architecture rtl;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Git 及 Github 上手</title>
@@ -3301,125 +3932,6 @@ twoDtree::Node*  twoDtree::copyNode(const Node* x){
 &lt;p&gt;我用了一周的时间去想高效的剪枝遍历解决方式，失败之后采用我起初认为最笨最麻烦的方式实现了剪枝函数，最终的运行时间另我很意外，我感觉我一直都在低估自己电脑的运算能力，大多数情况都只停留于感觉，没有进行较为科学的判断和推理，今后应该加强自己这方面的估算能力。另外如果可以的话，我想知道有没有更高效的算法，因为四张图片17秒的速度还是很慢。😕&lt;/p&gt;
 
 &lt;p&gt;另外在帮别人调试代码的时候发现了win和linux下long型所占内存的不同，这导致两种环境下long型对应的最大值也不同，在win下编译出来的程序在计算过程中会直接越界，需要换用long long 类型。这次编程因为之前没有用vscode建过工程所以使用wsl进行的编译。程序中有部分代码直接在win下编译也会有一点点小问题，这难道也是linux的优势🐎？&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>数据结构作业三 列车调度</title>
-      <link>https://wanakiki.github.io/2019/train/</link>
-      <pubDate>Sun, 21 Apr 2019 10:41:45 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/train/</guid>
-      <description>
-
-&lt;p&gt;本次作业不需提交报告。
-&lt;!-- more --&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
-
-&lt;p&gt;Input&lt;/p&gt;
-
-&lt;p&gt;共两行。&lt;/p&gt;
-
-&lt;p&gt;第一行为两个整数n，m。&lt;/p&gt;
-
-&lt;p&gt;第二行为以空格分隔的n个整数，保证为{1, 2, &amp;hellip;, n}的一个排列，表示待判断可行性的驶出序列{a1，a2，&amp;hellip;，an}。&lt;/p&gt;
-
-&lt;p&gt;Output&lt;/p&gt;
-
-&lt;p&gt;若驶出序列可行，则输出操作序列，其中push表示车厢从A进入S，pop表示车厢从S进入B，每个操作占一行。&lt;/p&gt;
-
-&lt;p&gt;若不可行，则输出No。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;Sample Input 1 
-
-5 2
-1 2 3 5 4
-Sample Output 1
-
-push
-pop
-push
-pop
-push
-pop
-push
-push
-pop
-pop
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;代码&#34;&gt;代码&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;stack&amp;gt;
-using namespace std;
-
-int main(){
-    int n, m;
-    int B[10000];   //B队列
-    bool step[20005];   //记录操作 0压入 1弹出
-    bool flag = false;  //标记是否出现错误
-    cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; m;
-    stack&amp;lt;int&amp;gt; s;   //代表中转端
-    
-    for(int i = 0; i &amp;lt; n; i++){
-        cin &amp;gt;&amp;gt; B[i];
-    }
-
-    int i = 1, j = 0, k = 0;  //当前数字i 操作步骤标记j B队列索引k
-    while(i &amp;lt;= n){
-        if(s.empty()){
-            s.push(i++);
-            step[j++] = 0;
-        }
-        else{
-            if(s.top() == B[k]){
-                s.pop();
-                step[j++] = 1;
-                k++;
-            }
-            else{
-                s.push(i++);
-                step[j++] = 0;
-                if(s.size() &amp;gt; m){
-                    flag = 1;
-                    break;
-                }
-            }
-        }
-    }
-
-    //剩余元素的弹出讨论
-    while(!s.empty()){
-        if(s.top() != B[k]){
-            flag = 1;
-            break;
-        }
-        else{
-            s.pop();
-            step[j++] = 1;
-            k++;
-        }
-    }
-
-    if(flag)
-        cout &amp;lt;&amp;lt; &amp;quot;no&amp;quot;;
-    else{
-        for(int l = 0; l &amp;lt; j; l++){
-            if(step[l])
-                cout &amp;lt;&amp;lt; &amp;quot;pop&amp;quot;;
-            else
-                cout &amp;lt;&amp;lt; &amp;quot;push&amp;quot;;
-            cout &amp;lt;&amp;lt; endl;
-        }
-    }
-    
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/05/03/5ccbb39a396b3.png&#34; alt=&#34;测试&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     

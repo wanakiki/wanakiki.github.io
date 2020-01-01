@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Wanakiki">
+  
+  
+  
+  <link rel="prev" href="https://wanakiki.github.io/2019/use-github/" />
+  
+  <link rel="canonical" href="https://wanakiki.github.io/2020/vhdl-miaobiao/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           VHDL设计 秒表 | Wanakiki`s Blog
+       
+  </title>
+  <meta name="title" content="VHDL设计 秒表 | Wanakiki`s Blog">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/wanakiki.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "VHDL设计 秒表",
+    "headline" : "VHDL设计 秒表",
+    "description" : "VHDL课程作业，设计一个带存储功能的秒表。 演示视频：https:\/\/www.bilibili.com\/video\/av79725799\/ 秒",
+    "inLanguage" : "zh-cn",
+    "author" : "Wanakiki",
+    "creator" : "Wanakiki",
+    "publisher": "Wanakiki",
+    "accountablePerson" : "Wanakiki",
+    "copyrightHolder" : "Wanakiki",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-01-01 21:50:14 \x2b0800 CST",
+    "dateModified" : "2020-01-01 21:50:14 \x2b0800 CST",
+    "url" : "https:\/\/wanakiki.github.io\/2020\/vhdl-miaobiao\/",
+    "wordCount" : "2403",
+    "keywords" : [  "Wanakiki`s Blog"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://wanakiki.github.io">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://wanakiki.github.io">Wanakiki`s Blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">VHDL设计 秒表</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://wanakiki.github.io" rel="author">Wanakiki</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2020-01-01 itemprop="datePublished">January 1, 2020</time>
+                </span>
+                in
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>VHDL课程作业，设计一个带存储功能的秒表。</p>
+
+<!-- more -->
+
+<p>演示视频：<a href="https://www.bilibili.com/video/av79725799/" rel="nofollow noreferrer" target="_blank">https://www.bilibili.com/video/av79725799/</a></p>
+
+<p>秒表由以下模块组成：</p>
+
+<ol>
+<li>按键消抖 xd</li>
+<li>分频器 clock_gen</li>
+<li>计数器 cnt</li>
+<li>译码器 dec</li>
+<li>串行扫描 scan</li>
+<li>寄存器 reg</li>
+<li>蜂鸣器 ling</li>
+<li>顶层秒表 miaobiao</li>
+</ol>
+
+<p>连接示意图，画的很垃圾😑</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://raw.githubusercontent.com/wanakiki/photo/master/vhdl/20200101215905.png" alt="示意图" class="lazyload"><figcaption class="image-caption">示意图</figcaption></figure></p>
+
+<p>引脚分配图：</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://raw.githubusercontent.com/wanakiki/photo/master/vhdl/20200101220658.jpg" alt="引脚分配图" class="lazyload"><figcaption class="image-caption">引脚分配图</figcaption></figure></p>
+
+<h2 id="顶层模块">顶层模块</h2>
+
+<pre><code class="language-vhdl">library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+
+entity miaobiao is
+    port(
+        clk, k1, k2, k3: in std_logic;
+        selector: out std_logic_vector(3 downto 0);
+        num: out std_logic_vector(7 downto 0);
+        ling_out: out std_logic
+    );
+end entity miaobiao;
+
+architecture rtl of miaobiao is
+    
+    component clock_gen is
+        port(
+            clk     : IN STD_LOGIC; 
+            clk_us     : OUT STD_LOGIC;
+            clk_ms 	   : OUT STD_LOGIC;
+            clk_10ms   : OUT STD_LOGIC;
+            clk_100ms 	   : OUT STD_LOGIC;
+            clk_500ms   : OUT STD_LOGIC;
+            clk_second : OUT STD_LOGIC
+        );
+    end component;
+
+    component cnt is
+        port(
+            reset, clk: in std_logic;
+            carry: out std_logic;
+            nums: out std_logic_vector(3 downto 0)
+        );
+    end component cnt;
+
+    component cnt6 is
+        port(
+            reset, clk: in std_logic;
+            carry: out std_logic;
+            nums: out std_logic_vector(3 downto 0)
+        );
+    end component cnt6;
+
+    component dec is
+        port(
+            nums : in std_logic_vector(3 downto 0);
+            res : out std_logic_vector(7 downto 0)
+        );
+    end component dec;
+
+    component dec_node is
+        port(
+            nums : in std_logic_vector(3 downto 0);
+            res : out std_logic_vector(7 downto 0)
+        );
+    end component dec_node;
+
+    component ling is
+        port(
+            enable, clk1, clk2: in std_logic;
+            clk_out : out std_logic
+        );
+    end component;
+
+    component reg is
+        port(
+            clk, clear, enable, st:in std_logic;
+            data: in std_logic_vector(15 downto 0);
+            l_st: out std_logic;
+            out_num0, out_num1, out_num2, out_num3: out std_logic_vector(3 downto 0)
+        );
+    end component reg;
+
+    component scan is
+        port(
+            num0, num1, num2, num3: in std_logic_vector(7 downto 0);
+            clk, clk_l, st: in std_logic;
+            selector : out std_logic_vector(3 downto 0);
+            nums: out std_logic_vector(7 downto 0)
+        );
+    end component scan;
+
+    component xd is
+        generic(n:integer:=30);
+        port(clk,k1:in std_logic;
+             y :out std_logic);
+    end component xd;
+--===================================================
+    signal vcc, st, clear: std_logic;
+    signal k1_xd, k2_xd, k3_xd, clk_10ms, clk_l, clk_xd, clk_cnt: std_logic;
+    signal c0, c1, c2, c3: std_logic;       --cnt
+	 signal num0, num1, num2, num3: std_logic_vector(3 downto 0);
+    signal nums:std_logic_vector(15 downto 0);      --reg
+    signal di_num0, di_num1, di_num2, di_num3: std_logic_vector(3 downto 0);      --decoder
+    signal sc_num0, sc_num1, sc_num2, sc_num3: std_logic_vector(7 downto 0);   --scan
+	 signal l_st:std_logic;
+    signal push: std_logic;
+begin
+    vcc &lt;= '1';
+    u0: clock_gen port map(clk=&gt;clk, clk_10ms=&gt;clk_cnt, clk_us=&gt;open, clk_ms=&gt;clk_xd, clk_100ms=&gt;clk_l, clk_500ms=&gt;open, clk_second=&gt;open);
+    u1: xd port map(clk=&gt;clk_xd, k1=&gt;k1, y=&gt;k1_xd);
+    u2: xd port map(clk=&gt;clk_xd, k1=&gt;k2, y=&gt;k2_xd);
+    u3: xd port map(clk=&gt;clk_xd, k1=&gt;k3, y=&gt;k3_xd);
+    
+    c0 &lt;= clk_cnt and st;
+    clear &lt;= st or k2_xd;
+    u4: cnt port map(reset=&gt;clear, clk=&gt;c0, carry=&gt;c1, nums=&gt;num0);
+    u5: cnt port map(reset=&gt;clear, clk=&gt;c1, carry=&gt;c2, nums=&gt;num1);
+    u6: cnt port map(reset=&gt;clear, clk=&gt;c2, carry=&gt;c3, nums=&gt;num2);
+    u7: cnt6 port map(reset=&gt;clear, clk=&gt;c3, carry=&gt;open, nums=&gt;num3);
+
+    nums&lt;= num3 &amp; num2 &amp; num1 &amp; num0;
+    u8: reg port map(clk=&gt;k3_xd, clear=&gt;clear, enable=&gt;vcc, st=&gt;st, data=&gt;nums, l_st=&gt;l_st,out_num0=&gt;di_num0, out_num1=&gt;di_num1, out_num2=&gt;di_num2, out_num3=&gt;di_num3);
+    
+    u9: dec port map(nums=&gt;di_num0, res=&gt;sc_num0);
+    u10: dec port map(nums=&gt;di_num1, res=&gt;sc_num1);
+    u11: dec_node port map(nums=&gt;di_num2, res=&gt;sc_num2);
+    u12: dec port map(nums=&gt;di_num3, res=&gt;sc_num3);
+    
+    u13: scan port map(num0=&gt;sc_num0, num1=&gt;sc_num1, num2=&gt;sc_num2, num3=&gt;sc_num3, clk=&gt;clk_xd, clk_l=&gt;clk_l, st=&gt;l_st, selector=&gt;selector, nums=&gt;num);
+    
+    push &lt;= k1_xd and k2_xd and k3_xd;
+    u14: ling port map(enable=&gt; push, clk1=&gt;clk_l, clk2=&gt;clk_xd, clk_out=&gt;ling_out);
+    
+    --zhuangtaikongzhi
+    process(k1_xd)
+    begin
+        if k1_xd'event and k1_xd = '0' then
+            if st = '0' then
+                st &lt;= '1';
+            else
+                st &lt;= '0';
+            end if;
+        end if;
+    end process;
+end architecture rtl;
+</code></pre>
+
+<h2 id="消抖模块">消抖模块</h2>
+
+<p>通常情况下，消抖时间为20ms。以下代码同样由老师提供，时钟输入为1ms。</p>
+
+<pre><code class="language-vhdl">library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+
+entity xd is
+generic(n:integer:=30);
+port(clk,k1:in std_logic;
+     y :out std_logic);
+end xd;
+
+architecture a of xd is
+begin
+process(clk)
+variable sum:integer range 1 to n;
+begin
+if clk'event and clk = '0' then 
+	if k1='0' then 
+		if sum=n then 
+			sum:=sum; 
+		else
+			sum:=sum+1;
+		end if;
+		
+		if sum=n then 
+			y&lt;='0';
+		else 
+			y&lt;='1';
+		end if;
+		
+	else 
+		sum:=1;
+		y&lt;='1';
+	end if;
+end if;
+end process;
+end;
+</code></pre>
+
+<h2 id="分频器模块">分频器模块</h2>
+
+<p>由老师直接提供，能够产生的频率见引脚定义处。</p>
+
+<pre><code class="language-vhdl">LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE ieee.std_logic_unsigned.all;
+USE ieee.STD_LOGIC_ARITH.all;
+
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+ENTITY clock_gen IS
+PORT(
+	clk     : IN STD_LOGIC; 
+	clk_us     : OUT STD_LOGIC;
+	clk_ms 	   : OUT STD_LOGIC;
+	clk_10ms   : OUT STD_LOGIC;
+	clk_100ms 	   : OUT STD_LOGIC;
+	clk_500ms   : OUT STD_LOGIC;
+	clk_second : OUT STD_LOGIC
+	);
+END clock_gen;
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+ARCHITECTURE  behav OF clock_gen IS
+    CONSTANT shake_constant :integer:=10;    -- shake wait for shake_constant us
+    signal q_1us :integer range 0 to 50;    --us��Ƶϵ��
+	signal q_1ms :integer range 0 to 1000;  --ms��Ƶϵ��
+	signal q_10ms:integer range 0 to 10;    --10ms��Ƶϵ��
+	signal q_100ms :integer range 0 to 10;  --100ms��Ƶϵ��
+	signal q_500ms:integer range 0 to 5;    --500ms��Ƶϵ��	
+	signal q_1s :integer range 0 to 1;   --����Ƶϵ��
+	
+	SIGNAL sig_second : STD_LOGIC;
+	SIGNAL sig_500ms : STD_LOGIC;	
+	SIGNAL sig_100ms : STD_LOGIC;	
+	SIGNAL sig_ms : STD_LOGIC;
+	SIGNAL sig_10ms : STD_LOGIC;
+	SIGNAL sig_us : STD_LOGIC;
+    
+-------------------------------------------------------------------------------------------
+begin
+
+output_clock:process(clk)                     
+begin	
+	if 	clk'event and clk='1' then
+		clk_us     &lt;= sig_us;	
+		clk_ms     &lt;= sig_ms;
+		clk_10ms   &lt;= sig_10ms;clk_100ms   &lt;= sig_100ms;
+		clk_second &lt;= sig_second;
+	end if;
+
+end process;
+
+-------------------------------------------------------------------------------------------
+----**************��Ƶ�� 1 us clock*******************	
+u_second:process(clk)         
+begin	
+	if 	clk'event and clk='1' then
+        if  q_1us &lt; 49	then
+			q_1us &lt;=  q_1us+1;
+			sig_us &lt;= '0';
+		else  
+			q_1us &lt;= 0;
+			sig_us &lt;= '1';
+			
+		end if;
+	end if;
+end process;
+-------------------------------------------------------------------------------------------
+----**************��Ƶ�� 1 ms clock*******************
+m_second:process(sig_us)                    
+begin
+	if sig_us'event and sig_us='1' then
+		if  q_1ms &lt; 999 then
+			q_1ms &lt;=  q_1ms+1;
+			sig_ms &lt;= '0';
+		else
+			q_1ms &lt;= 0;
+			sig_ms &lt;= '1'; 
+		end if;
+	end if;
+end process;
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+----**************��Ƶ�� 10 ms clock*******************
+m_second10:process(sig_ms)                    
+begin
+	if sig_ms'event and sig_ms='1' then
+		if  q_10ms &lt; 9 then
+			q_10ms &lt;=  q_10ms+1;
+			sig_10ms &lt;= '0';
+		else
+			q_10ms &lt;= 0;
+			sig_10ms &lt;= '1'; 
+		end if;
+	end if;
+end process;
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+----**************��Ƶ�� 100 ms clock*******************
+m_second100:process(sig_10ms)                    
+begin
+	if sig_10ms'event and sig_10ms='1' then
+		if  q_100ms &lt; 9 then
+			q_100ms &lt;=  q_100ms+1;
+			sig_100ms &lt;= '0';
+		else
+			q_100ms &lt;= 0;
+			sig_100ms &lt;= '1'; 
+		end if;
+	end if;
+end process;
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+----**************��Ƶ�� 500 ms clock*******************
+m_second500:process(sig_100ms)                    
+begin
+	if sig_100ms'event and sig_100ms='1' then
+		if  q_500ms &lt; 4 then
+			q_500ms &lt;=  q_500ms+1;
+			sig_500ms &lt;= '0';
+		else
+			q_500ms &lt;= 0;
+			sig_500ms &lt;= '1'; 
+		end if;
+	end if;
+end process;
+
+-------------------------------------------------------------------------
+----**************��Ƶ�� 1 second clock*******************
+second:process(sig_500ms)                    
+begin
+	if 	sig_500ms'event and sig_500ms='1' then
+		if  q_1s &lt; 1 then
+			q_1s &lt;= q_1s+1;
+			sig_second &lt;= '0';
+		else
+			q_1s &lt;= 0;
+			sig_second &lt;= '1'; 
+		end if;
+	end if;
+end process;
+-------------------------------------------------------------------------
+END behav;
+------------------------------------------------------------------------------------------	
+</code></pre>
+
+<h2 id="计数器模块">计数器模块</h2>
+
+<p>十进制计数器，带有复位端、进位端。在实现秒表时，需要将最后一个计数器改为六进制。</p>
+
+<pre><code class="language-vhdl">library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+entity cnt is
+	port(
+		reset, clk: in std_logic;
+		carry: out std_logic;
+		nums: out std_logic_vector(3 downto 0)
+	);
+end entity cnt;
+
+architecture rtl of cnt is
+begin
+	process(clk, reset)
+	variable temp : std_logic_vector(3 downto 0);
+	begin
+		if reset = '0' then
+			temp := (others =&gt; '0');
+		elsif clk'event and clk = '1' then
+			if temp &gt;= &quot;1001&quot; then
+				temp := (others =&gt; '0');
+				carry &lt;= '1';
+			else
+				temp := temp + 1;
+				carry &lt;= '0';
+			end if;
+		end if;
+		nums &lt;= temp;
+	end process;
+end architecture rtl;
+</code></pre>
+
+<h2 id="译码器模块">译码器模块</h2>
+
+<p>输入为四位二进制数，输出为对应的七段译码管数组。</p>
+
+<pre><code class="language-vhdl">library ieee;
+use ieee.std_logic_1164.all;
+
+entity dec is
+	port(
+		nums : in std_logic_vector(3 downto 0);
+		res : out std_logic_vector(7 downto 0)
+	);
+end entity dec;
+
+architecture rtl of dec is
+begin
+	process(nums)
+	begin
+		case nums is
+			when &quot;0000&quot; =&gt; res &lt;= B&quot;1100_0000&quot;;
+			when &quot;0001&quot; =&gt; res &lt;= B&quot;1111_1001&quot;;
+			when &quot;0010&quot; =&gt; res &lt;= B&quot;1010_0100&quot;;
+			when &quot;0011&quot; =&gt; res &lt;= B&quot;1011_0000&quot;;
+			when &quot;0100&quot; =&gt; res &lt;= B&quot;1001_1001&quot;;
+			when &quot;0101&quot; =&gt; res &lt;= B&quot;1001_0010&quot;;
+			when &quot;0110&quot; =&gt; res &lt;= B&quot;1000_0011&quot;;
+			when &quot;0111&quot; =&gt; res &lt;= B&quot;1111_1000&quot;;
+			when &quot;1000&quot; =&gt; res &lt;= B&quot;1000_0000&quot;;
+			when &quot;1001&quot; =&gt; res &lt;= B&quot;1001_1000&quot;;
+			when others =&gt; res &lt;= B&quot;1111_1111&quot;;
+		end case;
+	end process;
+end architecture rtl;
+</code></pre>
+
+<h2 id="串行扫描模块">串行扫描模块</h2>
+
+<p>实现串行扫描功能，当st为零时会进入闪烁状态。</p>
+
+<pre><code class="language-vhdl">library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+
+entity scan is
+	port(
+		num0, num1, num2, num3: in std_logic_vector(7 downto 0);
+		clk, clk_l, st: in std_logic;
+		selector : out std_logic_vector(3 downto 0);
+		nums: out std_logic_vector(7 downto 0)
+	);
+end entity scan;
+
+architecture rtl of scan is
+	signal flag :std_logic;
+begin
+	process(clk_l)
+	begin
+		if clk_l'event and clk_l = '1' then
+			if flag = '1' and  st = '0' then
+				flag &lt;= '0';
+			else
+				flag &lt;= '1';
+			end if;
+		end if;
+	end process;
+	
+	process(clk)
+	variable cur : std_logic_vector(1 downto 0);
+	begin
+		if flag = '1' then
+		if clk'event and clk = '1' then
+			case cur is
+				when &quot;00&quot; =&gt;
+					selector &lt;= &quot;1110&quot;;
+					nums &lt;= num0;
+				when &quot;01&quot; =&gt;
+					selector &lt;= &quot;1101&quot;;
+					nums &lt;= num1;
+				when &quot;10&quot; =&gt;
+					selector &lt;= &quot;1011&quot;;
+					nums &lt;= num2;
+				when others =&gt;
+					selector &lt;= &quot;0111&quot;;
+					nums &lt;= num3;
+			end case;
+			cur := cur + 1;
+		end if;
+		else
+			selector &lt;= &quot;1111&quot;;
+		end if;
+	end process;
+end architecture rtl;
+</code></pre>
+
+<h2 id="寄存器模块">寄存器模块</h2>
+
+<p>当秒表处于计时状态时，按下寄存器控制按键会将秒表当前的时间保存到计数器当中。当秒表处于暂停状态时，按下寄存器控制按键会将寄存器保存的数据逐个显示，在显示寄存器内部数据时，要求串行扫描闪烁。</p>
+
+<p>寄存器的输入为四个计数器当前的状态，内部能够根据秒表当下工作状态选择对应的数据交给译码器，设计相对复杂。</p>
+
+<pre><code class="language-vhdl">library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+
+entity reg is
+	port(
+		clk, clear, enable, st:in std_logic;
+		data: in std_logic_vector(15 downto 0);
+		l_st: out std_logic;
+		out_num0, out_num1, out_num2, out_num3: out std_logic_vector(3 downto 0)
+	);
+end entity reg;
+
+architecture rtl of reg is
+	signal num0, num1, num2:std_logic_vector(15 downto 0);
+begin
+	process(clk, clear)
+        variable status: integer range 0 to 3;
+	begin		
+		if clear = '0' then
+			num0 &lt;= (others =&gt; '0');
+			num1 &lt;= (others =&gt; '0');
+			num2 &lt;= (others =&gt; '0');
+			status := 0;
+		elsif enable = '1' then
+            if(clk'event and clk='1') then
+					if st = '1' then
+						num2 &lt;= num1;
+						num1 &lt;= num0;
+						num0 &lt;= data;
+					else
+						if status &gt;= 3 then
+							status := 0;
+						else
+							status := status + 1;
+						end if;
+					end if;
+				end if;
+		end if;
+		
+		if st = '1' then
+			status := 0;
+		end if;
+		
+		case status is
+			when 0 =&gt;
+				out_num3 &lt;= data(15 downto 12);
+				out_num2 &lt;= data(11 downto 8);
+				out_num1 &lt;= data(7 downto 4);
+				out_num0 &lt;= data(3 downto 0);
+				l_st &lt;= '1';
+			when 1 =&gt;
+				out_num3 &lt;= num0(15 downto 12);
+				out_num2 &lt;= num0(11 downto 8);
+				out_num1 &lt;= num0(7 downto 4);
+				out_num0 &lt;= num0(3 downto 0);
+				l_st &lt;= '0';
+			when 2 =&gt;
+				out_num3 &lt;= num1(15 downto 12);
+				out_num2 &lt;= num1(11 downto 8);
+				out_num1 &lt;= num1(7 downto 4);
+				out_num0 &lt;= num1(3 downto 0);
+				l_st &lt;= '0';
+			when 3 =&gt;
+				out_num3 &lt;= num2(15 downto 12);
+				out_num2 &lt;= num2(11 downto 8);
+				out_num1 &lt;= num2(7 downto 4);
+				out_num0 &lt;= num2(3 downto 0);
+				l_st &lt;= '0';
+			when others=&gt;
+				out_num3 &lt;= data(15 downto 12);
+				out_num2 &lt;= data(11 downto 8);
+				out_num1 &lt;= data(7 downto 4);
+				out_num0 &lt;= data(3 downto 0);
+				l_st &lt;= '1';
+		end case;
+	end process;
+end rtl;
+</code></pre>
+
+<h2 id="蜂鸣器">蜂鸣器</h2>
+
+<p>蜂鸣器的工作方式是当按键按下时鸣叫，当按键松开后，鸣叫会持续0.2秒。在我的设计当中，蜂鸣器使用了两个时钟输入，clk1用于控制蜂鸣器的发声频率，clk2（100ms）用来进行按键松开后的计时。</p>
+
+<pre><code class="language-vhdl">library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+
+entity ling is
+	port(
+		enable, clk1, clk2: in std_logic;
+		clk_out : out std_logic
+	);
+end entity;
+
+architecture rtl of ling is
+	signal flag: std_logic;
+begin
+	process(clk2, flag)
+	begin
+		if flag = '1' then
+			clk_out &lt;= clk2;
+		end if;
+	end process;
+	
+	process(clk1,enable, clk2)
+		variable num: integer range 0 to 2000;
+	begin	
+		if enable = '0' then
+			flag &lt;= '1';
+			num := 0;
+        
+		elsif clk1'event and clk1 = '1' then
+			if flag = '1' then
+				if num &gt;= 2 then
+					flag &lt;= '0';
+				else
+					num := num + 1;
+				end if;
+			end if;
+		end if;
+	end process;
+end architecture rtl;
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Wanakiki </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://wanakiki.github.io/2020/vhdl-miaobiao/>https://wanakiki.github.io/2020/vhdl-miaobiao/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://wanakiki.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://wanakiki.github.io/2019/use-github/" class="prev" rel="prev" title="Git 及 Github 上手"><i class="iconfont icon-left"></i>&nbsp;Git 及 Github 上手</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://wanakiki.github.io">Wanakiki</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>
