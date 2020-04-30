@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Wanakiki">
+  
+  
+  
+  <link rel="prev" href="https://wanakiki.github.io/2020/special-dictionary/" />
+  
+  <link rel="canonical" href="https://wanakiki.github.io/2020/xor/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           用异或找到数组中不重复出现的数字 | Wanakiki`s Blog
+       
+  </title>
+  <meta name="title" content="用异或找到数组中不重复出现的数字 | Wanakiki`s Blog">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/wanakiki.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "用异或找到数组中不重复出现的数字",
+    "headline" : "用异或找到数组中不重复出现的数字",
+    "description" : "找一个数很简单，但找两个数呢？ 最近做leetcode上面的题目的时候，遇到了一个面试题，需要找到数组中两个只出现过一次的数（其余数均出现过两",
+    "inLanguage" : "zh-cn",
+    "author" : "Wanakiki",
+    "creator" : "Wanakiki",
+    "publisher": "Wanakiki",
+    "accountablePerson" : "Wanakiki",
+    "copyrightHolder" : "Wanakiki",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-04-30 10:51:11 \x2b0800 CST",
+    "dateModified" : "2020-04-30 10:51:11 \x2b0800 CST",
+    "url" : "https:\/\/wanakiki.github.io\/2020\/xor\/",
+    "wordCount" : "828",
+    "keywords" : [ "算法", "Wanakiki`s Blog"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://wanakiki.github.io">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://wanakiki.github.io">Wanakiki`s Blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">用异或找到数组中不重复出现的数字</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://wanakiki.github.io" rel="author">Wanakiki</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2020-04-30 itemprop="datePublished">April 30, 2020</time>
+                </span>
+                in
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>找一个数很简单，但找两个数呢？</p>
+
+<!-- more -->
+
+<p>最近做leetcode上面的题目的时候，遇到了一个<a href="https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/" rel="nofollow noreferrer" target="_blank">面试题</a>，需要找到数组中两个只出现过一次的数（其余数均出现过两次），感觉很有意思，简单记录一下。</p>
+
+<h2 id="基本知识">基本知识</h2>
+
+<p>异或（<code>xor</code>）是一种非常常见的位运算，其计算特点是“相同为0，不同为1”，计算符号是⊕，有时也用<code>a^b</code>表示。一般使用异或时会用到下面的规律：</p>
+
+<ol>
+<li>任何数和本身的异或为0</li>
+<li>任何数与0的异或结果是自身</li>
+<li>异或满足交换律，<code>a^b^c = c^b^a</code></li>
+</ol>
+
+<p>有了这些基本概念之后就能尝试去解决这个题目了。</p>
+
+<h2 id="求解思路">求解思路</h2>
+
+<p>关于如何用异或查找到数组中唯一出现的数字（其他数字均出现过两次），有一个很简单的解法：设置初始值为0，然后将这个值与数组中的所有数进行异或运算，最终的结果就是唯一出现的数字。</p>
+
+<p>看到这个题目，最开始想到的做法是亦或，但仔细考虑之后发现由于有两个数字都只出现了一次，所以对整个数组进行异或的最终结果是两个只出现过一次的数的异或。很明显这样不能解决问题，但如果能够把整个数组划分为两组，确保两个只出现过一次的数不在同一组内，并且相同的数一定在同一组当中这一条件，对两组内容各进行一次异或便能得到最终的结果。</p>
+
+<p>但是怎么划分呢？这里有一个很巧妙的做法，由于不相等的两个数进行异或之后一定有一位的值为1，可以通过这点将所有数据划分为两组：对整个数组的数据进行判断，将该位为0的数据分到一组，该位为1的数据分到一组。这样便能满足相同的数都会被分在一组当中，两个只出现过一次的数也会被分到不同的两组当中。</p>
+
+<p>在代码实现的过程中，并不需要显式的分组，只要对指定位进行判断，分别与两个不同的数进行异或即可。另外找到二进制中为1的某一位可以通过将1逐步左移的方式实现。</p>
+
+<pre><code class="language-cpp">class Solution {
+public:
+    vector&lt;int&gt; singleNumbers(vector&lt;int&gt;&amp; nums) {
+        int tmp = 0;
+        for(int i = 0; i &lt; nums.size(); i++){
+            tmp ^= nums[i];
+        }
+
+        // 找到值为1的二进制位
+        int index = 1;
+        while(!(tmp&amp;index)){
+            index &lt;&lt;= 1;
+        }
+
+        int num1 = 0, num2 = 0;
+        for(int i = 0; i &lt; nums.size(); i++){
+            if(nums[i] &amp; index){
+                num1 ^= nums[i];
+            }
+            else{
+                num2 ^= nums[i];
+            }
+        }
+        return vector&lt;int&gt;{num1, num2};
+    }
+};
+</code></pre>
+
+<h2 id="其他">其他</h2>
+
+<p>在这个题目的题解区看到了别人总结的力扣位运算题目：136、137、260、645，感兴趣可以深入了解一下。</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Wanakiki </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://wanakiki.github.io/2020/xor/>https://wanakiki.github.io/2020/xor/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://wanakiki.github.io/tags/%E7%AE%97%E6%B3%95/">
+                    #算法</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://wanakiki.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://wanakiki.github.io/2020/special-dictionary/" class="prev" rel="prev" title="Flutter 词典APP"><i class="iconfont icon-left"></i>&nbsp;Flutter 词典APP</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://wanakiki.github.io">Wanakiki</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

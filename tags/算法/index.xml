@@ -6,10 +6,19 @@
     <description>Recent content in 算法 on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 20 Apr 2019 14:36:43 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 30 Apr 2020 10:51:11 +0800</lastBuildDate>
     
 	<atom:link href="https://wanakiki.github.io/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>用异或找到数组中不重复出现的数字</title>
+      <link>https://wanakiki.github.io/2020/xor/</link>
+      <pubDate>Thu, 30 Apr 2020 10:51:11 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2020/xor/</guid>
+      <description>找一个数很简单，但找两个数呢？ 最近做leetcode上面的题目的时候，遇到了一个面试题，需要找到数组中两个只出现过一次的数（其余数均出现过两</description>
+    </item>
     
     <item>
       <title>括号匹配</title>
