@@ -5,8 +5,254 @@
     <description>Recent content in Wanakiki`s Blog on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 02 May 2020 14:38:46 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 18 May 2020 20:44:50 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>百度翻译爬虫</title>
+      <link>https://wanakiki.github.io/2020/baidufanyi/</link>
+      <pubDate>Mon, 18 May 2020 20:44:50 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2020/baidufanyi/</guid>
+      <description>
+
+&lt;p&gt;典型的js加密爬虫实战，本文章内容仅作学习交流。&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;p&gt;首先放一下参考文章：&lt;a href=&#34;https://zhuanlan.zhihu.com/p/76239929&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;爬虫JS破解经典案例之百度翻译&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;如果没有这篇文章的话，我可能要花很多功夫才能找到具体的js代码位置。&lt;/p&gt;
+
+&lt;h2 id=&#34;页面加载分析&#34;&gt;页面加载分析&lt;/h2&gt;
+
+&lt;h3 id=&#34;初步探索&#34;&gt;初步探索&lt;/h3&gt;
+
+&lt;p&gt;打开&lt;a href=&#34;https://fanyi.baidu.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;百度翻译&lt;/a&gt;，然后右键、检查、network，刷新页面即可看到网页的加载过程。具体的图示可以在之前的&lt;a href=&#34;../leetcode-spider&#34;&gt;leetcode爬虫&lt;/a&gt;中找到。&lt;/p&gt;
+
+&lt;p&gt;在输入任意查询内容点击翻译后，在&lt;code&gt;XHR&lt;/code&gt;项中可以看到&lt;code&gt;langdetect&lt;/code&gt;、&lt;code&gt;v2transapi?form &amp;amp; to&lt;/code&gt;两个请求。检查内容不难发现，前者的作用是语言检查， 后者才是真正的翻译。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;from: en
+to: zh
+query: hello everyone
+transtype: translang
+simple_means_flag: 3
+sign: 58244.262325
+token: 440bdb196410660e636b3223ebb83a94
+domain: common
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面是我以&amp;rdquo;hello everyone&amp;rdquo;作为待翻译文本发起请求的表单内容，&lt;code&gt;from&lt;/code&gt;、&lt;code&gt;to&lt;/code&gt;、&lt;code&gt;query&lt;/code&gt;这三项意义很明确，其余项无法直接判断出具体的作用。&lt;/p&gt;
+
+&lt;h3 id=&#34;深入挖掘&#34;&gt;深入挖掘&lt;/h3&gt;
+
+&lt;p&gt;多输入几组数据，可以发现&lt;code&gt;sign&lt;/code&gt;会随着&lt;code&gt;query&lt;/code&gt;的值发生变化，而&lt;code&gt;token&lt;/code&gt;项却不会发生改变。&lt;/p&gt;
+
+&lt;p&gt;这里我参考了别人的方式，搜索&amp;rdquo;sign:&amp;ldquo;很快找到了这个请求的发起代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;h={from:p.fromLang,to:p.toLang,query:n,transtype:r,simple_means_flag:3,sign:y(n),token:window.common.token,domain:w.getCurDomain()}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;另外这里的&lt;code&gt;token&lt;/code&gt;也可以通过搜索&amp;rdquo;window[&amp;lsquo;common&amp;rsquo;]&amp;ldquo;找到，发现他其实位于html代码中，是一个固定的值，可以直接用正则表达式解析html代码获取。所以现在需要解决的问题就是&lt;code&gt;sign&lt;/code&gt;的产生。&lt;/p&gt;
+
+&lt;h2 id=&#34;js破解&#34;&gt;JS破解&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;sign&lt;/code&gt;通过y函数产生，另外通过观察可以发现y函数的传参实际上是待查询的内容，所以只要找到y函数，理论上我们可以获得任意输入的&lt;code&gt;sign&lt;/code&gt;值。那么怎么才能找到y函数呢？第一个想法当然是继续搜索，但实际上一搜索就会发现，因为特征太少无法确定具体是哪一个搜索结果。这里需要使用一个很关键的技术：&lt;code&gt;JS调试&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h3 id=&#34;js调试&#34;&gt;JS调试&lt;/h3&gt;
+
+&lt;p&gt;先说一下调试的具体步骤，如果没有相关基础的话直接上手还是会有点问题的。&lt;/p&gt;
+
+&lt;p&gt;首先找到代码所在行，对于复杂网页，一行内可能有多条语句，这时候如果直接点击想要调试的函数的话，实际上不会添加断点。正确的操作应该是像Python代码那样，先点击这一行的最左侧的行号，点击行号之后在把鼠标移动到想要调试的函数上，这时候会发现函数可以被点击，点击函数名便能添加断点。（当然也可以直接点击代码框左下角的花括号，直接把代码格式化，我当时找了很久没找到😣）&lt;/p&gt;
+
+&lt;p&gt;在添加完断点之后，继续输入内容，点击翻译，可以发现网站停止加载，并且返回调试界面可以看到变量名及其对应的值，将鼠标放到函数名上可以跳转到函数的具体位置，这样就能找到y函数的真正位置了。其具体内容如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function e(r) {
+    var o = r.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g);
+    if (null === o) {
+        var t = r.length;
+        t &amp;gt; 30 &amp;amp;&amp;amp; (r = &amp;quot;&amp;quot; + r.substr(0, 10) + r.substr(Math.floor(t / 2) - 5, 10) + r.substr(-10, 10))
+    } else {
+        for (var e = r.split(/[\uD800-\uDBFF][\uDC00-\uDFFF]/), C = 0, h = e.length, f = []; h &amp;gt; C; C++)&amp;quot;&amp;quot; !== e[C] &amp;amp;&amp;amp; f.push.apply(f, a(e[C].split(&amp;quot;&amp;quot;))), C !== h - 1 &amp;amp;&amp;amp; f.push(o[C]);
+        var g = f.length; g &amp;gt; 30 &amp;amp;&amp;amp; (r = f.slice(0, 10).join(&amp;quot;&amp;quot;) + f.slice(Math.floor(g / 2) - 5, Math.floor(g / 2) + 5).join(&amp;quot;&amp;quot;) + f.slice(-10).join(&amp;quot;&amp;quot;))
+    }
+    var i = null;   // 直接执行会提示i没有定义 所以加了一行
+    var u = void 0, l = &amp;quot;&amp;quot; + String.fromCharCode(103) + String.fromCharCode(116) + String.fromCharCode(107); 
+    u = null !== i ? i : (i = window[l] || &amp;quot;&amp;quot;) || &amp;quot;&amp;quot;;
+    for (var d = u.split(&amp;quot;.&amp;quot;), m = Number(d[0]) || 0, s = Number(d[1]) || 0, S = [], c = 0, v = 0; v &amp;lt; r.length; v++) {
+        var A = r.charCodeAt(v); 128 &amp;gt; A ? S[c++] = A : (2048 &amp;gt; A ? S[c++] = A &amp;gt;&amp;gt; 6 | 192 : (55296 === (64512 &amp;amp; A) &amp;amp;&amp;amp; v + 1 &amp;lt; r.length &amp;amp;&amp;amp; 56320 === (64512 &amp;amp; r.charCodeAt(v + 1)) ? (A = 65536 + ((1023 &amp;amp; A) &amp;lt;&amp;lt; 10) + (1023 &amp;amp; r.charCodeAt(++v)), S[c++] = A &amp;gt;&amp;gt; 18 | 240, S[c++] = A &amp;gt;&amp;gt; 12 &amp;amp; 63 | 128) : S[c++] = A &amp;gt;&amp;gt; 12 | 224, S[c++] = A &amp;gt;&amp;gt; 6 &amp;amp; 63 | 128), S[c++] = 63 &amp;amp; A | 128)
+    } for (var p = m, F = &amp;quot;&amp;quot; + String.fromCharCode(43) + String.fromCharCode(45) + String.fromCharCode(97) + (&amp;quot;&amp;quot; + String.fromCharCode(94) + String.fromCharCode(43) + String.fromCharCode(54)), D = &amp;quot;&amp;quot; + String.fromCharCode(43) + String.fromCharCode(45) + String.fromCharCode(51) + (&amp;quot;&amp;quot; + String.fromCharCode(94) + String.fromCharCode(43) + String.fromCharCode(98)) + (&amp;quot;&amp;quot; + String.fromCharCode(43) + String.fromCharCode(45) + String.fromCharCode(102)), b = 0; b &amp;lt; S.length; b++)p += S[b], p = n(p, F);
+    return p = n(p, D), p ^= s, 0 &amp;gt; p &amp;amp;&amp;amp; (p = (2147483647 &amp;amp; p) + 2147483648), p %= 1e6, p.toString() + &amp;quot;.&amp;quot; + (p ^ m)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可以看到这段代码还是比较复杂的，如果懂js的话，可以稍微解读一下，因为这段代码还没有混淆到完全没办法看的程度（把所有的字符都用括号或者下划线之类的替代）。&lt;/p&gt;
+
+&lt;p&gt;这里讲三个后续执行代码的时候才会发现的点：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;代码使用了全局的&lt;code&gt;window&lt;/code&gt;变量，js函数当中未作定义，通过调试可以发现实际上是为了获取该变量的&lt;code&gt;gtk&lt;/code&gt;值，该值也是写在html当中的，可以直接正则获得，获得之后对js代码进行稍微修改即可。&lt;/li&gt;
+&lt;li&gt;i变量未定义，没有找到i变量的具体位置，但是查看之后其没有很突出的作用，于是自己加了一条语句，对i变量进行了定义。&lt;/li&gt;
+&lt;li&gt;函数内部调用了另外的函数n😑，具体的调用可以在函数的return位置，如果不仔细看过，第一遍是不会发现这个点的。找到n的方法也很简单，直接打断点就好了，这里不做详细解释。n的代码会在最后给出。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;python执行js代码&#34;&gt;Python执行JS代码&lt;/h3&gt;
+
+&lt;p&gt;前面我们已经获得了&lt;code&gt;sign&lt;/code&gt;生成函数的具体代码，但是我们的爬虫语言是Python，如果把js代码翻译成Python就太麻烦了，还好有已经封装好的第三方库可以执行。&lt;/p&gt;
+
+&lt;p&gt;能够实现上述功能的第三方库有很多，我这里使用了&lt;code&gt;pyexecjs&lt;/code&gt;，需要注意该模块需要安装node.js配合使用。假设我们已经把生成函数放在了fanyi.js当中，可以通过下面的方式进行调用：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import execjs
+
+query = &amp;quot;待翻译语句&amp;quot;
+fh = open(&#39;fanyi.js&#39;, &#39;r&#39;)
+fun = execjs.compile(fh.read())
+print(fun.call(&#39;e&#39;, query))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;代码实现&#34;&gt;代码实现&lt;/h2&gt;
+
+&lt;p&gt;在做完前面的准备工作之后，便能开始具体的代码书写，整体思路如下：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;请求百度翻译首页&lt;/li&gt;
+&lt;li&gt;解析html获得&lt;code&gt;token&lt;/code&gt;、&lt;code&gt;gtk&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;用得到的&lt;code&gt;gkt&lt;/code&gt;替换js代码中的对应内容&lt;/li&gt;
+&lt;li&gt;编译js代码并执行，获得&lt;code&gt;sign&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;请求具体的语言检测、翻译网址，得到结果&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;在实现爬虫时，我又对查询请求做了进一步分析，发现在提交的众多cookie当中，最关键的是&lt;code&gt;BAIDUID&lt;/code&gt;这一项，而访问百度翻译首页刚好可以获得这个cookie。&lt;/p&gt;
+
+&lt;p&gt;这样便能直接用一个session，先访问百度翻译首页，获得cookie的同时解析html得到&lt;code&gt;token&lt;/code&gt;和&lt;code&gt;gtk&lt;/code&gt;，进行下一步的操作。到这里代码已经很清晰了，但是写完之后却发现不能成功执行，服务端报错998😭&lt;/p&gt;
+
+&lt;p&gt;看到错误之后以为是js代码出了问题，调整了很久，但是最后还是不行，于是又求助了百度，在&lt;a href=&#34;https://www.cnblogs.com/jason-Gan/p/10567018.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;这里&lt;/a&gt;找到了一个解决办法，先访问一下百度首页，带着百度首页的cookie访问百度翻译，这样就不会报错。&lt;/p&gt;
+
+&lt;p&gt;具体的原理我到现在还不清楚，我之前进行测试的时候，如果不先访问百度首页的话，访问百度翻译解析出来的&lt;code&gt;token&lt;/code&gt;是一个一成不变的值，我起初认为是js代码有错误，就一直进行了测试，半个多小时&lt;code&gt;token&lt;/code&gt;的值都没有变化。&lt;code&gt;token&lt;/code&gt;是在html当中写死的，有问题只能出在服务端上，所以我认为先访问百度首页的目的就是在访问百度翻译的时候带着一个cookie，让服务器返回html的时候生成正确的&lt;code&gt;token&lt;/code&gt;。至于具体是不是这个原因，等学的更多了才知道。&lt;/p&gt;
+
+&lt;p&gt;下面是我的代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import re
+import requests
+import execjs
+import json
+
+
+js_content = r&amp;quot;&amp;quot;&amp;quot;function e(r) {
+    var o = r.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g);
+    if (null === o) {
+        var t = r.length;
+        t &amp;gt; 30 &amp;amp;&amp;amp; (r = &amp;quot;&amp;quot; + r.substr(0, 10) + r.substr(Math.floor(t / 2) - 5, 10) + r.substr(-10, 10))
+    } else {
+        for (var e = r.split(/[\uD800-\uDBFF][\uDC00-\uDFFF]/), C = 0, h = e.length, f = []; h &amp;gt; C; C++)&amp;quot;&amp;quot; !== e[C] &amp;amp;&amp;amp; f.push.apply(f, a(e[C].split(&amp;quot;&amp;quot;))), C !== h - 1 &amp;amp;&amp;amp; f.push(o[C]);
+        var g = f.length; g &amp;gt; 30 &amp;amp;&amp;amp; (r = f.slice(0, 10).join(&amp;quot;&amp;quot;) + f.slice(Math.floor(g / 2) - 5, Math.floor(g / 2) + 5).join(&amp;quot;&amp;quot;) + f.slice(-10).join(&amp;quot;&amp;quot;))
+    }
+    var i = null 
+    var u = void 0, l = &amp;quot;&amp;quot; + String.fromCharCode(103) + String.fromCharCode(116) + String.fromCharCode(107); 
+    u = null !== i ? i : (i = window[l] || &amp;quot;&amp;quot;) || &amp;quot;&amp;quot;;
+    for (var d = u.split(&amp;quot;.&amp;quot;), m = Number(d[0]) || 0, s = Number(d[1]) || 0, S = [], c = 0, v = 0; v &amp;lt; r.length; v++) {
+        var A = r.charCodeAt(v); 128 &amp;gt; A ? S[c++] = A : (2048 &amp;gt; A ? S[c++] = A &amp;gt;&amp;gt; 6 | 192 : (55296 === (64512 &amp;amp; A) &amp;amp;&amp;amp; v + 1 &amp;lt; r.length &amp;amp;&amp;amp; 56320 === (64512 &amp;amp; r.charCodeAt(v + 1)) ? (A = 65536 + ((1023 &amp;amp; A) &amp;lt;&amp;lt; 10) + (1023 &amp;amp; r.charCodeAt(++v)), S[c++] = A &amp;gt;&amp;gt; 18 | 240, S[c++] = A &amp;gt;&amp;gt; 12 &amp;amp; 63 | 128) : S[c++] = A &amp;gt;&amp;gt; 12 | 224, S[c++] = A &amp;gt;&amp;gt; 6 &amp;amp; 63 | 128), S[c++] = 63 &amp;amp; A | 128)
+    } for (var p = m, F = &amp;quot;&amp;quot; + String.fromCharCode(43) + String.fromCharCode(45) + String.fromCharCode(97) + (&amp;quot;&amp;quot; + String.fromCharCode(94) + String.fromCharCode(43) + String.fromCharCode(54)), D = &amp;quot;&amp;quot; + String.fromCharCode(43) + String.fromCharCode(45) + String.fromCharCode(51) + (&amp;quot;&amp;quot; + String.fromCharCode(94) + String.fromCharCode(43) + String.fromCharCode(98)) + (&amp;quot;&amp;quot; + String.fromCharCode(43) + String.fromCharCode(45) + String.fromCharCode(102)), b = 0; b &amp;lt; S.length; b++)p += S[b], p = n(p, F);
+    return p = n(p, D), p ^= s, 0 &amp;gt; p &amp;amp;&amp;amp; (p = (2147483647 &amp;amp; p) + 2147483648), p %= 1e6, p.toString() + &amp;quot;.&amp;quot; + (p ^ m)
+}
+
+function n(r, o) {
+    for (var t = 0; t &amp;lt; o.length - 2; t += 3) {
+        var a = o.charAt(t + 2); a = a &amp;gt;= &amp;quot;a&amp;quot; ? a.charCodeAt(0) - 87 : Number(a), a = &amp;quot;+&amp;quot; === o.charAt(t + 1) ? r &amp;gt;&amp;gt;&amp;gt; a : r &amp;lt;&amp;lt; a, r = &amp;quot;+&amp;quot; === o.charAt(t) ? r + a &amp;amp; 4294967295 : r ^ a
+    } return r
+}
+&amp;quot;&amp;quot;&amp;quot;
+
+
+class TransMachine():
+    def __init__(self):
+        self.session = requests.session()
+
+    def get_token_and_gtk(self):
+        user_agent = &amp;quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4133.0 Safari/537.36 Edg/84.0.508.0&amp;quot;
+        headers = {
+            &#39;User-Agent&#39;: user_agent
+        }
+        res = self.session.get(&amp;quot;https://www.baidu.com/&amp;quot;, headers=headers)     # 神也不知道为什么访问百度首页就能避免998
+        print(res.cookies)
+        url = &#39;https://fanyi.baidu.com/&#39;
+        res = self.session.get(url, headers=headers)
+        print(res.cookies)
+        res = res.text
+        # fh = open(&#39;res.html&#39;, &#39;wb&#39;)
+        # fh.write(res.encode())
+        # fh.close()
+
+        token = re.findall(&amp;quot;token: &#39;(.*?)&#39;&amp;quot;, res)[0]
+        gtk = re.findall(&amp;quot;.gtk = &#39;(.*?)&#39;&amp;quot;, res)[0]
+
+        return token, gtk
+
+
+    def get_trans(self, words, token, sign):
+        check_res = self.session.post(
+            &amp;quot;https://fanyi.baidu.com/langdetect&amp;quot;, data={&#39;query&#39;: words})
+        check_json = json.loads(check_res.text)
+        lan = check_json[&#39;lan&#39;]
+
+        if lan == &#39;zh&#39;:
+            lan_from = &#39;zh&#39;
+            lan_to = &#39;en&#39;
+        elif lan == &#39;en&#39;:
+            lan_from = &#39;en&#39;
+            lan_to = &#39;zh&#39;
+        else:
+            return &#39;语言检测错误&#39;
+
+        url = &#39;https://fanyi.baidu.com/v2transapi&#39;
+        form_data = {
+            &#39;from&#39;: lan_from,
+            &#39;to&#39;: lan_to,
+            &#39;query&#39;: words,
+            &#39;transtype&#39;: &#39;realtime&#39;,
+            &#39;simple_means_flag&#39;: 3,
+            &#39;sign&#39;: sign,
+            &#39;token&#39;: token,
+            &#39;domain&#39;: &#39;common&#39;
+        }
+
+        user_agent = &amp;quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4133.0 Safari/537.36 Edg/84.0.508.0&amp;quot;
+        headers = {
+            &#39;User-Agent&#39;: user_agent,
+            &#39;origin&#39;: &#39;https://fanyi.baidu.com&#39;,
+            &#39;referer&#39;: &#39;https://fanyi.baidu.com/&#39;
+        }
+
+        res = self.session.post(url, data=form_data, headers=headers).content.decode()
+        res_json = json.loads(res)
+        res = res_json[&#39;trans_result&#39;][&#39;data&#39;][0][&#39;dst&#39;]
+        return &#39;翻译结果：&#39; + res
+
+
+if __name__ == &#39;__main__&#39;:
+    TM = TransMachine()
+    token, gtk = TM.get_token_and_gtk()
+    print(&#39;token:&#39;, token, &#39;gtk:&#39;, gtk)
+
+    # 方括号需要加\
+    js_content = re.sub(r&amp;quot;window\[l\]&amp;quot;, &#39;&amp;quot;&#39; + gtk + &#39;&amp;quot;&#39;, js_content)
+    fh = open(&#39;res.js&#39;, &#39;w&#39;)
+    fh.write(js_content)
+    fh.close()
+    fun = execjs.compile(js_content)
+
+    while True:
+        print(&#39;=========================================&#39;)
+        words = input(&#39;输入要翻译的内容（中文或英文，输入空白退出）:&#39;)
+        if words == &amp;quot;&amp;quot;:
+            break
+        sign = fun.call(&#39;e&#39;, words)
+        print(TM.get_trans( words, token, sign))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面为了cookie花了超级久的功夫，但实际上，可以直接手动访问一次，把cookie复制到代码里面，看到这个做法之后人直接傻了🙃&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>爬虫获取力扣题目信息并转为Markdown</title>
@@ -3123,117 +3369,6 @@ int main(){
 &lt;p&gt;最后的比赛冠军是烟台大学，山东大学占了二三名🤔&lt;/p&gt;
 
 &lt;p&gt;最后来的时候刮起了大风，一上车就开始下雨了，去上车的路上沙子眯眼了好几次😒，这感觉，的确挺亲切的&amp;hellip;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>函数对象和函数指针</title>
-      <link>https://wanakiki.github.io/2019/funs/</link>
-      <pubDate>Wed, 08 May 2019 21:21:26 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/funs/</guid>
-      <description>
-
-&lt;p&gt;简单复习一下函数对象和函数指针。
-&lt;!-- more --&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;函数指针&#34;&gt;函数指针&lt;/h2&gt;
-
-&lt;p&gt;函数指针，简单点来理解就是一个指向函数的的指针变量，函数指针所指的是一个函数的入口地址。&lt;/p&gt;
-
-&lt;p&gt;函数指针主要有两个作用：用来调用函数和作为函数的参数。&lt;/p&gt;
-
-&lt;h3 id=&#34;函数指针的声明方法及赋值&#34;&gt;函数指针的声明方法及赋值&lt;/h3&gt;
-
-&lt;p&gt;声明方式： 数据类型标识符 (指针变量名) (形参列表)&lt;br /&gt;
-例如： &lt;code&gt;int (*fun) (int x);&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;其中需要注意一点，指针变量名一定要用括号括起来，因为如果不加括号，我们的编译器就会默认其为返回值为指针的一个函数。&lt;/p&gt;
-
-&lt;p&gt;为了方便我们的使用，我们可以用typedef进行声明。之后定义函数指针就会方便许多。例如：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;typedef int(*PF) (int x);
-PF pf;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;对一个函数指针赋值我们不需要使用取地址符，因为一个函数的函数名就是该函数的入口指针，我们可以直接对函数指针赋值。&lt;/p&gt;
-
-&lt;p&gt;另外，我认为定义（或者说声明）函数指针时就只是相当于声明一个函数，所以函数指针定义时形参的变量名可以省略，&lt;br /&gt;
-即 &lt;code&gt;int (*fun) (int x);&lt;/code&gt; 和 &lt;code&gt;int (*fun) (int);&lt;/code&gt; 效果是一样的。&lt;/p&gt;
-
-&lt;h3 id=&#34;调用方法及测试&#34;&gt;调用方法及测试&lt;/h3&gt;
-
-&lt;p&gt;用函数指针调用函数时有两种调用方式：&lt;code&gt;fun(x)&lt;/code&gt; 和 &lt;code&gt;(*fun)(x)&lt;/code&gt;。&lt;br /&gt;
-而函数指针作为函数参数时，只需要在函数定义时将其写在函数的形参中，函数内部可以直接使用函数指针指向的函数。&lt;/p&gt;
-
-&lt;p&gt;测试程序：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include &amp;lt;iostream&amp;gt;
-using namespace std;
-
-typedef void (*PF) (int);
-
-void visit(int x){
-    cout &amp;lt;&amp;lt; x &amp;lt;&amp;lt; endl;
-}
-
-void visit_usePf(int x, void (*pf)(int)){
-    pf(x);
-}
-
-int main(){
-    PF pf1;
-    void (*pf2) (int);
-    void (*pf3) (int x);
-
-    //typedef 声明测试
-    pf1 = visit;
-    pf1(1);
-    (*pf1)(2);
-
-    //第一种定义测试
-    pf2 = visit;
-    pf2(3);
-    visit_usePf(4, pf2);
-
-    //第二种定义测试
-    pf3 = visit;
-    pf3(5);
-    visit_usePf(6, pf3);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;函数对象&#34;&gt;函数对象&lt;/h2&gt;
-
-&lt;p&gt;在C++中，实现了&lt;code&gt;operator()&lt;/code&gt;的类或者结构体，都可被称为函数对象并进行直接调用。在学习数据结构时图的优先级遍历所使用的优先级更新器便是一个函数对象。sort函数所需要的比较器也是一个函数对象。&lt;/p&gt;
-
-&lt;p&gt;示例：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include &amp;lt;iostream&amp;gt;
-using namespace std;
-
-class funA{
-    public:
-    void operator()(){
-        cout &amp;lt;&amp;lt; &amp;quot;Function Object&amp;quot; &amp;lt;&amp;lt; endl;
-    }
-};
-
-class funB{
-    public:
-    //函数输出两个数的和
-    int operator()(int a, int b){
-        return a + b;
-    }
-};
-
-int main(){
-    funA hello;
-    funB sum;
-    hello();
-    cout &amp;lt;&amp;lt; sum(1, 2) &amp;lt;&amp;lt; endl;
-}
-&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

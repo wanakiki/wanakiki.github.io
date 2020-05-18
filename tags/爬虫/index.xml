@@ -6,10 +6,19 @@
     <description>Recent content in 爬虫 on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 02 May 2020 14:38:46 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 18 May 2020 20:44:50 +0800</lastBuildDate>
     
 	<atom:link href="https://wanakiki.github.io/tags/%E7%88%AC%E8%99%AB/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>百度翻译爬虫</title>
+      <link>https://wanakiki.github.io/2020/baidufanyi/</link>
+      <pubDate>Mon, 18 May 2020 20:44:50 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2020/baidufanyi/</guid>
+      <description>典型的js加密爬虫实战，本文章内容仅作学习交流。 首先放一下参考文章：爬虫JS破解经典案例之百度翻译 如果没有这篇文章的话，我可能要花很多功夫才</description>
+    </item>
     
     <item>
       <title>爬虫获取力扣题目信息并转为Markdown</title>
