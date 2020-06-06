@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Wanakiki">
+  
+  
+  
+  <link rel="prev" href="https://wanakiki.github.io/2020/baidufanyi/" />
+  <link rel="next" href="https://wanakiki.github.io/2020/linux-c/" />
+  <link rel="canonical" href="https://wanakiki.github.io/2020/mongodb-demo/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Flask&#43;MongoDB CURD微实战 | Wanakiki`s Blog
+       
+  </title>
+  <meta name="title" content="Flask&#43;MongoDB CURD微实战 | Wanakiki`s Blog">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/wanakiki.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "Flask\x2bMongoDB CURD微实战",
+    "headline" : "Flask\x2bMongoDB CURD微实战",
+    "description" : "做SRDP的过程中发现关系型数据库在实现问卷效果时比较困难，所以找了个时间熟悉了一下非关系型数据库，做了一个todo小demo。 视频演示地址",
+    "inLanguage" : "zh-cn",
+    "author" : "Wanakiki",
+    "creator" : "Wanakiki",
+    "publisher": "Wanakiki",
+    "accountablePerson" : "Wanakiki",
+    "copyrightHolder" : "Wanakiki",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-05-30 11:07:16 \x2b0800 CST",
+    "dateModified" : "2020-05-30 11:07:16 \x2b0800 CST",
+    "url" : "https:\/\/wanakiki.github.io\/2020\/mongodb-demo\/",
+    "wordCount" : "841",
+    "keywords" : [ "flask","mongodb","数据库", "Wanakiki`s Blog"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://wanakiki.github.io">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://wanakiki.github.io">Wanakiki`s Blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Flask&#43;MongoDB CURD微实战</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://wanakiki.github.io" rel="author">Wanakiki</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2020-05-30 itemprop="datePublished">May 30, 2020</time>
+                </span>
+                in
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>做SRDP的过程中发现关系型数据库在实现问卷效果时比较困难，所以找了个时间熟悉了一下非关系型数据库，做了一个todo小demo。</p>
+
+<!-- more -->
+
+<p><a href="https://www.bilibili.com/video/BV1654y1D7jN/" rel="nofollow noreferrer" target="_blank">视频演示地址</a></p>
+
+<h2 id="过程记录">过程记录</h2>
+
+<p>下载安装<a href="https://www.mongodb.com/download-center/community" rel="nofollow noreferrer" target="_blank">mongodb</a>，注意安装的时候不要勾选compass，我勾选之后直接卡住了。</p>
+
+<p>安装Flask相关扩展：<code>pip install Flask-PyMongo</code>。</p>
+
+<p><code>Flask-PyMongo</code>是在<code>PyMongo</code>基础上进行的封装，令其满足扩展的习惯性使用方式，具体操作需要查看<code>PyMongo</code>中的相关内容。两个扩展的文档：<a href="http://www.pythondoc.com/flask-pymongo/index.html" rel="nofollow noreferrer" target="_blank">Flask-PyMongo</a>、<a href="https://pymongo.readthedocs.io/en/stable/tutorial.html" rel="nofollow noreferrer" target="_blank">PyMongo</a>。</p>
+
+<p>过程中参考的两个博客：</p>
+
+<ol>
+<li><a href="http://www.bjhee.com/flask-ext5.html" rel="nofollow noreferrer" target="_blank">http://www.bjhee.com/flask-ext5.html</a></li>
+<li><a href="https://towait.com/blog/flask-mongodb-crud/" rel="nofollow noreferrer" target="_blank">https://towait.com/blog/flask-mongodb-crud/</a></li>
+</ol>
+
+<p>过程中需要注意mongodb使用$配合其它关键字实现不同更新数据方式的方法。实现代码如下：</p>
+
+<pre><code class="language-python">from flask import Flask, render_template, abort, redirect, url_for, request
+from flask_bootstrap import Bootstrap
+from flask_pymongo import PyMongo
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
+from bson.objectid import ObjectId
+
+from time import time
+
+app = Flask(__name__)
+# app配置
+
+app.config['MONGO_DBNAME'] = 'flask'  # 数据库名
+app.config['MONGO_URI'] = 'mongodb://localhost:27017/flask'
+# 暂时不涉及用户名与密码
+app.config['SECRET_KEY'] = 'balabala'  # wtf
+
+mongo = PyMongo(app)
+bootstrap = Bootstrap(app)
+
+
+# 表单
+class ContentForm(FlaskForm):
+    content = StringField('Content', validators=[DataRequired()])
+    submit = SubmitField('提交')
+
+class DeleteForm(FlaskForm):
+    submit = SubmitField('Delete')
+
+class FinishForm(FlaskForm):
+    submit = SubmitField('Finish')
+
+
+# 数据模型
+def create(content: str):
+    body = {
+        'content': content,
+        'time': time(),
+        'finished': False,
+        'finished_time': None
+    }
+    return body
+
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    form = ContentForm()
+    form_d = DeleteForm()
+    form_f = FinishForm()
+    if form.validate_on_submit():
+        cur = create(form.content.data)     # 不需要要定义数据模型
+        mongo.db.todos.insert_one(cur)
+    res = mongo.db.todos.find()
+    return render_template('index.html', records=res, form=form, form_d=form_d, form_f=form_f)
+
+
+@app.route('/delete/&lt;obj_id&gt;', methods=['POST'])
+def delete_record(obj_id):
+    form = DeleteForm()
+    if form.validate_on_submit():
+        mongo.db.todos.delete_one({'_id': ObjectId(obj_id)})
+    else:
+        abort(400)
+    return redirect(url_for('index'))
+
+
+@app.route('/finish/&lt;obj_id&gt;', methods=['POST'])
+def finish_record(obj_id):
+    form = FinishForm()
+    if form.validate_on_submit():
+        print('dd')
+        mongo.db.todos.update_one({'_id': ObjectId(obj_id)}, {
+            '$set': {
+                'finished': True,
+                'finished_time': time()
+            }
+        })
+    else:
+        abort(400)
+    return redirect(url_for('index'))
+
+@app.route('/search', methods=['GET'])
+def search_records():
+    content = request.args.get('content', None)
+
+    form = ContentForm()
+    form_d = DeleteForm()
+    form_f = FinishForm()
+    if content is not None:
+        res = mongo.db.todos.find(
+            {'content': {&quot;$regex&quot;: content}}
+        )
+    else:
+        res = mongo.db.todos.find()
+    return render_template('index.html', records=res, form=form, form_d=form_d, form_f=form_f)
+
+if __name__ == '__main__':
+    app.run()
+</code></pre>
+
+<p>页面模板文件：</p>
+
+<pre><code class="language-html">{% extends &quot;bootstrap/base.html&quot; %}
+
+{% block title %}To Do {% endblock %}
+
+{% block content %}
+    &lt;h2&gt;To Do List&lt;/h2&gt;
+    &lt;form method=&quot;get&quot; action=&quot;{{ url_for('search_records', content=content) }}&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;content&quot;&gt; &lt;input type=&quot;submit&quot; value=&quot;搜索&quot;&gt;
+    &lt;/form&gt;
+    &lt;br&gt;
+    &lt;form method=&quot;post&quot; action=&quot;{{ url_for('index')}}&quot;&gt;
+    {{ form.csrf_token }}
+    {{ form.content() }}
+    {{ form.submit() }}
+    &lt;/form&gt;
+    &lt;h3&gt;记录列表&lt;/h3&gt;
+    &lt;ul&gt;
+    {% for record in records %}
+    &lt;li&gt;
+    &lt;p&gt;内容：{{ record['content'] }}&lt;/p&gt;
+    &lt;p&gt;创建时间：{{ record['time'] }}&lt;/p&gt;
+    {% if record['finished'] %}
+        &lt;p&gt;状态：Finished&lt;/p&gt;
+        &lt;p&gt;完成时间 {{ record['finished_time'] }}&lt;/p&gt;
+    {% else %}
+        &lt;p&gt;状态：Unfinished&lt;/p&gt;
+    {% endif %}
+    {% set p = record['_id']~'' %}
+    &lt;form method=&quot;post&quot; style=&quot;float: left&quot; action=&quot;{{ url_for('delete_record', obj_id=p) }}&quot;&gt;
+        {{ form_d.csrf_token }}
+        {{ form_d.submit() }}
+    &lt;/form&gt;
+    &lt;form method=&quot;post&quot; action=&quot;{{ url_for('finish_record', obj_id=p) }}&quot;&gt;
+        {{ form_f.csrf_token }}
+        {{ form_f.submit() }}
+    &lt;/form&gt;
+    &lt;/li&gt;
+    {% endfor %}
+    &lt;/ul&gt;
+{% endblock %}
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Wanakiki </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://wanakiki.github.io/2020/mongodb-demo/>https://wanakiki.github.io/2020/mongodb-demo/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://wanakiki.github.io/tags/flask/">
+                    #flask</a></span>
+            
+            <span class="tag"><a href="https://wanakiki.github.io/tags/mongodb/">
+                    #mongodb</a></span>
+            
+            <span class="tag"><a href="https://wanakiki.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                    #数据库</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://wanakiki.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://wanakiki.github.io/2020/baidufanyi/" class="prev" rel="prev" title="百度翻译爬虫"><i class="iconfont icon-left"></i>&nbsp;百度翻译爬虫</a>
+         
+        
+        <a href="https://wanakiki.github.io/2020/linux-c/" class="next" rel="next" title="Linux C语言系统编程作业">Linux C语言系统编程作业&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://wanakiki.github.io">Wanakiki</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

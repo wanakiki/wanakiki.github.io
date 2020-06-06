@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>linux on Wanakiki`s Blog</title>
+    <link>https://wanakiki.github.io/tags/linux/</link>
+    <description>Recent content in linux on Wanakiki`s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 06 Jun 2020 23:06:09 +0800</lastBuildDate>
+    
+	<atom:link href="https://wanakiki.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux C语言系统编程作业</title>
+      <link>https://wanakiki.github.io/2020/linux-c/</link>
+      <pubDate>Sat, 06 Jun 2020 23:06:09 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2020/linux-c/</guid>
+      <description>跟着别人简单学了下Linux下的系统编程，把做过的几个作业简单记录一下。作业的内容都是针对的具体的知识点，实现难度并不高。 进程间通信 设计一个</description>
+    </item>
+    
+  </channel>
+</rss>

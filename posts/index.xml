@@ -6,10 +6,28 @@
     <description>Recent content in Posts on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 18 May 2020 20:44:50 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 06 Jun 2020 23:06:09 +0800</lastBuildDate>
     
 	<atom:link href="https://wanakiki.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux C语言系统编程作业</title>
+      <link>https://wanakiki.github.io/2020/linux-c/</link>
+      <pubDate>Sat, 06 Jun 2020 23:06:09 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2020/linux-c/</guid>
+      <description>跟着别人简单学了下Linux下的系统编程，把做过的几个作业简单记录一下。作业的内容都是针对的具体的知识点，实现难度并不高。 进程间通信 设计一个</description>
+    </item>
+    
+    <item>
+      <title>Flask&#43;MongoDB CURD微实战</title>
+      <link>https://wanakiki.github.io/2020/mongodb-demo/</link>
+      <pubDate>Sat, 30 May 2020 11:07:16 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2020/mongodb-demo/</guid>
+      <description>做SRDP的过程中发现关系型数据库在实现问卷效果时比较困难，所以找了个时间熟悉了一下非关系型数据库，做了一个todo小demo。 视频演示地址</description>
+    </item>
     
     <item>
       <title>百度翻译爬虫</title>

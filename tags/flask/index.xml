@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>flask on Wanakiki`s Blog</title>
+    <link>https://wanakiki.github.io/tags/flask/</link>
+    <description>Recent content in flask on Wanakiki`s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 30 May 2020 11:07:16 +0800</lastBuildDate>
+    
+	<atom:link href="https://wanakiki.github.io/tags/flask/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Flask&#43;MongoDB CURD微实战</title>
+      <link>https://wanakiki.github.io/2020/mongodb-demo/</link>
+      <pubDate>Sat, 30 May 2020 11:07:16 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2020/mongodb-demo/</guid>
+      <description>做SRDP的过程中发现关系型数据库在实现问卷效果时比较困难，所以找了个时间熟悉了一下非关系型数据库，做了一个todo小demo。 视频演示地址</description>
+    </item>
+    
+  </channel>
+</rss>
