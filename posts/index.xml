@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 06 Jun 2020 23:06:09 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jul 2020 12:17:49 +0800</lastBuildDate>
     
 	<atom:link href="https://wanakiki.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>IIC总线协议</title>
+      <link>https://wanakiki.github.io/2020/about-iic/</link>
+      <pubDate>Wed, 01 Jul 2020 12:17:49 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2020/about-iic/</guid>
+      <description>之前做收音机的时候用到了IIC总线协议，因为用的是别人封装好的库，对协议的具体执行方式不是很了解，于是花了点时间查了一下。 IIC协议大致有下</description>
+    </item>
     
     <item>
       <title>Linux C语言系统编程作业</title>

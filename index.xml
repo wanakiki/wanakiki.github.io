@@ -5,8 +5,40 @@
     <description>Recent content in Wanakiki`s Blog on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 06 Jun 2020 23:06:09 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jul 2020 12:17:49 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>IIC总线协议</title>
+      <link>https://wanakiki.github.io/2020/about-iic/</link>
+      <pubDate>Wed, 01 Jul 2020 12:17:49 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2020/about-iic/</guid>
+      <description>
+
+&lt;p&gt;之前做收音机的时候用到了IIC总线协议，因为用的是别人封装好的库，对协议的具体执行方式不是很了解，于是花了点时间查了一下。&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;p&gt;IIC协议大致有下面几个特点：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;双向串行通信&lt;/li&gt;
+&lt;li&gt;两根线：数据线SDA，时钟线SCL，且支持挂载多个设备&lt;/li&gt;
+&lt;li&gt;传递四种信号：起始信号、8bit数据、响应信号、结束信号&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;起始信号&lt;/strong&gt;：SCL时钟线保持高电平，SDA数据信号由高变低便代表开始信号。当总线上的设备检测到这个开始信号后便知道即将发送数据。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;停止信号&lt;/strong&gt;：SCL时钟线保持高电平，SDA数据信号由低变高便代表停止信号。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;8bit数据与响应信号&lt;/strong&gt;：发送数据时，接收方在SCL为高电平时读取SDA数据，因此SCL时钟线变为低电平时SDA数据才能发生变化。输出到SDA上的数据一组有八位，传输组数不受限制，但每发送八位后需要接收来自接收方的确认信号才能继续发送下一组数据。数据从高位传输。&lt;/p&gt;
+
+&lt;h4 id=&#34;在多设备的情况下-一次通信过程可以如下描述&#34;&gt;在多设备的情况下，一次通信过程可以如下描述：&lt;/h4&gt;
+
+&lt;p&gt;发送方发出起始信号、发送方发送目标设备地址、发送方接收目标设备响应、发送方传输第一组数据、发送方接收目标设备响应、发送方传输第二组数据、发送方接收目标设备响应&amp;hellip;&amp;hellip;发送方发出停止信号&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Linux C语言系统编程作业</title>
@@ -3371,90 +3403,6 @@ print sum( [ ****** *** * in **********(&#39;[0-9]+&#39;,***********************
 Python 3:
 import re
 print( sum( [ ****** *** * in **********(&#39;[0-9]+&#39;,**************************.read()) ] ) )
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Latex 插入图片方式整理</title>
-      <link>https://wanakiki.github.io/2019/latex-img/</link>
-      <pubDate>Fri, 14 Jun 2019 23:22:50 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/latex-img/</guid>
-      <description>&lt;p&gt;又到期末，承担了帮别人排版论文的工作。因为自己不熟悉图片的插入方式拖慢了进度，趁今天有时间整理一下。当然，最大的目的还是备忘。
-&lt;!-- more --&gt;&lt;/p&gt;
-
-&lt;p&gt;新建一个&lt;code&gt;.tex&lt;/code&gt;文件，并将下面的代码复制到其中。在同一文件夹中准备一张图片（最好是方形），命名为&lt;code&gt;test.jpg&lt;/code&gt;。构建代码就可以看到效果，自己也可以对更多的细节进行修改。同时插入2*3或者3*3图片的情况还有待补充😀&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-tex&#34;&gt;\documentclass[UTF8]{article}
-\usepackage{graphicx} %use graph format
-%\usepackage{subfig}
-\usepackage{ctex}
-\usepackage{CJK}
-\usepackage{caption}
-\usepackage{subfigure}
-\usepackage{float}  %引入 H固定图片
-
-\begin{document}
-    \section{单个图片插入}
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width = 0.5\linewidth]{test.jpg}
-        \caption{单个图片插入}
-    \end{figure}
-
-    \section{多个图片插入}
-    一行存在两个同级图片
-    \begin{figure}[h]
-        \begin{minipage}[t]{0.5\linewidth}
-            \centering
-            \includegraphics[width = 0.5\linewidth]{test.jpg}
-            \caption{左侧图片}
-        \end{minipage}  %注意不要空开一行
-        \begin{minipage}[t]{0.5\linewidth}
-            \centering
-            \includegraphics[width = 0.5\linewidth]{test.jpg}
-            \caption{右侧图片}
-        \end{minipage}
-    \end{figure}
-
-    在一行并排两个子图(使用subfigure达到防止两个的目的，minipage起到一侧显示两个的效果)
-    \begin{figure}[H]
-        \centering
-        \subfigure[左子图]{
-            \begin{minipage}[b]{0.5\linewidth}
-                \centering
-                \includegraphics[width = 0.5\linewidth]{test.jpg}\\
-                \includegraphics[width = 0.5\linewidth]{test.jpg}  
-            \end{minipage}
-        }\subfigure[右子图]{
-            \centering
-            \begin{minipage}[b]{0.5\linewidth}
-                \centering
-                \includegraphics[width = 0.5\linewidth]{test.jpg} \\
-                \includegraphics[width = 0.5\linewidth]{test.jpg}
-            \end{minipage}
-        }
-        \caption{两个子图}
-    \end{figure}
-
-    使用minipage加自定义标签同样可以达到上述目的，自定义标签同样也可以达到表面上并列两个同级图片的效果。
-    \begin{figure}[!htp]
-        \begin{minipage}[t]{0.5\linewidth}%设定图片下字的宽度，在此基础尽量满足图片的长宽
-        \centering
-        \includegraphics[width = 0.5\linewidth]{test.jpg}
-        \caption*{(a) This is the left picure.}%加*可以去掉默认前缀，作为图片单独的说明
-        \label{fig:side:a}
-        \end{minipage}
-        \begin{minipage}[t]{0.5\linewidth}%需要几张添加即可，注意设定合适的linewidth
-        \centering
-        \includegraphics[width = 0.5\linewidth]{test.jpg}
-        \caption*{(b)This is the right picture.}
-        \label{fig:side:b}
-        \end{minipage}
-        \caption{两个子图}
-    \end{figure}
-    \end{document}
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
