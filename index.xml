@@ -5,8 +5,596 @@
     <description>Recent content in Wanakiki`s Blog on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 01 Jul 2020 12:17:49 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jul 2020 12:27:41 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Flask框架下API开发异常处理</title>
+      <link>https://wanakiki.github.io/2020/flask-api-exception/</link>
+      <pubDate>Wed, 08 Jul 2020 12:27:41 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2020/flask-api-exception/</guid>
+      <description>
+
+&lt;p&gt;最近在做SRDP项目的后端开发，但是狗书上面对API相关内容介绍比较少，示例代码中的API部分也不涉及用户登录注册相关内容。不过幸运的是在Github上找到了一个问卷调查项目，通过阅读项目代码发现了在进行API开发时处理异常的一些技巧。&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;p&gt;问卷项目地址：&lt;a href=&#34;https://github.com/yuzhanglong/EasyQuestionnaire-backend&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/yuzhanglong/EasyQuestionnaire-backend&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;flask异常&#34;&gt;Flask异常&lt;/h2&gt;
+
+&lt;p&gt;程序执行遇到异常是很正常的现象，在普通的程序中可以用&lt;code&gt;try except&lt;/code&gt;捕获异常并抛出来保证程序的正常执行。但是在web项目中，如果遇到了异常只是在服务器终端中抛出是不行的，有时必须要让用户了解到错误信息。&lt;/p&gt;
+
+&lt;p&gt;Flask作为一个web开发框架在设计之初就想到了这点，对异常处理也进行了封装，最典型的例子就是404异常。在默认情况下，如果访问了无效的路由，会看到一个错误页面，这个错误页面就是由Flask内部封装好的异常处理机制发出的。&lt;/p&gt;
+
+&lt;p&gt;如果是普通的Flask项目，在程序执行时遇到异常时可以直接把错误渲染在页面上，但是在进行API开发时，返回的数据都应该是json类型，当出现错误时只要把错误类型返回，具体的渲染工作交给前端负责即可。那么应该怎么实现呢，一个很实用的方法是自己定义异常处理类。&lt;/p&gt;
+
+&lt;p&gt;这里有一篇文章，详细的介绍了重写异常处理类的思路和方法：&lt;a href=&#34;https://www.cnblogs.com/luyuze95/p/12937704.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Flask开发技巧之异常处理&lt;/a&gt;。接下来简单介绍实现思路。&lt;/p&gt;
+
+&lt;h2 id=&#34;自定义异常&#34;&gt;自定义异常&lt;/h2&gt;
+
+&lt;p&gt;Flask内部的异常都是通过继承HTTPException类来实现的，当抛出这个类时会向发送方发送响应，内部有几个重要的方法：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;get_headers&lt;/code&gt;方法定义返回的响应头&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;get_body&lt;/code&gt;方法定义返回的响应体，默认情况下是一段html内容&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;因为在前后端分离开发时返回类型都是json，所以我们可以通过继承HTTPException这个类来定义我们自己的异常处理类。主要修改的内容就是响应头和响应主体两个部分，将响应头中的类型改为json，并将响应主体也改为json类型。下面是我自己实现的代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class ApiException(HTTPException):
+    code = 404
+    errorCode = 2000
+    information = &amp;quot;未知错误&amp;quot;
+
+    def __init__(self, code=None, error_code=None, information=None, payload=None):
+        Exception.__init__(self)
+        if code:
+            self.code = code
+        if error_code:
+            self.errorCode = error_code
+        if information:
+            self.information = information
+        self.payload = payload
+        super(ApiException, self).__init__(information, None)
+
+    # 重写get_body
+    def get_body(self, environ=None):
+        body = dict(self.payload or ())
+        body[&#39;errorCode&#39;] = self.errorCode
+        body[&#39;information&#39;] = self.information
+        return json.dumps(body)
+
+    # 设置返回的响应头
+    def get_headers(self, environ=None):
+        return [(&#39;Content-Type&#39;, &#39;application/json&#39;)]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当抛出上面的异常类时，就会返回包含错误码和错误信息的json格式的响应。http状态码会自动添加到响应当中，也需要注意修改。&lt;/p&gt;
+
+&lt;p&gt;在此基础上，我们可以定义自己的各种错误类，并且在合适的地方抛出，比如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class Success(ApiException):
+    code = 200
+    errorCode = 0
+
+
+class ParameterException(ApiException):
+    code = 403
+    errorCode = &amp;quot;validate error&amp;quot;
+    information = &amp;quot;验证失败&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;需要注意的一点是，虽然定义的是错误类，但实际上也可以返回成功的响应，比如上面代码中的&lt;code&gt;Success&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;最后一点技巧是全局捕获异常，推荐去看看我上面放的文章。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from flask import Blueprint
+from werkzeug.exceptions import HTTPException
+
+from .errorHandler import ApiException
+
+# 全局错误AOP处理
+commonException = Blueprint(&#39;common&#39;, __name__)
+
+
+@commonException.app_errorhandler(Exception)
+def framework_error(error):
+    if isinstance(error, ApiException):
+        return error                    # 自定义错误直接返回
+    if isinstance(error, HTTPException):
+        code = error.code
+        information = error.description
+        # error_code = 1007
+        return ApiException(code=code, information=information)     # flask内置错误封装为ApiException返回
+    else:
+        return error    # 比较合适的方法是在生产环境中返回服务器内部错误 不返回具体信息
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>VUE框架入门</title>
+      <link>https://wanakiki.github.io/2020/learn-vue/</link>
+      <pubDate>Wed, 08 Jul 2020 12:19:49 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2020/learn-vue/</guid>
+      <description>
+
+&lt;p&gt;在学习&lt;a href=&#34;https://www.bilibili.com/video/BV12J411m7MG?from=search&amp;amp;seid=11359227674252544915&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;VUE入门视频&lt;/a&gt;时记录的知识点和代码，备忘。&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;h2 id=&#34;基本&#34;&gt;基本&lt;/h2&gt;
+
+&lt;p&gt;el:挂载点，id选择器&lt;code&gt;#&lt;/code&gt;，不能挂载到&lt;code&gt;&amp;lt;html&amp;gt; &amp;lt;body&amp;gt;&lt;/code&gt;两个标签&lt;/p&gt;
+
+&lt;h2 id=&#34;vue指令&#34;&gt;Vue指令&lt;/h2&gt;
+
+&lt;h3 id=&#34;内容绑定-事件绑定&#34;&gt;内容绑定、事件绑定&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;v-text&lt;/code&gt;设置标签内容，支持用插值表达式对原有变量进行相关操作。和两个花括号基本等价。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div id=&amp;quot;vtext_app&amp;quot;&amp;gt;
+    &amp;lt;h2 v-text=&amp;quot;message + &#39;!&#39;&amp;quot;&amp;gt;&amp;lt;/h2&amp;gt;
+    &amp;lt;h2&amp;gt;局部更新{{ message + &amp;quot;!&amp;quot; }}&amp;lt;/h2&amp;gt;
+    &amp;lt;h2 v-text=&amp;quot;info&amp;quot;&amp;gt;&amp;lt;/h2&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;script&amp;gt;
+    var cur_app = new Vue({
+        el:&amp;quot;#vtext_app&amp;quot;,
+        data:{
+            message:&amp;quot;test&amp;quot;,
+            info: &amp;quot;多个变量支持&amp;quot;
+        }
+    })
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;v-html&lt;/code&gt;设置innerhtml属性，如果要渲染html结构，需要使用该语句。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;html&amp;gt;
+    &amp;lt;head&amp;gt;
+        &amp;lt;script src=&amp;quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;/head&amp;gt;
+    &amp;lt;body&amp;gt;
+        &amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;
+            &amp;lt;p v-text=&amp;quot;content1&amp;quot;&amp;gt;&amp;lt;/p&amp;gt;
+            &amp;lt;p v-html=&amp;quot;content1&amp;quot;&amp;gt;&amp;lt;/p&amp;gt;
+            &amp;lt;p v-text=&amp;quot;content2&amp;quot;&amp;gt;&amp;lt;/p&amp;gt;
+            &amp;lt;p v-html=&amp;quot;content2&amp;quot;&amp;gt;&amp;lt;/p&amp;gt;
+        &amp;lt;/div&amp;gt;
+        &amp;lt;script&amp;gt;
+            var app = new Vue({
+                el:&amp;quot;#app&amp;quot;,
+                data:{
+                    content1:&amp;quot;hello&amp;quot;,
+                    content2:&amp;quot;&amp;lt;a href=&#39;http://www.baidu.com&#39;&amp;gt;百度&amp;lt;/a&amp;gt;&amp;quot;
+                }
+            });
+        &amp;lt;/script&amp;gt;
+    &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;v-on&lt;/code&gt;为元素绑定事件，点击、按键、鼠标滚动等，与@符号等价。时间对应的方法需要提前准备在&lt;code&gt;methods&lt;/code&gt;当中。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;html&amp;gt;
+    &amp;lt;head&amp;gt;
+        &amp;lt;script src=&amp;quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;/head&amp;gt;
+    &amp;lt;body&amp;gt;
+        &amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;
+            &amp;lt;input type=&amp;quot;button&amp;quot; value=&amp;quot;v-on&amp;quot; v-on:click=&amp;quot;doIt&amp;quot;&amp;gt;
+            &amp;lt;input type=&amp;quot;button&amp;quot; value=&amp;quot;v-on简写&amp;quot; @click=&amp;quot;doIt&amp;quot;&amp;gt;
+            &amp;lt;input type=&amp;quot;button&amp;quot; value=&amp;quot;双击事件&amp;quot; @dblclick=&amp;quot;doIt&amp;quot;&amp;gt;
+
+            &amp;lt;!-- 不操作dom，修改数据 --&amp;gt;
+            &amp;lt;h2 @click=&amp;quot;changeFood&amp;quot;&amp;gt;{{ food }}&amp;lt;/h2&amp;gt;
+        &amp;lt;/div&amp;gt;
+        &amp;lt;script&amp;gt;
+            var app = new Vue({
+                el:&amp;quot;#app&amp;quot;,
+                data: {
+                    food:&amp;quot;番茄&amp;quot;,
+                },
+                methods: {
+                    doIt: function(){
+                        alert(&amp;quot;方法测试&amp;quot;);
+                    },
+                    changeFood:function(){
+                        console.log(this.food);
+                        this.food += &#39;好吃&#39;;
+                    }
+                },
+            });
+        &amp;lt;/script&amp;gt;
+    &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;综合小实例，计数器。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;html&amp;gt;
+    &amp;lt;head&amp;gt;
+        &amp;lt;script src=&amp;quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;/head&amp;gt;
+    &amp;lt;body&amp;gt;
+        &amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;
+            &amp;lt;div class=&amp;quot;input-num&amp;quot;&amp;gt;
+                &amp;lt;button @click=&amp;quot;sub&amp;quot;&amp;gt;-&amp;lt;/button&amp;gt;
+                &amp;lt;span&amp;gt;{{ num }}&amp;lt;/span&amp;gt;
+                &amp;lt;button @click=&amp;quot;add&amp;quot;&amp;gt;+&amp;lt;/button&amp;gt;
+            &amp;lt;/div&amp;gt;
+        &amp;lt;/div&amp;gt;
+        &amp;lt;script&amp;gt;
+            var app = new Vue({
+                el:&amp;quot;#app&amp;quot;,
+                data: {
+                    num: 0,
+                },
+                methods: {
+                    add:function(){
+                        if(this.num &amp;lt; 10){
+                            this.num++;
+                        }else{
+                            alert(&#39;已经达到最大值&#39;);
+                        }                        
+                    },
+                    sub:function(){
+                        if(this.num &amp;gt; 0){
+                            this.num--;
+                        }else{
+                            alert(&#39;已经到达最小值&#39;);
+                        }
+                    }
+                },
+            });
+        &amp;lt;/script&amp;gt;
+    &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;显示切换-属性绑定&#34;&gt;显示切换、属性绑定&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;v-show&lt;/code&gt;根据表达式的真假，切换元素的显示隐藏状态。本质上是切换display属性。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;html&amp;gt;
+
+&amp;lt;head&amp;gt;
+    &amp;lt;script src=&amp;quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;/head&amp;gt;
+
+&amp;lt;body&amp;gt;
+    &amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;
+        &amp;lt;input type=&amp;quot;button&amp;quot; value=&amp;quot;切换显示状态&amp;quot; @click=&amp;quot;changeIsShow&amp;quot;&amp;gt;
+        &amp;lt;img v-show=&amp;quot;isShow&amp;quot; src=&amp;quot;https://i0.hdslb.com/bfs/archive/e62b6b095ef38dfb742687f11e4b570dde420b5d.png&amp;quot; alt=&amp;quot;&amp;quot;&amp;gt;
+        &amp;lt;img v-show=&amp;quot;age&amp;gt;=18&amp;quot; src=&amp;quot;https://i0.hdslb.com/bfs/archive/e62b6b095ef38dfb742687f11e4b570dde420b5d.png&amp;quot; alt=&amp;quot;&amp;quot;&amp;gt;
+    &amp;lt;/div&amp;gt;
+    &amp;lt;script&amp;gt;
+        var app = new Vue({
+            el: &amp;quot;#app&amp;quot;,
+            data:{
+                isShow: false,
+                age: 18
+            },
+            methods: {
+                changeIsShow:function(){
+                    this.isShow = !this.isShow;
+                }
+            },
+        });
+    &amp;lt;/script&amp;gt;
+&amp;lt;/body&amp;gt;
+
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;v-if&lt;/code&gt;根据表达式的真假，切换元素的显示和隐藏，本质是操作dom元素的移除或添加，并非切换样式。表达式最终会解释为布尔值。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;html&amp;gt;
+
+&amp;lt;head&amp;gt;
+    &amp;lt;script src=&amp;quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;/head&amp;gt;
+
+&amp;lt;body&amp;gt;
+    &amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;
+        &amp;lt;input type=&amp;quot;button&amp;quot; value=&amp;quot;切换显示状态&amp;quot; @click=&amp;quot;toggleIsShow&amp;quot;&amp;gt;
+        &amp;lt;p v-if=&amp;quot;isShow&amp;quot;&amp;gt;v-if测试&amp;lt;/p&amp;gt;
+        &amp;lt;p v-show=&amp;quot;isShow&amp;quot;&amp;gt;v-show测试&amp;lt;/p&amp;gt;
+    &amp;lt;/div&amp;gt;
+    &amp;lt;script&amp;gt;
+        var app = new Vue({
+            el: &amp;quot;#app&amp;quot;,
+            data: {
+                isShow: false,
+            },
+            methods: {
+                toggleIsShow: function () {
+                    this.isShow = !this.isShow;
+                }
+            },
+        });
+    &amp;lt;/script&amp;gt;
+&amp;lt;/body&amp;gt;
+
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;v-bind&lt;/code&gt;设置元素的属性，src、class，使用方式为&lt;code&gt;v-bind:属性=值&lt;/code&gt;，可以省略指令，直接用冒号拼接属性值。设置class可以通过三元表达式或者用对象的方式来设置，推荐用后者。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;html&amp;gt;
+
+&amp;lt;head&amp;gt;
+    &amp;lt;script src=&amp;quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;style&amp;gt;
+        .active{
+            border: 1px solid red;
+        }
+    &amp;lt;/style&amp;gt;
+&amp;lt;/head&amp;gt;
+
+&amp;lt;body&amp;gt;
+    &amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;
+        &amp;lt;img v-bind:src=&amp;quot;imgSrc&amp;quot; alt=&amp;quot;&amp;quot;&amp;gt;
+        &amp;lt;br&amp;gt;
+        &amp;lt;img :src=&amp;quot;imgSrc&amp;quot; alt=&amp;quot;&amp;quot; :title=&amp;quot;imgTitle+&#39;!!!&#39;&amp;quot; :class=&amp;quot;isActive?&#39;active&#39;:&#39;&#39;&amp;quot; @click=&amp;quot;toggleActive&amp;quot;&amp;gt;
+        &amp;lt;br&amp;gt;
+        &amp;lt;img :src=&amp;quot;imgSrc&amp;quot; alt=&amp;quot;&amp;quot; :title=&amp;quot;imgTitle+&#39;!!!&#39;&amp;quot; :class=&amp;quot;{active:isActive}&amp;quot; @click=&amp;quot;toggleActive&amp;quot;&amp;gt;
+    &amp;lt;/div&amp;gt;
+    &amp;lt;script&amp;gt;
+        var app = new Vue({
+            el: &amp;quot;#app&amp;quot;,
+            data: {
+                imgSrc:&amp;quot;https://i0.hdslb.com/bfs/archive/e62b6b095ef38dfb742687f11e4b570dde420b5d.png&amp;quot;,
+                imgTitle: &amp;quot;vbind测试&amp;quot;,
+                isActive: false,
+            },
+            methods: {
+                toggleActive:function(){
+                    this.isActive = !this.isActive;
+                }
+            },
+        });
+    &amp;lt;/script&amp;gt;
+&amp;lt;/body&amp;gt;
+
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;轮播图实例&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;html&amp;gt;
+
+&amp;lt;head&amp;gt;
+    &amp;lt;script src=&amp;quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;/head&amp;gt;
+
+&amp;lt;body&amp;gt;
+    &amp;lt;div id=&amp;quot;mask&amp;quot;&amp;gt;
+        &amp;lt;div class=&amp;quot;center&amp;quot;&amp;gt;
+            &amp;lt;!-- 左箭头 --&amp;gt;
+            &amp;lt;!-- &amp;lt;a href=&amp;quot;javascript:void(0)&amp;quot; @click=&amp;quot;prev&amp;quot; class=&amp;quot;left&amp;quot;&amp;gt;
+                &amp;lt;img src=&amp;quot;&amp;quot; alt=&amp;quot;&amp;quot;&amp;gt;
+            &amp;lt;/a&amp;gt; --&amp;gt;
+            &amp;lt;input type=&amp;quot;button&amp;quot; value=&amp;quot;←&amp;quot; v-show=&amp;quot;index!=0&amp;quot; @click=&amp;quot;prev&amp;quot;&amp;gt;
+
+            &amp;lt;!-- 图片 --&amp;gt;
+            &amp;lt;img :src=&amp;quot;imgArr[index]&amp;quot; alt=&amp;quot;&amp;quot;&amp;gt;
+
+            &amp;lt;!-- 右箭头 --&amp;gt;
+            &amp;lt;!-- &amp;lt;a href=&amp;quot;javascript:void(0)&amp;quot; @click=&amp;quot;next&amp;quot; class=&amp;quot;right&amp;quot;&amp;gt;
+                &amp;lt;img src=&amp;quot;&amp;quot; alt=&amp;quot;&amp;quot;&amp;gt;
+            &amp;lt;/a&amp;gt; --&amp;gt;
+            &amp;lt;input type=&amp;quot;button&amp;quot; value=&amp;quot;→&amp;quot; v-show=&amp;quot;index&amp;lt;imgArr.length-1&amp;quot; @click=&amp;quot;next&amp;quot;&amp;gt;
+        &amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;
+
+    &amp;lt;script&amp;gt;
+        var app = new Vue({
+            el:&amp;quot;#mask&amp;quot;,
+            data:{
+                imgArr:[
+                    &amp;quot;https://i0.hdslb.com/bfs/archive/23f7ccf8b4cb143c6af7e6dc8534283bef293cb4.jpg@321w_182h_1c_100q.webp&amp;quot;,
+                    &amp;quot;https://i0.hdslb.com/bfs/archive/6a85c04866e27c51929c289dcef3011cb5db1d5f.jpg@321w_182h_1c_100q.webp&amp;quot;,
+                    &amp;quot;https://i2.hdslb.com/bfs/archive/90b09328d7daaa6fbff5002d25a311ada086f21b.jpg@321w_182h_1c_100q.webp&amp;quot;
+                ],
+                index:1
+            },
+            methods: {
+                prev:function(){
+                    console.log(this.index);
+                    this.index--;
+                },
+                next:function(){
+                    this.index++;
+                }
+                
+            },
+        })
+    &amp;lt;/script&amp;gt;
+&amp;lt;/body&amp;gt;
+
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;列表循环-表单元素绑定&#34;&gt;列表循环、表单元素绑定&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;v-for&lt;/code&gt;根据数据生成列表结构，经常和数组结合使用，语法是&lt;code&gt;(item, index) in 数据&lt;/code&gt;，数组内容的更新会同步到页面上。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;html&amp;gt;
+
+&amp;lt;head&amp;gt;
+    &amp;lt;script src=&amp;quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;/head&amp;gt;
+
+&amp;lt;body&amp;gt;
+    &amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;
+        &amp;lt;ul&amp;gt;
+            &amp;lt;li v-for=&amp;quot;(item,index) in arr&amp;quot;&amp;gt;
+                {{ index + 1}} 地点：{{ item }}
+            &amp;lt;/li&amp;gt;
+        &amp;lt;/ul&amp;gt;
+        
+        &amp;lt;input type=&amp;quot;button&amp;quot; value=&amp;quot;添加数据&amp;quot; @click=&amp;quot;add&amp;quot;&amp;gt;
+        &amp;lt;input type=&amp;quot;button&amp;quot; value=&amp;quot;移除数据&amp;quot; @click=&amp;quot;remove&amp;quot;&amp;gt;
+        &amp;lt;h2 v-for=&amp;quot;item in vegetable&amp;quot; v-bind:title=&amp;quot;item.name&amp;quot;&amp;gt;
+            {{ item.name }}
+        &amp;lt;/h2&amp;gt;
+        
+    &amp;lt;/div&amp;gt;
+    &amp;lt;script&amp;gt;
+        var app = new Vue({
+            el: &amp;quot;#app&amp;quot;,
+            data:{
+                arr:[&amp;quot;Beijing&amp;quot;, &amp;quot;ShangHai&amp;quot;, &amp;quot;GuangZhou&amp;quot;],
+                vegetable:[
+                    {name:&amp;quot;西兰花炒蛋&amp;quot;},
+                    {name:&amp;quot;蛋炒西兰花&amp;quot;}
+                ]
+            },
+            methods: {
+                add:function(){
+                    this.vegetable.push({name:&amp;quot;🥦&amp;quot;})
+                },
+                remove:function(){
+                    this.vegetable.shift();
+                }
+            },
+        });
+    &amp;lt;/script&amp;gt;
+&amp;lt;/body&amp;gt;
+
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;v-on&lt;/code&gt;补充内容，传递自定义参数、事件修饰符。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;html&amp;gt;
+
+&amp;lt;head&amp;gt;
+    &amp;lt;script src=&amp;quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;/head&amp;gt;
+
+&amp;lt;body&amp;gt;
+    &amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;
+        &amp;lt;input type=&amp;quot;button&amp;quot; value=&amp;quot;点击&amp;quot; @click=&amp;quot;doIt(666, &#39;老铁&#39;)&amp;quot;&amp;gt;
+        &amp;lt;input type=&amp;quot;text&amp;quot;  @keyup.enter=&amp;quot;sayHi&amp;quot;&amp;gt;
+    &amp;lt;/div&amp;gt;
+    &amp;lt;script&amp;gt;
+        var app = new Vue({
+            el: &amp;quot;#app&amp;quot;,
+            methods: {
+                doIt:function(p1, p2){
+                    console.log(&#39;do it&#39;);
+                    console.log(p1);
+                    console.log(p2);
+                },
+                sayHi:function(){
+                    alert(&amp;quot;吃了没？&amp;quot;);
+                }
+            },
+        });
+    &amp;lt;/script&amp;gt;
+&amp;lt;/body&amp;gt;
+
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;v-model&lt;/code&gt;获取和设置表单元素的值（双向数据绑定）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;html&amp;gt;
+
+&amp;lt;head&amp;gt;
+    &amp;lt;script src=&amp;quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;/head&amp;gt;
+
+&amp;lt;body&amp;gt;
+    &amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;
+        &amp;lt;input type=&amp;quot;text&amp;quot; v-model=&amp;quot;message&amp;quot; @keyup.enter=&amp;quot;getM&amp;quot;&amp;gt;
+        &amp;lt;h2&amp;gt;{{ message }}&amp;lt;/h2&amp;gt;
+    &amp;lt;/div&amp;gt;
+    &amp;lt;script&amp;gt;
+        var app = new Vue({
+            el: &amp;quot;#app&amp;quot;,
+            data:{
+                message:&amp;quot;双向数据绑定 VUE全响应数据开发&amp;quot;
+            },
+            methods: {
+                getM:function(){
+                    alert(this.message);
+                }
+            },
+        });
+    &amp;lt;/script&amp;gt;
+&amp;lt;/body&amp;gt;
+
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;本地应用-记事本&#34;&gt;本地应用 记事本&lt;/h3&gt;
+
+&lt;p&gt;没有写样式，只用了几个按钮：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;html&amp;gt;
+
+&amp;lt;head&amp;gt;
+    &amp;lt;script src=&amp;quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;/head&amp;gt;
+
+&amp;lt;body&amp;gt;
+    &amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;
+        &amp;lt;p&amp;gt;输入回车自动记录&amp;lt;/p&amp;gt;
+        &amp;lt;input type=&amp;quot;text&amp;quot; v-model=&amp;quot;message&amp;quot; @keyup.enter=&amp;quot;addNote(message)&amp;quot;&amp;gt;
+        &amp;lt;input type=&amp;quot;button&amp;quot; value=&amp;quot;删除全部&amp;quot; @click=&amp;quot;deleteAll&amp;quot; v-show=&amp;quot;todos.length!=0&amp;quot;&amp;gt;
+        &amp;lt;br&amp;gt;
+        &amp;lt;h3 v-text=&amp;quot;&#39;待办总数&#39; + todos.length&amp;quot; v-if=&amp;quot;todos.length != 0&amp;quot;&amp;gt;&amp;lt;/h3&amp;gt;
+        &amp;lt;ul&amp;gt;
+            &amp;lt;li v-for=&amp;quot;(item, index) in todos&amp;quot;&amp;gt;
+                {{index}} {{ item }}
+                &amp;lt;input type=&amp;quot;button&amp;quot; value=&amp;quot;×&amp;quot; @click=&amp;quot;deleteOne(index)&amp;quot;&amp;gt;
+            &amp;lt;/li&amp;gt;
+        &amp;lt;/ul&amp;gt;
+    &amp;lt;/div&amp;gt;
+    &amp;lt;script&amp;gt;
+        var app = new Vue({
+            el: &amp;quot;#app&amp;quot;,
+            data: {
+                message: &amp;quot;输入待办&amp;quot;,
+                todos:[&#39;写代码&#39;, &#39;备考&#39;]
+            },
+            methods: {
+                deleteAll:function(){
+                    // this.todos.splice(0);
+                    this.todos = [];
+                },
+                addNote:function(message){
+                    this.todos.push(message);
+                },
+                deleteOne:function(index){
+                    this.todos.splice(index, 1);
+                }
+            },
+        });
+    &amp;lt;/script&amp;gt;
+&amp;lt;/body&amp;gt;
+
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;网络&#34;&gt;网络&lt;/h2&gt;
+
+&lt;p&gt;axios引入&lt;code&gt;&amp;lt;script src=&amp;quot;https://unpkg.com/axios/dist/axios.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;使用的api：&lt;code&gt;https://github.com/AutumnFish/testApi&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;需要注意axios回调函数中的this已经改变，不能访问VUE实例中的数据。可以先把this保存起来，在回调函数中使用保存的this。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;https://autumnfish.cn/&lt;/code&gt;歌曲相关api&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>IIC总线协议</title>
@@ -2271,1139 +2859,6 @@ fh.close()
 &lt;h3 id=&#34;主动就业&#34;&gt;主动就业&lt;/h3&gt;
 
 &lt;p&gt;在假期参加实习，尽早规划尽早行动。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>PY4E 题目整理（下）</title>
-      <link>https://wanakiki.github.io/2019/python-assignments/</link>
-      <pubDate>Mon, 05 Aug 2019 18:29:25 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/python-assignments/</guid>
-      <description>
-
-&lt;p&gt;Coursera中python教程同步题目整理，涉及到网络和数据库编程部分。题目地址：&lt;a href=&#34;https://www.py4e.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;py4e&lt;/a&gt;。&lt;/p&gt;
-
-&lt;!-- more --&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;打开网页的操作步骤，导入urllib库，urllib.requert.urlopen(url).read()
-可以直接对字典进行url编码 urllib.parse.urlencode(parms)&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;exploring-the-hypert-ext-transport-protocol-探索超文本传输协议&#34;&gt;Exploring the HyperT ext Transport Protocol（探索超文本传输协议）&lt;/h2&gt;
-
-&lt;p&gt;You are to retrieve the following document using the HTTP protocol in a way that you can examine the HTTP Response headers.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://data.pr4e.org/intro-short.txt&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://data.pr4e.org/intro-short.txt&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;There are three ways that you might retrieve this web page and look at the response headers:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Preferred: Modify the socket1.py program to retrieve the above URL and print out the headers and data. Make sure to change the code to retrieve the above URL - the values are different for each URL.&lt;/li&gt;
-&lt;li&gt;Open the URL in a web browser with a developer console or FireBug and manually examine the headers that are returned.&lt;/li&gt;
-&lt;li&gt;Use the telnet program as shown in lecture to retrieve the headers and content.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Enter the header values in each of the fields below and press &amp;ldquo;Submit&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;有三种方式查看相应头文件，第一种方式是使用Python脚本，第二种方式是用浏览器打开URL，在控制台查看，第三种方式是使用telnet程序。仅列出了第一种的脚本。&lt;/p&gt;
-
-&lt;p&gt;由于网络的原因这段代码没有成功进行测试，在设定socket命令时的&lt;code&gt;\r\n&lt;/code&gt;也不清楚具体的含义。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import socket
-
-mysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-mysock.connect((&#39;data.pr4e.org&#39;, 80))
-print(&#39;connected&#39;)
-cmd = &#39;GET http://data.pr4e.org/intro-short.txt HTTP/1.0\r\n\r\n&#39;.encode()
-mysock.send(cmd)
-
-while True:
-    data = mysock.recv(512)
-    if len(data) &amp;lt; 1:
-        break
-    print(data.decode(), end=&#39;&#39;)
-mysock.close()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;scraping-numbers-from-html-using-beautifulsoup&#34;&gt;Scraping Numbers from HTML using BeautifulSoup&lt;/h2&gt;
-
-&lt;p&gt;In this assignment you will write a Python program similar to &lt;a href=&#34;http://www.py4e.com/code3/urllink2.py&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/urllink2.py&lt;/a&gt;. The program will use urllib to read the HTML from the data files below, and parse the data, extracting numbers and compute the sum of the numbers in the file.&lt;/p&gt;
-
-&lt;p&gt;We provide two files for this assignment. One is a sample file where we give you the sum for your testing and the other is the actual data you need to process for the assignment.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Sample data: &lt;a href=&#34;http://py4e-data.dr-chuck.net/comments_42.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://py4e-data.dr-chuck.net/comments_42.html&lt;/a&gt; (Sum=2553)&lt;/li&gt;
-&lt;li&gt;Actual data: &lt;a href=&#34;http://py4e-data.dr-chuck.net/comments_275913.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://py4e-data.dr-chuck.net/comments_275913.html&lt;/a&gt; (Sum ends with 37)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;You do not need to save these files to your folder since your program will read the data directly from the URL.&lt;/p&gt;
-
-&lt;h3 id=&#34;data-format&#34;&gt;Data Format&lt;/h3&gt;
-
-&lt;p&gt;The file is a table of names and comment counts. You can ignore most of the data in the file except for lines like the following:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;Modu&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;lt;span class=&amp;quot;comments&amp;quot;&amp;gt;90&amp;lt;/span&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;
-&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;Kenzie&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;lt;span class=&amp;quot;comments&amp;quot;&amp;gt;88&amp;lt;/span&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;
-&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;Hubert&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;lt;span class=&amp;quot;comments&amp;quot;&amp;gt;87&amp;lt;/span&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;解析网页，计算网页中数字的总和。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# 抓取网站中的数据并计算数据总和
-import urllib.request
-import urllib.parse
-import urllib.error
-from bs4 import BeautifulSoup
-
-
-url = &#39;http://python-data.dr-chuck.net/comments_275913.html&#39;
-html = urllib.request.urlopen(url).read()
-soup = BeautifulSoup(html, &#39;html.parser&#39;)
-
-span = soup(&#39;span&#39;)
-res = 0
-for aspan in span:
-    res = res + int(aspan.get_text())
-
-print(&#39;结果为&#39;, res)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;following-links-in-python&#34;&gt;Following Links in Python&lt;/h2&gt;
-
-&lt;p&gt;In this assignment you will write a Python program that expands on &lt;a href=&#34;http://www.py4e.com/code3/urllinks.py&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/urllinks.py&lt;/a&gt;. The program will use urllib to read the HTML from the data files below, extract the href= vaues from the anchor tags, scan for a tag that is in a particular position relative to the first name in the list, follow that link and repeat the process a number of times and report the last name you find.&lt;/p&gt;
-
-&lt;p&gt;We provide two files for this assignment. One is a sample file where we give you the name for your testing and the other is the actual data you need to process for the assignment&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Sample problem: Start at &lt;a href=&#34;http://py4e-data.dr-chuck.net/known_by_Fikret.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://py4e-data.dr-chuck.net/known_by_Fikret.html&lt;/a&gt;
-Find the link at position 3 (the first name is 1). Follow that link. Repeat this process 4 times. The answer is the last name that you retrieve.
-Sequence of names: Fikret Montgomery Mhairade Butchi Anayah
-Last name in sequence: Anayah&lt;/li&gt;
-&lt;li&gt;Actual problem: Start at: &lt;a href=&#34;http://py4e-data.dr-chuck.net/known_by_Cohen.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://py4e-data.dr-chuck.net/known_by_Cohen.html&lt;/a&gt;
-Find the link at position 18 (the first name is 1). Follow that link. Repeat this process 7 times. The answer is the last name that you retrieve.
-Hint: The first character of the name of the last page that you will load is: A&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;strategy&#34;&gt;Strategy&lt;/h3&gt;
-
-&lt;p&gt;The web pages tweak the height between the links and hide the page after a few seconds to make it difficult for you to do the assignment without writing a Python program. But frankly with a little effort and patience you can overcome these attempts to make it a little harder to complete the assignment without writing a Python program. But that is not the point. The point is to write a clever Python program to solve the program.&lt;/p&gt;
-
-&lt;h3 id=&#34;sample-execution&#34;&gt;Sample execution&lt;/h3&gt;
-
-&lt;p&gt;Here is a sample execution of a solution:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;$ python3 solution.py
-Enter URL: http://py4e-data.dr-chuck.net/known_by_Fikret.html
-Enter count: 4
-Enter position: 3
-Retrieving: http://py4e-data.dr-chuck.net/known_by_Fikret.html
-Retrieving: http://py4e-data.dr-chuck.net/known_by_Montgomery.html
-Retrieving: http://py4e-data.dr-chuck.net/known_by_Mhairade.html
-Retrieving: http://py4e-data.dr-chuck.net/known_by_Butchi.html
-Retrieving: http://py4e-data.dr-chuck.net/known_by_Anayah.html
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The answer to the assignment for this execution is &amp;ldquo;Anayah&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;程序要求：从指定的链接开始，解析html页面，获取所有的herf标签，找到指定位置（position）的链接，重复这个过程指定次数（count)。最终输出找到的人名。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# 跟踪超链接，找到目标
-import urllib.request
-import urllib.parse
-import urllib.error
-from bs4 import BeautifulSoup
-
-# 假定输入规范
-count = int(input(&#39;Enter Count:&#39;))
-position = int(input(&#39;Enter Position:&#39;)) - 1    #从1开始计算位置
-flag = int(input(&#39;&#39;&#39;Select Url:
-1: http://py4e-data.dr-chuck.net/known_by_Fikret.html
-2: http://py4e-data.dr-chuck.net/known_by_Cohen.html
-&#39;&#39;&#39;))
-
-if flag == 1:
-    url = &#39;http://py4e-data.dr-chuck.net/known_by_Fikret.html&#39;
-else:
-    url = &#39;http://py4e-data.dr-chuck.net/known_by_Cohen.html&#39;
-
-while True:
-    html = urllib.request.urlopen(url).read()   #打开界面
-    soup = BeautifulSoup(html, &#39;html.parser&#39;)   #界面解析
-
-
-    #界面链接的格式为 ``&amp;lt;a href = &amp;quot;xx.com&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;``
-    #应该提取a标签
-    a_coll = soup(&#39;a&#39;)    #获取a标签集合 属于beautiful soup中的类型，应该是重载了括号，print(a_coll[0])支持这种访问
-    href = a_coll[position].get(&#39;href&#39;, None)
-    if href is None:
-        print(&#39;runtime error&#39;)
-        quit()
-
-    if count &amp;gt; 1:
-        count = count - 1
-        url = href  # 更新url 以进一步抓取
-    else:
-        res = a_coll[position].get_text()   #获取内容
-        break
-
-print(res)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;extracting-data-from-xml&#34;&gt;Extracting Data from XML&lt;/h2&gt;
-
-&lt;p&gt;In this assignment you will write a Python program somewhat similar to &lt;a href=&#34;http://www.py4e.com/code3/geoxml.py&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/geoxml.py&lt;/a&gt;. The program will prompt for a URL, read the XML data from that URL using urllib and then parse and extract the comment counts from the XML data, compute the sum of the numbers in the file.&lt;/p&gt;
-
-&lt;p&gt;We provide two files for this assignment. One is a sample file where we give you the sum for your testing and the other is the actual data you need to process for the assignment.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Sample data: &lt;a href=&#34;http://py4e-data.dr-chuck.net/comments_42.xml&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://py4e-data.dr-chuck.net/comments_42.xml&lt;/a&gt; (Sum=2553)&lt;/li&gt;
-&lt;li&gt;Actual data: &lt;a href=&#34;http://py4e-data.dr-chuck.net/comments_275915.xml&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://py4e-data.dr-chuck.net/comments_275915.xml&lt;/a&gt; (Sum ends with 24)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;You do not need to save these files to your folder since your program will read the data directly from the URL. Note: Each student will have a distinct data url for the assignment - so only use your own data url for analysis.&lt;/p&gt;
-
-&lt;h3 id=&#34;data-format-and-approach&#34;&gt;Data Format and Approach&lt;/h3&gt;
-
-&lt;p&gt;The data consists of a number of names and comment counts in XML as follows:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;&amp;lt;comment&amp;gt;
-  &amp;lt;name&amp;gt;Matthias&amp;lt;/name&amp;gt;
-  &amp;lt;count&amp;gt;97&amp;lt;/count&amp;gt;
-&amp;lt;/comment&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You are to look through all the &lt;code&gt;&amp;lt;comment&amp;gt;&lt;/code&gt; tags and find the &lt;code&gt;&amp;lt;count&amp;gt;&lt;/code&gt; values sum the numbers. The closest sample code that shows how to parse XML is geoxml.py. But since the nesting of the elements in our data is different than the data we are parsing in that sample code you will have to make real changes to the code.&lt;/p&gt;
-
-&lt;p&gt;To make the code a little simpler, you can use an XPath selector string to look through the entire tree of XML for any tag named &amp;lsquo;count&amp;rsquo; with the following line of code:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;counts = tree.findall(&#39;.//count&#39;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Take a look at the Python ElementTree documentation and look for the supported XPath syntax for details. You could also work from the top of the XML down to the comments node and then loop through the child nodes of the comments node.&lt;/p&gt;
-
-&lt;h3 id=&#34;sample-execution-1&#34;&gt;Sample Execution&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;$ python3 solution.py
-Enter location: http://py4e-data.dr-chuck.net/comments_42.xml
-Retrieving http://py4e-data.dr-chuck.net/comments_42.xml
-Retrieved 4189 characters
-Count: 50
-Sum: 2...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;程序要求：解析XML文件，计算整个文件中count标签的总和。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import xml.etree.ElementTree as ET
-import urllib.request
-import urllib.parse
-import urllib.error
-
-url = &#39;http://py4e-data.dr-chuck.net/comments_275915.xml&#39;   # 指定URL
-uh = urllib.request.urlopen(url)
-data = uh.read()    #获取网页数据
-
-print(&#39;Retrived&#39;, len(data), &#39;characters&#39;)
-tree = ET.fromstring(data)
-counts = tree.findall(&#39;.//count&#39;)   #查找count标签
-# counts = tree.findall(&#39;comments/comment/count&#39;)
-# 查找count可以使用上面这行语句
-
-print(&#39;Count:&#39;, len(counts))
-
-res = 0
-for count in counts:
-    res = res + int(count.text)
-
-print(&#39;Sum:&#39;, res)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;extracting-data-from-json&#34;&gt;Extracting Data from JSON&lt;/h2&gt;
-
-&lt;p&gt;In this assignment you will write a Python program somewhat similar to &lt;a href=&#34;http://www.py4e.com/code3/json2.py&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/json2.py&lt;/a&gt;. The program will prompt for a URL, read the JSON data from that URL using urllib and then parse and extract the comment counts from the JSON data, compute the sum of the numbers in the file and enter the sum below:&lt;/p&gt;
-
-&lt;p&gt;We provide two files for this assignment. One is a sample file where we give you the sum for your testing and the other is the actual data you need to process for the assignment.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Sample data: &lt;a href=&#34;http://py4e-data.dr-chuck.net/comments_42.json&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://py4e-data.dr-chuck.net/comments_42.json&lt;/a&gt; (Sum=2553)&lt;/li&gt;
-&lt;li&gt;Actual data: &lt;a href=&#34;http://py4e-data.dr-chuck.net/comments_275916.json&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://py4e-data.dr-chuck.net/comments_275916.json&lt;/a&gt; (Sum ends with 15)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;You do not need to save these files to your folder since your program will read the data directly from the URL. Note: Each student will have a distinct data url for the assignment - so only use your own data url for analysis.&lt;/p&gt;
-
-&lt;h3 id=&#34;data-format-1&#34;&gt;Data Format&lt;/h3&gt;
-
-&lt;p&gt;The data consists of a number of names and comment counts in JSON as follows:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-  comments: [
-    {
-      name: &amp;quot;Matthias&amp;quot;
-      count: 97
-    },
-    {
-      name: &amp;quot;Geomer&amp;quot;
-      count: 97
-    }
-    ...
-  ]
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The closest sample code that shows how to parse JSON and extract a list is json2.py. You might also want to look at geoxml.py to see how to prompt for a URL and retrieve data from a URL.&lt;/p&gt;
-
-&lt;h3 id=&#34;sample-execution-2&#34;&gt;Sample Execution&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;$ python3 solution.py
-Enter location: http://py4e-data.dr-chuck.net/comments_42.json
-Retrieving http://py4e-data.dr-chuck.net/comments_42.json
-Retrieved 2733 characters
-Count: 50
-Sum: 2...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;解析JSON文件，获得count的总和。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import urllib.request, urllib.error, urllib.parse
-import json     #导入json
-
-# - Sample data: http://py4e-data.dr-chuck.net/comments_42.json (Sum=2553)
-# - Actual data: http://py4e-data.dr-chuck.net/comments_275916.json (Sum ends with 15)
-
-url = input(&#39;Enter url &#39;)
-print(&#39;Retriving&#39;, url)
-uh = urllib.request.urlopen(url).read()
-print(&#39;Retrived&#39;, len(uh), &#39;characters&#39;)
-
-js = json.loads(uh)
-# 观察文档结构，js为字典，js[&#39;comments&#39;]为由字典组成的list
-
-res = 0
-for comment in js[&#39;comments&#39;]:
-    res = res + comment[&#39;count&#39;]
-
-print(&#39;Sum:&#39;, res)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;calling-a-json-api&#34;&gt;Calling a JSON API&lt;/h2&gt;
-
-&lt;p&gt;In this assignment you will write a Python program somewhat similar to &lt;a href=&#34;http://www.py4e.com/code3/geojson.py&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/geojson.py&lt;/a&gt;. The program will prompt for a location, contact a web service and retrieve JSON for the web service and parse that data, and retrieve the first place_id from the JSON. A place ID is a textual identifier that uniquely identifies a place as within Google Maps.&lt;/p&gt;
-
-&lt;h3 id=&#34;api-end-points&#34;&gt;API End Points&lt;/h3&gt;
-
-&lt;p&gt;To complete this assignment, you should use this API endpoint that has a static subset of the Google Data:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;http://py4e-data.dr-chuck.net/json?
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This API uses the same parameter (address) as the Google API. This API also has no rate limit so you can test as often as you like. If you visit the URL with no parameters, you get &amp;ldquo;No address&amp;hellip;&amp;rdquo; response.&lt;/p&gt;
-
-&lt;p&gt;To call the API, you need to provide the address that you are requesting as the address= parameter that is properly URL encoded using the urllib.parse.urlencode() function as shown in &lt;a href=&#34;http://www.py4e.com/code3/geojson.py&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/geojson.py&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;test-data-sample-execution&#34;&gt;Test Data / Sample Execution&lt;/h3&gt;
-
-&lt;p&gt;You can test to see if your program is working with a location of &amp;ldquo;South Federal University&amp;rdquo; which will have a place_id of &amp;ldquo;ChIJ9e_QQm0sDogRhUPatldEFxw&amp;rdquo;.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;$ python3 solution.py
-Enter location: South Federal University
-Retrieving http://...
-Retrieved 2291 characters
-Place id ChIJ9e_QQm0sDogRhUPatldEFxw
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;调用谷歌API查询指定地点的&lt;code&gt;place id&lt;/code&gt;，因为谷歌地图API现在需要验证，所以最好使用PY4E提供的副本。需要注意，使用py4e提供的副本时，需要额外传递一个key参数，这点在作业说明中没有指出，查看代码包中的代码之后才发现这个值为42，&lt;a href=&#34;http://www.py4e.com/code3/geojson.py&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/geojson.py&lt;/a&gt; 具体见这个链接。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import urllib.error, urllib.request, urllib.parse
-import json
-
-target = &#39;http://py4e-data.dr-chuck.net/json?&#39;  #使用这个接口，需要 key参数且值为42
-local = input(&#39;Enter location: &#39;)
-
-url = target + urllib.parse.urlencode({&#39;address&#39;: local, &#39;key&#39; : 42})
-#对字符串进行url编码，直接传递参数和值构成的字典
-print(&#39;Retriving&#39;, url)
-
-data = urllib.request.urlopen(url).read()
-print(&#39;Retrived&#39;, len(data), &#39;characters&#39;)
-
-js = json.loads(data)
-# print(json.dumps(js, indent = 4)) #查看接收到的文件结构
-print(&#39;Place id&#39;, js[&#39;results&#39;][0][&#39;place_id&#39;])
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;counting-organizations&#34;&gt;Counting Organizations&lt;/h2&gt;
-
-&lt;p&gt;This application will read the mailbox data (mbox.txt) and count the number of email messages per organization (i.e. domain name of the email address) using a database with the following schema to maintain the counts.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;CREATE TABLE Counts (org TEXT, count INTEGER)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;When you have run the program on mbox.txt upload the resulting database file above for grading.&lt;/p&gt;
-
-&lt;p&gt;If you run the program multiple times in testing or with dfferent files, make sure to empty out the data before each run.&lt;/p&gt;
-
-&lt;p&gt;You can use this code as a starting point for your application: &lt;a href=&#34;http://www.py4e.com/code3/emaildb.py&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/emaildb.py&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;The data file for this application is the same as in previous assignments: &lt;a href=&#34;http://www.py4e.com/code3/mbox.txt&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/mbox.txt&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Because the sample code is using an UPDATE statement and committing the results to the database as each record is read in the loop, it might take as long as a few minutes to process all the data. The commit insists on completely writing all the data to disk every time it is called.&lt;/p&gt;
-
-&lt;p&gt;The program can be speeded up greatly by moving the commit operation outside of the loop. In any database program, there is a balance between the number of operations you execute between commits and the importance of not losing the results of operations that have not yet been committed.&lt;/p&gt;
-
-&lt;p&gt;此前做过的统计文本文件中每个人发送的邮件数目的升级版，统计各个公司服务器域名发送的邮件总数，将最终找到的结果保存到了数据库中。需要注意，提交sql查询时为了加快速度要放在循环外部。如何使用SQL可见&lt;a href=&#34;https://docs.python.org/zh-cn/3/library/sqlite3.html#module-sqlite3&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;官方文档&lt;/a&gt;。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import sqlite3
-
-conn = sqlite3.connect(&#39;mail-count.sqlite&#39;)
-cur = conn.cursor()
-
-cur.execute(&#39;DROP TABLE IF EXISTS Counts&#39;)  # 如果存在就提前删除表
-cur.execute(&#39;&#39;&#39;CREATE TABLE Counts (org TEXT, count INTEGER)&#39;&#39;&#39;)    # 创建表
-
-fh = open(&#39;mbox.txt&#39;)
-for line in fh:
-    if not line.startswith(&#39;From:&#39;):
-        continue
-    mail = line.split()[1]
-    index = mail.find(&#39;@&#39;)+1
-    org = mail[index:]
-
-    # 针对org执行sql后续操作，先查询再决定更新还是插入
-    cur.execute(&#39;&#39;&#39;SELECT count FROM Counts WHERE org = ?&#39;&#39;&#39;, (org,) ) #execute函数第二个参数需要是元组
-    num = cur.fetchone()    #返回list，查询不到时返回None
-
-    if num is None:
-        cur.execute(&#39;INSERT INTO Counts(org, count) VALUES(?, 1)&#39;, (org, ))
-    else:
-        cur.execute(&#39;UPDATE Counts SET count = ? WHERE org = ?&#39;, (num[0] + 1, org))
-        # 在进行更新时可以直接 count = count + 1
-
-conn.commit()   #提交放在循环外加速
-cur.execute(&#39;SELECT * FROM Counts ORDER BY count DESC LIMIT 1&#39;)
-print(cur.fetchone())
-cur.close()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;musical-track-database&#34;&gt;Musical Track Database&lt;/h2&gt;
-
-&lt;p&gt;This application will read an iTunes export file in XML and produce a properly normalized database with this structure:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;CREATE TABLE Artist (
-    id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-    name    TEXT UNIQUE
-);
-
-CREATE TABLE Genre (
-    id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-    name    TEXT UNIQUE
-);
-
-CREATE TABLE Album (
-    id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-    artist_id  INTEGER,
-    title   TEXT UNIQUE
-);
-
-CREATE TABLE Track (
-    id  INTEGER NOT NULL PRIMARY KEY
-        AUTOINCREMENT UNIQUE,
-    title TEXT  UNIQUE,
-    album_id  INTEGER,
-    genre_id  INTEGER,
-    len INTEGER, rating INTEGER, count INTEGER
-);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If you run the program multiple times in testing or with different files, make sure to empty out the data before each run.&lt;/p&gt;
-
-&lt;p&gt;You can use this code as a starting point for your application: &lt;a href=&#34;http://www.py4e.com/code3/tracks.zip&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/tracks.zip&lt;/a&gt;. The ZIP file contains the Library.xml file to be used for this assignment. You can export your own tracks from iTunes and create a database, but for the database that you turn in for this assignment, only use the Library.xml data that is provided.&lt;/p&gt;
-
-&lt;p&gt;To grade this assignment, the program will run a query like this on your uploaded database and look for the data it expects to see:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;SELECT Track.title, Artist.name, Album.title, Genre.name
-    FROM Track JOIN Genre JOIN Album JOIN Artist
-    ON Track.genre_id = Genre.ID and Track.album_id = Album.id
-        AND Album.artist_id = Artist.id
-    ORDER BY Artist.name LIMIT 3
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The expected result of the modified query on your database is: (shown here as a simple HTML table with titles)&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;center&#34;&gt;Track&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;Artist&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;Album&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;Genre&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;Chase the Ace&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;AC/DC&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;Who Made Who&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;Rock&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;D.T.&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;AC/DC&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;Who Made Who&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;Rock&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;For Those About To Rock (We Salute You)&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;AC/DC&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;Who Made Who&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;Rock&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import sqlite3
-import xml.etree.ElementTree as ET
-
-conn = sqlite3.connect(&#39;music.sqlite&#39;)
-cur = conn.cursor()
-
-cur.executescript(&#39;&#39;&#39;
-DROP TABLE IF EXISTS Artist;
-DROP TABLE IF EXISTS Genre;
-DROP TABLE IF EXISTS Album;
-DROP TABLE IF EXISTS Track;&#39;&#39;&#39;) 
-#如果存在就先删除表
-# 执行多条查询需要 executescript
-
-cur.executescript(&#39;&#39;&#39;CREATE TABLE Artist (
-    id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-    name    TEXT UNIQUE
-);
-
-CREATE TABLE Genre (
-    id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-    name    TEXT UNIQUE
-);
-
-CREATE TABLE Album (
-    id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-    artist_id  INTEGER,
-    title   TEXT UNIQUE
-);
-
-CREATE TABLE Track (
-    id  INTEGER NOT NULL PRIMARY KEY 
-        AUTOINCREMENT UNIQUE,
-    title TEXT  UNIQUE,
-    album_id  INTEGER,
-    genre_id  INTEGER,
-    len INTEGER, rating INTEGER, count INTEGER
-);&#39;&#39;&#39;)  # 执行多行时注意使用三个引号
-
-file_name = &#39;Library.xml&#39;
-fh = open(file_name)
-tree = ET.fromstring(fh.read())
-dicts = tree.findall(&#39;./dict/dict/dict&#39;)
-
-# 查看xml文件，分析目录树结构 需要在/dict/dict/dict内查找字段
-# 定义查找函数
-def lookup(pare, aim):
-    flag = False
-    for child in pare:
-        if flag:
-            return child.text
-        if child.tag == &#39;key&#39; and child.text == aim:
-            flag = True
-    return None
-
-# 通过构建的数据库情况，需要查找的字段为
-# Track ID   Name    Artist     Album   Play Count  Rating  Total Time
-
-for entry in dicts:
-    if(lookup(entry, &#39;Track ID&#39;) is None):  continue
-    name = lookup(entry, &#39;Name&#39;)
-    artist = lookup(entry, &#39;Artist&#39;)
-    album = lookup(entry, &#39;Album&#39;)
-    count = lookup(entry, &#39;Play Count&#39;)
-    rating = lookup(entry, &#39;Rating&#39;)
-    length = lookup(entry, &#39;Total Time&#39;)
-    genre = lookup(entry, &#39;Genre&#39;)
-
-    if name is None or artist is None or album is None or genre is None:
-        continue
-    print(name, artist, album, count, rating, length)
-
-    # 根据建立数据库的顺序进行插入，并获取外键对应的id值
-    # 注意对于唯一元素插入时使用ignore
-    cur.execute(&#39;&#39;&#39;INSERT OR IGNORE INTO Artist(name) VALUES(?)&#39;&#39;&#39;, (artist,))
-    cur.execute(&#39;SELECT id FROM Artist WHERE name = ?&#39;, (artist,))
-    artist_id = cur.fetchone()[0]   # 查询返回的是数组
-
-    cur.execute(&#39;INSERT OR IGNORE INTO Genre(name) VALUES(?)&#39;, (genre,))
-    cur.execute(&#39;SELECT id FROM Genre WHERE name = ?&#39;,(genre,))
-    genre_id = cur.fetchone()[0]
-
-    cur.execute(&#39;INSERT OR IGNORE INTO Album(artist_id, title) VALUES(?, ?)&#39;,(artist_id, album))
-    cur.execute(&#39;SELECT id FROM Album WHERE title = ?&#39;, (album,))
-    album_id = cur.fetchone()[0]
-
-    # 至于这里为什么要用replace原因不知
-    cur.execute(&#39;&#39;&#39;INSERT OR REPLACE INTO Track(title, album_id, genre_id, len, rating, count) 
-    VALUES(?, ?, ?, ?, ?, ?)&#39;&#39;&#39;,(name, album_id, genre_id, length, rating, count))
-
-conn.commit()
-cur.execute(&#39;&#39;&#39;SELECT Track.title, Artist.name, Album.title, Genre.name
-    FROM Track JOIN Genre JOIN Album JOIN Artist
-    ON Track.genre_id = Genre.ID and Track.album_id = Album.id
-        AND Album.artist_id = Artist.id
-    ORDER BY Artist.name LIMIT 3&#39;&#39;&#39;)
-res = cur.fetchall()
-for line in res:
-    print(line)
-cur.close()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;虽然执行之后结果和示例结果不一样，但是个人认为程序没有错误。&lt;/p&gt;
-
-&lt;h2 id=&#34;make-database-from-json&#34;&gt;Make database from JSON&lt;/h2&gt;
-
-&lt;p&gt;This application will read roster data in JSON format, parse the file, and then produce an SQLite database that contains a User, Course, and Member table and populate the tables from the data file.&lt;/p&gt;
-
-&lt;p&gt;You can base your solution on this code: &lt;a href=&#34;http://www.py4e.com/code3/roster/roster.py&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/roster/roster.py&lt;/a&gt; - this code is incomplete as you need to modify the program to store the &lt;strong&gt;role&lt;/strong&gt; column in the &lt;strong&gt;Member&lt;/strong&gt; table to complete the assignment.&lt;/p&gt;
-
-&lt;p&gt;Each student gets their own file for the assignment. Download this file and save it as &lt;code&gt;roster_data.json&lt;/code&gt;. Move the downloaded file into the same folder as your &lt;code&gt;roster.py&lt;/code&gt; program.&lt;/p&gt;
-
-&lt;p&gt;Once you have made the necessary changes to the program and it has been run successfully reading the above JSON data, run the following SQL command:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;SELECT hex(User.name || Course.title || Member.role ) AS X FROM
-    User JOIN Member JOIN Course
-    ON User.id = Member.user_id AND Member.course_id = Course.id
-    ORDER BY X
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Find the first row in the resulting record set and enter the long string that looks like 53656C696E613333.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import json
-import sqlite3
-
-conn = sqlite3.connect(&#39;rosterdb.sqlite&#39;)
-cur = conn.cursor()
-
-# 建立数据库
-cur.executescript(&#39;&#39;&#39;
-DROP TABLE IF EXISTS User;
-DROP TABLE IF EXISTS Member;
-DROP TABLE IF EXISTS Course;
-
-CREATE TABLE User (
-    id     INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-    name   TEXT UNIQUE
-);
-
-CREATE TABLE Course (
-    id     INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-    title  TEXT UNIQUE
-);
-
-CREATE TABLE Member (
-    user_id     INTEGER,
-    course_id   INTEGER,
-    role        INTEGER,
-    PRIMARY KEY (user_id, course_id)
-)
-&#39;&#39;&#39;)
-
-
-file_name = input(&#39;Enter filename: &#39;)
-if(len(file_name) &amp;lt; 1):
-    file_name = &#39;roster_data.json&#39;
-fh = open(file_name).read()
-js = json.loads(fh)
-
-for record in js:
-    name = record[0]
-    title = record[1]
-    role = record[2]
-
-    cur.execute(&#39;INSERT OR IGNORE INTO User(name) VALUES(?)&#39;, (name,))
-    cur.execute(&#39;SELECT id FROM User WHERE name = ?&#39;, (name,))
-    user_id = cur.fetchone()[0]
-
-    cur.execute(&#39;INSERT OR IGNORE INTO Course(title) VALUES(?)&#39;, (title,))
-    cur.execute(&#39;SELECT id FROM Course WHERE title = ?&#39;, (title,))
-    course_id = cur.fetchone()[0]
-
-    cur.execute(&#39;INSERT OR REPLACE INTO Member(user_id, course_id, role) VALUES(?,?,?)&#39;, (user_id, course_id, role))
-
-cur.execute(&#39;&#39;&#39;SELECT hex(User.name || Course.title || Member.role ) AS X FROM 
-    User JOIN Member JOIN Course 
-    ON User.id = Member.user_id AND Member.course_id = Course.id
-    ORDER BY X LIMIT 5&#39;&#39;&#39;)
-res = cur.fetchall()
-for line in res:
-    print(line)
-
-conn.commit()
-cur.close()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;多对多关系示例。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>PY4E 题目整理（上）</title>
-      <link>https://wanakiki.github.io/2019/python-assignment/</link>
-      <pubDate>Sun, 04 Aug 2019 17:39:49 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/python-assignment/</guid>
-      <description>
-
-&lt;p&gt;Coursera中python教程同步题目整理，因为旁听课程不能直接对每章的编程作业进行提交，学到中期之后才发现&lt;a href=&#34;https://www.py4e.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;py4e&lt;/a&gt;上有几乎所有题目的在线测试环境，在看完所有的教学视频之后重新刷题，回顾知识点，在此进行整理。分为基础部分和网络及数据库编程部分。&lt;/p&gt;
-
-&lt;!-- more --&gt;
-
-&lt;h2 id=&#34;hello-world&#34;&gt;Hello world&lt;/h2&gt;
-
-&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
-
-&lt;p&gt;Write a program that uses a print statement to say &amp;lsquo;hello world&amp;rsquo; as shown in &amp;lsquo;Desired Output&amp;rsquo;.&lt;/p&gt;
-
-&lt;h3 id=&#34;code&#34;&gt;Code&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt; print(&#39;hello world&#39;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;回顾&#34;&gt;回顾&lt;/h3&gt;
-
-&lt;p&gt;Python中字符串可以用四种引号组合进行标注：&lt;code&gt;&#39; &amp;quot; &#39;&#39;&#39; &amp;quot;&amp;quot;&amp;quot;&lt;/code&gt;，其中单独的单引或者双引可以使引号内部不同的引号不需要进行转义，如&lt;code&gt;&amp;quot;this is &#39;a&#39; test&amp;quot;&lt;/code&gt;中的单引号就不需要进行转义。三个单引号和双引号具有相同的作用，可以保证被定义的字符串原封不动地输出（一般定义多行），在后面执行SQL语句时有用到。同时其中的单引号或者双引号不需要转义。&lt;/p&gt;
-
-&lt;h2 id=&#34;2-3&#34;&gt;2-3&lt;/h2&gt;
-
-&lt;h3 id=&#34;problem-1&#34;&gt;Problem&lt;/h3&gt;
-
-&lt;p&gt;Write a program to prompt the user for hours and rate per hour using input to compute gross pay. Use 35 hours and a rate of 2.75 per hour to test the program (the pay should be 96.25). You should use input to read a string and float() to convert the string to a number. Do not worry about error checking or bad user data.&lt;/p&gt;
-
-&lt;p&gt;根据输入的时间和工资标准计算总工资，并输出。假定时间为35小时，工资标准为2.75每小时，标准结果应为96.25。&lt;/p&gt;
-
-&lt;h3 id=&#34;desired-output&#34;&gt;Desired Output&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;Pay: 96.25
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;code-1&#34;&gt;Code&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# This first line is provided for you
-
-hrs = input(&amp;quot;Enter Hours:&amp;quot;)
-hrs = float(hrs)
-
-rate = float(input(&amp;quot;Enter Rate:&amp;quot;))
-print(&#39;Pay:&#39;, hrs * rate)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;3-1&#34;&gt;3-1&lt;/h2&gt;
-
-&lt;h3 id=&#34;problem-2&#34;&gt;Problem&lt;/h3&gt;
-
-&lt;p&gt;Write a program to prompt the user for hours and rate per hour using input to compute gross pay. Pay the hourly rate for the hours up to 40 and 1.5 times the hourly rate for all hours worked above 40 hours. Use 45 hours and a rate of 10.50 per hour to test the program (the pay should be 498.75). You should use input to read a string and float() to convert the string to a number. Do not worry about error checking the user input - assume the user types numbers properly.&lt;/p&gt;
-
-&lt;p&gt;根据时长和工资标准计算工资，工作时间大于40小时的部分需要付1.5倍工资，标准输入为45，10.5，标准输出为498.75。&lt;/p&gt;
-
-&lt;h3 id=&#34;code-2&#34;&gt;Code&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;hrs = input(&amp;quot;Enter Hours:&amp;quot;)
-h = float(hrs)
-
-rate = float(input(&amp;quot;Enter Rates:&amp;quot;))
-if h &amp;gt; 40:
-    res = 40 * rate + (h - 40) * rate * 1.5
-else:
-    res = rate * 40
-print(res)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;3-3&#34;&gt;3-3&lt;/h2&gt;
-
-&lt;h3 id=&#34;program&#34;&gt;Program&lt;/h3&gt;
-
-&lt;p&gt;Write a program to prompt for a score between 0.0 and 1.0. If the score is out of range, print an error. If the score is between 0.0 and 1.0, print a grade using the following table:&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;center&#34;&gt;Score&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;Grade&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;&amp;gt;= 0.9&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;A&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;&amp;gt;= 0.8&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;B&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;&amp;gt;= 0.7&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;C&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;&amp;gt;= 0.6&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;D&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;&amp;lt; 0.6&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;F&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;If the user enters a value out of range, print a suitable error message and exit. For the test, enter a score of 0.85.&lt;/p&gt;
-
-&lt;p&gt;按照表格输出对应的级别，要求输入在0到1，越界输出错误信息，假定输入为0.85。&lt;/p&gt;
-
-&lt;h3 id=&#34;code-3&#34;&gt;Code&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-py&#34;&gt;score = input(&amp;quot;Enter Score: &amp;quot;)
-grade = [&#39;D&#39;,&#39;C&#39;,&#39;B&#39;,&#39;A&#39;]
-
-try:
-    score = float(score)
-except:
-    print(&#39;输入不是浮点数&#39;)
-    quit()
-
-if score &amp;lt; 0 or score &amp;gt; 1:
-    print(&#39;输入不在指定范围&#39;)
-    quit()
-
-score = int(score * 10)
-
-if score &amp;lt; 6:
-    print(&#39;F&#39;)
-elif score &amp;gt; 9:
-    print(&#39;A&#39;)
-else:
-    print(grade[score-6])
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;没有用那么多的判断，使用了一个list。&lt;/p&gt;
-
-&lt;h2 id=&#34;4-6&#34;&gt;4-6&lt;/h2&gt;
-
-&lt;h3 id=&#34;problem-3&#34;&gt;Problem&lt;/h3&gt;
-
-&lt;p&gt;Write a program to prompt the user for hours and rate per hour using input to compute gross pay. Pay should be the normal rate for hours up to 40 and time-and-a-half for the hourly rate for all hours worked above 40 hours. Put the logic to do the computation of pay in a function called computepay() and use the function to do the computation. The function should return a value. Use 45 hours and a rate of 10.50 per hour to test the program (the pay should be 498.75). You should use input to read a string and float() to convert the string to a number. Do not worry about error checking the user input unless you want to - you can assume the user types numbers properly. Do not name your variable sum or use the sum() function.&lt;/p&gt;
-
-&lt;p&gt;使用函数计算&lt;a href=&#34;#3-1&#34;&gt;3-1问题&lt;/a&gt;，假定输入规范，测试输入为45h，10.5，标准结果为498.75。&lt;/p&gt;
-
-&lt;h3 id=&#34;code-4&#34;&gt;Code&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def computepay(h, r):
-    if h &amp;lt;= 40:
-        return h * r
-    else:
-        return 40 * r + (h - 40) * r * 1.5
-
-
-hrs = input(&amp;quot;Enter Hours:&amp;quot;)
-hrs = float(hrs)
-rat = float(input(&amp;quot;Enter Rates:&amp;quot;))
-
-p = computepay(hrs, rat)
-print(p)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;5-2&#34;&gt;5-2&lt;/h2&gt;
-
-&lt;h3 id=&#34;problem-4&#34;&gt;Problem&lt;/h3&gt;
-
-&lt;p&gt;Write a program that repeatedly prompts a user for integer numbers until the user enters &amp;lsquo;done&amp;rsquo;. Once &amp;lsquo;done&amp;rsquo; is entered, print out the largest and smallest of the numbers. If the user enters anything other than a valid number catch it with a try/except and put out an appropriate message and ignore the number. Enter 7, 2, bob, 10, and 4 and match the output below.&lt;/p&gt;
-
-&lt;p&gt;写一个程序监测用户输入的整数，直到用户输入“done”程序停止，之后程序输出这批数字的最大值和最小值。需要对输入进行检测，对于不合法的输入需要输出&lt;code&gt;Invalid input&lt;/code&gt;。&lt;/p&gt;
-
-&lt;h3 id=&#34;code-5&#34;&gt;Code&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;largest = None
-smallest = None
-while True:
-    num = input(&amp;quot;Enter a number: &amp;quot;)
-    if num == &amp;quot;done&amp;quot;:
-        break
-
-    try:
-        num = int(num)
-    except:
-        print(&#39;Invalid input&#39;)
-        continue
-
-    if largest is None:
-        largest = num
-        smallest = num
-    else:
-        if largest &amp;lt; num:
-            largest = num
-        if smallest &amp;gt; num:
-            smallest = num
-
-print(&amp;quot;Maximum is&amp;quot;, largest)
-print(&amp;quot;Minimum is&amp;quot;, smallest)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;6-5&#34;&gt;6-5&lt;/h2&gt;
-
-&lt;p&gt;Write code using find() and string slicing (see section 6.10) to extract the number at the end of the line below. Convert the extracted value to a floating point number and print it out.&lt;/p&gt;
-
-&lt;p&gt;通过find和切片截取字符串中的浮点数。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;text = &amp;quot;X-DSPAM-Confidence:    0.8475&amp;quot;
-index = text.find(&#39;0&#39;)
-
-res = float(text[index:])
-print(res)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;7-2&#34;&gt;7-2&lt;/h2&gt;
-
-&lt;p&gt;Write a program that prompts for a file name, then opens that file and reads through the file, looking for lines of the form:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;X-DSPAM-Confidence:    0.8475
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Count these lines and extract the floating point values from each of the lines and compute the average of those values and produce an output as shown below. Do not use the sum() function or a variable named sum in your solution.&lt;/p&gt;
-
-&lt;p&gt;You can download the sample data at &lt;a href=&#34;http://www.py4e.com/code3/mbox-short.txt&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/mbox-short.txt&lt;/a&gt; when you are testing below enter mbox-short.txt as the file name.&lt;/p&gt;
-
-&lt;p&gt;文件操作，提取指定格式行的数据，并计算平均值。标准输出为&lt;code&gt;Average spam confidence: 0.750718518519&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def getNumber(line : str):
-    index = line.find(&#39;:&#39;) + 1  #查找冒号更加合适
-    return float(line[index:])
-
-# Use the file name mbox-short.txt as the file name
-fname = input(&amp;quot;Enter file name: &amp;quot;)
-if len(fname) &amp;lt; 1:
-    fname = &#39;mbox-short.txt&#39;
-fh = open(fname)
-
-Sum = 0
-num = 0
-for line in fh:
-    if not line.startswith(&amp;quot;X-DSPAM-Confidence:&amp;quot;):
-        continue
-    Sum = Sum + getNumber(line.rstrip())
-    num = num + 1
-
-print(&#39;Average spam confidence:&#39;, Sum / num)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;8-4&#34;&gt;8-4&lt;/h2&gt;
-
-&lt;p&gt;Open the file romeo.txt and read it line by line. For each line, split the line into a list of words using the split() method. The program should build a list of words. For each word on each line check to see if the word is already in the list and if not append it to the list. When the program completes, sort and print the resulting words in alphabetical order.&lt;/p&gt;
-
-&lt;p&gt;You can download the sample data at &lt;a href=&#34;http://www.py4e.com/code3/romeo.txt&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/romeo.txt&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;读取文件，统计其中出现过的单词，按字典序输出。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fname = input(&amp;quot;Enter file name: &amp;quot;)
-if len(fname) &amp;lt; 1:
-    fname = &#39;romeo.txt&#39;
-fh = open(fname)
-lst = list()
-
-for line in fh:
-    line = line.rstrip()
-    words = line.split()
-
-    for word in words:
-        if word not in lst:
-            lst.append(word)
-
-lst.sort()
-print(lst)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;8-5&#34;&gt;8-5&lt;/h2&gt;
-
-&lt;p&gt;Open the file mbox-short.txt and read it line by line. When you find a line that starts with &amp;lsquo;From &amp;rsquo; like the following line:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You will parse the From line using split() and print out the second word in the line (i.e. the entire address of the person who sent the message). Then print out a count at the end.&lt;/p&gt;
-
-&lt;p&gt;Hint: make sure not to include the lines that start with &amp;lsquo;From:&amp;lsquo;.&lt;/p&gt;
-
-&lt;p&gt;You can download the sample data at &lt;a href=&#34;http://www.py4e.com/code3/mbox-short.txt&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.py4e.com/code3/mbox-short.txt&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;读文件，对其中&lt;code&gt;From&lt;/code&gt;开始的行，输出邮件来源并统计个数，在最后输出统计结果。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;fname = input(&amp;quot;Enter file name: &amp;quot;)
-if len(fname) &amp;lt; 1:
-    fname = &amp;quot;mbox-short.txt&amp;quot;
-
-fh = open(fname)
-count = 0
-
-for line in fh:
-    if not line.startswith(&#39;From &#39;):
-        continue
-    line = line.split()
-    print(line[1])
-    count = count + 1
-
-print(&amp;quot;There were&amp;quot;, count, &amp;quot;lines in the file with From as the first word&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;9-4&#34;&gt;9-4&lt;/h2&gt;
-
-&lt;p&gt;Write a program to read through the mbox-short.txt and figure out who has sent the greatest number of mail messages. The program looks for &amp;lsquo;From &amp;rsquo; lines and takes the second word of those lines as the person who sent the mail. The program creates a Python dictionary that maps the sender&amp;rsquo;s mail address to a count of the number of times they appear in the file. After the dictionary is produced, the program reads through the dictionary using a maximum loop to find the most prolific committer.&lt;/p&gt;
-
-&lt;p&gt;统计文件中的发信人行，使用字典存储每个人发送邮件的数目。最后使用一个最大for循环，查找到发送最多邮件的人。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;name = input(&amp;quot;Enter file:&amp;quot;)
-if len(name) &amp;lt; 1:
-    name = &amp;quot;mbox-short.txt&amp;quot;
-handle = open(name)
-res = dict()
-
-for line in handle:
-    if not line.startswith(&#39;From &#39;):
-        continue
-
-    line = line.split()
-    author = line[1]
-    res[author] = res.get(author, 0) + 1
-
-name = None
-count = None
-for k, v in res.items():
-    if count is None or v &amp;gt; count:
-        count = v
-        name = k
-
-print(name, count)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;10-2&#34;&gt;10-2&lt;/h2&gt;
-
-&lt;p&gt;Write a program to read through the mbox-short.txt and figure out the distribution by hour of the day for each of the messages. You can pull the hour out from the &amp;lsquo;From &amp;rsquo; line by finding the time and then splitting the string a second time using a colon.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Once you have accumulated the counts for each hour, print out the counts, sorted by hour as shown below.&lt;/p&gt;
-
-&lt;p&gt;统计各个时段中邮件的数目，存储到字典之中，最后按照时间顺序输出各个时间段对应的邮件数。（需要对dict进行排序）&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;name = input(&amp;quot;Enter file:&amp;quot;)
-if len(name) &amp;lt; 1 : name = &amp;quot;mbox-short.txt&amp;quot;
-handle = open(name)
-
-status = {}
-for line in handle:
-    if not line.startswith(&#39;From &#39;):
-        continue
-
-    # 抓取时间
-    line = line.split()
-    line = line[5]
-    line = line.split(&#39;:&#39;)
-
-    # 截取时间
-    tim = line[0]
-    if tim in status:
-        status[tim] = status[tim] + 1
-    else:
-        status[tim] = 1
-
-res = sorted([(k, v) for (k, v) in status.items()])
-for k, v in res:
-    print(k, v)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上面将dict转化为list的步骤利用了python的特性。&lt;/p&gt;
-
-&lt;h2 id=&#34;regular-expressions&#34;&gt;Regular Expressions&lt;/h2&gt;
-
-&lt;h3 id=&#34;finding-numbers-in-a-haystack&#34;&gt;Finding Numbers in a Haystack&lt;/h3&gt;
-
-&lt;p&gt;In this assignment you will read through and parse a file with text and numbers. You will extract all the numbers in the file and compute the sum of the numbers.&lt;/p&gt;
-
-&lt;h3 id=&#34;data-files&#34;&gt;Data Files&lt;/h3&gt;
-
-&lt;p&gt;We provide two files for this assignment. One is a sample file where we give you the sum for your testing and the other is the actual data you need to process for the assignment.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Sample data: &lt;a href=&#34;http://py4e-data.dr-chuck.net/regex_sum_42.txt&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://py4e-data.dr-chuck.net/regex_sum_42.txt&lt;/a&gt; (There are 90 values with a sum=445833)&lt;/li&gt;
-&lt;li&gt;Actual data: &lt;a href=&#34;http://py4e-data.dr-chuck.net/regex_sum_275911.txt&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://py4e-data.dr-chuck.net/regex_sum_275911.txt&lt;/a&gt; (There are 92 values and the sum ends with 76)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;These links open in a new window. Make sure to save the file into the same folder as you will be writing your Python program. Note: Each student will have a distinct data file for the assignment - so only use your own data file for analysis.&lt;/p&gt;
-
-&lt;h3 id=&#34;data-format&#34;&gt;Data Format&lt;/h3&gt;
-
-&lt;p&gt;The file contains much of the text from the introduction of the textbook except that random numbers are inserted throughout the text. Here is a sample of the output you might see:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-no&#34;&gt;Why should you learn to write programs? 7746
-12 1929 8827
-Writing programs (or programming) is a very creative
-7 and rewarding activity.  You can write programs for
-many reasons, ranging from making your living to solving
-8837 a difficult data analysis problem to having fun to helping 128
-someone else solve a problem.  This book assumes that
-everyone needs to know how to program ...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The sum for the sample text above is 27486. The numbers can appear anywhere in the line. There can be any number of numbers in each line (including none).&lt;/p&gt;
-
-&lt;h3 id=&#34;handling-the-data&#34;&gt;Handling The Data&lt;/h3&gt;
-
-&lt;p&gt;The basic outline of this problem is to read the file, look for integers using the re.findall(), looking for a regular expression of &amp;lsquo;[0-9]+&amp;rsquo; and then converting the extracted strings to integers and summing up the integers.&lt;/p&gt;
-
-&lt;h3 id=&#34;my-code&#34;&gt;My Code&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# 统计文件中数字的总和
-import re
-
-filename = input(&#39;Input filename:&#39;)
-if len(filename) &amp;lt; 1:
-    filename = &#39;regex_sum_275911.txt&#39;
-
-res = 0
-fh = open(filename)
-for line in fh:
-    tmp = re.findall(&#39;[0-9]+&#39;, line)
-
-    # 计算一行中数字的和
-    for x in tmp:
-        res = res + int(x)
-
-print(res)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;两行代码解决问题&lt;/strong&gt;（好熟悉&amp;hellip;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;Python 2
-import re
-print sum( [ ****** *** * in **********(&#39;[0-9]+&#39;,**************************.read()) ] )
-
-Python 3:
-import re
-print( sum( [ ****** *** * in **********(&#39;[0-9]+&#39;,**************************.read()) ] ) )
-&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

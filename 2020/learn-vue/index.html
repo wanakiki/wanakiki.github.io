@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Wanakiki">
+  
+  
+  
+  <link rel="prev" href="https://wanakiki.github.io/2020/about-iic/" />
+  <link rel="next" href="https://wanakiki.github.io/2020/flask-api-exception/" />
+  <link rel="canonical" href="https://wanakiki.github.io/2020/learn-vue/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           VUE框架入门 | Wanakiki`s Blog
+       
+  </title>
+  <meta name="title" content="VUE框架入门 | Wanakiki`s Blog">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/wanakiki.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "VUE框架入门",
+    "headline" : "VUE框架入门",
+    "description" : "在学习VUE入门视频时记录的知识点和代码，备忘。 基本 el:挂载点，id选择器#，不能挂载到\x26lt;html\x26gt; \x26lt;body\x26gt;两",
+    "inLanguage" : "zh-cn",
+    "author" : "Wanakiki",
+    "creator" : "Wanakiki",
+    "publisher": "Wanakiki",
+    "accountablePerson" : "Wanakiki",
+    "copyrightHolder" : "Wanakiki",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-07-08 12:19:49 \x2b0800 CST",
+    "dateModified" : "2020-07-08 12:19:49 \x2b0800 CST",
+    "url" : "https:\/\/wanakiki.github.io\/2020\/learn-vue\/",
+    "wordCount" : "2126",
+    "keywords" : [  "Wanakiki`s Blog"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://wanakiki.github.io">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://wanakiki.github.io">Wanakiki`s Blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">VUE框架入门</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://wanakiki.github.io" rel="author">Wanakiki</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2020-07-08 itemprop="datePublished">July 8, 2020</time>
+                </span>
+                in
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>在学习<a href="https://www.bilibili.com/video/BV12J411m7MG?from=search&amp;seid=11359227674252544915" rel="nofollow noreferrer" target="_blank">VUE入门视频</a>时记录的知识点和代码，备忘。</p>
+
+<!-- more -->
+
+<h2 id="基本">基本</h2>
+
+<p>el:挂载点，id选择器<code>#</code>，不能挂载到<code>&lt;html&gt; &lt;body&gt;</code>两个标签</p>
+
+<h2 id="vue指令">Vue指令</h2>
+
+<h3 id="内容绑定-事件绑定">内容绑定、事件绑定</h3>
+
+<p><code>v-text</code>设置标签内容，支持用插值表达式对原有变量进行相关操作。和两个花括号基本等价。</p>
+
+<pre><code class="language-html">&lt;div id=&quot;vtext_app&quot;&gt;
+    &lt;h2 v-text=&quot;message + '!'&quot;&gt;&lt;/h2&gt;
+    &lt;h2&gt;局部更新{{ message + &quot;!&quot; }}&lt;/h2&gt;
+    &lt;h2 v-text=&quot;info&quot;&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var cur_app = new Vue({
+        el:&quot;#vtext_app&quot;,
+        data:{
+            message:&quot;test&quot;,
+            info: &quot;多个变量支持&quot;
+        }
+    })
+&lt;/script&gt;
+</code></pre>
+
+<p><code>v-html</code>设置innerhtml属性，如果要渲染html结构，需要使用该语句。</p>
+
+<pre><code class="language-html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id=&quot;app&quot;&gt;
+            &lt;p v-text=&quot;content1&quot;&gt;&lt;/p&gt;
+            &lt;p v-html=&quot;content1&quot;&gt;&lt;/p&gt;
+            &lt;p v-text=&quot;content2&quot;&gt;&lt;/p&gt;
+            &lt;p v-html=&quot;content2&quot;&gt;&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;script&gt;
+            var app = new Vue({
+                el:&quot;#app&quot;,
+                data:{
+                    content1:&quot;hello&quot;,
+                    content2:&quot;&lt;a href='http://www.baidu.com'&gt;百度&lt;/a&gt;&quot;
+                }
+            });
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p><code>v-on</code>为元素绑定事件，点击、按键、鼠标滚动等，与@符号等价。时间对应的方法需要提前准备在<code>methods</code>当中。</p>
+
+<pre><code class="language-html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id=&quot;app&quot;&gt;
+            &lt;input type=&quot;button&quot; value=&quot;v-on&quot; v-on:click=&quot;doIt&quot;&gt;
+            &lt;input type=&quot;button&quot; value=&quot;v-on简写&quot; @click=&quot;doIt&quot;&gt;
+            &lt;input type=&quot;button&quot; value=&quot;双击事件&quot; @dblclick=&quot;doIt&quot;&gt;
+
+            &lt;!-- 不操作dom，修改数据 --&gt;
+            &lt;h2 @click=&quot;changeFood&quot;&gt;{{ food }}&lt;/h2&gt;
+        &lt;/div&gt;
+        &lt;script&gt;
+            var app = new Vue({
+                el:&quot;#app&quot;,
+                data: {
+                    food:&quot;番茄&quot;,
+                },
+                methods: {
+                    doIt: function(){
+                        alert(&quot;方法测试&quot;);
+                    },
+                    changeFood:function(){
+                        console.log(this.food);
+                        this.food += '好吃';
+                    }
+                },
+            });
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>综合小实例，计数器。</p>
+
+<pre><code class="language-html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id=&quot;app&quot;&gt;
+            &lt;div class=&quot;input-num&quot;&gt;
+                &lt;button @click=&quot;sub&quot;&gt;-&lt;/button&gt;
+                &lt;span&gt;{{ num }}&lt;/span&gt;
+                &lt;button @click=&quot;add&quot;&gt;+&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;script&gt;
+            var app = new Vue({
+                el:&quot;#app&quot;,
+                data: {
+                    num: 0,
+                },
+                methods: {
+                    add:function(){
+                        if(this.num &lt; 10){
+                            this.num++;
+                        }else{
+                            alert('已经达到最大值');
+                        }                        
+                    },
+                    sub:function(){
+                        if(this.num &gt; 0){
+                            this.num--;
+                        }else{
+                            alert('已经到达最小值');
+                        }
+                    }
+                },
+            });
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h3 id="显示切换-属性绑定">显示切换、属性绑定</h3>
+
+<p><code>v-show</code>根据表达式的真假，切换元素的显示隐藏状态。本质上是切换display属性。</p>
+
+<pre><code class="language-html">&lt;html&gt;
+
+&lt;head&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;input type=&quot;button&quot; value=&quot;切换显示状态&quot; @click=&quot;changeIsShow&quot;&gt;
+        &lt;img v-show=&quot;isShow&quot; src=&quot;https://i0.hdslb.com/bfs/archive/e62b6b095ef38dfb742687f11e4b570dde420b5d.png&quot; alt=&quot;&quot;&gt;
+        &lt;img v-show=&quot;age&gt;=18&quot; src=&quot;https://i0.hdslb.com/bfs/archive/e62b6b095ef38dfb742687f11e4b570dde420b5d.png&quot; alt=&quot;&quot;&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        var app = new Vue({
+            el: &quot;#app&quot;,
+            data:{
+                isShow: false,
+                age: 18
+            },
+            methods: {
+                changeIsShow:function(){
+                    this.isShow = !this.isShow;
+                }
+            },
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+
+<p><code>v-if</code>根据表达式的真假，切换元素的显示和隐藏，本质是操作dom元素的移除或添加，并非切换样式。表达式最终会解释为布尔值。</p>
+
+<pre><code class="language-html">&lt;html&gt;
+
+&lt;head&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;input type=&quot;button&quot; value=&quot;切换显示状态&quot; @click=&quot;toggleIsShow&quot;&gt;
+        &lt;p v-if=&quot;isShow&quot;&gt;v-if测试&lt;/p&gt;
+        &lt;p v-show=&quot;isShow&quot;&gt;v-show测试&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        var app = new Vue({
+            el: &quot;#app&quot;,
+            data: {
+                isShow: false,
+            },
+            methods: {
+                toggleIsShow: function () {
+                    this.isShow = !this.isShow;
+                }
+            },
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+
+<p><code>v-bind</code>设置元素的属性，src、class，使用方式为<code>v-bind:属性=值</code>，可以省略指令，直接用冒号拼接属性值。设置class可以通过三元表达式或者用对象的方式来设置，推荐用后者。</p>
+
+<pre><code class="language-html">&lt;html&gt;
+
+&lt;head&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+    &lt;style&gt;
+        .active{
+            border: 1px solid red;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;img v-bind:src=&quot;imgSrc&quot; alt=&quot;&quot;&gt;
+        &lt;br&gt;
+        &lt;img :src=&quot;imgSrc&quot; alt=&quot;&quot; :title=&quot;imgTitle+'!!!'&quot; :class=&quot;isActive?'active':''&quot; @click=&quot;toggleActive&quot;&gt;
+        &lt;br&gt;
+        &lt;img :src=&quot;imgSrc&quot; alt=&quot;&quot; :title=&quot;imgTitle+'!!!'&quot; :class=&quot;{active:isActive}&quot; @click=&quot;toggleActive&quot;&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        var app = new Vue({
+            el: &quot;#app&quot;,
+            data: {
+                imgSrc:&quot;https://i0.hdslb.com/bfs/archive/e62b6b095ef38dfb742687f11e4b570dde420b5d.png&quot;,
+                imgTitle: &quot;vbind测试&quot;,
+                isActive: false,
+            },
+            methods: {
+                toggleActive:function(){
+                    this.isActive = !this.isActive;
+                }
+            },
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+
+<p>轮播图实例</p>
+
+<pre><code class="language-html">&lt;html&gt;
+
+&lt;head&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div id=&quot;mask&quot;&gt;
+        &lt;div class=&quot;center&quot;&gt;
+            &lt;!-- 左箭头 --&gt;
+            &lt;!-- &lt;a href=&quot;javascript:void(0)&quot; @click=&quot;prev&quot; class=&quot;left&quot;&gt;
+                &lt;img src=&quot;&quot; alt=&quot;&quot;&gt;
+            &lt;/a&gt; --&gt;
+            &lt;input type=&quot;button&quot; value=&quot;←&quot; v-show=&quot;index!=0&quot; @click=&quot;prev&quot;&gt;
+
+            &lt;!-- 图片 --&gt;
+            &lt;img :src=&quot;imgArr[index]&quot; alt=&quot;&quot;&gt;
+
+            &lt;!-- 右箭头 --&gt;
+            &lt;!-- &lt;a href=&quot;javascript:void(0)&quot; @click=&quot;next&quot; class=&quot;right&quot;&gt;
+                &lt;img src=&quot;&quot; alt=&quot;&quot;&gt;
+            &lt;/a&gt; --&gt;
+            &lt;input type=&quot;button&quot; value=&quot;→&quot; v-show=&quot;index&lt;imgArr.length-1&quot; @click=&quot;next&quot;&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+        var app = new Vue({
+            el:&quot;#mask&quot;,
+            data:{
+                imgArr:[
+                    &quot;https://i0.hdslb.com/bfs/archive/23f7ccf8b4cb143c6af7e6dc8534283bef293cb4.jpg@321w_182h_1c_100q.webp&quot;,
+                    &quot;https://i0.hdslb.com/bfs/archive/6a85c04866e27c51929c289dcef3011cb5db1d5f.jpg@321w_182h_1c_100q.webp&quot;,
+                    &quot;https://i2.hdslb.com/bfs/archive/90b09328d7daaa6fbff5002d25a311ada086f21b.jpg@321w_182h_1c_100q.webp&quot;
+                ],
+                index:1
+            },
+            methods: {
+                prev:function(){
+                    console.log(this.index);
+                    this.index--;
+                },
+                next:function(){
+                    this.index++;
+                }
+                
+            },
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+
+<h3 id="列表循环-表单元素绑定">列表循环、表单元素绑定</h3>
+
+<p><code>v-for</code>根据数据生成列表结构，经常和数组结合使用，语法是<code>(item, index) in 数据</code>，数组内容的更新会同步到页面上。</p>
+
+<pre><code class="language-html">&lt;html&gt;
+
+&lt;head&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;ul&gt;
+            &lt;li v-for=&quot;(item,index) in arr&quot;&gt;
+                {{ index + 1}} 地点：{{ item }}
+            &lt;/li&gt;
+        &lt;/ul&gt;
+        
+        &lt;input type=&quot;button&quot; value=&quot;添加数据&quot; @click=&quot;add&quot;&gt;
+        &lt;input type=&quot;button&quot; value=&quot;移除数据&quot; @click=&quot;remove&quot;&gt;
+        &lt;h2 v-for=&quot;item in vegetable&quot; v-bind:title=&quot;item.name&quot;&gt;
+            {{ item.name }}
+        &lt;/h2&gt;
+        
+    &lt;/div&gt;
+    &lt;script&gt;
+        var app = new Vue({
+            el: &quot;#app&quot;,
+            data:{
+                arr:[&quot;Beijing&quot;, &quot;ShangHai&quot;, &quot;GuangZhou&quot;],
+                vegetable:[
+                    {name:&quot;西兰花炒蛋&quot;},
+                    {name:&quot;蛋炒西兰花&quot;}
+                ]
+            },
+            methods: {
+                add:function(){
+                    this.vegetable.push({name:&quot;🥦&quot;})
+                },
+                remove:function(){
+                    this.vegetable.shift();
+                }
+            },
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+
+<p><code>v-on</code>补充内容，传递自定义参数、事件修饰符。</p>
+
+<pre><code class="language-html">&lt;html&gt;
+
+&lt;head&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;input type=&quot;button&quot; value=&quot;点击&quot; @click=&quot;doIt(666, '老铁')&quot;&gt;
+        &lt;input type=&quot;text&quot;  @keyup.enter=&quot;sayHi&quot;&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        var app = new Vue({
+            el: &quot;#app&quot;,
+            methods: {
+                doIt:function(p1, p2){
+                    console.log('do it');
+                    console.log(p1);
+                    console.log(p2);
+                },
+                sayHi:function(){
+                    alert(&quot;吃了没？&quot;);
+                }
+            },
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+
+<p><code>v-model</code>获取和设置表单元素的值（双向数据绑定）</p>
+
+<pre><code class="language-html">&lt;html&gt;
+
+&lt;head&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;input type=&quot;text&quot; v-model=&quot;message&quot; @keyup.enter=&quot;getM&quot;&gt;
+        &lt;h2&gt;{{ message }}&lt;/h2&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        var app = new Vue({
+            el: &quot;#app&quot;,
+            data:{
+                message:&quot;双向数据绑定 VUE全响应数据开发&quot;
+            },
+            methods: {
+                getM:function(){
+                    alert(this.message);
+                }
+            },
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+
+<h3 id="本地应用-记事本">本地应用 记事本</h3>
+
+<p>没有写样式，只用了几个按钮：</p>
+
+<pre><code class="language-html">&lt;html&gt;
+
+&lt;head&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;p&gt;输入回车自动记录&lt;/p&gt;
+        &lt;input type=&quot;text&quot; v-model=&quot;message&quot; @keyup.enter=&quot;addNote(message)&quot;&gt;
+        &lt;input type=&quot;button&quot; value=&quot;删除全部&quot; @click=&quot;deleteAll&quot; v-show=&quot;todos.length!=0&quot;&gt;
+        &lt;br&gt;
+        &lt;h3 v-text=&quot;'待办总数' + todos.length&quot; v-if=&quot;todos.length != 0&quot;&gt;&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li v-for=&quot;(item, index) in todos&quot;&gt;
+                {{index}} {{ item }}
+                &lt;input type=&quot;button&quot; value=&quot;×&quot; @click=&quot;deleteOne(index)&quot;&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        var app = new Vue({
+            el: &quot;#app&quot;,
+            data: {
+                message: &quot;输入待办&quot;,
+                todos:['写代码', '备考']
+            },
+            methods: {
+                deleteAll:function(){
+                    // this.todos.splice(0);
+                    this.todos = [];
+                },
+                addNote:function(message){
+                    this.todos.push(message);
+                },
+                deleteOne:function(index){
+                    this.todos.splice(index, 1);
+                }
+            },
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+
+<h2 id="网络">网络</h2>
+
+<p>axios引入<code>&lt;script src=&quot;https://unpkg.com/axios/dist/axios.min.js&quot;&gt;&lt;/script&gt;</code></p>
+
+<p>使用的api：<code>https://github.com/AutumnFish/testApi</code></p>
+
+<p>需要注意axios回调函数中的this已经改变，不能访问VUE实例中的数据。可以先把this保存起来，在回调函数中使用保存的this。</p>
+
+<p><code>https://autumnfish.cn/</code>歌曲相关api</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Wanakiki </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://wanakiki.github.io/2020/learn-vue/>https://wanakiki.github.io/2020/learn-vue/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://wanakiki.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://wanakiki.github.io/2020/about-iic/" class="prev" rel="prev" title="IIC总线协议"><i class="iconfont icon-left"></i>&nbsp;IIC总线协议</a>
+         
+        
+        <a href="https://wanakiki.github.io/2020/flask-api-exception/" class="next" rel="next" title="Flask框架下API开发异常处理">Flask框架下API开发异常处理&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://wanakiki.github.io">Wanakiki</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>
