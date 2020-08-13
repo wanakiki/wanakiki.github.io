@@ -6,10 +6,19 @@
     <description>Recent content in 爬虫 on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 18 May 2020 20:44:50 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 13 Aug 2020 22:16:21 +0800</lastBuildDate>
     
 	<atom:link href="https://wanakiki.github.io/tags/%E7%88%AC%E8%99%AB/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python爬虫 代理IP地址获取及使用</title>
+      <link>https://wanakiki.github.io/2020/spider-with-proxy/</link>
+      <pubDate>Thu, 13 Aug 2020 22:16:21 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2020/spider-with-proxy/</guid>
+      <description>最近别人发给了一个邀请链接，问能不能刷满邀请人数，简单试了一下，网站对访问IP进行了记录，不能用一个IP一直访问，想到的解决方案是套上代理来</description>
+    </item>
     
     <item>
       <title>百度翻译爬虫</title>

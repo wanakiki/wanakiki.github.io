@@ -5,8 +5,80 @@
     <description>Recent content in Wanakiki`s Blog on Wanakiki`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 08 Jul 2020 12:27:41 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 13 Aug 2020 22:16:21 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Python爬虫 代理IP地址获取及使用</title>
+      <link>https://wanakiki.github.io/2020/spider-with-proxy/</link>
+      <pubDate>Thu, 13 Aug 2020 22:16:21 +0800</pubDate>
+      
+      <guid>https://wanakiki.github.io/2020/spider-with-proxy/</guid>
+      <description>
+
+&lt;p&gt;最近别人发给了一个邀请链接，问能不能刷满邀请人数，简单试了一下，网站对访问IP进行了记录，不能用一个IP一直访问，想到的解决方案是套上代理来实现刷点击量的目的。&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;p&gt;自从学了点爬虫知识之后，这是第一次需要使用代理的场景，简单记录一下实现点击量目标所做的工作。&lt;/p&gt;
+
+&lt;h3 id=&#34;站点分析&#34;&gt;站点分析&lt;/h3&gt;
+
+&lt;p&gt;在接到这个链接之后，先用浏览器访问了一遍查看了一下相关请求，发现并没有与IP地址相关的加载项，于是花几分钟写了个简单的请求脚本，但是发现请求之后点击量一次都没有增加。接着开始对脚本进行了调试，将返回的结果打印之后发现返回的html主体是下面的内容：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;meta http-equiv=&amp;quot;refresh&amp;quot; content=&amp;quot;1;url=xxxx&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这行代码的意思是在一秒后刷新到url指向的页面，这个链接和最初的邀请链接是不同的，在实际访问时没有注意到这点。假设网站提供的邀请链接为A，上面代码指向的链接为B，整个流程为：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;网站发布邀请链接A&lt;/li&gt;
+&lt;li&gt;用户在互联网传播链接A&lt;/li&gt;
+&lt;li&gt;他人点击邀请链接A，1秒后跳转到链接B对应页面&lt;/li&gt;
+&lt;li&gt;页面B被访问，邀请人数增加&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;也就是说，链接B才是真正的链接，链接A相当于一个外壳，对链接B进行了一定程度的保护。在了解到这些之后，只要把之前脚本中的链接A改为链接B，再加上代理相关的内容便能达到我们的目的了。&lt;/p&gt;
+
+&lt;p&gt;在这一过程中也总结了点经验，在写脚本之前先用postmam访问网站，对返回内容进行核查理清逻辑之后再动手。&lt;/p&gt;
+
+&lt;h3 id=&#34;爬虫添加代理&#34;&gt;爬虫添加代理&lt;/h3&gt;
+
+&lt;h4 id=&#34;获取随机ua&#34;&gt;获取随机UA&lt;/h4&gt;
+
+&lt;p&gt;大部分情况下，切换代理的原因是因为此前的IP爬取内容过快导致被封禁，更换代理的同时一般也会对UA进行更换。下面是用别人的接口实现的获取随机UA的函数：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def get_rand_ua():
+    ua_url = &#39;http://nmsl8.com/getUA&#39;
+    res = requests.get(ua_url)
+    return res.text
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面的接口是部署在别人的主机上的，不知道能维持多久，最好的办法还是去网上查找整理好的UA列表，直接读取本地文件。&lt;/p&gt;
+
+&lt;h4 id=&#34;requests添加代理&#34;&gt;requests添加代理&lt;/h4&gt;
+
+&lt;p&gt;requests库使用代理的方法很简单，&lt;a href=&#34;https://cn.python-requests.org/zh_CN/latest/user/advanced.html#proxies&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;官方文档&lt;/a&gt;写的很清楚。下面是文档中的示例使用方式：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;proxies = {
+    &amp;quot;http&amp;quot;: &amp;quot;http://10.10.1.10:3128&amp;quot;,
+    &amp;quot;https&amp;quot;: &amp;quot;http://10.10.1.10:1080&amp;quot;,
+}
+
+requests.get(&amp;quot;http://example.org&amp;quot;, proxies=proxies, timeout=10)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;免费的代理可以在这里获得：&lt;a href=&#34;https://ip.ihuan.me/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://ip.ihuan.me/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;由于免费，代理的质量不是很高，我在使用的时候添加了timeout参数，避免在一个代理上花费很多时间。&lt;/p&gt;
+
+&lt;h4 id=&#34;代理验证&#34;&gt;代理验证&lt;/h4&gt;
+
+&lt;p&gt;访问这个地址可以获得自己的IP：&lt;a href=&#34;http://icanhazip.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://icanhazip.com/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;可以通过比较返回的IP地址和使用的代理是否相同来判断代理是否有效。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Flask框架下API开发异常处理</title>
@@ -2789,76 +2861,6 @@ fh.close()
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;上面脚本运行结束之后，就能得到想要的公司列表。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>新生の大学分享</title>
-      <link>https://wanakiki.github.io/2019/univ-share/</link>
-      <pubDate>Fri, 30 Aug 2019 22:54:12 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/univ-share/</guid>
-      <description>
-
-&lt;p&gt;可能很多人都会问怎么样才能过好自己的大学生活，但是当我想要去总结自己大学以来的经验，首先想到的大部分都是自己的遗憾，提不出来什么有价值的建议。&lt;/p&gt;
-
-&lt;p&gt;今年的新生由我来带，借此机会整理一下之前在于老师那里听到的分享，希望能对他人带来一些启发。（当然这部分内容对于19级来说是新老生交流一部分。&lt;/p&gt;
-
-&lt;!-- more --&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;文章观点取自于老师的分享，暂时未询问其本人意见。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;总的来看，大学可以分为三个阶段，前三学期为一阶段，大二下及大三上为一阶段，大三下及整个大四为一阶段。&lt;/p&gt;
-
-&lt;h2 id=&#34;大学的前三个学期&#34;&gt;大学的前三个学期&lt;/h2&gt;
-
-&lt;p&gt;从高中来到大学这个小社会，绝大部分学生，尤其是像我一样的山东考生，适应大学着实需要一定的时期。大学的生活和高中有太多不同，步入大学也会发现周围的人有各种各样的追求，如何快速适应新的环境、找到新的目标是这个阶段首要解决的问题。&lt;/p&gt;
-
-&lt;p&gt;从大学的课程设定也可以看出，对于大部分专业的学生来说前三个学期都是打基础的过程，这个时期学习的课程主要是为自身专业化的发展打下基础，为未来的专业课程做准备。&lt;/p&gt;
-
-&lt;p&gt;对于理工科专业，高数真的是步入大学之后最大的难题，本身高中和大学数学课程的交接设定的就不合理，高中课本与大学课本衔接程度不高，而这个时候的大学生们还在享受着自己刚刚拥有的“自由”，高数的学习时间不是很充分。最终自然导致了学习效果较差，对今后的专业课学习也会带来不利影响。这点个人深有体会。&lt;/p&gt;
-
-&lt;p&gt;美国的本科生没有设立医学专业，学医的研究生都是从生物专业的本科生选拔而来，对这部分医学专业的学生来说，他们的适应时期是整个本科。&lt;/p&gt;
-
-&lt;h2 id=&#34;大二下-大三上&#34;&gt;大二下，大三上&lt;/h2&gt;
-
-&lt;p&gt;对于想要走最多人走的路的那些人，这个时期的重点在&lt;strong&gt;科研&lt;/strong&gt;。因为经过了前三个学期的学习，理论上每个人都已经掌握了基本的专业知识，可以试着以本科生的身份加入一些实验室，提前了解实验室。&lt;/p&gt;
-
-&lt;p&gt;最佳的方案是在大二上学期的寒假或者更早就确定好方向，及时地联系老师并进行一定科研知识的学习。但是要注意的是，加入一个实验室是一件很慎重的事情，不能因为自己的一时冲动或者是好奇才去报名。你的动机会决定你最终的成就，如果你没有下好决定不如再进行一定时间的观望。&lt;/p&gt;
-
-&lt;p&gt;进入实验室后，要避免成为工人，在大学最好要学会如何与他人交流，积极主动的人往往会获得更多的机遇。毕竟现在还是本科生，和实验室的研究生总会有一些代沟，你可能过了几个月之后还会独自一人在角落里研究一些常识性的问题。如果有这种情况，不如从一开始就和一个研究生学长学姐保持好关系，很多简单的问题可以去问学长学姐，但不是很适合去问老师。&lt;/p&gt;
-
-&lt;h2 id=&#34;大三下以及大四&#34;&gt;大三下以及大四&lt;/h2&gt;
-
-&lt;p&gt;如果你能够完成此前的计划，这一阶段将会成为收获的阶段。&lt;del&gt;原谅我笑了&lt;/del&gt;&lt;/p&gt;
-
-&lt;p&gt;大家的去向有下面几种：&lt;/p&gt;
-
-&lt;h3 id=&#34;保研&#34;&gt;保研&lt;/h3&gt;
-
-&lt;p&gt;整体推免比例大概有10~15%，分下面几种情况&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;普通推免：满足成绩要求，并且六级达到426分。&lt;/li&gt;
-&lt;li&gt;科技竞赛：在本校，要求专业前50%并且通过四级。国二及以上的奖项可用于竞赛保研。但满足推免条件的竞赛具有不确定性。&lt;/li&gt;
-&lt;li&gt;特殊学术专长：SI EI第一作者，专业前50%，通过六级。&lt;/li&gt;
-&lt;li&gt;研究生支教团：支教一年，对个人的志愿服务经历有要求。&lt;/li&gt;
-&lt;li&gt;在职研究生：中共党员+四级&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&#34;考研&#34;&gt;考研&lt;/h3&gt;
-
-&lt;p&gt;考研比例大概占毕业生的35~40%，且有一定数量的二战人员。考研有很多相关的复习计划，在这里不列出。&lt;/p&gt;
-
-&lt;h3 id=&#34;出国&#34;&gt;出国&lt;/h3&gt;
-
-&lt;p&gt;实验室经历可能更有帮助。&lt;/p&gt;
-
-&lt;h3 id=&#34;主动就业&#34;&gt;主动就业&lt;/h3&gt;
-
-&lt;p&gt;在假期参加实习，尽早规划尽早行动。&lt;/p&gt;
 </description>
     </item>
     

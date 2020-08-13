@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Wanakiki">
+  
+  
+  
+  <link rel="prev" href="https://wanakiki.github.io/2020/flask-api-exception/" />
+  
+  <link rel="canonical" href="https://wanakiki.github.io/2020/spider-with-proxy/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Python爬虫 代理IP地址获取及使用 | Wanakiki`s Blog
+       
+  </title>
+  <meta name="title" content="Python爬虫 代理IP地址获取及使用 | Wanakiki`s Blog">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/wanakiki.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "Python爬虫 代理IP地址获取及使用",
+    "headline" : "Python爬虫 代理IP地址获取及使用",
+    "description" : "最近别人发给了一个邀请链接，问能不能刷满邀请人数，简单试了一下，网站对访问IP进行了记录，不能用一个IP一直访问，想到的解决方案是套上代理来",
+    "inLanguage" : "zh-cn",
+    "author" : "Wanakiki",
+    "creator" : "Wanakiki",
+    "publisher": "Wanakiki",
+    "accountablePerson" : "Wanakiki",
+    "copyrightHolder" : "Wanakiki",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-08-13 22:16:21 \x2b0800 CST",
+    "dateModified" : "2020-08-13 22:16:21 \x2b0800 CST",
+    "url" : "https:\/\/wanakiki.github.io\/2020\/spider-with-proxy\/",
+    "wordCount" : "920",
+    "keywords" : [ "python","爬虫", "Wanakiki`s Blog"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://wanakiki.github.io">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://wanakiki.github.io">Wanakiki`s Blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Python爬虫 代理IP地址获取及使用</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://wanakiki.github.io" rel="author">Wanakiki</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2020-08-13 itemprop="datePublished">August 13, 2020</time>
+                </span>
+                in
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>最近别人发给了一个邀请链接，问能不能刷满邀请人数，简单试了一下，网站对访问IP进行了记录，不能用一个IP一直访问，想到的解决方案是套上代理来实现刷点击量的目的。</p>
+
+<!-- more -->
+
+<p>自从学了点爬虫知识之后，这是第一次需要使用代理的场景，简单记录一下实现点击量目标所做的工作。</p>
+
+<h3 id="站点分析">站点分析</h3>
+
+<p>在接到这个链接之后，先用浏览器访问了一遍查看了一下相关请求，发现并没有与IP地址相关的加载项，于是花几分钟写了个简单的请求脚本，但是发现请求之后点击量一次都没有增加。接着开始对脚本进行了调试，将返回的结果打印之后发现返回的html主体是下面的内容：</p>
+
+<pre><code class="language-html">&lt;meta http-equiv=&quot;refresh&quot; content=&quot;1;url=xxxx&quot;&gt;
+</code></pre>
+
+<p>这行代码的意思是在一秒后刷新到url指向的页面，这个链接和最初的邀请链接是不同的，在实际访问时没有注意到这点。假设网站提供的邀请链接为A，上面代码指向的链接为B，整个流程为：</p>
+
+<ol>
+<li>网站发布邀请链接A</li>
+<li>用户在互联网传播链接A</li>
+<li>他人点击邀请链接A，1秒后跳转到链接B对应页面</li>
+<li>页面B被访问，邀请人数增加</li>
+</ol>
+
+<p>也就是说，链接B才是真正的链接，链接A相当于一个外壳，对链接B进行了一定程度的保护。在了解到这些之后，只要把之前脚本中的链接A改为链接B，再加上代理相关的内容便能达到我们的目的了。</p>
+
+<p>在这一过程中也总结了点经验，在写脚本之前先用postmam访问网站，对返回内容进行核查理清逻辑之后再动手。</p>
+
+<h3 id="爬虫添加代理">爬虫添加代理</h3>
+
+<h4 id="获取随机ua">获取随机UA</h4>
+
+<p>大部分情况下，切换代理的原因是因为此前的IP爬取内容过快导致被封禁，更换代理的同时一般也会对UA进行更换。下面是用别人的接口实现的获取随机UA的函数：</p>
+
+<pre><code class="language-python">def get_rand_ua():
+    ua_url = 'http://nmsl8.com/getUA'
+    res = requests.get(ua_url)
+    return res.text
+</code></pre>
+
+<p>上面的接口是部署在别人的主机上的，不知道能维持多久，最好的办法还是去网上查找整理好的UA列表，直接读取本地文件。</p>
+
+<h4 id="requests添加代理">requests添加代理</h4>
+
+<p>requests库使用代理的方法很简单，<a href="https://cn.python-requests.org/zh_CN/latest/user/advanced.html#proxies" rel="nofollow noreferrer" target="_blank">官方文档</a>写的很清楚。下面是文档中的示例使用方式：</p>
+
+<pre><code class="language-python">proxies = {
+    &quot;http&quot;: &quot;http://10.10.1.10:3128&quot;,
+    &quot;https&quot;: &quot;http://10.10.1.10:1080&quot;,
+}
+
+requests.get(&quot;http://example.org&quot;, proxies=proxies, timeout=10)
+</code></pre>
+
+<p>免费的代理可以在这里获得：<a href="https://ip.ihuan.me/" rel="nofollow noreferrer" target="_blank">https://ip.ihuan.me/</a></p>
+
+<p>由于免费，代理的质量不是很高，我在使用的时候添加了timeout参数，避免在一个代理上花费很多时间。</p>
+
+<h4 id="代理验证">代理验证</h4>
+
+<p>访问这个地址可以获得自己的IP：<a href="http://icanhazip.com/" rel="nofollow noreferrer" target="_blank">http://icanhazip.com/</a></p>
+
+<p>可以通过比较返回的IP地址和使用的代理是否相同来判断代理是否有效。</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Wanakiki </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://wanakiki.github.io/2020/spider-with-proxy/>https://wanakiki.github.io/2020/spider-with-proxy/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://wanakiki.github.io/tags/python/">
+                    #python</a></span>
+            
+            <span class="tag"><a href="https://wanakiki.github.io/tags/%E7%88%AC%E8%99%AB/">
+                    #爬虫</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://wanakiki.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://wanakiki.github.io/2020/flask-api-exception/" class="prev" rel="prev" title="Flask框架下API开发异常处理"><i class="iconfont icon-left"></i>&nbsp;Flask框架下API开发异常处理</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://wanakiki.github.io">Wanakiki</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>
