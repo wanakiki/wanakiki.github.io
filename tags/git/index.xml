@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>git - 标签 - Wanakiki`s Blog</title>
-        <link>http://example.org/tags/git/</link>
+        <link>https://wanakiki.github.io/tags/git/</link>
         <description>git - 标签 - Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 25 Nov 2019 16:15:58 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/git/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 25 Nov 2019 16:15:58 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/git/" rel="self" type="application/rss+xml" /><item>
     <title>Git 及 Github 上手</title>
-    <link>http://example.org/posts/use-github/</link>
+    <link>https://wanakiki.github.io/posts/use-github/</link>
     <pubDate>Mon, 25 Nov 2019 16:15:58 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/use-github/</guid>
+    <guid>https://wanakiki.github.io/posts/use-github/</guid>
     <description><![CDATA[记录使用git及GitHub的过程 准备工作 在GitHub官网注册账号，之后去Git官网下载git并安装。安装完成后打开终端，输入下面的命令，在电脑上设置github邮箱和账户名 git config --global user.name &#34;用户名]]></description>
 </item></channel>
 </rss>

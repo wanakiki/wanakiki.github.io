@@ -1,77 +1,77 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>所有文章 - Wanakiki`s Blog</title>
-        <link>http://example.org/posts/</link>
+        <link>https://wanakiki.github.io/posts/</link>
         <description>所有文章 | Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 25 Sep 2020 17:16:30 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 25 Sep 2020 17:16:30 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>📄个人介绍</title>
-    <link>http://example.org/posts/about-me/</link>
+    <link>https://wanakiki.github.io/posts/about-me/</link>
     <pubDate>Fri, 25 Sep 2020 17:16:30 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/about-me/</guid>
+    <guid>https://wanakiki.github.io/posts/about-me/</guid>
     <description><![CDATA[本科学校：中国海洋大学，Ocean University of China 入学年份：2017 所修专业：电子信息科学与技术，Electronic Information Science and Technology 实验室经历：学院水下视觉实验室 比赛经历： 山东省ACM程序设计竞赛（2018、2019]]></description>
 </item><item>
     <title>Python爬虫 代理IP地址获取及使用</title>
-    <link>http://example.org/posts/spider-with-proxy/</link>
+    <link>https://wanakiki.github.io/posts/spider-with-proxy/</link>
     <pubDate>Thu, 13 Aug 2020 22:16:21 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/spider-with-proxy/</guid>
+    <guid>https://wanakiki.github.io/posts/spider-with-proxy/</guid>
     <description><![CDATA[最近别人发给了一个邀请链接，问能不能刷满邀请人数，简单试了一下，网站对访问IP进行了记录，不能用一个IP一直访问，想到的解决方案是套上代理来实现刷点击量的目的。 自从学了点爬虫知识之后，这是第一次需要使]]></description>
 </item><item>
     <title>Flask框架下API开发异常处理</title>
-    <link>http://example.org/posts/flask-api-exception/</link>
+    <link>https://wanakiki.github.io/posts/flask-api-exception/</link>
     <pubDate>Wed, 08 Jul 2020 12:27:41 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/flask-api-exception/</guid>
+    <guid>https://wanakiki.github.io/posts/flask-api-exception/</guid>
     <description><![CDATA[最近在做SRDP项目的后端开发，但是狗书上面对API相关内容介绍比较少，示例代码中的API部分也不涉及用户登录注册相关内容。不过幸运的是在Github上找到了一个问卷调查项目，通过阅读项目代码发现了在]]></description>
 </item><item>
     <title>VUE框架入门</title>
-    <link>http://example.org/posts/learn-vue/</link>
+    <link>https://wanakiki.github.io/posts/learn-vue/</link>
     <pubDate>Wed, 08 Jul 2020 12:19:49 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/learn-vue/</guid>
+    <guid>https://wanakiki.github.io/posts/learn-vue/</guid>
     <description><![CDATA[在学习VUE入门视频时记录的知识点和代码，备忘。 基本 el:挂载点，id选择器#，不能挂载到&lt;html&gt; &lt;body&gt;两个标签 Vue指令 内容绑定、事件绑定 v-text设置标签内容，]]></description>
 </item><item>
     <title>IIC总线协议</title>
-    <link>http://example.org/posts/about-iic/</link>
+    <link>https://wanakiki.github.io/posts/about-iic/</link>
     <pubDate>Wed, 01 Jul 2020 12:17:49 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/about-iic/</guid>
+    <guid>https://wanakiki.github.io/posts/about-iic/</guid>
     <description><![CDATA[之前做收音机的时候用到了IIC总线协议，因为用的是别人封装好的库，对协议的具体执行方式不是很了解，于是花了点时间查了一下。 IIC协议大致有下面几个特点： 双向串行通信 两根线：数据线SDA，时钟线SCL，]]></description>
 </item><item>
     <title>Linux C语言系统编程作业</title>
-    <link>http://example.org/posts/linux-c/</link>
+    <link>https://wanakiki.github.io/posts/linux-c/</link>
     <pubDate>Sat, 06 Jun 2020 23:06:09 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/linux-c/</guid>
+    <guid>https://wanakiki.github.io/posts/linux-c/</guid>
     <description><![CDATA[跟着别人简单学了下Linux下的系统编程，把做过的几个作业简单记录一下。作业的内容都是针对的具体的知识点，实现难度并不高。 进程间通信 设计一个程序，打开一个匿名管道，然后生成一个子进程，主进程向管道中写]]></description>
 </item><item>
     <title>Flask&#43;MongoDB CURD微实战</title>
-    <link>http://example.org/posts/mongodb-demo/</link>
+    <link>https://wanakiki.github.io/posts/mongodb-demo/</link>
     <pubDate>Sat, 30 May 2020 11:07:16 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/mongodb-demo/</guid>
+    <guid>https://wanakiki.github.io/posts/mongodb-demo/</guid>
     <description><![CDATA[做SRDP的过程中发现关系型数据库在实现问卷效果时比较困难，所以找了个时间熟悉了一下非关系型数据库，做了一个todo小demo。 视频演示地址 过程记录 下载安装mongodb，注意安装的时候不要勾选com]]></description>
 </item><item>
     <title>百度翻译爬虫</title>
-    <link>http://example.org/posts/baidufanyi/</link>
+    <link>https://wanakiki.github.io/posts/baidufanyi/</link>
     <pubDate>Mon, 18 May 2020 20:44:50 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/baidufanyi/</guid>
+    <guid>https://wanakiki.github.io/posts/baidufanyi/</guid>
     <description><![CDATA[典型的js加密爬虫实战，本文章内容仅作学习交流。 首先放一下参考文章：爬虫JS破解经典案例之百度翻译 如果没有这篇文章的话，我可能要花很多功夫才能找到具体的js代码位置。 页面加载分析 初步探索 打开百度翻译，]]></description>
 </item><item>
     <title>爬虫获取力扣题目信息并转为Markdown</title>
-    <link>http://example.org/posts/leetcode-spider/</link>
+    <link>https://wanakiki.github.io/posts/leetcode-spider/</link>
     <pubDate>Sat, 02 May 2020 14:38:46 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/leetcode-spider/</guid>
+    <guid>https://wanakiki.github.io/posts/leetcode-spider/</guid>
     <description><![CDATA[很早就接触了leetcode，在上面做了不少题，每次整理的时候复制题目信息是个很麻烦的过程，于是便想着要用爬虫来解决这个问题，今天终于实现了这个功能，简单记录。 写在前面 我自己用得比较多的两个语言是C+]]></description>
 </item><item>
     <title>用异或找到数组中不重复出现的数字</title>
-    <link>http://example.org/posts/xor/</link>
+    <link>https://wanakiki.github.io/posts/xor/</link>
     <pubDate>Thu, 30 Apr 2020 10:51:11 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/xor/</guid>
+    <guid>https://wanakiki.github.io/posts/xor/</guid>
     <description><![CDATA[找一个数很简单，但找两个数呢？ 最近做leetcode上面的题目的时候，遇到了一个面试题，需要找到数组中两个只出现过一次的数（其余数均出现过两次），感觉很有意思，简单记录一下。 基本知识 异或（xor）是一]]></description>
 </item></channel>
 </rss>

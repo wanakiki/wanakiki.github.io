@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>linux - 标签 - Wanakiki`s Blog</title>
-        <link>http://example.org/tags/linux/</link>
+        <link>https://wanakiki.github.io/tags/linux/</link>
         <description>linux - 标签 - Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 06 Jun 2020 23:06:09 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/linux/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 06 Jun 2020 23:06:09 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/linux/" rel="self" type="application/rss+xml" /><item>
     <title>Linux C语言系统编程作业</title>
-    <link>http://example.org/posts/linux-c/</link>
+    <link>https://wanakiki.github.io/posts/linux-c/</link>
     <pubDate>Sat, 06 Jun 2020 23:06:09 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/linux-c/</guid>
+    <guid>https://wanakiki.github.io/posts/linux-c/</guid>
     <description><![CDATA[跟着别人简单学了下Linux下的系统编程，把做过的几个作业简单记录一下。作业的内容都是针对的具体的知识点，实现难度并不高。 进程间通信 设计一个程序，打开一个匿名管道，然后生成一个子进程，主进程向管道中写]]></description>
 </item></channel>
 </rss>

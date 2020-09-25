@@ -1,77 +1,77 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Tags - 标签 - Wanakiki`s Blog</title>
-        <link>http://example.org/tags/</link>
+        <link>https://wanakiki.github.io/tags/</link>
         <description>Tags - 标签 - Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 13 Aug 2020 22:16:21 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 13 Aug 2020 22:16:21 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/" rel="self" type="application/rss+xml" /><item>
     <title>Python</title>
-    <link>http://example.org/tags/python/</link>
+    <link>https://wanakiki.github.io/tags/python/</link>
     <pubDate>Thu, 13 Aug 2020 22:16:21 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/tags/python/</guid>
+    <guid>https://wanakiki.github.io/tags/python/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>爬虫</title>
-    <link>http://example.org/tags/%E7%88%AC%E8%99%AB/</link>
+    <link>https://wanakiki.github.io/tags/%E7%88%AC%E8%99%AB/</link>
     <pubDate>Thu, 13 Aug 2020 22:16:21 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/tags/%E7%88%AC%E8%99%AB/</guid>
+    <guid>https://wanakiki.github.io/tags/%E7%88%AC%E8%99%AB/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>flask</title>
-    <link>http://example.org/tags/flask/</link>
+    <link>https://wanakiki.github.io/tags/flask/</link>
     <pubDate>Wed, 08 Jul 2020 12:27:41 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/tags/flask/</guid>
+    <guid>https://wanakiki.github.io/tags/flask/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>C语言</title>
-    <link>http://example.org/tags/c%E8%AF%AD%E8%A8%80/</link>
+    <link>https://wanakiki.github.io/tags/c%E8%AF%AD%E8%A8%80/</link>
     <pubDate>Sat, 06 Jun 2020 23:06:09 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/tags/c%E8%AF%AD%E8%A8%80/</guid>
+    <guid>https://wanakiki.github.io/tags/c%E8%AF%AD%E8%A8%80/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>linux</title>
-    <link>http://example.org/tags/linux/</link>
+    <link>https://wanakiki.github.io/tags/linux/</link>
     <pubDate>Sat, 06 Jun 2020 23:06:09 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/tags/linux/</guid>
+    <guid>https://wanakiki.github.io/tags/linux/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>mongodb</title>
-    <link>http://example.org/tags/mongodb/</link>
+    <link>https://wanakiki.github.io/tags/mongodb/</link>
     <pubDate>Sat, 30 May 2020 11:07:16 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/tags/mongodb/</guid>
+    <guid>https://wanakiki.github.io/tags/mongodb/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>数据库</title>
-    <link>http://example.org/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+    <link>https://wanakiki.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
     <pubDate>Sat, 30 May 2020 11:07:16 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+    <guid>https://wanakiki.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>算法</title>
-    <link>http://example.org/tags/%E7%AE%97%E6%B3%95/</link>
+    <link>https://wanakiki.github.io/tags/%E7%AE%97%E6%B3%95/</link>
     <pubDate>Thu, 30 Apr 2020 10:51:11 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/tags/%E7%AE%97%E6%B3%95/</guid>
+    <guid>https://wanakiki.github.io/tags/%E7%AE%97%E6%B3%95/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>Flutter</title>
-    <link>http://example.org/tags/flutter/</link>
+    <link>https://wanakiki.github.io/tags/flutter/</link>
     <pubDate>Tue, 21 Apr 2020 09:43:32 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/tags/flutter/</guid>
+    <guid>https://wanakiki.github.io/tags/flutter/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>git</title>
-    <link>http://example.org/tags/git/</link>
+    <link>https://wanakiki.github.io/tags/git/</link>
     <pubDate>Mon, 25 Nov 2019 16:15:58 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/tags/git/</guid>
+    <guid>https://wanakiki.github.io/tags/git/</guid>
     <description><![CDATA[]]></description>
 </item></channel>
 </rss>

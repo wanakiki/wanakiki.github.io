@@ -1,21 +1,21 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>算法 - 标签 - Wanakiki`s Blog</title>
-        <link>http://example.org/tags/%E7%AE%97%E6%B3%95/</link>
+        <link>https://wanakiki.github.io/tags/%E7%AE%97%E6%B3%95/</link>
         <description>算法 - 标签 - Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 30 Apr 2020 10:51:11 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E7%AE%97%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 30 Apr 2020 10:51:11 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/%E7%AE%97%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
     <title>用异或找到数组中不重复出现的数字</title>
-    <link>http://example.org/posts/xor/</link>
+    <link>https://wanakiki.github.io/posts/xor/</link>
     <pubDate>Thu, 30 Apr 2020 10:51:11 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/xor/</guid>
+    <guid>https://wanakiki.github.io/posts/xor/</guid>
     <description><![CDATA[找一个数很简单，但找两个数呢？ 最近做leetcode上面的题目的时候，遇到了一个面试题，需要找到数组中两个只出现过一次的数（其余数均出现过两次），感觉很有意思，简单记录一下。 基本知识 异或（xor）是一]]></description>
 </item><item>
     <title>括号匹配</title>
-    <link>http://example.org/posts/kuohao/</link>
+    <link>https://wanakiki.github.io/posts/kuohao/</link>
     <pubDate>Sat, 20 Apr 2019 14:36:43 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/kuohao/</guid>
+    <guid>https://wanakiki.github.io/posts/kuohao/</guid>
     <description><![CDATA[这个学期开始学数据结构，第一节课老师又提出了这个经典的问题。 问题描述 给出一个只包含'(&lsquo;和&rsquo;)&lsquo;的字符串，判断该字符串中的括号是否匹配。并将匹配的括号用&rsquo]]></description>
 </item></channel>
 </rss>

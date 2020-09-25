@@ -1,42 +1,42 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Python - 标签 - Wanakiki`s Blog</title>
-        <link>http://example.org/tags/python/</link>
+        <link>https://wanakiki.github.io/tags/python/</link>
         <description>Python - 标签 - Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 13 Aug 2020 22:16:21 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/python/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 13 Aug 2020 22:16:21 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/python/" rel="self" type="application/rss+xml" /><item>
     <title>Python爬虫 代理IP地址获取及使用</title>
-    <link>http://example.org/posts/spider-with-proxy/</link>
+    <link>https://wanakiki.github.io/posts/spider-with-proxy/</link>
     <pubDate>Thu, 13 Aug 2020 22:16:21 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/spider-with-proxy/</guid>
+    <guid>https://wanakiki.github.io/posts/spider-with-proxy/</guid>
     <description><![CDATA[最近别人发给了一个邀请链接，问能不能刷满邀请人数，简单试了一下，网站对访问IP进行了记录，不能用一个IP一直访问，想到的解决方案是套上代理来实现刷点击量的目的。 自从学了点爬虫知识之后，这是第一次需要使]]></description>
 </item><item>
     <title>Flask框架下API开发异常处理</title>
-    <link>http://example.org/posts/flask-api-exception/</link>
+    <link>https://wanakiki.github.io/posts/flask-api-exception/</link>
     <pubDate>Wed, 08 Jul 2020 12:27:41 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/flask-api-exception/</guid>
+    <guid>https://wanakiki.github.io/posts/flask-api-exception/</guid>
     <description><![CDATA[最近在做SRDP项目的后端开发，但是狗书上面对API相关内容介绍比较少，示例代码中的API部分也不涉及用户登录注册相关内容。不过幸运的是在Github上找到了一个问卷调查项目，通过阅读项目代码发现了在]]></description>
 </item><item>
     <title>百度翻译爬虫</title>
-    <link>http://example.org/posts/baidufanyi/</link>
+    <link>https://wanakiki.github.io/posts/baidufanyi/</link>
     <pubDate>Mon, 18 May 2020 20:44:50 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/baidufanyi/</guid>
+    <guid>https://wanakiki.github.io/posts/baidufanyi/</guid>
     <description><![CDATA[典型的js加密爬虫实战，本文章内容仅作学习交流。 首先放一下参考文章：爬虫JS破解经典案例之百度翻译 如果没有这篇文章的话，我可能要花很多功夫才能找到具体的js代码位置。 页面加载分析 初步探索 打开百度翻译，]]></description>
 </item><item>
     <title>爬虫获取力扣题目信息并转为Markdown</title>
-    <link>http://example.org/posts/leetcode-spider/</link>
+    <link>https://wanakiki.github.io/posts/leetcode-spider/</link>
     <pubDate>Sat, 02 May 2020 14:38:46 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/leetcode-spider/</guid>
+    <guid>https://wanakiki.github.io/posts/leetcode-spider/</guid>
     <description><![CDATA[很早就接触了leetcode，在上面做了不少题，每次整理的时候复制题目信息是个很麻烦的过程，于是便想着要用爬虫来解决这个问题，今天终于实现了这个功能，简单记录。 写在前面 我自己用得比较多的两个语言是C+]]></description>
 </item><item>
     <title>PY4E 题目整理（上）</title>
-    <link>http://example.org/posts/python-assignment/</link>
+    <link>https://wanakiki.github.io/posts/python-assignment/</link>
     <pubDate>Sun, 04 Aug 2019 17:39:49 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/python-assignment/</guid>
+    <guid>https://wanakiki.github.io/posts/python-assignment/</guid>
     <description><![CDATA[Coursera中python教程同步题目整理，因为旁听课程不能直接对每章的编程作业进行提交，学到中期之后才发现py4e上有几乎所有题目的在线测试环境，在看完所有的教学视频之后重新刷题，回顾知识点，在]]></description>
 </item></channel>
 </rss>

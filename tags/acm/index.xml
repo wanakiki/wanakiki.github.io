@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>ACM - 标签 - Wanakiki`s Blog</title>
-        <link>http://example.org/tags/acm/</link>
+        <link>https://wanakiki.github.io/tags/acm/</link>
         <description>ACM - 标签 - Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 12 May 2019 23:24:12 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/acm/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 12 May 2019 23:24:12 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/acm/" rel="self" type="application/rss+xml" /><item>
     <title>2019年山东省省赛回顾</title>
-    <link>http://example.org/posts/shengsai-2019/</link>
+    <link>https://wanakiki.github.io/posts/shengsai-2019/</link>
     <pubDate>Sun, 12 May 2019 23:24:12 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/shengsai-2019/</guid>
+    <guid>https://wanakiki.github.io/posts/shengsai-2019/</guid>
     <description><![CDATA[2019年5月11-12号山东省ACM竞赛回顾（想起来什么写什么，绝大部分内容和比赛内容无关） 第一天中午到济南大学，开幕式之后开始热身赛（开幕式上那个山东大学的老师再一次提到了山大夺冠的问题）。 热身赛]]></description>
 </item></channel>
 </rss>

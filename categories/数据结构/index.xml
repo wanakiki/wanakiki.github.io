@@ -1,70 +1,70 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>数据结构 - 分类 - Wanakiki`s Blog</title>
-        <link>http://example.org/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
+        <link>https://wanakiki.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
         <description>数据结构 - 分类 - Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 17 May 2019 09:47:43 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 17 May 2019 09:47:43 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="self" type="application/rss+xml" /><item>
     <title>数据结构作业七 Transport</title>
-    <link>http://example.org/posts/transport/</link>
+    <link>https://wanakiki.github.io/posts/transport/</link>
     <pubDate>Fri, 17 May 2019 09:47:43 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/transport/</guid>
+    <guid>https://wanakiki.github.io/posts/transport/</guid>
     <description><![CDATA[清华OJ广度优先搜索题目。 描述 某广播公司要在一个地区架设无线广播发射装置。该地区共有n个小镇，每个小镇都要安装一台发射机并播放各自的节目。 不过，该公司只获得了FM104.2和FM98.6两个波段的授权]]></description>
 </item><item>
     <title>函数对象和函数指针</title>
-    <link>http://example.org/posts/funs/</link>
+    <link>https://wanakiki.github.io/posts/funs/</link>
     <pubDate>Wed, 08 May 2019 21:21:26 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/funs/</guid>
+    <guid>https://wanakiki.github.io/posts/funs/</guid>
     <description><![CDATA[简单复习一下函数对象和函数指针。 函数指针 函数指针，简单点来理解就是一个指向函数的的指针变量，函数指针所指的是一个函数的入口地址。 函数指针主要有两个作用：用来调用函数和作为函数的参数。 函数指针的声明方法]]></description>
 </item><item>
     <title>数据结构作业六 旅行商（TSP）</title>
-    <link>http://example.org/posts/tsp/</link>
+    <link>https://wanakiki.github.io/posts/tsp/</link>
     <pubDate>Tue, 07 May 2019 23:55:50 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/tsp/</guid>
+    <guid>https://wanakiki.github.io/posts/tsp/</guid>
     <description><![CDATA[图论第一次作业，不需要提交报告，在OJ上提交。 描述 Shrek是一个大山里的邮递员，每天负责给所在地区的n个村庄派发信件。但杯具的是，由于道路狭窄，年久失修，村庄间的道路都只能单向通过，甚至有些村庄无法]]></description>
 </item><item>
     <title>数据结构作业四 表达式树</title>
-    <link>http://example.org/posts/bin-tree/</link>
+    <link>https://wanakiki.github.io/posts/bin-tree/</link>
     <pubDate>Fri, 03 May 2019 18:56:50 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/bin-tree/</guid>
+    <guid>https://wanakiki.github.io/posts/bin-tree/</guid>
     <description><![CDATA[从中缀表达式构建二叉树 问题分析 &amp; 解决方案 题目要求输入一个中缀表达式，构建其相应的表达式树，并输出验证。 表达式树的特点是操作符所对应的两个操作数分别对应于操作符的左孩子和右孩子。直接从中缀表达式构建相对]]></description>
 </item><item>
     <title>数据结构作业五 Compression</title>
-    <link>http://example.org/posts/compression/</link>
+    <link>https://wanakiki.github.io/posts/compression/</link>
     <pubDate>Fri, 03 May 2019 14:00:51 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/compression/</guid>
+    <guid>https://wanakiki.github.io/posts/compression/</guid>
     <description><![CDATA[图片有损压缩大作业 问题分析 &amp; 解决方案 本次编程任务给出了一个纯英文的PDF文件，较为详细地介绍了图像有损压缩算法的实现方式，通过二叉树的树剪枝达到保留图片细节的目的。任务要求达到的效果如下图所示，可以看]]></description>
 </item><item>
     <title>数据结构作业三 列车调度</title>
-    <link>http://example.org/posts/train/</link>
+    <link>https://wanakiki.github.io/posts/train/</link>
     <pubDate>Sun, 21 Apr 2019 10:41:45 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/train/</guid>
+    <guid>https://wanakiki.github.io/posts/train/</guid>
     <description><![CDATA[本次作业不需提交报告。 题目描述 Input 共两行。 第一行为两个整数n，m。 第二行为以空格分隔的n个整数，保证为{1, 2, &hellip;, n}的一个排列，表示待判断可行性的驶出序列{a1，a2，&hellip;，an}。 Output 若驶出]]></description>
 </item><item>
     <title>数据结构作业二 List ADT</title>
-    <link>http://example.org/posts/list-adt/</link>
+    <link>https://wanakiki.github.io/posts/list-adt/</link>
     <pubDate>Sat, 20 Apr 2019 20:22:40 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/list-adt/</guid>
+    <guid>https://wanakiki.github.io/posts/list-adt/</guid>
     <description><![CDATA[问题分析 题目要求自行实现list ADT，并在此基础上实现PrintLots函数并且实现懒惰删除功能。对于PrintLots函数，题目要求分析运行时间；对于懒惰删除功能，除编写实现外，题目还要求列出懒惰]]></description>
 </item><item>
     <title>数据结构作业一 Zuma List</title>
-    <link>http://example.org/posts/zuma-list/</link>
+    <link>https://wanakiki.github.io/posts/zuma-list/</link>
     <pubDate>Sat, 20 Apr 2019 19:41:55 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/zuma-list/</guid>
+    <guid>https://wanakiki.github.io/posts/zuma-list/</guid>
     <description><![CDATA[数据结构第一次作业。 问题分析 题目要求书写程序对祖玛消除过程进行回放，输入为原始珠子序列以及玩家所做的一系列操作，要求我们按照游戏规则计算出每次操作后的珠子序列并进行输出。 祖玛游戏规则：有三个或更多同色]]></description>
 </item><item>
     <title>括号匹配</title>
-    <link>http://example.org/posts/kuohao/</link>
+    <link>https://wanakiki.github.io/posts/kuohao/</link>
     <pubDate>Sat, 20 Apr 2019 14:36:43 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/kuohao/</guid>
+    <guid>https://wanakiki.github.io/posts/kuohao/</guid>
     <description><![CDATA[这个学期开始学数据结构，第一节课老师又提出了这个经典的问题。 问题描述 给出一个只包含'(&lsquo;和&rsquo;)&lsquo;的字符串，判断该字符串中的括号是否匹配。并将匹配的括号用&rsquo]]></description>
 </item></channel>
 </rss>

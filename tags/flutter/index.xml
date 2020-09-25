@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Flutter - 标签 - Wanakiki`s Blog</title>
-        <link>http://example.org/tags/flutter/</link>
+        <link>https://wanakiki.github.io/tags/flutter/</link>
         <description>Flutter - 标签 - Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 21 Apr 2020 09:43:32 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/flutter/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 21 Apr 2020 09:43:32 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/flutter/" rel="self" type="application/rss+xml" /><item>
     <title>Flutter 词典APP</title>
-    <link>http://example.org/posts/special-dictionary/</link>
+    <link>https://wanakiki.github.io/posts/special-dictionary/</link>
     <pubDate>Tue, 21 Apr 2020 09:43:32 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/posts/special-dictionary/</guid>
+    <guid>https://wanakiki.github.io/posts/special-dictionary/</guid>
     <description><![CDATA[对自己写的flutter APP的简单记录。 怕自己忘了之前看过的flutter教程，所以趁周末写了这个APP，功能很简单，涉及到的都是基本知识，写的时候稍微花了点时间学习数据库和文件读写。界面不怎么漂亮]]></description>
 </item></channel>
 </rss>
