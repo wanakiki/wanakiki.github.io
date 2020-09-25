@@ -1,24 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>latex on Wanakiki`s Blog</title>
-    <link>https://wanakiki.github.io/tags/latex/</link>
-    <description>Recent content in latex on Wanakiki`s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Fri, 14 Jun 2019 23:22:50 +0800</lastBuildDate>
-    
-	<atom:link href="https://wanakiki.github.io/tags/latex/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Latex 插入图片方式整理</title>
-      <link>https://wanakiki.github.io/2019/latex-img/</link>
-      <pubDate>Fri, 14 Jun 2019 23:22:50 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/latex-img/</guid>
-      <description>又到期末，承担了帮别人排版论文的工作。因为自己不熟悉图片的插入方式拖慢了进度，趁今天有时间整理一下。当然，最大的目的还是备忘。 新建一个.te</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>latex - 标签 - Wanakiki`s Blog</title>
+        <link>http://example.org/tags/latex/</link>
+        <description>latex - 标签 - Wanakiki`s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 14 Jun 2019 23:22:50 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/latex/" rel="self" type="application/rss+xml" /><item>
+    <title>Latex 插入图片方式整理</title>
+    <link>http://example.org/posts/latex-img/</link>
+    <pubDate>Fri, 14 Jun 2019 23:22:50 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/posts/latex-img/</guid>
+    <description><![CDATA[又到期末，承担了帮别人排版论文的工作。因为自己不熟悉图片的插入方式拖慢了进度，趁今天有时间整理一下。当然，最大的目的还是备忘。 新建一个.tex文件，并将下面的代码复制到其中。在同一文件夹中准备一张图片]]></description>
+</item></channel>
 </rss>

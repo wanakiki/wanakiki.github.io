@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>爬虫获取力扣题目信息并转为Markdown - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="爬虫获取力扣题目信息并转为Markdown" />
+<meta property="og:description" content="很早就接触了leetcode，在上面做了不少题，每次整理的时候复制题目信息是个很麻烦的过程，于是便想着要用爬虫来解决这个问题，今天终于实现了这个功能，简单记录。 写在前面 我自己用得比较多的两个语言是C&#43;" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/leetcode-spider/" />
+<meta property="article:published_time" content="2020-05-02T14:38:46+08:00" />
+<meta property="article:modified_time" content="2020-05-02T14:38:46+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="爬虫获取力扣题目信息并转为Markdown"/>
+<meta name="twitter:description" content="很早就接触了leetcode，在上面做了不少题，每次整理的时候复制题目信息是个很麻烦的过程，于是便想着要用爬虫来解决这个问题，今天终于实现了这个功能，简单记录。 写在前面 我自己用得比较多的两个语言是C&#43;"/>
+<meta name="application-name" content="Wanakiki`s Blog">
+<meta name="apple-mobile-web-app-title" content="Wanakiki`s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/leetcode-spider/" /><link rel="prev" href="http://example.org/posts/xor/" /><link rel="next" href="http://example.org/posts/baidufanyi/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "爬虫获取力扣题目信息并转为Markdown",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/leetcode-spider\/"
+        },"genre": "posts","keywords": "爬虫, Python","wordcount":  2914 ,
+        "url": "http:\/\/example.org\/posts\/leetcode-spider\/","datePublished": "2020-05-02T14:38:46+08:00","dateModified": "2020-05-02T14:38:46+08:00","publisher": {
+            "@type": "Organization",
+            "name": "wanakiki"},"author": {
+                "@type": "Person",
+                "name": "wanakiki"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Blog </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Blog</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">爬虫获取力扣题目信息并转为Markdown</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-05-02">2020-05-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2914 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#写在前面">写在前面</a></li>
+    <li><a href="#基本知识">基本知识</a></li>
+    <li><a href="#问题页面分析">问题页面分析</a></li>
+    <li><a href="#具体实现">具体实现</a>
+      <ul>
+        <li><a href="#html转化为markdown">html转化为Markdown</a></li>
+      </ul>
+    </li>
+    <li><a href="#其他">其他</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>很早就接触了leetcode，在上面做了不少题，每次整理的时候复制题目信息是个很麻烦的过程，于是便想着要用爬虫来解决这个问题，今天终于实现了这个功能，简单记录。</p>
+<!-- raw HTML omitted -->
+<h2 id="写在前面">写在前面</h2>
+<p>我自己用得比较多的两个语言是C++和Python，爬虫是去年五一假期简单入门的，到现在刚好过了一年。这一年里面也写了点小的爬虫脚本，比如查询图书馆某本书的借阅状态、学校官网信息的收集。之前访问的网站都是偏老的网站，界面都是一些静态界面，不需要动态加载，一般都是简单访问页面之后解析数据就能获得想要的信息。但是leetcode网页的加载方式跟之前那些网站不一样，它的绝大部分内容都是动态加载出来的，首次请求只会返回一个基本的网页模板，之后会自动发起（或者用户调用）请求获得页面更详细的信息。</p>
+<p>最近我也在做我的SRDP项目，对网站的基本知识也有了一定的了解，按照现在的发展趋势，像Leetcode这样的网站构建方式会逐渐成为主流，前后端分离、数据动态加载，这样后续跨平台制作客户端或者小程序会非常方便。所以在我看来，这次Leetcode爬取是很有意义的。</p>
+<p>在正式开始之前，先介绍一下其他人的一篇文章：<a href="https://www.jianshu.com/p/199881dc86e2" target="_blank" rel="noopener noreffer">Python爬取 LeetCode 题目及 AC 代码</a>，从这篇文章当中我接触到了一些新的知识，也参考了原文章中的一些代码。但有一点，现在leetcode的登陆方式发生了变化，我不确定这篇文章里面的代码是否可用。</p>
+<h2 id="基本知识">基本知识</h2>
+<p>首先要知道，网页的动态加载方式是通过Ajax技术实现的，关于这项技术具体的操作我们可以暂时不用了解，但需要知道下面这点信息：</p>
+<blockquote>
+<p>Ajax在工作的时候，会创建一个XHR（或是Fetch）对象，然后利用XHR对象来实现服务器和浏览器之间传输数据。在这里，XHR和Fetch并没有本质区别，只是Fetch出现得比XHR更晚一些，所以对一些开发人员来说会更好用，但作用都是一样的。</p>
+</blockquote>
+<p>通过浏览器自带的<code>右键-&gt;检查-&gt;network</code>，可以知道网页的请求过程，选择<code>XHR</code>便能看到所有的动态加载信息，分析加载过程。下面就是leetcode首页的情况：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/wanakiki/photo/master/leetcode-spider/20200502151203.png"
+        data-srcset="https://raw.githubusercontent.com/wanakiki/photo/master/leetcode-spider/20200502151203.png, https://raw.githubusercontent.com/wanakiki/photo/master/leetcode-spider/20200502151203.png 1.5x, https://raw.githubusercontent.com/wanakiki/photo/master/leetcode-spider/20200502151203.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/wanakiki/photo/master/leetcode-spider/20200502151203.png"
+        title="leetcode首页" /></p>
+<p>点开每条内容可以看到具体信息，可以查看其对应的响应内容。</p>
+<h2 id="问题页面分析">问题页面分析</h2>
+<p>访问<a href="https://leetcode-cn.com/problemset/all/" target="_blank" rel="noopener noreffer">问题列表</a>（不需要登陆），再随便打开一个问题页面，重复上面提到的检查过程，对得到的所有XHR对象进行检索，可以发现在某个请求里面含有题目信息。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/wanakiki/photo/master/leetcode-spider/20200502152530.png"
+        data-srcset="https://raw.githubusercontent.com/wanakiki/photo/master/leetcode-spider/20200502152530.png, https://raw.githubusercontent.com/wanakiki/photo/master/leetcode-spider/20200502152530.png 1.5x, https://raw.githubusercontent.com/wanakiki/photo/master/leetcode-spider/20200502152530.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/wanakiki/photo/master/leetcode-spider/20200502152530.png"
+        title="具体查看位置" /></p>
+<p>接下来检查这个请求的其他信息，可以发现这是一个POST请求，请求头当中有很特殊的一项<code>Request Payload</code>，点开可以看到很多信息。在左边也能看到XHR类型的请求名字都是一样的，在分析内容的时候，我就很好奇这些请求的名字为什么都是<code>graphql</code>，于是就搜了一下，get到了一个新的知识点。(我很庆幸当时直接搜索了，省了很多麻烦)</p>
+<blockquote>
+<p>GraphQL 是一种用于 API 的查询语言，是由 Facebook 开源的一种用于提供数据查询服务的抽象框架。在服务端 API 开发中，很多时候定义一个接口返回的数据相对固定，因此要获得更多信息或者只想得到某部分信息时，基于 RESTful API 的接口就显得不那么灵活。而 GraphQL 对 API 中的数据提供了一套易于理解的完整描述，使得客户端能够准确地获得它需要的数据，而且没有任何冗余，也让 API 更容易地随着时间推移而演进，还能用于构建强大的开发者工具。<br>
+来源：<a href="https://blog.csdn.net/qq_42564846/article/details/81127469" target="_blank" rel="noopener noreffer">以LeetCode为例——如何发送GraphQL Query获取数据</a></p>
+</blockquote>
+<p>搜索过程中也发现了别人是如何提交这份信息的，实现过程跟普通的请求没有太大的区别，只要把查询参数封装好传递过去就可以了，实现的时候我参考了开始那篇文章里面的代码。</p>
+<p>这里讲一点题外话，在后面的分析中，我发现Leetcode的绝大部分数据都是采用这种方式获取的，甚至登陆都是通过这种方式将用户名密码传递到服务器，再设置带有用户信息的cookie。因为这点，我怀疑之前参考的那份简书的文章里面的代码应该不再适用了。</p>
+<h2 id="具体实现">具体实现</h2>
+<p>整体来说没有太多复杂的地方，需要注意的有两点。第一是graphql的查询内容的格式在封装的时候要注意保证格式的正确，因为查询代码的缩进很重要。</p>
+<p>网页上直接复制来的信息只有一行，需要对其进行稍微的处理，替换掉不必要的换行符，代码的缩进也要注意。我直接在VSCode上安装了一个插件，对查询代码进行了格式化，下面是我处理后的代码，可以看到正常的查询内容还是很多的。使用的时候需要注意把<code>variables: {titleSlug: &quot;merge-two-sorted-lists&quot;}</code>这一行的titleSlug变量值换成想要查询的题目。</p>
+<div class="highlight"><pre class="chroma"><code class="language-gql" data-lang="gql"><span class="p">{</span><span class="w">
+</span><span class="w">  </span><span class="py">operationName</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;questionData&#34;</span><span class="w">
+</span><span class="w">  </span><span class="nc">query</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;query questionData($titleSlug: String!) {
+</span><span class="s">  question(titleSlug: $titleSlug) {
+</span><span class="s">    questionId
+</span><span class="s">    questionFrontendId
+</span><span class="s">    boundTopicId
+</span><span class="s">    title
+</span><span class="s">    titleSlug
+</span><span class="s">    content
+</span><span class="s">    translatedTitle
+</span><span class="s">    translatedContent
+</span><span class="s">    isPaidOnly
+</span><span class="s">    difficulty
+</span><span class="s">    likes
+</span><span class="s">    dislikes
+</span><span class="s">    isLiked
+</span><span class="s">    similarQuestions
+</span><span class="s">    contributors {
+</span><span class="s">      username
+</span><span class="s">      profileUrl
+</span><span class="s">      avatarUrl
+</span><span class="s">      __typename
+</span><span class="s">    }
+</span><span class="s">    langToValidPlayground
+</span><span class="s">    topicTags {
+</span><span class="s">      name
+</span><span class="s">      slug
+</span><span class="s">      translatedName
+</span><span class="s">      __typename
+</span><span class="s">    }
+</span><span class="s">    companyTagStats
+</span><span class="s">    codeSnippets {
+</span><span class="s">      lang
+</span><span class="s">      langSlug
+</span><span class="s">      code
+</span><span class="s">      __typename
+</span><span class="s">    }
+</span><span class="s">    stats
+</span><span class="s">    hints
+</span><span class="s">    solution {
+</span><span class="s">      id
+</span><span class="s">      canSeeDetail
+</span><span class="s">      __typename
+</span><span class="s">    }
+</span><span class="s">    status
+</span><span class="s">    sampleTestCase
+</span><span class="s">    metaData
+</span><span class="s">    judgerAvailable
+</span><span class="s">    judgeType
+</span><span class="s">    mysqlSchemas
+</span><span class="s">    enableRunCode
+</span><span class="s">    envInfo
+</span><span class="s">    book {
+</span><span class="s">      id
+</span><span class="s">      bookName
+</span><span class="s">      pressName
+</span><span class="s">      source
+</span><span class="s">      shortDescription
+</span><span class="s">      fullDescription
+</span><span class="s">      bookImgUrl
+</span><span class="s">      pressImgUrl
+</span><span class="s">      productUrl
+</span><span class="s">      __typename
+</span><span class="s">    }
+</span><span class="s">    isSubscribed
+</span><span class="s">    isDailyQuestion
+</span><span class="s">    dailyRecordStatus
+</span><span class="s">    editorType
+</span><span class="s">    ugcQuestionId
+</span><span class="s">    __typename
+</span><span class="s">  }
+</span><span class="s">}
+</span><span class="s">&#34;</span><span class="w">
+</span><span class="w">  </span><span class="nc">variables</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nc">titleSlug</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;merge-two-sorted-lists&#34;</span><span class="p">}</span><span class="w">
+</span><span class="w"></span><span class="p">}</span><span class="w">
+</span></code></pre></div><p>第二点需要注意的是Graphql查询的灵活度很高，在使用的时候不必要的查询内容完全可以忽略掉，我在实现的时候就只保留了我想要的查询信息。下面是我的代码：</p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="kn">import</span> <span class="nn">requests</span><span class="o">,</span> <span class="nn">json</span>
+
+<span class="k">def</span> <span class="nf">get_problem_content</span><span class="p">(</span><span class="n">slug</span><span class="p">):</span>
+    <span class="n">user_agent</span> <span class="o">=</span> <span class="s2">&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36&#34;</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&#34;https://leetcode-cn.com/graphql&#34;</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;operationName&#39;</span><span class="p">:</span> <span class="s2">&#34;getQuestionDetail&#34;</span><span class="p">,</span>
+              <span class="s1">&#39;variables&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;titleSlug&#39;</span><span class="p">:</span> <span class="n">slug</span><span class="p">},</span>
+              <span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;&#39;query getQuestionDetail($titleSlug: String!) {
+</span><span class="s1">            question(titleSlug: $titleSlug) {
+</span><span class="s1">                questionId
+</span><span class="s1">                translatedTitle
+</span><span class="s1">                translatedContent
+</span><span class="s1">            }
+</span><span class="s1">        }&#39;&#39;&#39;</span>
+    <span class="p">}</span>
+    <span class="n">json_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span>   
+
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="n">user_agent</span><span class="p">,</span> <span class="s1">&#39;Connection&#39;</span><span class="p">:</span>
+               <span class="s1">&#39;keep-alive&#39;</span><span class="p">,</span> <span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;Referer&#39;</span><span class="p">:</span> <span class="s1">&#39;https://leetcode-cn.com/problems/&#39;</span> <span class="o">+</span> <span class="n">slug</span><span class="p">}</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">resp</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;utf8&#39;</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+    <span class="c1"># 题目详细信息</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;question&#39;</span><span class="p">]</span>
+    <span class="n">fh</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;res.md&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="c1"># fh.writelines(question[&#39;translatedContent&#39;])</span>
+    <span class="n">fh</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">convert</span><span class="p">(</span><span class="n">question</span><span class="p">[</span><span class="s1">&#39;translatedContent&#39;</span><span class="p">]))</span>
+    <span class="n">fh</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div><h3 id="html转化为markdown">html转化为Markdown</h3>
+<p>通过上面的函数可以获得题目的详细内容，但这个内容给出的方式是html代码，我之前在做笔记的时候都是用Markdown格式记录题目信息的，于是又写了一个函数用正则表达式对html标签进行了修改替换。</p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">Remove</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&#34;&lt;/?p&gt;&#34;</span>
+<span class="p">]</span>
+<span class="n">Replace</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s2">&#34;&lt;/?code&gt;&#34;</span><span class="p">,</span> <span class="s2">&#34;``&#34;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">&#34;&lt;/?strong&gt;&#34;</span><span class="p">,</span> <span class="s2">&#34;**&#34;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">&#34;&lt;pre&gt;&#34;</span><span class="p">,</span> <span class="s2">&#34;```</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">&#34;&lt;/pre&gt;&#34;</span><span class="p">,</span> <span class="s2">&#34;```&#34;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">&#34;&amp;nbsp;&#34;</span><span class="p">,</span> <span class="s2">&#34; &#34;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">&#34;&amp;quot;&#34;</span><span class="p">,</span> <span class="s1">&#39;&#34;&#39;</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">src</span><span class="p">):</span>
+    <span class="c1"># pre内部预处理</span>
+    <span class="k">def</span> <span class="nf">remove_label_in_pre</span><span class="p">(</span><span class="n">matched</span><span class="p">):</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">matched</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&#34;&lt;[^&gt;p]*&gt;&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">,</span> <span class="n">tmp</span><span class="p">)</span>   <span class="c1"># 不匹配&gt;与p</span>
+        <span class="k">return</span> <span class="n">tmp</span>
+    <span class="n">src</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&#34;&lt;pre&gt;[\s\S]*?&lt;/pre&gt;&#34;</span><span class="p">,</span> <span class="n">remove_label_in_pre</span><span class="p">,</span> <span class="n">src</span><span class="p">)</span>   <span class="c1"># 注意此处非贪心匹配，因为可能有多个示例</span>
+
+    <span class="c1"># 可以直接删除的标签</span>
+    <span class="k">for</span> <span class="n">curPattern</span> <span class="ow">in</span> <span class="n">Remove</span><span class="p">:</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">curPattern</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">,</span> <span class="n">src</span><span class="p">)</span>
+
+    <span class="c1"># 需要替换内容的标签</span>
+    <span class="k">for</span> <span class="n">curPattern</span><span class="p">,</span> <span class="n">curRepl</span> <span class="ow">in</span> <span class="n">Replace</span><span class="p">:</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">curPattern</span><span class="p">,</span> <span class="n">curRepl</span><span class="p">,</span> <span class="n">src</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">src</span>
+</code></pre></div><p>因为题目内容里面的标签都是辅助标记类的标签，所以整体上不需要有很大的操作。通过分析可以发现，有些标签是可以直接去掉的，比如<code>&lt;p&gt;</code>标签，它标记了段落，直接删除之后在Markdown当中视觉效果相同。而另外大部分标签都需要替换成Markdown中对应的标识符，比如<code>&lt;strong&gt;</code>标签需要替换成两个星号。这两种标签都可以直接用<code>re.sub</code>函数进行替换，需要删除的标签可以直接替换为空字符串，其他标签替换为对应的标识符。</p>
+<p>实现过程中我发现<code>&lt;pre&gt;</code>标签内部的标签不能做简单的处理，因为在一般的Markdown语法当中，代码块当中的内容是不会有加粗、斜体之类的特殊标记的，所以在对加粗、斜体等标签进行替换时，需要提前做处理，把代码块里面所有的标签都删掉。我在实现的时候使用了<code>re.sub</code>函数的高级用法，替换字符串更改为了函数，具体的内容可以自行百度理解。</p>
+<h2 id="其他">其他</h2>
+<p>对于我来说，做到这些基本已经足够了，接下来可能会让代码访问剪切板直接把题目信息设置到剪切板当中，结合utools方便自己的操作。关于用户登陆这里也有一点小的想法，实现过程需要创建一个session，找到并构造登陆用户的<code>Graphql</code>语句发起请求，获得cookie，然后进行其他的查询操作。我暂时没有相关的需要，就不作进一步的探索了。🤔</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-05-02</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%88%AC%E8%99%AB/">爬虫</a>,&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/xor/" class="prev" rel="prev" title="用异或找到数组中不重复出现的数字"><i class="fas fa-angle-left fa-fw"></i>用异或找到数组中不重复出现的数字</a>
+            <a href="/posts/baidufanyi/" class="next" rel="next" title="百度翻译爬虫">百度翻译爬虫<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.75.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

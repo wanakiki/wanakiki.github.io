@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>数据结构作业一 Zuma List - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="数据结构作业一 Zuma List" />
+<meta property="og:description" content="数据结构第一次作业。 问题分析 题目要求书写程序对祖玛消除过程进行回放，输入为原始珠子序列以及玩家所做的一系列操作，要求我们按照游戏规则计算出每次操作后的珠子序列并进行输出。 祖玛游戏规则：有三个或更多同色" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/zuma-list/" />
+<meta property="article:published_time" content="2019-04-20T19:41:55+08:00" />
+<meta property="article:modified_time" content="2019-04-20T19:41:55+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="数据结构作业一 Zuma List"/>
+<meta name="twitter:description" content="数据结构第一次作业。 问题分析 题目要求书写程序对祖玛消除过程进行回放，输入为原始珠子序列以及玩家所做的一系列操作，要求我们按照游戏规则计算出每次操作后的珠子序列并进行输出。 祖玛游戏规则：有三个或更多同色"/>
+<meta name="application-name" content="Wanakiki`s Blog">
+<meta name="apple-mobile-web-app-title" content="Wanakiki`s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/zuma-list/" /><link rel="prev" href="http://example.org/posts/kuohao/" /><link rel="next" href="http://example.org/posts/list-adt/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "数据结构作业一 Zuma List",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/zuma-list\/"
+        },"genre": "posts","wordcount":  1213 ,
+        "url": "http:\/\/example.org\/posts\/zuma-list\/","datePublished": "2019-04-20T19:41:55+08:00","dateModified": "2019-04-20T19:41:55+08:00","publisher": {
+            "@type": "Organization",
+            "name": "wanakiki"},"author": {
+                "@type": "Person",
+                "name": "wanakiki"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Blog </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Blog</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">数据结构作业一 Zuma List</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw"></i>数据结构</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-04-20">2019-04-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1213 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#问题分析">问题分析</a></li>
+    <li><a href="#解决方案">解决方案</a></li>
+    <li><a href="#算法设计">算法设计</a></li>
+    <li><a href="#流程图">流程图</a></li>
+    <li><a href="#编程实现">编程实现</a></li>
+    <li><a href="#结果分析">结果分析</a></li>
+    <li><a href="#总结体会">总结体会</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>数据结构第一次作业。</p>
+<!-- raw HTML omitted -->
+<h2 id="问题分析">问题分析</h2>
+<p>题目要求书写程序对祖玛消除过程进行回放，输入为原始珠子序列以及玩家所做的一系列操作，要求我们按照游戏规则计算出每次操作后的珠子序列并进行输出。</p>
+<p>祖玛游戏规则：有三个或更多同色珠子变成相邻就会立即消失，并且可能会发生连锁反应。<strong>需要注意，原始情况中出现的三个或更多相邻同色珠子，在没有新珠子或者连锁反应影响时是不会消除的。</strong></p>
+<h2 id="解决方案">解决方案</h2>
+<p>将新的珠子插入到原有序列，在插入位置向两侧判断同色珠子个数，满足条件则进行删除。考虑到删除后的连锁反应，需要将判断的过程循环执行到无法继续删除。</p>
+<h2 id="算法设计">算法设计</h2>
+<p>考虑到整个过程需要多次插入删除的操作，并且查找过程只需要从插入的具体位置向两侧进行判断，所以使用list对珠子序列进行存储。</p>
+<p>插入过程只需要简单的insert函数与advance函数相配合就可以了，使用advance函数使迭代器指到插入位置，之后再用insert函数进行插入。</p>
+<p>比较难的地方在于是否消除的判断上，考虑到迭代器的特殊性，为了避免不必要的麻烦，当list中的元素少于三个的时候直接不进行判断。对三个以上的元素判断时，需要从插入元素的位置向两侧查找相同颜色，可以用<code>end()</code>和<code>begin()</code>来判断是否到达了查找的两端，当然，如果在查找过程中就发现了不同的珠子就可以直接停止查找过程。查找结束之后直接对查找到的区间进行删除，同时保留左开右闭区间的右端点作为下次查找过程的起始位置。</p>
+<p>数据的输入和结果输出过程按照题目的要求进行编写即可。</p>
+<h2 id="流程图">流程图</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2019/05/03/5ccbb38e8cb30.jpg"
+        data-srcset="https://i.loli.net/2019/05/03/5ccbb38e8cb30.jpg, https://i.loli.net/2019/05/03/5ccbb38e8cb30.jpg 1.5x, https://i.loli.net/2019/05/03/5ccbb38e8cb30.jpg 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2019/05/03/5ccbb38e8cb30.jpg"
+        title="流程图" /></p>
+<h2 id="编程实现">编程实现</h2>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;list&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">bang</span><span class="p">(</span><span class="n">list</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">beads</span><span class="p">,</span> <span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="kt">char</span> <span class="n">bead</span><span class="p">){</span>
+    <span class="n">list</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;::</span><span class="n">iterator</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">l</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>    <span class="cm">/*计数*/</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">beads</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+    <span class="n">advance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">id</span><span class="p">);</span>
+    <span class="n">beads</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">bead</span><span class="p">);</span>  <span class="cm">/*插入元素*/</span>
+
+    <span class="cm">/*考虑到多次消除的可能，使用while循环进行消除*/</span>
+    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">beads</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="k">break</span><span class="p">;</span>
+        
+        <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">i</span><span class="o">--</span><span class="p">;</span>    
+        <span class="cm">/*这步操作之后r指向被插入元素以后，i指向被插入元素*/</span>
+        
+        <span class="k">for</span><span class="p">(;</span> <span class="n">r</span> <span class="o">!=</span> <span class="n">beads</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="n">r</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="n">r</span> <span class="o">==</span> <span class="o">*</span><span class="n">i</span><span class="p">)</span>    <span class="n">num</span> <span class="o">++</span><span class="p">;</span>
+            <span class="k">else</span>    <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>           <span class="cm">/*向右判断*/</span>
+
+        <span class="n">l</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>          
+        <span class="cm">/*if(i != beads.begin()){
+</span><span class="cm">            l--;
+</span><span class="cm">            while (1){
+</span><span class="cm">                if(*l != *i){   l++;break;} //l需要加加
+</span><span class="cm">                else    num ++;
+</span><span class="cm">                
+</span><span class="cm">                if(l == beads.begin())  break;
+</span><span class="cm">                else    l--;    
+</span><span class="cm">            }
+</span><span class="cm">        }   //向左判断*/</span>
+
+        <span class="cm">/*由流程图发现的简化方法*/</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">l</span> <span class="o">!=</span> <span class="n">beads</span><span class="p">.</span><span class="n">begin</span><span class="p">()){</span>
+            <span class="n">l</span><span class="o">--</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="n">l</span> <span class="o">!=</span> <span class="o">*</span><span class="n">i</span><span class="p">){</span>   <span class="n">l</span><span class="o">++</span><span class="p">;</span> <span class="k">break</span><span class="p">;}</span>
+            <span class="k">else</span>    <span class="n">num</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+
+
+        <span class="cm">/*删除部分*/</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">num</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">){</span>
+            <span class="n">beads</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">);</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">r</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+            <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="cm">/*输出*/</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">beads</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;-&#39;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="k">else</span><span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="n">beads</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">beads</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">i</span><span class="p">;</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">id</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">bead</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">initial_beads</span><span class="p">;</span>
+    <span class="n">list</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span> <span class="n">beads</span><span class="p">;</span>
+
+    <span class="n">getline</span><span class="p">(</span><span class="n">cin</span><span class="p">,</span> <span class="n">initial_beads</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">initial_beads</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">beads</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">initial_beads</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="cm">/*构造初始状态*/</span>
+
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">n</span><span class="o">--</span><span class="p">){</span>
+        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">id</span> <span class="o">&gt;&gt;</span> <span class="n">bead</span><span class="p">;</span>
+        <span class="n">bang</span><span class="p">(</span><span class="n">beads</span><span class="p">,</span> <span class="n">id</span><span class="p">,</span> <span class="n">bead</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="结果分析">结果分析</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2019/05/03/5ccbb38f267db.jpg"
+        data-srcset="https://i.loli.net/2019/05/03/5ccbb38f267db.jpg, https://i.loli.net/2019/05/03/5ccbb38f267db.jpg 1.5x, https://i.loli.net/2019/05/03/5ccbb38f267db.jpg 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2019/05/03/5ccbb38f267db.jpg"
+        title="测试1" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2019/05/03/5ccbb39060e21.jpg"
+        data-srcset="https://i.loli.net/2019/05/03/5ccbb39060e21.jpg, https://i.loli.net/2019/05/03/5ccbb39060e21.jpg 1.5x, https://i.loli.net/2019/05/03/5ccbb39060e21.jpg 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2019/05/03/5ccbb39060e21.jpg"
+        title="测试2" /></p>
+<p>如上，经过测试，程序完成要求，并且能够处理初始序列为空的情况。👍</p>
+<h2 id="总结体会">总结体会</h2>
+<ol>
+<li>增加了对erase函数的了解：
+<ol>
+<li>当参数只有一个的时候，原迭代器指向的位置被删除，迭代器无效化，不能对其继续进行操作，否则会造成错误，但函数会返回原位置之后的迭代器，所以可以利用这个特性进行区间删除（省略++步骤）。</li>
+<li>当有两个参数的时候，函数结束之后前一个迭代器会无效化，而后一个迭代器因为删除区间为左闭右开的特点，其指向的位置不会被删除。</li>
+</ol>
+</li>
+<li>迭代器是一个很玄学的东西，使用不规范很容易带来错误，查错的时候可以优先考虑。</li>
+<li>流程图可以帮忙理清逻辑结构！！！😀</li>
+<li>写程序尽量一次性写完&hellip;&hellip;🤧</li>
+</ol>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-04-20</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/kuohao/" class="prev" rel="prev" title="括号匹配"><i class="fas fa-angle-left fa-fw"></i>括号匹配</a>
+            <a href="/posts/list-adt/" class="next" rel="next" title="数据结构作业二 List ADT">数据结构作业二 List ADT<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.75.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

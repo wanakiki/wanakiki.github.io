@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Flask&#43;MongoDB CURD微实战 - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="Flask&#43;MongoDB CURD微实战" />
+<meta property="og:description" content="做SRDP的过程中发现关系型数据库在实现问卷效果时比较困难，所以找了个时间熟悉了一下非关系型数据库，做了一个todo小demo。 视频演示地址 过程记录 下载安装mongodb，注意安装的时候不要勾选com" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/mongodb-demo/" />
+<meta property="article:published_time" content="2020-05-30T11:07:16+08:00" />
+<meta property="article:modified_time" content="2020-05-30T11:07:16+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Flask&#43;MongoDB CURD微实战"/>
+<meta name="twitter:description" content="做SRDP的过程中发现关系型数据库在实现问卷效果时比较困难，所以找了个时间熟悉了一下非关系型数据库，做了一个todo小demo。 视频演示地址 过程记录 下载安装mongodb，注意安装的时候不要勾选com"/>
+<meta name="application-name" content="Wanakiki`s Blog">
+<meta name="apple-mobile-web-app-title" content="Wanakiki`s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/mongodb-demo/" /><link rel="prev" href="http://example.org/posts/baidufanyi/" /><link rel="next" href="http://example.org/posts/linux-c/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Flask+MongoDB CURD微实战",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/mongodb-demo\/"
+        },"genre": "posts","keywords": "flask, mongodb, 数据库","wordcount":  847 ,
+        "url": "http:\/\/example.org\/posts\/mongodb-demo\/","datePublished": "2020-05-30T11:07:16+08:00","dateModified": "2020-05-30T11:07:16+08:00","publisher": {
+            "@type": "Organization",
+            "name": "wanakiki"},"author": {
+                "@type": "Person",
+                "name": "wanakiki"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Blog </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Blog</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Flask&#43;MongoDB CURD微实战</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-05-30">2020-05-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 847 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#过程记录">过程记录</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>做SRDP的过程中发现关系型数据库在实现问卷效果时比较困难，所以找了个时间熟悉了一下非关系型数据库，做了一个todo小demo。</p>
+<!-- raw HTML omitted -->
+<p><a href="https://www.bilibili.com/video/BV1654y1D7jN/" target="_blank" rel="noopener noreffer">视频演示地址</a></p>
+<h2 id="过程记录">过程记录</h2>
+<p>下载安装<a href="https://www.mongodb.com/download-center/community" target="_blank" rel="noopener noreffer">mongodb</a>，注意安装的时候不要勾选compass，我勾选之后直接卡住了。</p>
+<p>安装Flask相关扩展：<code>pip install Flask-PyMongo</code>。</p>
+<p><code>Flask-PyMongo</code>是在<code>PyMongo</code>基础上进行的封装，令其满足扩展的习惯性使用方式，具体操作需要查看<code>PyMongo</code>中的相关内容。两个扩展的文档：<a href="http://www.pythondoc.com/flask-pymongo/index.html" target="_blank" rel="noopener noreffer">Flask-PyMongo</a>、<a href="https://pymongo.readthedocs.io/en/stable/tutorial.html" target="_blank" rel="noopener noreffer">PyMongo</a>。</p>
+<p>过程中参考的两个博客：</p>
+<ol>
+<li><a href="http://www.bjhee.com/flask-ext5.html">http://www.bjhee.com/flask-ext5.html</a></li>
+<li><a href="https://towait.com/blog/flask-mongodb-crud/">https://towait.com/blog/flask-mongodb-crud/</a></li>
+</ol>
+<p>过程中需要注意mongodb使用$配合其它关键字实现不同更新数据方式的方法。实现代码如下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">abort</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span><span class="p">,</span> <span class="n">request</span>
+<span class="kn">from</span> <span class="nn">flask_bootstrap</span> <span class="kn">import</span> <span class="n">Bootstrap</span>
+<span class="kn">from</span> <span class="nn">flask_pymongo</span> <span class="kn">import</span> <span class="n">PyMongo</span>
+<span class="kn">from</span> <span class="nn">flask_wtf</span> <span class="kn">import</span> <span class="n">FlaskForm</span>
+<span class="kn">from</span> <span class="nn">wtforms</span> <span class="kn">import</span> <span class="n">StringField</span><span class="p">,</span> <span class="n">SubmitField</span>
+<span class="kn">from</span> <span class="nn">wtforms.validators</span> <span class="kn">import</span> <span class="n">DataRequired</span>
+<span class="kn">from</span> <span class="nn">bson.objectid</span> <span class="kn">import</span> <span class="n">ObjectId</span>
+
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="c1"># app配置</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;MONGO_DBNAME&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;flask&#39;</span>  <span class="c1"># 数据库名</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;MONGO_URI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;mongodb://localhost:27017/flask&#39;</span>
+<span class="c1"># 暂时不涉及用户名与密码</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SECRET_KEY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;balabala&#39;</span>  <span class="c1"># wtf</span>
+
+<span class="n">mongo</span> <span class="o">=</span> <span class="n">PyMongo</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="n">bootstrap</span> <span class="o">=</span> <span class="n">Bootstrap</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+
+<span class="c1"># 表单</span>
+<span class="k">class</span> <span class="nc">ContentForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Content&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">()])</span>
+    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">&#39;提交&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">DeleteForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
+    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">&#39;Delete&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">FinishForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
+    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">&#39;Finish&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># 数据模型</span>
+<span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">content</span><span class="p">,</span>
+        <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">time</span><span class="p">(),</span>
+        <span class="s1">&#39;finished&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+        <span class="s1">&#39;finished_time&#39;</span><span class="p">:</span> <span class="bp">None</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">body</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">ContentForm</span><span class="p">()</span>
+    <span class="n">form_d</span> <span class="o">=</span> <span class="n">DeleteForm</span><span class="p">()</span>
+    <span class="n">form_f</span> <span class="o">=</span> <span class="n">FinishForm</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>     <span class="c1"># 不需要要定义数据模型</span>
+        <span class="n">mongo</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">todos</span><span class="o">.</span><span class="n">insert_one</span><span class="p">(</span><span class="n">cur</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">mongo</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">todos</span><span class="o">.</span><span class="n">find</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">records</span><span class="o">=</span><span class="n">res</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span> <span class="n">form_d</span><span class="o">=</span><span class="n">form_d</span><span class="p">,</span> <span class="n">form_f</span><span class="o">=</span><span class="n">form_f</span><span class="p">)</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/delete/&lt;obj_id&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">delete_record</span><span class="p">(</span><span class="n">obj_id</span><span class="p">):</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">DeleteForm</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
+        <span class="n">mongo</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">todos</span><span class="o">.</span><span class="n">delete_one</span><span class="p">({</span><span class="s1">&#39;_id&#39;</span><span class="p">:</span> <span class="n">ObjectId</span><span class="p">(</span><span class="n">obj_id</span><span class="p">)})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">abort</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">))</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/finish/&lt;obj_id&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">finish_record</span><span class="p">(</span><span class="n">obj_id</span><span class="p">):</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">FinishForm</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;dd&#39;</span><span class="p">)</span>
+        <span class="n">mongo</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">todos</span><span class="o">.</span><span class="n">update_one</span><span class="p">({</span><span class="s1">&#39;_id&#39;</span><span class="p">:</span> <span class="n">ObjectId</span><span class="p">(</span><span class="n">obj_id</span><span class="p">)},</span> <span class="p">{</span>
+            <span class="s1">&#39;$set&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;finished&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+                <span class="s1">&#39;finished_time&#39;</span><span class="p">:</span> <span class="n">time</span><span class="p">()</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">abort</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">))</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/search&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">search_records</span><span class="p">():</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+
+    <span class="n">form</span> <span class="o">=</span> <span class="n">ContentForm</span><span class="p">()</span>
+    <span class="n">form_d</span> <span class="o">=</span> <span class="n">DeleteForm</span><span class="p">()</span>
+    <span class="n">form_f</span> <span class="o">=</span> <span class="n">FinishForm</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">content</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">mongo</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">todos</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+            <span class="p">{</span><span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&#34;$regex&#34;</span><span class="p">:</span> <span class="n">content</span><span class="p">}}</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">mongo</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">todos</span><span class="o">.</span><span class="n">find</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">records</span><span class="o">=</span><span class="n">res</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span> <span class="n">form_d</span><span class="o">=</span><span class="n">form_d</span><span class="p">,</span> <span class="n">form_f</span><span class="o">=</span><span class="n">form_f</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div><p>页面模板文件：</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">{% extends &#34;bootstrap/base.html&#34; %}
+
+{% block title %}To Do {% endblock %}
+
+{% block content %}
+    <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>To Do List<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;get&#34;</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;{{ url_for(&#39;search_records&#39;, content=content) }}&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;content&#34;</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;搜索&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;post&#34;</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;{{ url_for(&#39;index&#39;)}}&#34;</span><span class="p">&gt;</span>
+    {{ form.csrf_token }}
+    {{ form.content() }}
+    {{ form.submit() }}
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>记录列表<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+    {% for record in records %}
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>内容：{{ record[&#39;content&#39;] }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>创建时间：{{ record[&#39;time&#39;] }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    {% if record[&#39;finished&#39;] %}
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>状态：Finished<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>完成时间 {{ record[&#39;finished_time&#39;] }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    {% else %}
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>状态：Unfinished<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    {% endif %}
+    {% set p = record[&#39;_id&#39;]~&#39;&#39; %}
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;post&#34;</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;float: left&#34;</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;{{ url_for(&#39;delete_record&#39;, obj_id=p) }}&#34;</span><span class="p">&gt;</span>
+        {{ form_d.csrf_token }}
+        {{ form_d.submit() }}
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;post&#34;</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;{{ url_for(&#39;finish_record&#39;, obj_id=p) }}&#34;</span><span class="p">&gt;</span>
+        {{ form_f.csrf_token }}
+        {{ form_f.submit() }}
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    {% endfor %}
+    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+{% endblock %}
+</code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-05-30</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/flask/">flask</a>,&nbsp;<a href="/tags/mongodb/">mongodb</a>,&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/baidufanyi/" class="prev" rel="prev" title="百度翻译爬虫"><i class="fas fa-angle-left fa-fw"></i>百度翻译爬虫</a>
+            <a href="/posts/linux-c/" class="next" rel="next" title="Linux C语言系统编程作业">Linux C语言系统编程作业<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.75.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

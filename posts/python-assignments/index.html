@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>PY4E 题目整理（下） - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="PY4E 题目整理（下）" />
+<meta property="og:description" content="Coursera中python教程同步题目整理，涉及到网络和数据库编程部分。题目地址：py4e。 打开网页的操作步骤，导入urllib库，urllib.requert.urlopen(url).read" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/python-assignments/" />
+<meta property="article:published_time" content="2019-08-05T18:29:25+08:00" />
+<meta property="article:modified_time" content="2019-08-05T18:29:25+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="PY4E 题目整理（下）"/>
+<meta name="twitter:description" content="Coursera中python教程同步题目整理，涉及到网络和数据库编程部分。题目地址：py4e。 打开网页的操作步骤，导入urllib库，urllib.requert.urlopen(url).read"/>
+<meta name="application-name" content="Wanakiki`s Blog">
+<meta name="apple-mobile-web-app-title" content="Wanakiki`s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/python-assignments/" /><link rel="prev" href="http://example.org/posts/python-assignment/" /><link rel="next" href="http://example.org/posts/univ-share/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "PY4E 题目整理（下）",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/python-assignments\/"
+        },"genre": "posts","wordcount":  4284 ,
+        "url": "http:\/\/example.org\/posts\/python-assignments\/","datePublished": "2019-08-05T18:29:25+08:00","dateModified": "2019-08-05T18:29:25+08:00","publisher": {
+            "@type": "Organization",
+            "name": "wanakiki"},"author": {
+                "@type": "Person",
+                "name": "wanakiki"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Blog </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Blog</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">PY4E 题目整理（下）</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-08-05">2019-08-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4284 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#exploring-the-hypert-ext-transport-protocol探索超文本传输协议">Exploring the HyperT ext Transport Protocol（探索超文本传输协议）</a></li>
+    <li><a href="#scraping-numbers-from-html-using-beautifulsoup">Scraping Numbers from HTML using BeautifulSoup</a>
+      <ul>
+        <li><a href="#data-format">Data Format</a></li>
+      </ul>
+    </li>
+    <li><a href="#following-links-in-python">Following Links in Python</a>
+      <ul>
+        <li><a href="#strategy">Strategy</a></li>
+        <li><a href="#sample-execution">Sample execution</a></li>
+      </ul>
+    </li>
+    <li><a href="#extracting-data-from-xml">Extracting Data from XML</a>
+      <ul>
+        <li><a href="#data-format-and-approach">Data Format and Approach</a></li>
+        <li><a href="#sample-execution-1">Sample Execution</a></li>
+      </ul>
+    </li>
+    <li><a href="#extracting-data-from-json">Extracting Data from JSON</a>
+      <ul>
+        <li><a href="#data-format-1">Data Format</a></li>
+        <li><a href="#sample-execution-2">Sample Execution</a></li>
+      </ul>
+    </li>
+    <li><a href="#calling-a-json-api">Calling a JSON API</a>
+      <ul>
+        <li><a href="#api-end-points">API End Points</a></li>
+        <li><a href="#test-data--sample-execution">Test Data / Sample Execution</a></li>
+      </ul>
+    </li>
+    <li><a href="#counting-organizations">Counting Organizations</a></li>
+    <li><a href="#musical-track-database">Musical Track Database</a></li>
+    <li><a href="#make-database-from-json">Make database from JSON</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Coursera中python教程同步题目整理，涉及到网络和数据库编程部分。题目地址：<a href="https://www.py4e.com/" target="_blank" rel="noopener noreffer">py4e</a>。</p>
+<!-- raw HTML omitted -->
+<blockquote>
+<p>打开网页的操作步骤，导入urllib库，urllib.requert.urlopen(url).read()
+可以直接对字典进行url编码 urllib.parse.urlencode(parms)</p>
+</blockquote>
+<h2 id="exploring-the-hypert-ext-transport-protocol探索超文本传输协议">Exploring the HyperT ext Transport Protocol（探索超文本传输协议）</h2>
+<p>You are to retrieve the following document using the HTTP protocol in a way that you can examine the HTTP Response headers.</p>
+<ul>
+<li><a href="http://data.pr4e.org/intro-short.txt">http://data.pr4e.org/intro-short.txt</a></li>
+</ul>
+<p>There are three ways that you might retrieve this web page and look at the response headers:</p>
+<ul>
+<li>Preferred: Modify the socket1.py program to retrieve the above URL and print out the headers and data. Make sure to change the code to retrieve the above URL - the values are different for each URL.</li>
+<li>Open the URL in a web browser with a developer console or FireBug and manually examine the headers that are returned.</li>
+<li>Use the telnet program as shown in lecture to retrieve the headers and content.</li>
+</ul>
+<p>Enter the header values in each of the fields below and press &ldquo;Submit&rdquo;.</p>
+<p>有三种方式查看相应头文件，第一种方式是使用Python脚本，第二种方式是用浏览器打开URL，在控制台查看，第三种方式是使用telnet程序。仅列出了第一种的脚本。</p>
+<p>由于网络的原因这段代码没有成功进行测试，在设定socket命令时的<code>\r\n</code>也不清楚具体的含义。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">socket</span>
+
+<span class="n">mysock</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+<span class="n">mysock</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s1">&#39;data.pr4e.org&#39;</span><span class="p">,</span> <span class="mi">80</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;connected&#39;</span><span class="p">)</span>
+<span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;GET http://data.pr4e.org/intro-short.txt HTTP/1.0</span><span class="se">\r\n\r\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+<span class="n">mysock</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">mysock</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">mysock</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div><h2 id="scraping-numbers-from-html-using-beautifulsoup">Scraping Numbers from HTML using BeautifulSoup</h2>
+<p>In this assignment you will write a Python program similar to <a href="http://www.py4e.com/code3/urllink2.py">http://www.py4e.com/code3/urllink2.py</a>. The program will use urllib to read the HTML from the data files below, and parse the data, extracting numbers and compute the sum of the numbers in the file.</p>
+<p>We provide two files for this assignment. One is a sample file where we give you the sum for your testing and the other is the actual data you need to process for the assignment.</p>
+<ul>
+<li>Sample data: <a href="http://py4e-data.dr-chuck.net/comments_42.html">http://py4e-data.dr-chuck.net/comments_42.html</a> (Sum=2553)</li>
+<li>Actual data: <a href="http://py4e-data.dr-chuck.net/comments_275913.html">http://py4e-data.dr-chuck.net/comments_275913.html</a> (Sum ends with 37)</li>
+</ul>
+<p>You do not need to save these files to your folder since your program will read the data directly from the URL.</p>
+<h3 id="data-format">Data Format</h3>
+<p>The file is a table of names and comment counts. You can ignore most of the data in the file except for lines like the following:</p>
+<pre><code class="language-no" data-lang="no">&lt;tr&gt;&lt;td&gt;Modu&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;comments&quot;&gt;90&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Kenzie&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;comments&quot;&gt;88&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Hubert&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;comments&quot;&gt;87&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+</code></pre><p>解析网页，计算网页中数字的总和。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 抓取网站中的数据并计算数据总和</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">import</span> <span class="nn">urllib.parse</span>
+<span class="kn">import</span> <span class="nn">urllib.error</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://python-data.dr-chuck.net/comments_275913.html&#39;</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+
+<span class="n">span</span> <span class="o">=</span> <span class="n">soup</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">aspan</span> <span class="ow">in</span> <span class="n">span</span><span class="p">:</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">aspan</span><span class="o">.</span><span class="n">get_text</span><span class="p">())</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;结果为&#39;</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+</code></pre></div><h2 id="following-links-in-python">Following Links in Python</h2>
+<p>In this assignment you will write a Python program that expands on <a href="http://www.py4e.com/code3/urllinks.py">http://www.py4e.com/code3/urllinks.py</a>. The program will use urllib to read the HTML from the data files below, extract the href= vaues from the anchor tags, scan for a tag that is in a particular position relative to the first name in the list, follow that link and repeat the process a number of times and report the last name you find.</p>
+<p>We provide two files for this assignment. One is a sample file where we give you the name for your testing and the other is the actual data you need to process for the assignment</p>
+<ul>
+<li>Sample problem: Start at <a href="http://py4e-data.dr-chuck.net/known_by_Fikret.html">http://py4e-data.dr-chuck.net/known_by_Fikret.html</a>
+Find the link at position 3 (the first name is 1). Follow that link. Repeat this process 4 times. The answer is the last name that you retrieve.
+Sequence of names: Fikret Montgomery Mhairade Butchi Anayah
+Last name in sequence: Anayah</li>
+<li>Actual problem: Start at: <a href="http://py4e-data.dr-chuck.net/known_by_Cohen.html">http://py4e-data.dr-chuck.net/known_by_Cohen.html</a>
+Find the link at position 18 (the first name is 1). Follow that link. Repeat this process 7 times. The answer is the last name that you retrieve.
+Hint: The first character of the name of the last page that you will load is: A</li>
+</ul>
+<h3 id="strategy">Strategy</h3>
+<p>The web pages tweak the height between the links and hide the page after a few seconds to make it difficult for you to do the assignment without writing a Python program. But frankly with a little effort and patience you can overcome these attempts to make it a little harder to complete the assignment without writing a Python program. But that is not the point. The point is to write a clever Python program to solve the program.</p>
+<h3 id="sample-execution">Sample execution</h3>
+<p>Here is a sample execution of a solution:</p>
+<pre><code class="language-no" data-lang="no">$ python3 solution.py
+Enter URL: http://py4e-data.dr-chuck.net/known_by_Fikret.html
+Enter count: 4
+Enter position: 3
+Retrieving: http://py4e-data.dr-chuck.net/known_by_Fikret.html
+Retrieving: http://py4e-data.dr-chuck.net/known_by_Montgomery.html
+Retrieving: http://py4e-data.dr-chuck.net/known_by_Mhairade.html
+Retrieving: http://py4e-data.dr-chuck.net/known_by_Butchi.html
+Retrieving: http://py4e-data.dr-chuck.net/known_by_Anayah.html
+</code></pre><p>The answer to the assignment for this execution is &ldquo;Anayah&rdquo;.</p>
+<p>程序要求：从指定的链接开始，解析html页面，获取所有的herf标签，找到指定位置（position）的链接，重复这个过程指定次数（count)。最终输出找到的人名。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 跟踪超链接，找到目标</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">import</span> <span class="nn">urllib.parse</span>
+<span class="kn">import</span> <span class="nn">urllib.error</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+<span class="c1"># 假定输入规范</span>
+<span class="n">count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter Count:&#39;</span><span class="p">))</span>
+<span class="n">position</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter Position:&#39;</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>    <span class="c1">#从1开始计算位置</span>
+<span class="n">flag</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;Select Url:
+</span><span class="s1">1: http://py4e-data.dr-chuck.net/known_by_Fikret.html
+</span><span class="s1">2: http://py4e-data.dr-chuck.net/known_by_Cohen.html
+</span><span class="s1">&#39;&#39;&#39;</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">flag</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://py4e-data.dr-chuck.net/known_by_Fikret.html&#39;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://py4e-data.dr-chuck.net/known_by_Cohen.html&#39;</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>   <span class="c1">#打开界面</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>   <span class="c1">#界面解析</span>
+
+
+    <span class="c1">#界面链接的格式为 ``&lt;a href = &#34;xx.com&#34;&gt;&lt;/a&gt;``</span>
+    <span class="c1">#应该提取a标签</span>
+    <span class="n">a_coll</span> <span class="o">=</span> <span class="n">soup</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>    <span class="c1">#获取a标签集合 属于beautiful soup中的类型，应该是重载了括号，print(a_coll[0])支持这种访问</span>
+    <span class="n">href</span> <span class="o">=</span> <span class="n">a_coll</span><span class="p">[</span><span class="n">position</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">href</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;runtime error&#39;</span><span class="p">)</span>
+        <span class="n">quit</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">href</span>  <span class="c1"># 更新url 以进一步抓取</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">a_coll</span><span class="p">[</span><span class="n">position</span><span class="p">]</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>   <span class="c1">#获取内容</span>
+        <span class="k">break</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</code></pre></div><h2 id="extracting-data-from-xml">Extracting Data from XML</h2>
+<p>In this assignment you will write a Python program somewhat similar to <a href="http://www.py4e.com/code3/geoxml.py">http://www.py4e.com/code3/geoxml.py</a>. The program will prompt for a URL, read the XML data from that URL using urllib and then parse and extract the comment counts from the XML data, compute the sum of the numbers in the file.</p>
+<p>We provide two files for this assignment. One is a sample file where we give you the sum for your testing and the other is the actual data you need to process for the assignment.</p>
+<ul>
+<li>Sample data: <a href="http://py4e-data.dr-chuck.net/comments_42.xml">http://py4e-data.dr-chuck.net/comments_42.xml</a> (Sum=2553)</li>
+<li>Actual data: <a href="http://py4e-data.dr-chuck.net/comments_275915.xml">http://py4e-data.dr-chuck.net/comments_275915.xml</a> (Sum ends with 24)</li>
+</ul>
+<p>You do not need to save these files to your folder since your program will read the data directly from the URL. Note: Each student will have a distinct data url for the assignment - so only use your own data url for analysis.</p>
+<h3 id="data-format-and-approach">Data Format and Approach</h3>
+<p>The data consists of a number of names and comment counts in XML as follows:</p>
+<pre><code class="language-no" data-lang="no">&lt;comment&gt;
+  &lt;name&gt;Matthias&lt;/name&gt;
+  &lt;count&gt;97&lt;/count&gt;
+&lt;/comment&gt;
+</code></pre><p>You are to look through all the <code>&lt;comment&gt;</code> tags and find the <code>&lt;count&gt;</code> values sum the numbers. The closest sample code that shows how to parse XML is geoxml.py. But since the nesting of the elements in our data is different than the data we are parsing in that sample code you will have to make real changes to the code.</p>
+<p>To make the code a little simpler, you can use an XPath selector string to look through the entire tree of XML for any tag named &lsquo;count&rsquo; with the following line of code:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">counts</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;.//count&#39;</span><span class="p">)</span>
+</code></pre></div><p>Take a look at the Python ElementTree documentation and look for the supported XPath syntax for details. You could also work from the top of the XML down to the comments node and then loop through the child nodes of the comments node.</p>
+<h3 id="sample-execution-1">Sample Execution</h3>
+<pre><code class="language-no" data-lang="no">$ python3 solution.py
+Enter location: http://py4e-data.dr-chuck.net/comments_42.xml
+Retrieving http://py4e-data.dr-chuck.net/comments_42.xml
+Retrieved 4189 characters
+Count: 50
+Sum: 2...
+</code></pre><p>程序要求：解析XML文件，计算整个文件中count标签的总和。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="kn">as</span> <span class="nn">ET</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">import</span> <span class="nn">urllib.parse</span>
+<span class="kn">import</span> <span class="nn">urllib.error</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://py4e-data.dr-chuck.net/comments_275915.xml&#39;</span>   <span class="c1"># 指定URL</span>
+<span class="n">uh</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">uh</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>    <span class="c1">#获取网页数据</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Retrived&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="s1">&#39;characters&#39;</span><span class="p">)</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;.//count&#39;</span><span class="p">)</span>   <span class="c1">#查找count标签</span>
+<span class="c1"># counts = tree.findall(&#39;comments/comment/count&#39;)</span>
+<span class="c1"># 查找count可以使用上面这行语句</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Count:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">counts</span><span class="p">))</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">counts</span><span class="p">:</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">count</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Sum:&#39;</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+</code></pre></div><h2 id="extracting-data-from-json">Extracting Data from JSON</h2>
+<p>In this assignment you will write a Python program somewhat similar to <a href="http://www.py4e.com/code3/json2.py">http://www.py4e.com/code3/json2.py</a>. The program will prompt for a URL, read the JSON data from that URL using urllib and then parse and extract the comment counts from the JSON data, compute the sum of the numbers in the file and enter the sum below:</p>
+<p>We provide two files for this assignment. One is a sample file where we give you the sum for your testing and the other is the actual data you need to process for the assignment.</p>
+<ul>
+<li>Sample data: <a href="http://py4e-data.dr-chuck.net/comments_42.json">http://py4e-data.dr-chuck.net/comments_42.json</a> (Sum=2553)</li>
+<li>Actual data: <a href="http://py4e-data.dr-chuck.net/comments_275916.json">http://py4e-data.dr-chuck.net/comments_275916.json</a> (Sum ends with 15)</li>
+</ul>
+<p>You do not need to save these files to your folder since your program will read the data directly from the URL. Note: Each student will have a distinct data url for the assignment - so only use your own data url for analysis.</p>
+<h3 id="data-format-1">Data Format</h3>
+<p>The data consists of a number of names and comment counts in JSON as follows:</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="err">comments:</span> <span class="err">[</span>
+    <span class="err">{</span>
+      <span class="err">name:</span> <span class="nt">&#34;Matthias&#34;</span>
+      <span class="err">count</span><span class="p">:</span> <span class="mi">97</span>
+    <span class="p">}</span><span class="err">,</span>
+    <span class="p">{</span>
+      <span class="err">name:</span> <span class="nt">&#34;Geomer&#34;</span>
+      <span class="err">count</span><span class="p">:</span> <span class="mi">97</span>
+    <span class="p">}</span>
+    <span class="err">...</span>
+  <span class="err">]</span>
+<span class="err">}</span>
+</code></pre></div><p>The closest sample code that shows how to parse JSON and extract a list is json2.py. You might also want to look at geoxml.py to see how to prompt for a URL and retrieve data from a URL.</p>
+<h3 id="sample-execution-2">Sample Execution</h3>
+<pre><code class="language-no" data-lang="no">$ python3 solution.py
+Enter location: http://py4e-data.dr-chuck.net/comments_42.json
+Retrieving http://py4e-data.dr-chuck.net/comments_42.json
+Retrieved 2733 characters
+Count: 50
+Sum: 2...
+</code></pre><p>解析JSON文件，获得count的总和。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">urllib.request</span><span class="o">,</span> <span class="nn">urllib.error</span><span class="o">,</span> <span class="nn">urllib.parse</span>
+<span class="kn">import</span> <span class="nn">json</span>     <span class="c1">#导入json</span>
+
+<span class="c1"># - Sample data: http://py4e-data.dr-chuck.net/comments_42.json (Sum=2553)</span>
+<span class="c1"># - Actual data: http://py4e-data.dr-chuck.net/comments_275916.json (Sum ends with 15)</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter url &#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Retriving&#39;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="n">uh</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Retrived&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">uh</span><span class="p">),</span> <span class="s1">&#39;characters&#39;</span><span class="p">)</span>
+
+<span class="n">js</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">uh</span><span class="p">)</span>
+<span class="c1"># 观察文档结构，js为字典，js[&#39;comments&#39;]为由字典组成的list</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">comment</span> <span class="ow">in</span> <span class="n">js</span><span class="p">[</span><span class="s1">&#39;comments&#39;</span><span class="p">]:</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="n">comment</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Sum:&#39;</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+</code></pre></div><h2 id="calling-a-json-api">Calling a JSON API</h2>
+<p>In this assignment you will write a Python program somewhat similar to <a href="http://www.py4e.com/code3/geojson.py">http://www.py4e.com/code3/geojson.py</a>. The program will prompt for a location, contact a web service and retrieve JSON for the web service and parse that data, and retrieve the first place_id from the JSON. A place ID is a textual identifier that uniquely identifies a place as within Google Maps.</p>
+<h3 id="api-end-points">API End Points</h3>
+<p>To complete this assignment, you should use this API endpoint that has a static subset of the Google Data:</p>
+<pre><code class="language-no" data-lang="no">http://py4e-data.dr-chuck.net/json?
+</code></pre><p>This API uses the same parameter (address) as the Google API. This API also has no rate limit so you can test as often as you like. If you visit the URL with no parameters, you get &ldquo;No address&hellip;&rdquo; response.</p>
+<p>To call the API, you need to provide the address that you are requesting as the address= parameter that is properly URL encoded using the urllib.parse.urlencode() function as shown in <a href="http://www.py4e.com/code3/geojson.py">http://www.py4e.com/code3/geojson.py</a></p>
+<h3 id="test-data--sample-execution">Test Data / Sample Execution</h3>
+<p>You can test to see if your program is working with a location of &ldquo;South Federal University&rdquo; which will have a place_id of &ldquo;ChIJ9e_QQm0sDogRhUPatldEFxw&rdquo;.</p>
+<pre><code class="language-no" data-lang="no">$ python3 solution.py
+Enter location: South Federal University
+Retrieving http://...
+Retrieved 2291 characters
+Place id ChIJ9e_QQm0sDogRhUPatldEFxw
+</code></pre><p>调用谷歌API查询指定地点的<code>place id</code>，因为谷歌地图API现在需要验证，所以最好使用PY4E提供的副本。需要注意，使用py4e提供的副本时，需要额外传递一个key参数，这点在作业说明中没有指出，查看代码包中的代码之后才发现这个值为42，http://www.py4e.com/code3/geojson.py 具体见这个链接。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">urllib.error</span><span class="o">,</span> <span class="nn">urllib.request</span><span class="o">,</span> <span class="nn">urllib.parse</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">target</span> <span class="o">=</span> <span class="s1">&#39;http://py4e-data.dr-chuck.net/json?&#39;</span>  <span class="c1">#使用这个接口，需要 key参数且值为42</span>
+<span class="n">local</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter location: &#39;</span><span class="p">)</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="n">target</span> <span class="o">+</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlencode</span><span class="p">({</span><span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="n">local</span><span class="p">,</span> <span class="s1">&#39;key&#39;</span> <span class="p">:</span> <span class="mi">42</span><span class="p">})</span>
+<span class="c1">#对字符串进行url编码，直接传递参数和值构成的字典</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Retriving&#39;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Retrived&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="s1">&#39;characters&#39;</span><span class="p">)</span>
+
+<span class="n">js</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="c1"># print(json.dumps(js, indent = 4)) #查看接收到的文件结构</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Place id&#39;</span><span class="p">,</span> <span class="n">js</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;place_id&#39;</span><span class="p">])</span>
+</code></pre></div><h2 id="counting-organizations">Counting Organizations</h2>
+<p>This application will read the mailbox data (mbox.txt) and count the number of email messages per organization (i.e. domain name of the email address) using a database with the following schema to maintain the counts.</p>
+<pre><code class="language-no" data-lang="no">CREATE TABLE Counts (org TEXT, count INTEGER)
+</code></pre><p>When you have run the program on mbox.txt upload the resulting database file above for grading.</p>
+<p>If you run the program multiple times in testing or with dfferent files, make sure to empty out the data before each run.</p>
+<p>You can use this code as a starting point for your application: <a href="http://www.py4e.com/code3/emaildb.py">http://www.py4e.com/code3/emaildb.py</a>.</p>
+<p>The data file for this application is the same as in previous assignments: <a href="http://www.py4e.com/code3/mbox.txt">http://www.py4e.com/code3/mbox.txt</a>.</p>
+<p>Because the sample code is using an UPDATE statement and committing the results to the database as each record is read in the loop, it might take as long as a few minutes to process all the data. The commit insists on completely writing all the data to disk every time it is called.</p>
+<p>The program can be speeded up greatly by moving the commit operation outside of the loop. In any database program, there is a balance between the number of operations you execute between commits and the importance of not losing the results of operations that have not yet been committed.</p>
+<p>此前做过的统计文本文件中每个人发送的邮件数目的升级版，统计各个公司服务器域名发送的邮件总数，将最终找到的结果保存到了数据库中。需要注意，提交sql查询时为了加快速度要放在循环外部。如何使用SQL可见<a href="https://docs.python.org/zh-cn/3/library/sqlite3.html#module-sqlite3" target="_blank" rel="noopener noreffer">官方文档</a>。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sqlite3</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;mail-count.sqlite&#39;</span><span class="p">)</span>
+<span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+<span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;DROP TABLE IF EXISTS Counts&#39;</span><span class="p">)</span>  <span class="c1"># 如果存在就提前删除表</span>
+<span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;CREATE TABLE Counts (org TEXT, count INTEGER)&#39;&#39;&#39;</span><span class="p">)</span>    <span class="c1"># 创建表</span>
+
+<span class="n">fh</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;mbox.txt&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fh</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;From:&#39;</span><span class="p">):</span>
+        <span class="k">continue</span>
+    <span class="n">mail</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">mail</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;@&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+    <span class="n">org</span> <span class="o">=</span> <span class="n">mail</span><span class="p">[</span><span class="n">index</span><span class="p">:]</span>
+
+    <span class="c1"># 针对org执行sql后续操作，先查询再决定更新还是插入</span>
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT count FROM Counts WHERE org = ?&#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">org</span><span class="p">,)</span> <span class="p">)</span> <span class="c1">#execute函数第二个参数需要是元组</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>    <span class="c1">#返回list，查询不到时返回None</span>
+
+    <span class="k">if</span> <span class="n">num</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;INSERT INTO Counts(org, count) VALUES(?, 1)&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">org</span><span class="p">,</span> <span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;UPDATE Counts SET count = ? WHERE org = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">num</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">org</span><span class="p">))</span>
+        <span class="c1"># 在进行更新时可以直接 count = count + 1</span>
+
+<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>   <span class="c1">#提交放在循环外加速</span>
+<span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM Counts ORDER BY count DESC LIMIT 1&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">())</span>
+<span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div><h2 id="musical-track-database">Musical Track Database</h2>
+<p>This application will read an iTunes export file in XML and produce a properly normalized database with this structure:</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Artist</span> <span class="p">(</span>
+    <span class="n">id</span>  <span class="nb">INTEGER</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="n">AUTOINCREMENT</span> <span class="k">UNIQUE</span><span class="p">,</span>
+    <span class="n">name</span>    <span class="nb">TEXT</span> <span class="k">UNIQUE</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Genre</span> <span class="p">(</span>
+    <span class="n">id</span>  <span class="nb">INTEGER</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="n">AUTOINCREMENT</span> <span class="k">UNIQUE</span><span class="p">,</span>
+    <span class="n">name</span>    <span class="nb">TEXT</span> <span class="k">UNIQUE</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Album</span> <span class="p">(</span>
+    <span class="n">id</span>  <span class="nb">INTEGER</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="n">AUTOINCREMENT</span> <span class="k">UNIQUE</span><span class="p">,</span>
+    <span class="n">artist_id</span>  <span class="nb">INTEGER</span><span class="p">,</span>
+    <span class="n">title</span>   <span class="nb">TEXT</span> <span class="k">UNIQUE</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Track</span> <span class="p">(</span>
+    <span class="n">id</span>  <span class="nb">INTEGER</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span>
+        <span class="n">AUTOINCREMENT</span> <span class="k">UNIQUE</span><span class="p">,</span>
+    <span class="n">title</span> <span class="nb">TEXT</span>  <span class="k">UNIQUE</span><span class="p">,</span>
+    <span class="n">album_id</span>  <span class="nb">INTEGER</span><span class="p">,</span>
+    <span class="n">genre_id</span>  <span class="nb">INTEGER</span><span class="p">,</span>
+    <span class="n">len</span> <span class="nb">INTEGER</span><span class="p">,</span> <span class="n">rating</span> <span class="nb">INTEGER</span><span class="p">,</span> <span class="k">count</span> <span class="nb">INTEGER</span>
+<span class="p">);</span>
+</code></pre></div><p>If you run the program multiple times in testing or with different files, make sure to empty out the data before each run.</p>
+<p>You can use this code as a starting point for your application: <a href="http://www.py4e.com/code3/tracks.zip">http://www.py4e.com/code3/tracks.zip</a>. The ZIP file contains the Library.xml file to be used for this assignment. You can export your own tracks from iTunes and create a database, but for the database that you turn in for this assignment, only use the Library.xml data that is provided.</p>
+<p>To grade this assignment, the program will run a query like this on your uploaded database and look for the data it expects to see:</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">Track</span><span class="p">.</span><span class="n">title</span><span class="p">,</span> <span class="n">Artist</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">Album</span><span class="p">.</span><span class="n">title</span><span class="p">,</span> <span class="n">Genre</span><span class="p">.</span><span class="n">name</span>
+    <span class="k">FROM</span> <span class="n">Track</span> <span class="k">JOIN</span> <span class="n">Genre</span> <span class="k">JOIN</span> <span class="n">Album</span> <span class="k">JOIN</span> <span class="n">Artist</span>
+    <span class="k">ON</span> <span class="n">Track</span><span class="p">.</span><span class="n">genre_id</span> <span class="o">=</span> <span class="n">Genre</span><span class="p">.</span><span class="n">ID</span> <span class="k">and</span> <span class="n">Track</span><span class="p">.</span><span class="n">album_id</span> <span class="o">=</span> <span class="n">Album</span><span class="p">.</span><span class="n">id</span>
+        <span class="k">AND</span> <span class="n">Album</span><span class="p">.</span><span class="n">artist_id</span> <span class="o">=</span> <span class="n">Artist</span><span class="p">.</span><span class="n">id</span>
+    <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">Artist</span><span class="p">.</span><span class="n">name</span> <span class="k">LIMIT</span> <span class="mi">3</span>
+</code></pre></div><p>The expected result of the modified query on your database is: (shown here as a simple HTML table with titles)</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Track</th>
+<th style="text-align:center">Artist</th>
+<th style="text-align:center">Album</th>
+<th style="text-align:center">Genre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Chase the Ace</td>
+<td style="text-align:center">AC/DC</td>
+<td style="text-align:center">Who Made Who</td>
+<td style="text-align:center">Rock</td>
+</tr>
+<tr>
+<td style="text-align:center">D.T.</td>
+<td style="text-align:center">AC/DC</td>
+<td style="text-align:center">Who Made Who</td>
+<td style="text-align:center">Rock</td>
+</tr>
+<tr>
+<td style="text-align:center">For Those About To Rock (We Salute You)</td>
+<td style="text-align:center">AC/DC</td>
+<td style="text-align:center">Who Made Who</td>
+<td style="text-align:center">Rock</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="kn">as</span> <span class="nn">ET</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;music.sqlite&#39;</span><span class="p">)</span>
+<span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+<span class="n">cur</span><span class="o">.</span><span class="n">executescript</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">DROP TABLE IF EXISTS Artist;
+</span><span class="s1">DROP TABLE IF EXISTS Genre;
+</span><span class="s1">DROP TABLE IF EXISTS Album;
+</span><span class="s1">DROP TABLE IF EXISTS Track;&#39;&#39;&#39;</span><span class="p">)</span> 
+<span class="c1">#如果存在就先删除表</span>
+<span class="c1"># 执行多条查询需要 executescript</span>
+
+<span class="n">cur</span><span class="o">.</span><span class="n">executescript</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;CREATE TABLE Artist (
+</span><span class="s1">    id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+</span><span class="s1">    name    TEXT UNIQUE
+</span><span class="s1">);
+</span><span class="s1">
+</span><span class="s1">CREATE TABLE Genre (
+</span><span class="s1">    id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+</span><span class="s1">    name    TEXT UNIQUE
+</span><span class="s1">);
+</span><span class="s1">
+</span><span class="s1">CREATE TABLE Album (
+</span><span class="s1">    id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+</span><span class="s1">    artist_id  INTEGER,
+</span><span class="s1">    title   TEXT UNIQUE
+</span><span class="s1">);
+</span><span class="s1">
+</span><span class="s1">CREATE TABLE Track (
+</span><span class="s1">    id  INTEGER NOT NULL PRIMARY KEY 
+</span><span class="s1">        AUTOINCREMENT UNIQUE,
+</span><span class="s1">    title TEXT  UNIQUE,
+</span><span class="s1">    album_id  INTEGER,
+</span><span class="s1">    genre_id  INTEGER,
+</span><span class="s1">    len INTEGER, rating INTEGER, count INTEGER
+</span><span class="s1">);&#39;&#39;&#39;</span><span class="p">)</span>  <span class="c1"># 执行多行时注意使用三个引号</span>
+
+<span class="n">file_name</span> <span class="o">=</span> <span class="s1">&#39;Library.xml&#39;</span>
+<span class="n">fh</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">fh</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="n">dicts</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;./dict/dict/dict&#39;</span><span class="p">)</span>
+
+<span class="c1"># 查看xml文件，分析目录树结构 需要在/dict/dict/dict内查找字段</span>
+<span class="c1"># 定义查找函数</span>
+<span class="k">def</span> <span class="nf">lookup</span><span class="p">(</span><span class="n">pare</span><span class="p">,</span> <span class="n">aim</span><span class="p">):</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">pare</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">flag</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">child</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;key&#39;</span> <span class="ow">and</span> <span class="n">child</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="n">aim</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">None</span>
+
+<span class="c1"># 通过构建的数据库情况，需要查找的字段为</span>
+<span class="c1"># Track ID   Name    Artist     Album   Play Count  Rating  Total Time</span>
+
+<span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">dicts</span><span class="p">:</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">lookup</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="s1">&#39;Track ID&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>  <span class="k">continue</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">lookup</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">)</span>
+    <span class="n">artist</span> <span class="o">=</span> <span class="n">lookup</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="s1">&#39;Artist&#39;</span><span class="p">)</span>
+    <span class="n">album</span> <span class="o">=</span> <span class="n">lookup</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="s1">&#39;Album&#39;</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">lookup</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="s1">&#39;Play Count&#39;</span><span class="p">)</span>
+    <span class="n">rating</span> <span class="o">=</span> <span class="n">lookup</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="s1">&#39;Rating&#39;</span><span class="p">)</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="n">lookup</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="s1">&#39;Total Time&#39;</span><span class="p">)</span>
+    <span class="n">genre</span> <span class="o">=</span> <span class="n">lookup</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="s1">&#39;Genre&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">artist</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">album</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">genre</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">artist</span><span class="p">,</span> <span class="n">album</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">rating</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+
+    <span class="c1"># 根据建立数据库的顺序进行插入，并获取外键对应的id值</span>
+    <span class="c1"># 注意对于唯一元素插入时使用ignore</span>
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;INSERT OR IGNORE INTO Artist(name) VALUES(?)&#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">artist</span><span class="p">,))</span>
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT id FROM Artist WHERE name = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">artist</span><span class="p">,))</span>
+    <span class="n">artist_id</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>   <span class="c1"># 查询返回的是数组</span>
+
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;INSERT OR IGNORE INTO Genre(name) VALUES(?)&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">genre</span><span class="p">,))</span>
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT id FROM Genre WHERE name = ?&#39;</span><span class="p">,(</span><span class="n">genre</span><span class="p">,))</span>
+    <span class="n">genre_id</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;INSERT OR IGNORE INTO Album(artist_id, title) VALUES(?, ?)&#39;</span><span class="p">,(</span><span class="n">artist_id</span><span class="p">,</span> <span class="n">album</span><span class="p">))</span>
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT id FROM Album WHERE title = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">album</span><span class="p">,))</span>
+    <span class="n">album_id</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># 至于这里为什么要用replace原因不知</span>
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;INSERT OR REPLACE INTO Track(title, album_id, genre_id, len, rating, count) 
+</span><span class="s1">    VALUES(?, ?, ?, ?, ?, ?)&#39;&#39;&#39;</span><span class="p">,(</span><span class="n">name</span><span class="p">,</span> <span class="n">album_id</span><span class="p">,</span> <span class="n">genre_id</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">rating</span><span class="p">,</span> <span class="n">count</span><span class="p">))</span>
+
+<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+<span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT Track.title, Artist.name, Album.title, Genre.name
+</span><span class="s1">    FROM Track JOIN Genre JOIN Album JOIN Artist
+</span><span class="s1">    ON Track.genre_id = Genre.ID and Track.album_id = Album.id
+</span><span class="s1">        AND Album.artist_id = Artist.id
+</span><span class="s1">    ORDER BY Artist.name LIMIT 3&#39;&#39;&#39;</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div><p>虽然执行之后结果和示例结果不一样，但是个人认为程序没有错误。</p>
+<h2 id="make-database-from-json">Make database from JSON</h2>
+<p>This application will read roster data in JSON format, parse the file, and then produce an SQLite database that contains a User, Course, and Member table and populate the tables from the data file.</p>
+<p>You can base your solution on this code: <a href="http://www.py4e.com/code3/roster/roster.py">http://www.py4e.com/code3/roster/roster.py</a> - this code is incomplete as you need to modify the program to store the <strong>role</strong> column in the <strong>Member</strong> table to complete the assignment.</p>
+<p>Each student gets their own file for the assignment. Download this file and save it as <code>roster_data.json</code>. Move the downloaded file into the same folder as your <code>roster.py</code> program.</p>
+<p>Once you have made the necessary changes to the program and it has been run successfully reading the above JSON data, run the following SQL command:</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">hex</span><span class="p">(</span><span class="k">User</span><span class="p">.</span><span class="n">name</span> <span class="o">||</span> <span class="n">Course</span><span class="p">.</span><span class="n">title</span> <span class="o">||</span> <span class="n">Member</span><span class="p">.</span><span class="k">role</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">X</span> <span class="k">FROM</span>
+    <span class="k">User</span> <span class="k">JOIN</span> <span class="n">Member</span> <span class="k">JOIN</span> <span class="n">Course</span>
+    <span class="k">ON</span> <span class="k">User</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">Member</span><span class="p">.</span><span class="n">user_id</span> <span class="k">AND</span> <span class="n">Member</span><span class="p">.</span><span class="n">course_id</span> <span class="o">=</span> <span class="n">Course</span><span class="p">.</span><span class="n">id</span>
+    <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">X</span>
+</code></pre></div><p>Find the first row in the resulting record set and enter the long string that looks like 53656C696E613333.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">sqlite3</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;rosterdb.sqlite&#39;</span><span class="p">)</span>
+<span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+<span class="c1"># 建立数据库</span>
+<span class="n">cur</span><span class="o">.</span><span class="n">executescript</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">DROP TABLE IF EXISTS User;
+</span><span class="s1">DROP TABLE IF EXISTS Member;
+</span><span class="s1">DROP TABLE IF EXISTS Course;
+</span><span class="s1">
+</span><span class="s1">CREATE TABLE User (
+</span><span class="s1">    id     INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+</span><span class="s1">    name   TEXT UNIQUE
+</span><span class="s1">);
+</span><span class="s1">
+</span><span class="s1">CREATE TABLE Course (
+</span><span class="s1">    id     INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+</span><span class="s1">    title  TEXT UNIQUE
+</span><span class="s1">);
+</span><span class="s1">
+</span><span class="s1">CREATE TABLE Member (
+</span><span class="s1">    user_id     INTEGER,
+</span><span class="s1">    course_id   INTEGER,
+</span><span class="s1">    role        INTEGER,
+</span><span class="s1">    PRIMARY KEY (user_id, course_id)
+</span><span class="s1">)
+</span><span class="s1">&#39;&#39;&#39;</span><span class="p">)</span>
+
+
+<span class="n">file_name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter filename: &#39;</span><span class="p">)</span>
+<span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">file_name</span> <span class="o">=</span> <span class="s1">&#39;roster_data.json&#39;</span>
+<span class="n">fh</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">js</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">fh</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">js</span><span class="p">:</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">role</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;INSERT OR IGNORE INTO User(name) VALUES(?)&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,))</span>
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT id FROM User WHERE name = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,))</span>
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;INSERT OR IGNORE INTO Course(title) VALUES(?)&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">title</span><span class="p">,))</span>
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT id FROM Course WHERE title = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">title</span><span class="p">,))</span>
+    <span class="n">course_id</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;INSERT OR REPLACE INTO Member(user_id, course_id, role) VALUES(?,?,?)&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">course_id</span><span class="p">,</span> <span class="n">role</span><span class="p">))</span>
+
+<span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT hex(User.name || Course.title || Member.role ) AS X FROM 
+</span><span class="s1">    User JOIN Member JOIN Course 
+</span><span class="s1">    ON User.id = Member.user_id AND Member.course_id = Course.id
+</span><span class="s1">    ORDER BY X LIMIT 5&#39;&#39;&#39;</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+<span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div><p>多对多关系示例。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-08-05</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/python-assignment/" class="prev" rel="prev" title="PY4E 题目整理（上）"><i class="fas fa-angle-left fa-fw"></i>PY4E 题目整理（上）</a>
+            <a href="/posts/univ-share/" class="next" rel="next" title="新生の大学分享">新生の大学分享<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.75.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

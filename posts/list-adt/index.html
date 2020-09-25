@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>数据结构作业二 List ADT - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="数据结构作业二 List ADT" />
+<meta property="og:description" content="问题分析 题目要求自行实现list ADT，并在此基础上实现PrintLots函数并且实现懒惰删除功能。对于PrintLots函数，题目要求分析运行时间；对于懒惰删除功能，除编写实现外，题目还要求列出懒惰" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/list-adt/" />
+<meta property="article:published_time" content="2019-04-20T20:22:40+08:00" />
+<meta property="article:modified_time" content="2019-04-20T20:22:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="数据结构作业二 List ADT"/>
+<meta name="twitter:description" content="问题分析 题目要求自行实现list ADT，并在此基础上实现PrintLots函数并且实现懒惰删除功能。对于PrintLots函数，题目要求分析运行时间；对于懒惰删除功能，除编写实现外，题目还要求列出懒惰"/>
+<meta name="application-name" content="Wanakiki`s Blog">
+<meta name="apple-mobile-web-app-title" content="Wanakiki`s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/list-adt/" /><link rel="prev" href="http://example.org/posts/zuma-list/" /><link rel="next" href="http://example.org/posts/train/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "数据结构作业二 List ADT",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/list-adt\/"
+        },"genre": "posts","wordcount":  2676 ,
+        "url": "http:\/\/example.org\/posts\/list-adt\/","datePublished": "2019-04-20T20:22:40+08:00","dateModified": "2019-04-20T20:22:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "wanakiki"},"author": {
+                "@type": "Person",
+                "name": "wanakiki"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Blog </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Blog</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">数据结构作业二 List ADT</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw"></i>数据结构</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-04-20">2019-04-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2676 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#问题分析">问题分析</a></li>
+    <li><a href="#解决方案">解决方案</a></li>
+    <li><a href="#算法设计">算法设计</a>
+      <ul>
+        <li><a href="#printlots函数">PrintLots函数</a></li>
+        <li><a href="#懒惰删除">懒惰删除</a></li>
+      </ul>
+    </li>
+    <li><a href="#流程图">流程图</a></li>
+    <li><a href="#编程实现">编程实现</a></li>
+    <li><a href="#结果分析">结果分析</a></li>
+    <li><a href="#总结体会">总结体会</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="问题分析">问题分析</h2>
+<p>题目要求自行实现list ADT，并在此基础上实现PrintLots函数并且实现懒惰删除功能。对于PrintLots函数，题目要求分析运行时间；对于懒惰删除功能，除编写实现外，题目还要求列出懒惰删除的优点和缺点。</p>
+<p><strong>PrintLots(L,P)</strong>：有两个链表L和P, 他们包含以升序排列的整数，操作PrintLots(L,P)将打印L中那些由P所指定位置上的元素。</p>
+<p><strong>懒惰删除（lazy deletion）</strong>：为了删除一个元素，我们只标记上该元素被删除。表中被删除和非被删除元素的个数作为数据结构的一部分被保留。如果被删除元素和非被删除元素一样多，我们遍历整个表，对所有被标记的节点执行标准的删除算法。</p>
+<h2 id="解决方案">解决方案</h2>
+<p>设计list ADT，准备好PrintLots函数所需要的接口。主文件引用自己编写的list ADT，并在主文件中完成对PrintLots函数的实现，懒惰删除则可以直接封装在ADT中。由于本次实验缺乏示例输入输出，因此还要对输入输出部分稍微加以设计，在此不多赘述。</p>
+<h2 id="算法设计">算法设计</h2>
+<p>list ADT的实现大体可以按照课本所给的框架来初步构建，之后对其进行丰富，首先实现节点类，再进一步实现List类。考虑到懒惰删除的需要，在实现节点类的时候我在其中加入了是否删除的标志，实现List类时增加了用于统计伪删除元素个数的变量。为了更进一步贴合标准模板库的操作，相对多此一举地加入了迭代器子类。（实践证明，我对迭代器相关知识的了解并不充分&hellip;😕）</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2019/05/03/5ccbb39389ad9.jpg"
+        data-srcset="https://i.loli.net/2019/05/03/5ccbb39389ad9.jpg, https://i.loli.net/2019/05/03/5ccbb39389ad9.jpg 1.5x, https://i.loli.net/2019/05/03/5ccbb39389ad9.jpg 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2019/05/03/5ccbb39389ad9.jpg"
+        title="结构示意" /></p>
+<h3 id="printlots函数">PrintLots函数</h3>
+<p>因为两个链表的元素都是升序排列的，所以L的迭代器可以一直向一个方向移动，整个函数的实现降低了一些难度。定义一个整形变量用来记录当前L的迭代器指向位置的编号，编号若与P的迭代器指向的元素相同则进行输出，同时两个迭代器向后移动。若编号与P当前元素不同，则指向L的迭代器向后移动。函数的终止条件为链表P遍历结束。</p>
+<h4 id="复杂度分析">复杂度分析</h4>
+<p>从整体上来看，PrintLots函数只是两个链表的单向遍历输出，只是细节方面稍微复杂，但引入的均为常数时间可以完成的操作。因为P的元素个数不可能超过L的元素个数，所以最坏情况便是输出了L的所有元素。时间复杂度为O(n)。</p>
+<h3 id="懒惰删除">懒惰删除</h3>
+<p>函数参数为指向要删除元素的迭代器，函数通过迭代器访问该元素内部的删除标志，并对其进行修改。修改之后检查当前伪删除元素的总数，大于总元素一般对整个链表进行遍历删除。总体实现相对简单。</p>
+<h4 id="懒惰删除优缺点分析">懒惰删除优缺点分析</h4>
+<p>优点：误删数据有恢复的空间，未被释放的空间可以进行二次利用，减少了资源消耗较大的删除过程的需求次数（链表中体现不明显）。
+缺点：记录元素伪删除需要额外的操作和空间，被删除的节点不及时释放增加了空间的占用，也提高了部分操作所需的时间。</p>
+<h2 id="流程图">流程图</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2019/05/03/5ccbb3959aa95.jpg"
+        data-srcset="https://i.loli.net/2019/05/03/5ccbb3959aa95.jpg, https://i.loli.net/2019/05/03/5ccbb3959aa95.jpg 1.5x, https://i.loli.net/2019/05/03/5ccbb3959aa95.jpg 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2019/05/03/5ccbb3959aa95.jpg"
+        title="lazy deletion" /></p>
+<h2 id="编程实现">编程实现</h2>
+<p>共编写了三个文件：listnode.h、my_list.h、main.cpp</p>
+<p>1.listnode.h</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp">    <span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp"></span>    <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+    <span class="c1">//定义列表的节点
+</span><span class="c1"></span>    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span> <span class="k">struct</span> <span class="nc">ListNode</span>
+    <span class="p">{</span>
+        <span class="n">T</span> <span class="n">data</span><span class="p">;</span>
+        <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">pred</span><span class="p">;</span>
+        <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">succ</span><span class="p">;</span>
+        <span class="kt">bool</span> <span class="n">need_remove</span><span class="p">;</span>   <span class="c1">//need_remove为了方便懒惰消除
+</span><span class="c1"></span>
+        <span class="n">ListNode</span><span class="p">()</span> <span class="o">:</span> <span class="n">need_remove</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span> <span class="p">{}</span>
+        <span class="n">ListNode</span><span class="p">(</span><span class="n">T</span> <span class="n">e</span><span class="p">,</span> <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">p</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">s</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">)</span>
+            <span class="o">:</span> <span class="n">data</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">pred</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">succ</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">need_remove</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span> <span class="p">{}</span>
+
+        <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">insertAsPred</span><span class="p">(</span><span class="n">T</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">);</span>
+        <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">insertAsSucc</span><span class="p">(</span><span class="n">T</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="c1">//前插入
+</span><span class="c1"></span>    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+    <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">insertAsPred</span><span class="p">(</span><span class="n">T</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">){</span>
+        <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">x</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+        <span class="n">pred</span><span class="o">-&gt;</span><span class="n">succ</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">//后插入
+</span><span class="c1"></span>    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+    <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">insertAsSucc</span><span class="p">(</span><span class="n">T</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">){</span>
+        <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">x</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="n">succ</span><span class="p">);</span>
+        <span class="n">succ</span><span class="o">-&gt;</span><span class="n">pred</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+        <span class="n">succ</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div><p>2.my_list.h</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&#34;listnode.h&#34;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">List</span>
+<span class="p">{</span>
+  <span class="k">private</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">_size</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">_num</span><span class="p">;</span>
+    <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">header</span><span class="p">;</span>
+    <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">trailer</span><span class="p">;</span>
+
+  <span class="k">protected</span><span class="o">:</span>
+    <span class="kt">void</span> <span class="n">init</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="nf">copyNodes</span><span class="p">(</span><span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+    <span class="c1">//只写出了有可能用到的函数
+</span><span class="c1"></span>
+  <span class="k">public</span><span class="o">:</span>
+    <span class="n">List</span><span class="p">()</span> <span class="p">{</span> <span class="n">init</span><span class="p">();</span> <span class="p">}</span> <span class="c1">//默认构造
+</span><span class="c1"></span>    <span class="n">List</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="k">const</span> <span class="o">&amp;</span><span class="n">L</span><span class="p">);</span>
+    <span class="n">List</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="k">const</span> <span class="o">&amp;</span><span class="n">L</span><span class="p">,</span> <span class="kt">int</span> <span class="n">r</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">);</span>
+    <span class="n">List</span><span class="p">(</span><span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="nf">clear</span><span class="p">();</span>
+
+    <span class="o">~</span><span class="n">List</span><span class="p">();</span> <span class="c1">//析构
+</span><span class="c1"></span>
+    <span class="k">class</span> <span class="nc">Iterator</span><span class="p">{</span>
+      <span class="k">public</span><span class="o">:</span>
+        <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+
+        <span class="n">Iterator</span><span class="p">()</span> <span class="o">:</span> <span class="n">ptr</span><span class="p">(</span><span class="nb">NULL</span><span class="p">)</span> <span class="p">{}</span>
+        <span class="n">Iterator</span><span class="p">(</span><span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">tmp</span><span class="p">)</span> <span class="o">:</span> <span class="n">ptr</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span> <span class="p">{}</span>
+
+        <span class="n">T</span> <span class="k">operator</span><span class="o">*</span><span class="p">(){</span>
+            <span class="k">return</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
+            <span class="c1">//为空时如何抛出错误？
+</span><span class="c1"></span>        <span class="p">}</span>
+
+        <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="n">Iterator</span> <span class="k">const</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">ptr</span> <span class="o">==</span> <span class="n">x</span><span class="p">.</span><span class="n">ptr</span><span class="p">;</span> <span class="p">}</span>
+        <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="n">Iterator</span> <span class="k">const</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">ptr</span> <span class="o">!=</span> <span class="n">x</span><span class="p">.</span><span class="n">ptr</span><span class="p">;</span> <span class="p">}</span>
+        <span class="n">Iterator</span> <span class="k">operator</span><span class="o">++</span><span class="p">(</span><span class="kt">int</span><span class="p">){</span>
+            <span class="c1">//不能在这里访问trailer，那么标准的迭代器是怎么操作的呢
+</span><span class="c1"></span>            <span class="n">Iterator</span> <span class="nf">tmp</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
+            <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">ptr</span><span class="o">-&gt;</span><span class="n">succ</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+                    <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">succ</span><span class="p">;</span>
+                <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">ptr</span><span class="o">-&gt;</span><span class="n">need_remove</span><span class="p">)</span>   <span class="c1">//不需要继续访问，跳出循环
+</span><span class="c1"></span>                    <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="n">tmp</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">Iterator</span> <span class="k">operator</span><span class="o">--</span><span class="p">(</span><span class="kt">int</span><span class="p">){</span>
+            <span class="n">Iterator</span> <span class="nf">tmp</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
+            <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">ptr</span><span class="o">-&gt;</span><span class="n">pred</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+                    <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">pred</span><span class="p">;</span>
+                <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">ptr</span><span class="o">-&gt;</span><span class="n">need_remove</span><span class="p">)</span>
+                    <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="n">tmp</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">Iterator</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">++</span><span class="p">(){</span>
+            <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">ptr</span><span class="o">-&gt;</span><span class="n">succ</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+                    <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">succ</span><span class="p">;</span>
+                <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">ptr</span><span class="o">-&gt;</span><span class="n">need_remove</span><span class="p">)</span>   <span class="c1">//不需要继续访问，跳出循环
+</span><span class="c1"></span>                    <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">Iterator</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">--</span><span class="p">(){</span>
+            <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">ptr</span><span class="o">-&gt;</span><span class="n">pred</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+                    <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">pred</span><span class="p">;</span>
+                <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">ptr</span><span class="o">-&gt;</span><span class="n">need_remove</span><span class="p">)</span>
+                    <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="kt">bool</span> <span class="nf">empty</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_size</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kt">int</span> <span class="nf">size</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_size</span><span class="o">-</span><span class="n">_num</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">insertAsFirst</span><span class="p">(</span><span class="n">T</span> <span class="k">const</span> <span class="o">&amp;</span><span class="n">e</span><span class="p">);</span>
+    <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">insertAsLast</span><span class="p">(</span><span class="n">T</span> <span class="k">const</span> <span class="o">&amp;</span><span class="n">e</span><span class="p">);</span>
+    <span class="n">Iterator</span> <span class="nf">begin</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="o">++</span><span class="n">Iterator</span><span class="p">(</span><span class="n">header</span><span class="p">);</span> <span class="p">}</span>
+    <span class="n">Iterator</span> <span class="nf">end</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">Iterator</span><span class="p">(</span><span class="n">trailer</span><span class="p">);</span> <span class="p">}</span>
+    <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">first</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">header</span><span class="o">-&gt;</span><span class="n">succ</span><span class="p">;</span> <span class="p">}</span> <span class="c1">//first和begin完全没必要
+</span><span class="c1"></span>    <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">last</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">trailer</span><span class="o">-&gt;</span><span class="n">pred</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">T</span> <span class="nf">remove</span><span class="p">(</span><span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">lazy_deletion</span><span class="p">(</span><span class="n">Iterator</span> <span class="n">i</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">show</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="nf">Advance</span><span class="p">(</span><span class="n">Iterator</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span> <span class="c1">//列表初始化
+</span><span class="c1"></span><span class="kt">void</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">init</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">trailer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">header</span><span class="o">-&gt;</span><span class="n">succ</span> <span class="o">=</span> <span class="n">trailer</span><span class="p">;</span>
+    <span class="n">header</span><span class="o">-&gt;</span><span class="n">pred</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">trailer</span><span class="o">-&gt;</span><span class="n">pred</span> <span class="o">=</span> <span class="n">header</span><span class="p">;</span>
+    <span class="n">trailer</span><span class="o">-&gt;</span><span class="n">succ</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">_size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">_num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//复制自p开始的n项
+</span><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">copyNodes</span><span class="p">(</span><span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">init</span><span class="p">();</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">n</span><span class="o">--</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">insertASLast</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">succ</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//Clear()
+</span><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="kt">int</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">clear</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">_size</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">_size</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">header</span><span class="o">-&gt;</span><span class="n">succ</span><span class="p">;</span>
+        <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">tmp</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">p</span> <span class="o">!=</span> <span class="n">trailer</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">succ</span><span class="p">;</span>
+            <span class="k">delete</span> <span class="n">p</span><span class="p">;</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">_size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">_num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">num</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//构造函数
+</span><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">List</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="k">const</span> <span class="o">&amp;</span><span class="n">L</span><span class="p">)</span> <span class="p">{</span> <span class="n">copyNodes</span><span class="p">(</span><span class="n">L</span><span class="p">.</span><span class="n">first</span><span class="p">(),</span> <span class="n">L</span><span class="p">.</span><span class="n">size</span><span class="p">());</span> <span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">List</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="k">const</span> <span class="o">&amp;</span><span class="n">L</span><span class="p">,</span> <span class="kt">int</span> <span class="n">r</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">tmp</span> <span class="o">=</span> <span class="n">L</span><span class="p">.</span><span class="n">first</span><span class="p">();</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">--</span><span class="n">r</span><span class="p">)</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">succ</span><span class="p">;</span>
+    <span class="n">copyNodes</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">List</span><span class="p">(</span><span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="n">copyNodes</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span> <span class="p">}</span>
+
+<span class="c1">//析构函数
+</span><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::~</span><span class="n">List</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">clear</span><span class="p">();</span>
+    <span class="k">delete</span> <span class="n">trailer</span><span class="p">;</span>
+    <span class="k">delete</span> <span class="n">header</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">insertAsFirst</span><span class="p">(</span><span class="n">T</span> <span class="k">const</span> <span class="o">&amp;</span><span class="n">e</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">_size</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">header</span><span class="o">-&gt;</span><span class="n">insertAsSucc</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">insertAsLast</span><span class="p">(</span><span class="n">T</span> <span class="k">const</span> <span class="o">&amp;</span><span class="n">e</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">_size</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">trailer</span><span class="o">-&gt;</span><span class="n">insertAsPred</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">//删除
+</span><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="n">T</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">remove</span><span class="p">(</span><span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">T</span> <span class="n">tmp</span><span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
+    <span class="n">_size</span><span class="o">--</span><span class="p">;</span>
+    <span class="n">p</span><span class="o">-&gt;</span><span class="n">pred</span><span class="o">-&gt;</span><span class="n">succ</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">succ</span><span class="p">;</span>
+    <span class="n">p</span><span class="o">-&gt;</span><span class="n">succ</span><span class="o">-&gt;</span><span class="n">pred</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">pred</span><span class="p">;</span>
+    <span class="k">delete</span> <span class="n">p</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">lazy_deletion</span><span class="p">(</span><span class="n">Iterator</span> <span class="n">i</span><span class="p">){</span>
+    <span class="n">_num</span><span class="o">++</span><span class="p">;</span>
+    <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">i</span><span class="p">.</span><span class="n">ptr</span><span class="p">;</span>
+    <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">need_remove</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+
+    <span class="c1">//数量大于一半开始全部删除
+</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">_num</span> <span class="o">&gt;=</span> <span class="n">_size</span><span class="o">/</span><span class="mi">2</span><span class="p">){</span>
+        <span class="n">_num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">header</span><span class="o">-&gt;</span><span class="n">succ</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">trailer</span> <span class="o">!=</span> <span class="n">p</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">need_remove</span><span class="p">){</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">succ</span><span class="p">;</span>
+                <span class="k">continue</span><span class="p">;</span>
+            <span class="p">}</span>
+                
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">succ</span><span class="p">;</span>
+            <span class="n">remove</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>       
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//输出格式化
+</span><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">show</span><span class="p">(){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">_size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;None&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="k">return</span> <span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">ListNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">p</span> <span class="o">=</span> <span class="n">header</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">trailer</span> <span class="o">!=</span> <span class="p">(</span><span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">succ</span><span class="p">)){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">header</span><span class="o">-&gt;</span><span class="n">succ</span><span class="p">){</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">pred</span><span class="o">-&gt;</span><span class="n">need_remove</span> <span class="o">&amp;&amp;</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">need_remove</span><span class="p">)</span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;____&#34;</span><span class="p">;</span>
+        <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">need_remove</span><span class="p">)</span>     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;--__&#34;</span><span class="p">;</span>
+        <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">pred</span><span class="o">-&gt;</span><span class="n">need_remove</span><span class="p">)</span>   <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;__-&gt;&#34;</span><span class="p">;</span>
+        <span class="k">else</span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;---&gt;&#34;</span><span class="p">;</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//用于迭代器的移动
+</span><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">Advance</span><span class="p">(</span><span class="n">Iterator</span> <span class="o">&amp;</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">){</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">n</span><span class="o">--</span><span class="p">)</span>
+            <span class="n">i</span><span class="p">.</span><span class="n">ptr</span> <span class="o">=</span> <span class="n">i</span><span class="p">.</span><span class="n">ptr</span><span class="o">-&gt;</span><span class="n">succ</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">n</span><span class="o">++</span><span class="p">)</span>
+            <span class="n">i</span><span class="p">.</span><span class="n">ptr</span> <span class="o">=</span> <span class="n">i</span><span class="p">.</span><span class="n">ptr</span><span class="o">-&gt;</span><span class="n">pred</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">//如果向容器里面放个pair？
+</span></code></pre></div><p>3.main.cpp</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&#34;my_list.h&#34;</span><span class="cp">
+</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">PrintLots</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">L</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">P</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">current</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="c1">//是否存在空序列
+</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">L</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">||</span> <span class="n">P</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>  <span class="p">{</span>   <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;Error, input is empty&#34;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span> <span class="k">return</span> <span class="p">;}</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">Iterator</span> <span class="n">l</span> <span class="o">=</span> <span class="n">L</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">Iterator</span> <span class="n">p</span> <span class="o">=</span> <span class="n">P</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">L</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="o">*</span><span class="n">p</span><span class="p">){</span>  
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Error, the number of P is bigger than the size of L&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">current</span><span class="o">++</span> <span class="o">==</span> <span class="o">*</span><span class="n">p</span><span class="p">){</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">l</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; &#34;</span><span class="p">;</span>
+            <span class="n">p</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">//输出结束
+</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">P</span><span class="p">.</span><span class="n">end</span><span class="p">()){</span>  
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Finished!&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">l</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">last</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">select</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Choose function(0 means lazy_deletion, 1 means PrintLots):&#34;</span><span class="p">;</span>
+        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">select</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">select</span><span class="p">){</span>
+            <span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">L</span><span class="p">,</span> <span class="n">P</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Input the size of L and P: &#34;</span><span class="p">;</span>
+            <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Input the elements of L: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">m</span><span class="o">--</span><span class="p">){</span>
+                <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">tmp</span><span class="p">;</span>
+                <span class="n">L</span><span class="p">.</span><span class="n">insertAsLast</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Input the elements of P: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">n</span><span class="o">--</span><span class="p">){</span>
+                <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">tmp</span><span class="p">;</span>
+                <span class="n">P</span><span class="p">.</span><span class="n">insertAsLast</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">PrintLots</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">P</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span><span class="p">{</span>
+            <span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">L</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Input the size of L: &#34;</span><span class="p">;</span>
+            <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Input the elements of L:&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">tmp</span><span class="p">;</span>
+                <span class="n">L</span><span class="p">.</span><span class="n">insertAsLast</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;L is: &#34;</span><span class="p">;</span>
+            <span class="n">L</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+            <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+
+
+            <span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">Iterator</span> <span class="n">i</span> <span class="o">=</span> <span class="n">L</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+            <span class="n">last</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;How many elements do you want to delete? &#34;</span><span class="p">;</span>
+            <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Input them(from 1 to &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">m</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;)&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">n</span><span class="o">--</span><span class="p">){</span>
+                <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">tmp</span><span class="p">;</span>
+                <span class="n">L</span><span class="p">.</span><span class="n">Advance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">tmp</span><span class="o">-</span><span class="n">last</span><span class="p">);</span>
+                <span class="n">last</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+                <span class="n">L</span><span class="p">.</span><span class="n">lazy_deletion</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Now L is: &#34;</span><span class="p">;</span>
+            <span class="n">L</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span> 
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="结果分析">结果分析</h2>
+<p>PrintLots进行了四组测试，从测试结果可以看出对错误情况进行了有效的判断，并且能够处理一般情况。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2019/05/03/5ccbb396983b0.jpg"
+        data-srcset="https://i.loli.net/2019/05/03/5ccbb396983b0.jpg, https://i.loli.net/2019/05/03/5ccbb396983b0.jpg 1.5x, https://i.loli.net/2019/05/03/5ccbb396983b0.jpg 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2019/05/03/5ccbb396983b0.jpg"
+        title="PrintLots测试" /></p>
+<p>为了方便懒惰删除的查看，设置了一个函数用来表现链表当前的情况，同时进行了三种样例的测试，能够代表所有类型的满足要求的输入情况。可以很容易的看出当删除元素过半时按要求完成了操作。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2019/05/03/5ccbb3979a5b2.jpg"
+        data-srcset="https://i.loli.net/2019/05/03/5ccbb3979a5b2.jpg, https://i.loli.net/2019/05/03/5ccbb3979a5b2.jpg 1.5x, https://i.loli.net/2019/05/03/5ccbb3979a5b2.jpg 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2019/05/03/5ccbb3979a5b2.jpg"
+        title="懒惰删除测试" /></p>
+<h2 id="总结体会">总结体会</h2>
+<ol>
+<li>深刻感觉到自己的宏观思维有极大的欠缺，自己设计出的类中的函数不能很好地衔接，编程思维有问题。</li>
+<li>自己写的迭代器可能称不上是迭代器，只是稍微包装了一下指针。自己测试的时候发现在iterator已经被定义，意识到平时所用的迭代器并不是定义在容器的头文件中。</li>
+<li>边界等特殊情况没有得到很好的处理，不过能够保证在输入规范的情况下得到良好的结果，代码总体有待完善。（总之还是对标准模板库特殊情况处理方式不够了解📌</li>
+<li>很多用不到的东西也进行了实现，导致代码量相对较大😓</li>
+</ol>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-04-20</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/zuma-list/" class="prev" rel="prev" title="数据结构作业一 Zuma List"><i class="fas fa-angle-left fa-fw"></i>数据结构作业一 Zuma List</a>
+            <a href="/posts/train/" class="next" rel="next" title="数据结构作业三 列车调度">数据结构作业三 列车调度<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.75.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

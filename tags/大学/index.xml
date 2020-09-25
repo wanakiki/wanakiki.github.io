@@ -1,24 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>大学 on Wanakiki`s Blog</title>
-    <link>https://wanakiki.github.io/tags/%E5%A4%A7%E5%AD%A6/</link>
-    <description>Recent content in 大学 on Wanakiki`s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Fri, 30 Aug 2019 22:54:12 +0800</lastBuildDate>
-    
-	<atom:link href="https://wanakiki.github.io/tags/%E5%A4%A7%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>新生の大学分享</title>
-      <link>https://wanakiki.github.io/2019/univ-share/</link>
-      <pubDate>Fri, 30 Aug 2019 22:54:12 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/univ-share/</guid>
-      <description>可能很多人都会问怎么样才能过好自己的大学生活，但是当我想要去总结自己大学以来的经验，首先想到的大部分都是自己的遗憾，提不出来什么有价值的建议</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>大学 - 标签 - Wanakiki`s Blog</title>
+        <link>http://example.org/tags/%E5%A4%A7%E5%AD%A6/</link>
+        <description>大学 - 标签 - Wanakiki`s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 30 Aug 2019 22:54:12 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E5%A4%A7%E5%AD%A6/" rel="self" type="application/rss+xml" /><item>
+    <title>新生の大学分享</title>
+    <link>http://example.org/posts/univ-share/</link>
+    <pubDate>Fri, 30 Aug 2019 22:54:12 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/posts/univ-share/</guid>
+    <description><![CDATA[可能很多人都会问怎么样才能过好自己的大学生活，但是当我想要去总结自己大学以来的经验，首先想到的大部分都是自己的遗憾，提不出来什么有价值的建议。 今年的新生由我来带，借此机会整理一下之前在于老师那里听到的]]></description>
+</item></channel>
 </rss>

@@ -1,33 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>SRDP on Wanakiki`s Blog</title>
-    <link>https://wanakiki.github.io/tags/srdp/</link>
-    <description>Recent content in SRDP on Wanakiki`s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Mon, 25 Nov 2019 16:15:58 +0800</lastBuildDate>
-    
-	<atom:link href="https://wanakiki.github.io/tags/srdp/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Git 及 Github 上手</title>
-      <link>https://wanakiki.github.io/2019/use-github/</link>
-      <pubDate>Mon, 25 Nov 2019 16:15:58 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/use-github/</guid>
-      <description>记录使用git及GitHub的过程 准备工作 在GitHub官网注册账号，之后去Git官网下载git并安装。安装完成后打开终端，输入下面的命令，</description>
-    </item>
-    
-    <item>
-      <title>🏠班级网站项目</title>
-      <link>https://wanakiki.github.io/2019/website/</link>
-      <pubDate>Wed, 06 Nov 2019 23:04:39 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/website/</guid>
-      <description>起因💡 本人有两年大学班委的经验，发现学校团委给班级的一般都是信息整理相关的工作。但现在已经是21世纪，完全没有必要因为收集一些个人信息让每个</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>SRDP - 标签 - Wanakiki`s Blog</title>
+        <link>http://example.org/tags/srdp/</link>
+        <description>SRDP - 标签 - Wanakiki`s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 25 Nov 2019 16:15:58 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/srdp/" rel="self" type="application/rss+xml" /><item>
+    <title>Git 及 Github 上手</title>
+    <link>http://example.org/posts/use-github/</link>
+    <pubDate>Mon, 25 Nov 2019 16:15:58 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/posts/use-github/</guid>
+    <description><![CDATA[记录使用git及GitHub的过程 准备工作 在GitHub官网注册账号，之后去Git官网下载git并安装。安装完成后打开终端，输入下面的命令，在电脑上设置github邮箱和账户名 git config --global user.name &#34;用户名]]></description>
+</item><item>
+    <title>🏠班级网站项目</title>
+    <link>http://example.org/posts/website/</link>
+    <pubDate>Wed, 06 Nov 2019 23:04:39 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/posts/website/</guid>
+    <description><![CDATA[起因💡 本人有两年大学班委的经验，发现学校团委给班级的一般都是信息整理相关的工作。但现在已经是21世纪，完全没有必要因为收集一些个人信息让每个人都填写一遍excel表再发给班委进行汇总。我之前曾经试过利]]></description>
+</item></channel>
 </rss>

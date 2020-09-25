@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>百度翻译爬虫 - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="百度翻译爬虫" />
+<meta property="og:description" content="典型的js加密爬虫实战，本文章内容仅作学习交流。 首先放一下参考文章：爬虫JS破解经典案例之百度翻译 如果没有这篇文章的话，我可能要花很多功夫才能找到具体的js代码位置。 页面加载分析 初步探索 打开百度翻译，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/baidufanyi/" />
+<meta property="article:published_time" content="2020-05-18T20:44:50+08:00" />
+<meta property="article:modified_time" content="2020-05-18T20:44:50+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="百度翻译爬虫"/>
+<meta name="twitter:description" content="典型的js加密爬虫实战，本文章内容仅作学习交流。 首先放一下参考文章：爬虫JS破解经典案例之百度翻译 如果没有这篇文章的话，我可能要花很多功夫才能找到具体的js代码位置。 页面加载分析 初步探索 打开百度翻译，"/>
+<meta name="application-name" content="Wanakiki`s Blog">
+<meta name="apple-mobile-web-app-title" content="Wanakiki`s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/baidufanyi/" /><link rel="prev" href="http://example.org/posts/leetcode-spider/" /><link rel="next" href="http://example.org/posts/mongodb-demo/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "百度翻译爬虫",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/baidufanyi\/"
+        },"genre": "posts","keywords": "Python, 爬虫","wordcount":  3393 ,
+        "url": "http:\/\/example.org\/posts\/baidufanyi\/","datePublished": "2020-05-18T20:44:50+08:00","dateModified": "2020-05-18T20:44:50+08:00","publisher": {
+            "@type": "Organization",
+            "name": "wanakiki"},"author": {
+                "@type": "Person",
+                "name": "wanakiki"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Blog </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Blog</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">百度翻译爬虫</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-05-18">2020-05-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3393 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#页面加载分析">页面加载分析</a>
+      <ul>
+        <li><a href="#初步探索">初步探索</a></li>
+        <li><a href="#深入挖掘">深入挖掘</a></li>
+      </ul>
+    </li>
+    <li><a href="#js破解">JS破解</a>
+      <ul>
+        <li><a href="#js调试">JS调试</a></li>
+        <li><a href="#python执行js代码">Python执行JS代码</a></li>
+      </ul>
+    </li>
+    <li><a href="#代码实现">代码实现</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>典型的js加密爬虫实战，本文章内容仅作学习交流。</p>
+<!-- raw HTML omitted -->
+<p>首先放一下参考文章：<a href="https://zhuanlan.zhihu.com/p/76239929" target="_blank" rel="noopener noreffer">爬虫JS破解经典案例之百度翻译</a></p>
+<p>如果没有这篇文章的话，我可能要花很多功夫才能找到具体的js代码位置。</p>
+<h2 id="页面加载分析">页面加载分析</h2>
+<h3 id="初步探索">初步探索</h3>
+<p>打开<a href="https://fanyi.baidu.com/" target="_blank" rel="noopener noreffer">百度翻译</a>，然后右键、检查、network，刷新页面即可看到网页的加载过程。具体的图示可以在之前的<a href="../leetcode-spider" rel="">leetcode爬虫</a>中找到。</p>
+<p>在输入任意查询内容点击翻译后，在<code>XHR</code>项中可以看到<code>langdetect</code>、<code>v2transapi?form &amp; to</code>两个请求。检查内容不难发现，前者的作用是语言检查， 后者才是真正的翻译。</p>
+<pre><code class="language-no" data-lang="no">from: en
+to: zh
+query: hello everyone
+transtype: translang
+simple_means_flag: 3
+sign: 58244.262325
+token: 440bdb196410660e636b3223ebb83a94
+domain: common
+</code></pre><p>上面是我以&quot;hello everyone&quot;作为待翻译文本发起请求的表单内容，<code>from</code>、<code>to</code>、<code>query</code>这三项意义很明确，其余项无法直接判断出具体的作用。</p>
+<h3 id="深入挖掘">深入挖掘</h3>
+<p>多输入几组数据，可以发现<code>sign</code>会随着<code>query</code>的值发生变化，而<code>token</code>项却不会发生改变。</p>
+<p>这里我参考了别人的方式，搜索&quot;sign:&ldquo;很快找到了这个请求的发起代码：</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">h</span><span class="o">=</span><span class="p">{</span><span class="nx">from</span><span class="o">:</span><span class="nx">p</span><span class="p">.</span><span class="nx">fromLang</span><span class="p">,</span><span class="nx">to</span><span class="o">:</span><span class="nx">p</span><span class="p">.</span><span class="nx">toLang</span><span class="p">,</span><span class="nx">query</span><span class="o">:</span><span class="nx">n</span><span class="p">,</span><span class="nx">transtype</span><span class="o">:</span><span class="nx">r</span><span class="p">,</span><span class="nx">simple_means_flag</span><span class="o">:</span><span class="mi">3</span><span class="p">,</span><span class="nx">sign</span><span class="o">:</span><span class="nx">y</span><span class="p">(</span><span class="nx">n</span><span class="p">),</span><span class="nx">token</span><span class="o">:</span><span class="nb">window</span><span class="p">.</span><span class="nx">common</span><span class="p">.</span><span class="nx">token</span><span class="p">,</span><span class="nx">domain</span><span class="o">:</span><span class="nx">w</span><span class="p">.</span><span class="nx">getCurDomain</span><span class="p">()}</span>
+</code></pre></div><p>另外这里的<code>token</code>也可以通过搜索&quot;window[&lsquo;common&rsquo;]&ldquo;找到，发现他其实位于html代码中，是一个固定的值，可以直接用正则表达式解析html代码获取。所以现在需要解决的问题就是<code>sign</code>的产生。</p>
+<h2 id="js破解">JS破解</h2>
+<p><code>sign</code>通过y函数产生，另外通过观察可以发现y函数的传参实际上是待查询的内容，所以只要找到y函数，理论上我们可以获得任意输入的<code>sign</code>值。那么怎么才能找到y函数呢？第一个想法当然是继续搜索，但实际上一搜索就会发现，因为特征太少无法确定具体是哪一个搜索结果。这里需要使用一个很关键的技术：<code>JS调试</code>。</p>
+<h3 id="js调试">JS调试</h3>
+<p>先说一下调试的具体步骤，如果没有相关基础的话直接上手还是会有点问题的。</p>
+<p>首先找到代码所在行，对于复杂网页，一行内可能有多条语句，这时候如果直接点击想要调试的函数的话，实际上不会添加断点。正确的操作应该是像Python代码那样，先点击这一行的最左侧的行号，点击行号之后在把鼠标移动到想要调试的函数上，这时候会发现函数可以被点击，点击函数名便能添加断点。（当然也可以直接点击代码框左下角的花括号，直接把代码格式化，我当时找了很久没找到😣）</p>
+<p>在添加完断点之后，继续输入内容，点击翻译，可以发现网站停止加载，并且返回调试界面可以看到变量名及其对应的值，将鼠标放到函数名上可以跳转到函数的具体位置，这样就能找到y函数的真正位置了。其具体内容如下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">e</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/[\uD800-\uDBFF][\uDC00-\uDFFF]/g</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="kc">null</span> <span class="o">===</span> <span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+        <span class="nx">t</span> <span class="o">&gt;</span> <span class="mi">30</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">r</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span> <span class="o">+</span> <span class="nx">r</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="nx">r</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">t</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="nx">r</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">e</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="sr">/[\uD800-\uDBFF][\uDC00-\uDFFF]/</span><span class="p">),</span> <span class="nx">C</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">h</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="nx">f</span> <span class="o">=</span> <span class="p">[];</span> <span class="nx">h</span> <span class="o">&gt;</span> <span class="nx">C</span><span class="p">;</span> <span class="nx">C</span><span class="o">++</span><span class="p">)</span><span class="s2">&#34;&#34;</span> <span class="o">!==</span> <span class="nx">e</span><span class="p">[</span><span class="nx">C</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="nx">f</span><span class="p">.</span><span class="nx">push</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">f</span><span class="p">,</span> <span class="nx">a</span><span class="p">(</span><span class="nx">e</span><span class="p">[</span><span class="nx">C</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">))),</span> <span class="nx">C</span> <span class="o">!==</span> <span class="nx">h</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">f</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">o</span><span class="p">[</span><span class="nx">C</span><span class="p">]);</span>
+        <span class="kd">var</span> <span class="nx">g</span> <span class="o">=</span> <span class="nx">f</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">g</span> <span class="o">&gt;</span> <span class="mi">30</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">r</span> <span class="o">=</span> <span class="nx">f</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="nx">f</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">g</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">5</span><span class="p">,</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">g</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="nx">f</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">))</span>
+    <span class="p">}</span>
+    <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>   <span class="c1">// 直接执行会提示i没有定义 所以加了一行
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">u</span> <span class="o">=</span> <span class="k">void</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">l</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">103</span><span class="p">)</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">116</span><span class="p">)</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">107</span><span class="p">);</span> 
+    <span class="nx">u</span> <span class="o">=</span> <span class="kc">null</span> <span class="o">!==</span> <span class="nx">i</span> <span class="o">?</span> <span class="nx">i</span> <span class="o">:</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="nb">window</span><span class="p">[</span><span class="nx">l</span><span class="p">]</span> <span class="o">||</span> <span class="s2">&#34;&#34;</span><span class="p">)</span> <span class="o">||</span> <span class="s2">&#34;&#34;</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">u</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">),</span> <span class="nx">m</span> <span class="o">=</span> <span class="nb">Number</span><span class="p">(</span><span class="nx">d</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">||</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">s</span> <span class="o">=</span> <span class="nb">Number</span><span class="p">(</span><span class="nx">d</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">||</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">S</span> <span class="o">=</span> <span class="p">[],</span> <span class="nx">c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">v</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">v</span> <span class="o">&lt;</span> <span class="nx">r</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">v</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">A</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span> <span class="mi">128</span> <span class="o">&gt;</span> <span class="nx">A</span> <span class="o">?</span> <span class="nx">S</span><span class="p">[</span><span class="nx">c</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="nx">A</span> <span class="o">:</span> <span class="p">(</span><span class="mi">2048</span> <span class="o">&gt;</span> <span class="nx">A</span> <span class="o">?</span> <span class="nx">S</span><span class="p">[</span><span class="nx">c</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="nx">A</span> <span class="o">&gt;&gt;</span> <span class="mi">6</span> <span class="o">|</span> <span class="mi">192</span> <span class="o">:</span> <span class="p">(</span><span class="mi">55296</span> <span class="o">===</span> <span class="p">(</span><span class="mi">64512</span> <span class="o">&amp;</span> <span class="nx">A</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">v</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nx">r</span><span class="p">.</span><span class="nx">length</span> <span class="o">&amp;&amp;</span> <span class="mi">56320</span> <span class="o">===</span> <span class="p">(</span><span class="mi">64512</span> <span class="o">&amp;</span> <span class="nx">r</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="nx">v</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">?</span> <span class="p">(</span><span class="nx">A</span> <span class="o">=</span> <span class="mi">65536</span> <span class="o">+</span> <span class="p">((</span><span class="mi">1023</span> <span class="o">&amp;</span> <span class="nx">A</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1023</span> <span class="o">&amp;</span> <span class="nx">r</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="o">++</span><span class="nx">v</span><span class="p">)),</span> <span class="nx">S</span><span class="p">[</span><span class="nx">c</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="nx">A</span> <span class="o">&gt;&gt;</span> <span class="mi">18</span> <span class="o">|</span> <span class="mi">240</span><span class="p">,</span> <span class="nx">S</span><span class="p">[</span><span class="nx">c</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="nx">A</span> <span class="o">&gt;&gt;</span> <span class="mi">12</span> <span class="o">&amp;</span> <span class="mi">63</span> <span class="o">|</span> <span class="mi">128</span><span class="p">)</span> <span class="o">:</span> <span class="nx">S</span><span class="p">[</span><span class="nx">c</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="nx">A</span> <span class="o">&gt;&gt;</span> <span class="mi">12</span> <span class="o">|</span> <span class="mi">224</span><span class="p">,</span> <span class="nx">S</span><span class="p">[</span><span class="nx">c</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="nx">A</span> <span class="o">&gt;&gt;</span> <span class="mi">6</span> <span class="o">&amp;</span> <span class="mi">63</span> <span class="o">|</span> <span class="mi">128</span><span class="p">),</span> <span class="nx">S</span><span class="p">[</span><span class="nx">c</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="mi">63</span> <span class="o">&amp;</span> <span class="nx">A</span> <span class="o">|</span> <span class="mi">128</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">m</span><span class="p">,</span> <span class="nx">F</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">43</span><span class="p">)</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">45</span><span class="p">)</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">97</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&#34;&#34;</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">94</span><span class="p">)</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">43</span><span class="p">)</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">54</span><span class="p">)),</span> <span class="nx">D</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">43</span><span class="p">)</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">45</span><span class="p">)</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">51</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&#34;&#34;</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">94</span><span class="p">)</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">43</span><span class="p">)</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">98</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&#34;&#34;</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">43</span><span class="p">)</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">45</span><span class="p">)</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">102</span><span class="p">)),</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">b</span> <span class="o">&lt;</span> <span class="nx">S</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">b</span><span class="o">++</span><span class="p">)</span><span class="nx">p</span> <span class="o">+=</span> <span class="nx">S</span><span class="p">[</span><span class="nx">b</span><span class="p">],</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">n</span><span class="p">(</span><span class="nx">p</span><span class="p">,</span> <span class="nx">F</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">n</span><span class="p">(</span><span class="nx">p</span><span class="p">,</span> <span class="nx">D</span><span class="p">),</span> <span class="nx">p</span> <span class="o">^=</span> <span class="nx">s</span><span class="p">,</span> <span class="mi">0</span> <span class="o">&gt;</span> <span class="nx">p</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">p</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2147483647</span> <span class="o">&amp;</span> <span class="nx">p</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2147483648</span><span class="p">),</span> <span class="nx">p</span> <span class="o">%=</span> <span class="mi">1</span><span class="nx">e6</span><span class="p">,</span> <span class="nx">p</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&#34;.&#34;</span> <span class="o">+</span> <span class="p">(</span><span class="nx">p</span> <span class="o">^</span> <span class="nx">m</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div><p>可以看到这段代码还是比较复杂的，如果懂js的话，可以稍微解读一下，因为这段代码还没有混淆到完全没办法看的程度（把所有的字符都用括号或者下划线之类的替代）。</p>
+<p>这里讲三个后续执行代码的时候才会发现的点：</p>
+<ol>
+<li>代码使用了全局的<code>window</code>变量，js函数当中未作定义，通过调试可以发现实际上是为了获取该变量的<code>gtk</code>值，该值也是写在html当中的，可以直接正则获得，获得之后对js代码进行稍微修改即可。</li>
+<li>i变量未定义，没有找到i变量的具体位置，但是查看之后其没有很突出的作用，于是自己加了一条语句，对i变量进行了定义。</li>
+<li>函数内部调用了另外的函数n😑，具体的调用可以在函数的return位置，如果不仔细看过，第一遍是不会发现这个点的。找到n的方法也很简单，直接打断点就好了，这里不做详细解释。n的代码会在最后给出。</li>
+</ol>
+<h3 id="python执行js代码">Python执行JS代码</h3>
+<p>前面我们已经获得了<code>sign</code>生成函数的具体代码，但是我们的爬虫语言是Python，如果把js代码翻译成Python就太麻烦了，还好有已经封装好的第三方库可以执行。</p>
+<p>能够实现上述功能的第三方库有很多，我这里使用了<code>pyexecjs</code>，需要注意该模块需要安装node.js配合使用。假设我们已经把生成函数放在了fanyi.js当中，可以通过下面的方式进行调用：</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">execjs</span>
+
+<span class="n">query</span> <span class="o">=</span> <span class="s2">&#34;待翻译语句&#34;</span>
+<span class="n">fh</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;fanyi.js&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">fun</span> <span class="o">=</span> <span class="n">execjs</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">fh</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">fun</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="n">query</span><span class="p">))</span>
+</code></pre></div><h2 id="代码实现">代码实现</h2>
+<p>在做完前面的准备工作之后，便能开始具体的代码书写，整体思路如下：</p>
+<ol>
+<li>请求百度翻译首页</li>
+<li>解析html获得<code>token</code>、<code>gtk</code></li>
+<li>用得到的<code>gkt</code>替换js代码中的对应内容</li>
+<li>编译js代码并执行，获得<code>sign</code></li>
+<li>请求具体的语言检测、翻译网址，得到结果</li>
+</ol>
+<p>在实现爬虫时，我又对查询请求做了进一步分析，发现在提交的众多cookie当中，最关键的是<code>BAIDUID</code>这一项，而访问百度翻译首页刚好可以获得这个cookie。</p>
+<p>这样便能直接用一个session，先访问百度翻译首页，获得cookie的同时解析html得到<code>token</code>和<code>gtk</code>，进行下一步的操作。到这里代码已经很清晰了，但是写完之后却发现不能成功执行，服务端报错998😭</p>
+<p>看到错误之后以为是js代码出了问题，调整了很久，但是最后还是不行，于是又求助了百度，在<a href="https://www.cnblogs.com/jason-Gan/p/10567018.html" target="_blank" rel="noopener noreffer">这里</a>找到了一个解决办法，先访问一下百度首页，带着百度首页的cookie访问百度翻译，这样就不会报错。</p>
+<p>具体的原理我到现在还不清楚，我之前进行测试的时候，如果不先访问百度首页的话，访问百度翻译解析出来的<code>token</code>是一个一成不变的值，我起初认为是js代码有错误，就一直进行了测试，半个多小时<code>token</code>的值都没有变化。<code>token</code>是在html当中写死的，有问题只能出在服务端上，所以我认为先访问百度首页的目的就是在访问百度翻译的时候带着一个cookie，让服务器返回html的时候生成正确的<code>token</code>。至于具体是不是这个原因，等学的更多了才知道。</p>
+<p>下面是我的代码：</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">execjs</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="n">js_content</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&#34;&#34;&#34;function e(r) {
+</span><span class="s2">    var o = r.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g);
+</span><span class="s2">    if (null === o) {
+</span><span class="s2">        var t = r.length;
+</span><span class="s2">        t &gt; 30 &amp;&amp; (r = &#34;&#34; + r.substr(0, 10) + r.substr(Math.floor(t / 2) - 5, 10) + r.substr(-10, 10))
+</span><span class="s2">    } else {
+</span><span class="s2">        for (var e = r.split(/[\uD800-\uDBFF][\uDC00-\uDFFF]/), C = 0, h = e.length, f = []; h &gt; C; C++)&#34;&#34; !== e[C] &amp;&amp; f.push.apply(f, a(e[C].split(&#34;&#34;))), C !== h - 1 &amp;&amp; f.push(o[C]);
+</span><span class="s2">        var g = f.length; g &gt; 30 &amp;&amp; (r = f.slice(0, 10).join(&#34;&#34;) + f.slice(Math.floor(g / 2) - 5, Math.floor(g / 2) + 5).join(&#34;&#34;) + f.slice(-10).join(&#34;&#34;))
+</span><span class="s2">    }
+</span><span class="s2">    var i = null 
+</span><span class="s2">    var u = void 0, l = &#34;&#34; + String.fromCharCode(103) + String.fromCharCode(116) + String.fromCharCode(107); 
+</span><span class="s2">    u = null !== i ? i : (i = window[l] || &#34;&#34;) || &#34;&#34;;
+</span><span class="s2">    for (var d = u.split(&#34;.&#34;), m = Number(d[0]) || 0, s = Number(d[1]) || 0, S = [], c = 0, v = 0; v &lt; r.length; v++) {
+</span><span class="s2">        var A = r.charCodeAt(v); 128 &gt; A ? S[c++] = A : (2048 &gt; A ? S[c++] = A &gt;&gt; 6 | 192 : (55296 === (64512 &amp; A) &amp;&amp; v + 1 &lt; r.length &amp;&amp; 56320 === (64512 &amp; r.charCodeAt(v + 1)) ? (A = 65536 + ((1023 &amp; A) &lt;&lt; 10) + (1023 &amp; r.charCodeAt(++v)), S[c++] = A &gt;&gt; 18 | 240, S[c++] = A &gt;&gt; 12 &amp; 63 | 128) : S[c++] = A &gt;&gt; 12 | 224, S[c++] = A &gt;&gt; 6 &amp; 63 | 128), S[c++] = 63 &amp; A | 128)
+</span><span class="s2">    } for (var p = m, F = &#34;&#34; + String.fromCharCode(43) + String.fromCharCode(45) + String.fromCharCode(97) + (&#34;&#34; + String.fromCharCode(94) + String.fromCharCode(43) + String.fromCharCode(54)), D = &#34;&#34; + String.fromCharCode(43) + String.fromCharCode(45) + String.fromCharCode(51) + (&#34;&#34; + String.fromCharCode(94) + String.fromCharCode(43) + String.fromCharCode(98)) + (&#34;&#34; + String.fromCharCode(43) + String.fromCharCode(45) + String.fromCharCode(102)), b = 0; b &lt; S.length; b++)p += S[b], p = n(p, F);
+</span><span class="s2">    return p = n(p, D), p ^= s, 0 &gt; p &amp;&amp; (p = (2147483647 &amp; p) + 2147483648), p %= 1e6, p.toString() + &#34;.&#34; + (p ^ m)
+</span><span class="s2">}
+</span><span class="s2">
+</span><span class="s2">function n(r, o) {
+</span><span class="s2">    for (var t = 0; t &lt; o.length - 2; t += 3) {
+</span><span class="s2">        var a = o.charAt(t + 2); a = a &gt;= &#34;a&#34; ? a.charCodeAt(0) - 87 : Number(a), a = &#34;+&#34; === o.charAt(t + 1) ? r &gt;&gt;&gt; a : r &lt;&lt; a, r = &#34;+&#34; === o.charAt(t) ? r + a &amp; 4294967295 : r ^ a
+</span><span class="s2">    } return r
+</span><span class="s2">}
+</span><span class="s2">&#34;&#34;&#34;</span>
+
+
+<span class="k">class</span> <span class="nc">TransMachine</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">session</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">get_token_and_gtk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">user_agent</span> <span class="o">=</span> <span class="s2">&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4133.0 Safari/537.36 Edg/84.0.508.0&#34;</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="n">user_agent</span>
+        <span class="p">}</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;https://www.baidu.com/&#34;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>     <span class="c1"># 神也不知道为什么访问百度首页就能避免998</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">cookies</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://fanyi.baidu.com/&#39;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">cookies</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">text</span>
+        <span class="c1"># fh = open(&#39;res.html&#39;, &#39;wb&#39;)</span>
+        <span class="c1"># fh.write(res.encode())</span>
+        <span class="c1"># fh.close()</span>
+
+        <span class="n">token</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&#34;token: &#39;(.*?)&#39;&#34;</span><span class="p">,</span> <span class="n">res</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">gtk</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&#34;.gtk = &#39;(.*?)&#39;&#34;</span><span class="p">,</span> <span class="n">res</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">token</span><span class="p">,</span> <span class="n">gtk</span>
+
+
+    <span class="k">def</span> <span class="nf">get_trans</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">sign</span><span class="p">):</span>
+        <span class="n">check_res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+            <span class="s2">&#34;https://fanyi.baidu.com/langdetect&#34;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="n">words</span><span class="p">})</span>
+        <span class="n">check_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">check_res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">lan</span> <span class="o">=</span> <span class="n">check_json</span><span class="p">[</span><span class="s1">&#39;lan&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">lan</span> <span class="o">==</span> <span class="s1">&#39;zh&#39;</span><span class="p">:</span>
+            <span class="n">lan_from</span> <span class="o">=</span> <span class="s1">&#39;zh&#39;</span>
+            <span class="n">lan_to</span> <span class="o">=</span> <span class="s1">&#39;en&#39;</span>
+        <span class="k">elif</span> <span class="n">lan</span> <span class="o">==</span> <span class="s1">&#39;en&#39;</span><span class="p">:</span>
+            <span class="n">lan_from</span> <span class="o">=</span> <span class="s1">&#39;en&#39;</span>
+            <span class="n">lan_to</span> <span class="o">=</span> <span class="s1">&#39;zh&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;语言检测错误&#39;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://fanyi.baidu.com/v2transapi&#39;</span>
+        <span class="n">form_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;from&#39;</span><span class="p">:</span> <span class="n">lan_from</span><span class="p">,</span>
+            <span class="s1">&#39;to&#39;</span><span class="p">:</span> <span class="n">lan_to</span><span class="p">,</span>
+            <span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="n">words</span><span class="p">,</span>
+            <span class="s1">&#39;transtype&#39;</span><span class="p">:</span> <span class="s1">&#39;realtime&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;simple_means_flag&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s1">&#39;sign&#39;</span><span class="p">:</span> <span class="n">sign</span><span class="p">,</span>
+            <span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="n">token</span><span class="p">,</span>
+            <span class="s1">&#39;domain&#39;</span><span class="p">:</span> <span class="s1">&#39;common&#39;</span>
+        <span class="p">}</span>
+
+        <span class="n">user_agent</span> <span class="o">=</span> <span class="s2">&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4133.0 Safari/537.36 Edg/84.0.508.0&#34;</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="n">user_agent</span><span class="p">,</span>
+            <span class="s1">&#39;origin&#39;</span><span class="p">:</span> <span class="s1">&#39;https://fanyi.baidu.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;referer&#39;</span><span class="p">:</span> <span class="s1">&#39;https://fanyi.baidu.com/&#39;</span>
+        <span class="p">}</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">form_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+        <span class="n">res_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">res_json</span><span class="p">[</span><span class="s1">&#39;trans_result&#39;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;dst&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="s1">&#39;翻译结果：&#39;</span> <span class="o">+</span> <span class="n">res</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">TM</span> <span class="o">=</span> <span class="n">TransMachine</span><span class="p">()</span>
+    <span class="n">token</span><span class="p">,</span> <span class="n">gtk</span> <span class="o">=</span> <span class="n">TM</span><span class="o">.</span><span class="n">get_token_and_gtk</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;token:&#39;</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="s1">&#39;gtk:&#39;</span><span class="p">,</span> <span class="n">gtk</span><span class="p">)</span>
+
+    <span class="c1"># 方括号需要加\</span>
+    <span class="n">js_content</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&#34;window\[l\]&#34;</span><span class="p">,</span> <span class="s1">&#39;&#34;&#39;</span> <span class="o">+</span> <span class="n">gtk</span> <span class="o">+</span> <span class="s1">&#39;&#34;&#39;</span><span class="p">,</span> <span class="n">js_content</span><span class="p">)</span>
+    <span class="n">fh</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;res.js&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">js_content</span><span class="p">)</span>
+    <span class="n">fh</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">fun</span> <span class="o">=</span> <span class="n">execjs</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">js_content</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;=========================================&#39;</span><span class="p">)</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;输入要翻译的内容（中文或英文，输入空白退出）:&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">words</span> <span class="o">==</span> <span class="s2">&#34;&#34;</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">sign</span> <span class="o">=</span> <span class="n">fun</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">TM</span><span class="o">.</span><span class="n">get_trans</span><span class="p">(</span> <span class="n">words</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">sign</span><span class="p">))</span>
+</code></pre></div><p>上面为了cookie花了超级久的功夫，但实际上，可以直接手动访问一次，把cookie复制到代码里面，看到这个做法之后人直接傻了🙃</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-05-18</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/%E7%88%AC%E8%99%AB/">爬虫</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/leetcode-spider/" class="prev" rel="prev" title="爬虫获取力扣题目信息并转为Markdown"><i class="fas fa-angle-left fa-fw"></i>爬虫获取力扣题目信息并转为Markdown</a>
+            <a href="/posts/mongodb-demo/" class="next" rel="next" title="Flask&#43;MongoDB CURD微实战">Flask&#43;MongoDB CURD微实战<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.75.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,276 +1,77 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Posts on Wanakiki`s Blog</title>
-    <link>https://wanakiki.github.io/posts/</link>
-    <description>Recent content in Posts on Wanakiki`s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Thu, 13 Aug 2020 22:16:21 +0800</lastBuildDate>
-    
-	<atom:link href="https://wanakiki.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Python爬虫 代理IP地址获取及使用</title>
-      <link>https://wanakiki.github.io/2020/spider-with-proxy/</link>
-      <pubDate>Thu, 13 Aug 2020 22:16:21 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2020/spider-with-proxy/</guid>
-      <description>最近别人发给了一个邀请链接，问能不能刷满邀请人数，简单试了一下，网站对访问IP进行了记录，不能用一个IP一直访问，想到的解决方案是套上代理来</description>
-    </item>
-    
-    <item>
-      <title>Flask框架下API开发异常处理</title>
-      <link>https://wanakiki.github.io/2020/flask-api-exception/</link>
-      <pubDate>Wed, 08 Jul 2020 12:27:41 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2020/flask-api-exception/</guid>
-      <description>最近在做SRDP项目的后端开发，但是狗书上面对API相关内容介绍比较少，示例代码中的API部分也不涉及用户登录注册相关内容。不过幸运的是在G</description>
-    </item>
-    
-    <item>
-      <title>VUE框架入门</title>
-      <link>https://wanakiki.github.io/2020/learn-vue/</link>
-      <pubDate>Wed, 08 Jul 2020 12:19:49 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2020/learn-vue/</guid>
-      <description>在学习VUE入门视频时记录的知识点和代码，备忘。 基本 el:挂载点，id选择器#，不能挂载到&amp;lt;html&amp;gt; &amp;lt;body&amp;gt;两</description>
-    </item>
-    
-    <item>
-      <title>IIC总线协议</title>
-      <link>https://wanakiki.github.io/2020/about-iic/</link>
-      <pubDate>Wed, 01 Jul 2020 12:17:49 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2020/about-iic/</guid>
-      <description>之前做收音机的时候用到了IIC总线协议，因为用的是别人封装好的库，对协议的具体执行方式不是很了解，于是花了点时间查了一下。 IIC协议大致有下</description>
-    </item>
-    
-    <item>
-      <title>Linux C语言系统编程作业</title>
-      <link>https://wanakiki.github.io/2020/linux-c/</link>
-      <pubDate>Sat, 06 Jun 2020 23:06:09 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2020/linux-c/</guid>
-      <description>跟着别人简单学了下Linux下的系统编程，把做过的几个作业简单记录一下。作业的内容都是针对的具体的知识点，实现难度并不高。 进程间通信 设计一个</description>
-    </item>
-    
-    <item>
-      <title>Flask&#43;MongoDB CURD微实战</title>
-      <link>https://wanakiki.github.io/2020/mongodb-demo/</link>
-      <pubDate>Sat, 30 May 2020 11:07:16 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2020/mongodb-demo/</guid>
-      <description>做SRDP的过程中发现关系型数据库在实现问卷效果时比较困难，所以找了个时间熟悉了一下非关系型数据库，做了一个todo小demo。 视频演示地址</description>
-    </item>
-    
-    <item>
-      <title>百度翻译爬虫</title>
-      <link>https://wanakiki.github.io/2020/baidufanyi/</link>
-      <pubDate>Mon, 18 May 2020 20:44:50 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2020/baidufanyi/</guid>
-      <description>典型的js加密爬虫实战，本文章内容仅作学习交流。 首先放一下参考文章：爬虫JS破解经典案例之百度翻译 如果没有这篇文章的话，我可能要花很多功夫才</description>
-    </item>
-    
-    <item>
-      <title>爬虫获取力扣题目信息并转为Markdown</title>
-      <link>https://wanakiki.github.io/2020/leetcode-spider/</link>
-      <pubDate>Sat, 02 May 2020 14:38:46 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2020/leetcode-spider/</guid>
-      <description>很早就接触了leetcode，在上面做了不少题，每次整理的时候复制题目信息是个很麻烦的过程，于是便想着要用爬虫来解决这个问题，今天终于实现了</description>
-    </item>
-    
-    <item>
-      <title>用异或找到数组中不重复出现的数字</title>
-      <link>https://wanakiki.github.io/2020/xor/</link>
-      <pubDate>Thu, 30 Apr 2020 10:51:11 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2020/xor/</guid>
-      <description>找一个数很简单，但找两个数呢？ 最近做leetcode上面的题目的时候，遇到了一个面试题，需要找到数组中两个只出现过一次的数（其余数均出现过两</description>
-    </item>
-    
-    <item>
-      <title>Flutter 词典APP</title>
-      <link>https://wanakiki.github.io/2020/special-dictionary/</link>
-      <pubDate>Tue, 21 Apr 2020 09:43:32 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2020/special-dictionary/</guid>
-      <description>对自己写的flutter APP的简单记录。 怕自己忘了之前看过的flutter教程，所以趁周末写了这个APP，功能很简单，涉及到的都是基本知识</description>
-    </item>
-    
-    <item>
-      <title>VHDL设计 秒表</title>
-      <link>https://wanakiki.github.io/2020/vhdl-miaobiao/</link>
-      <pubDate>Wed, 01 Jan 2020 21:50:14 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2020/vhdl-miaobiao/</guid>
-      <description>VHDL课程作业，设计一个带存储功能的秒表。 演示视频：https://www.bilibili.com/video/av79725799/ 秒</description>
-    </item>
-    
-    <item>
-      <title>Git 及 Github 上手</title>
-      <link>https://wanakiki.github.io/2019/use-github/</link>
-      <pubDate>Mon, 25 Nov 2019 16:15:58 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/use-github/</guid>
-      <description>记录使用git及GitHub的过程 准备工作 在GitHub官网注册账号，之后去Git官网下载git并安装。安装完成后打开终端，输入下面的命令，</description>
-    </item>
-    
-    <item>
-      <title>🏠班级网站项目</title>
-      <link>https://wanakiki.github.io/2019/website/</link>
-      <pubDate>Wed, 06 Nov 2019 23:04:39 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/website/</guid>
-      <description>起因💡 本人有两年大学班委的经验，发现学校团委给班级的一般都是信息整理相关的工作。但现在已经是21世纪，完全没有必要因为收集一些个人信息让每个</description>
-    </item>
-    
-    <item>
-      <title>利用Termux群发短信</title>
-      <link>https://wanakiki.github.io/2019/termux-sms/</link>
-      <pubDate>Wed, 25 Sep 2019 19:23:03 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/termux-sms/</guid>
-      <description>Termux的简单应用，为了让群发短信有更便捷高效的解决方案。 前言 Termux是一个Android下一个高级的终端模拟器，开源且不需要roo</description>
-    </item>
-    
-    <item>
-      <title>提取小米云服务短信</title>
-      <link>https://wanakiki.github.io/2019/short-message/</link>
-      <pubDate>Thu, 05 Sep 2019 12:16:09 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/short-message/</guid>
-      <description>最近手机刷了AOSIP，原来的短信都没有同步，去小米云服务官网发现没有导出按钮，稍微折腾了下达到了目的，简单记录。 登陆小米云服务，进入短信界</description>
-    </item>
-    
-    <item>
-      <title>新生の大学分享</title>
-      <link>https://wanakiki.github.io/2019/univ-share/</link>
-      <pubDate>Fri, 30 Aug 2019 22:54:12 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/univ-share/</guid>
-      <description>可能很多人都会问怎么样才能过好自己的大学生活，但是当我想要去总结自己大学以来的经验，首先想到的大部分都是自己的遗憾，提不出来什么有价值的建议</description>
-    </item>
-    
-    <item>
-      <title>PY4E 题目整理（下）</title>
-      <link>https://wanakiki.github.io/2019/python-assignments/</link>
-      <pubDate>Mon, 05 Aug 2019 18:29:25 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/python-assignments/</guid>
-      <description>Coursera中python教程同步题目整理，涉及到网络和数据库编程部分。题目地址：py4e。 打开网页的操作步骤，导入urllib库，ur</description>
-    </item>
-    
-    <item>
-      <title>PY4E 题目整理（上）</title>
-      <link>https://wanakiki.github.io/2019/python-assignment/</link>
-      <pubDate>Sun, 04 Aug 2019 17:39:49 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/python-assignment/</guid>
-      <description>Coursera中python教程同步题目整理，因为旁听课程不能直接对每章的编程作业进行提交，学到中期之后才发现py4e上有几乎所有题目的在</description>
-    </item>
-    
-    <item>
-      <title>Latex 插入图片方式整理</title>
-      <link>https://wanakiki.github.io/2019/latex-img/</link>
-      <pubDate>Fri, 14 Jun 2019 23:22:50 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/latex-img/</guid>
-      <description>又到期末，承担了帮别人排版论文的工作。因为自己不熟悉图片的插入方式拖慢了进度，趁今天有时间整理一下。当然，最大的目的还是备忘。 新建一个.te</description>
-    </item>
-    
-    <item>
-      <title>数据结构作业七 Transport</title>
-      <link>https://wanakiki.github.io/2019/transport/</link>
-      <pubDate>Fri, 17 May 2019 09:47:43 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/transport/</guid>
-      <description>清华OJ广度优先搜索题目。 描述 某广播公司要在一个地区架设无线广播发射装置。该地区共有n个小镇，每个小镇都要安装一台发射机并播放各自的节目。 不</description>
-    </item>
-    
-    <item>
-      <title>2019年山东省省赛回顾</title>
-      <link>https://wanakiki.github.io/2019/shengsai-2019/</link>
-      <pubDate>Sun, 12 May 2019 23:24:12 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/shengsai-2019/</guid>
-      <description>2019年5月11-12号山东省ACM竞赛回顾（想起来什么写什么，绝大部分内容和比赛内容无关） 第一天中午到济南大学，开幕式之后开始热身赛（开</description>
-    </item>
-    
-    <item>
-      <title>函数对象和函数指针</title>
-      <link>https://wanakiki.github.io/2019/funs/</link>
-      <pubDate>Wed, 08 May 2019 21:21:26 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/funs/</guid>
-      <description>简单复习一下函数对象和函数指针。 函数指针 函数指针，简单点来理解就是一个指向函数的的指针变量，函数指针所指的是一个函数的入口地址。 函数指针主要</description>
-    </item>
-    
-    <item>
-      <title>数据结构作业六 旅行商（TSP）</title>
-      <link>https://wanakiki.github.io/2019/tsp/</link>
-      <pubDate>Tue, 07 May 2019 23:55:50 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/tsp/</guid>
-      <description>图论第一次作业，不需要提交报告，在OJ上提交。 描述 Shrek是一个大山里的邮递员，每天负责给所在地区的n个村庄派发信件。但杯具的是，由于道路</description>
-    </item>
-    
-    <item>
-      <title>数据结构作业四 表达式树</title>
-      <link>https://wanakiki.github.io/2019/bin-tree/</link>
-      <pubDate>Fri, 03 May 2019 18:56:50 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/bin-tree/</guid>
-      <description>从中缀表达式构建二叉树 问题分析 &amp;amp; 解决方案 题目要求输入一个中缀表达式，构建其相应的表达式树，并输出验证。 表达式树的特点是操作符所对应的两个操作</description>
-    </item>
-    
-    <item>
-      <title>数据结构作业五 Compression</title>
-      <link>https://wanakiki.github.io/2019/compression/</link>
-      <pubDate>Fri, 03 May 2019 14:00:51 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/compression/</guid>
-      <description>图片有损压缩大作业 问题分析 &amp;amp; 解决方案 本次编程任务给出了一个纯英文的PDF文件，较为详细地介绍了图像有损压缩算法的实现方式，通过二叉树的树剪枝</description>
-    </item>
-    
-    <item>
-      <title>数据结构作业三 列车调度</title>
-      <link>https://wanakiki.github.io/2019/train/</link>
-      <pubDate>Sun, 21 Apr 2019 10:41:45 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/train/</guid>
-      <description>本次作业不需提交报告。 题目描述 Input 共两行。 第一行为两个整数n，m。 第二行为以空格分隔的n个整数，保证为{1, 2, &amp;hellip;, n}的一个排列，表示待判断可行</description>
-    </item>
-    
-    <item>
-      <title>数据结构作业二 List ADT</title>
-      <link>https://wanakiki.github.io/2019/list-adt/</link>
-      <pubDate>Sat, 20 Apr 2019 20:22:40 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/list-adt/</guid>
-      <description>问题分析 题目要求自行实现list ADT，并在此基础上实现PrintLots函数并且实现懒惰删除功能。对于PrintLots函数，题目要求分析</description>
-    </item>
-    
-    <item>
-      <title>数据结构作业一 Zuma List</title>
-      <link>https://wanakiki.github.io/2019/zuma-list/</link>
-      <pubDate>Sat, 20 Apr 2019 19:41:55 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/zuma-list/</guid>
-      <description>数据结构第一次作业。 问题分析 题目要求书写程序对祖玛消除过程进行回放，输入为原始珠子序列以及玩家所做的一系列操作，要求我们按照游戏规则计算出每</description>
-    </item>
-    
-    <item>
-      <title>括号匹配</title>
-      <link>https://wanakiki.github.io/2019/kuohao/</link>
-      <pubDate>Sat, 20 Apr 2019 14:36:43 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/kuohao/</guid>
-      <description>这个学期开始学数据结构，第一节课老师又提出了这个经典的问题。 问题描述 给出一个只包含&amp;rsquo;(&amp;lsquo;和&amp;rsquo;)&amp;lsqu</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>所有文章 - Wanakiki`s Blog</title>
+        <link>http://example.org/posts/</link>
+        <description>所有文章 | Wanakiki`s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 25 Sep 2020 17:16:30 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>📄个人介绍</title>
+    <link>http://example.org/posts/about-me/</link>
+    <pubDate>Fri, 25 Sep 2020 17:16:30 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/posts/about-me/</guid>
+    <description><![CDATA[本科学校：中国海洋大学，Ocean University of China 入学年份：2017 所修专业：电子信息科学与技术，Electronic Information Science and Technology 实验室经历：学院水下视觉实验室 比赛经历： 山东省ACM程序设计竞赛（2018、2019]]></description>
+</item><item>
+    <title>Python爬虫 代理IP地址获取及使用</title>
+    <link>http://example.org/posts/spider-with-proxy/</link>
+    <pubDate>Thu, 13 Aug 2020 22:16:21 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/posts/spider-with-proxy/</guid>
+    <description><![CDATA[最近别人发给了一个邀请链接，问能不能刷满邀请人数，简单试了一下，网站对访问IP进行了记录，不能用一个IP一直访问，想到的解决方案是套上代理来实现刷点击量的目的。 自从学了点爬虫知识之后，这是第一次需要使]]></description>
+</item><item>
+    <title>Flask框架下API开发异常处理</title>
+    <link>http://example.org/posts/flask-api-exception/</link>
+    <pubDate>Wed, 08 Jul 2020 12:27:41 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/posts/flask-api-exception/</guid>
+    <description><![CDATA[最近在做SRDP项目的后端开发，但是狗书上面对API相关内容介绍比较少，示例代码中的API部分也不涉及用户登录注册相关内容。不过幸运的是在Github上找到了一个问卷调查项目，通过阅读项目代码发现了在]]></description>
+</item><item>
+    <title>VUE框架入门</title>
+    <link>http://example.org/posts/learn-vue/</link>
+    <pubDate>Wed, 08 Jul 2020 12:19:49 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/posts/learn-vue/</guid>
+    <description><![CDATA[在学习VUE入门视频时记录的知识点和代码，备忘。 基本 el:挂载点，id选择器#，不能挂载到&lt;html&gt; &lt;body&gt;两个标签 Vue指令 内容绑定、事件绑定 v-text设置标签内容，]]></description>
+</item><item>
+    <title>IIC总线协议</title>
+    <link>http://example.org/posts/about-iic/</link>
+    <pubDate>Wed, 01 Jul 2020 12:17:49 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/posts/about-iic/</guid>
+    <description><![CDATA[之前做收音机的时候用到了IIC总线协议，因为用的是别人封装好的库，对协议的具体执行方式不是很了解，于是花了点时间查了一下。 IIC协议大致有下面几个特点： 双向串行通信 两根线：数据线SDA，时钟线SCL，]]></description>
+</item><item>
+    <title>Linux C语言系统编程作业</title>
+    <link>http://example.org/posts/linux-c/</link>
+    <pubDate>Sat, 06 Jun 2020 23:06:09 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/posts/linux-c/</guid>
+    <description><![CDATA[跟着别人简单学了下Linux下的系统编程，把做过的几个作业简单记录一下。作业的内容都是针对的具体的知识点，实现难度并不高。 进程间通信 设计一个程序，打开一个匿名管道，然后生成一个子进程，主进程向管道中写]]></description>
+</item><item>
+    <title>Flask&#43;MongoDB CURD微实战</title>
+    <link>http://example.org/posts/mongodb-demo/</link>
+    <pubDate>Sat, 30 May 2020 11:07:16 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/posts/mongodb-demo/</guid>
+    <description><![CDATA[做SRDP的过程中发现关系型数据库在实现问卷效果时比较困难，所以找了个时间熟悉了一下非关系型数据库，做了一个todo小demo。 视频演示地址 过程记录 下载安装mongodb，注意安装的时候不要勾选com]]></description>
+</item><item>
+    <title>百度翻译爬虫</title>
+    <link>http://example.org/posts/baidufanyi/</link>
+    <pubDate>Mon, 18 May 2020 20:44:50 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/posts/baidufanyi/</guid>
+    <description><![CDATA[典型的js加密爬虫实战，本文章内容仅作学习交流。 首先放一下参考文章：爬虫JS破解经典案例之百度翻译 如果没有这篇文章的话，我可能要花很多功夫才能找到具体的js代码位置。 页面加载分析 初步探索 打开百度翻译，]]></description>
+</item><item>
+    <title>爬虫获取力扣题目信息并转为Markdown</title>
+    <link>http://example.org/posts/leetcode-spider/</link>
+    <pubDate>Sat, 02 May 2020 14:38:46 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/posts/leetcode-spider/</guid>
+    <description><![CDATA[很早就接触了leetcode，在上面做了不少题，每次整理的时候复制题目信息是个很麻烦的过程，于是便想着要用爬虫来解决这个问题，今天终于实现了这个功能，简单记录。 写在前面 我自己用得比较多的两个语言是C+]]></description>
+</item><item>
+    <title>用异或找到数组中不重复出现的数字</title>
+    <link>http://example.org/posts/xor/</link>
+    <pubDate>Thu, 30 Apr 2020 10:51:11 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/posts/xor/</guid>
+    <description><![CDATA[找一个数很简单，但找两个数呢？ 最近做leetcode上面的题目的时候，遇到了一个面试题，需要找到数组中两个只出现过一次的数（其余数均出现过两次），感觉很有意思，简单记录一下。 基本知识 异或（xor）是一]]></description>
+</item></channel>
 </rss>

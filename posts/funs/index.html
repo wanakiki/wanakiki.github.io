@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>函数对象和函数指针 - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="函数对象和函数指针" />
+<meta property="og:description" content="简单复习一下函数对象和函数指针。 函数指针 函数指针，简单点来理解就是一个指向函数的的指针变量，函数指针所指的是一个函数的入口地址。 函数指针主要有两个作用：用来调用函数和作为函数的参数。 函数指针的声明方法" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/funs/" />
+<meta property="article:published_time" content="2019-05-08T21:21:26+08:00" />
+<meta property="article:modified_time" content="2019-05-08T21:21:26+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="函数对象和函数指针"/>
+<meta name="twitter:description" content="简单复习一下函数对象和函数指针。 函数指针 函数指针，简单点来理解就是一个指向函数的的指针变量，函数指针所指的是一个函数的入口地址。 函数指针主要有两个作用：用来调用函数和作为函数的参数。 函数指针的声明方法"/>
+<meta name="application-name" content="Wanakiki`s Blog">
+<meta name="apple-mobile-web-app-title" content="Wanakiki`s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/funs/" /><link rel="prev" href="http://example.org/posts/tsp/" /><link rel="next" href="http://example.org/posts/shengsai-2019/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "函数对象和函数指针",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/funs\/"
+        },"genre": "posts","wordcount":  707 ,
+        "url": "http:\/\/example.org\/posts\/funs\/","datePublished": "2019-05-08T21:21:26+08:00","dateModified": "2019-05-08T21:21:26+08:00","publisher": {
+            "@type": "Organization",
+            "name": "wanakiki"},"author": {
+                "@type": "Person",
+                "name": "wanakiki"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Blog </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Blog</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">函数对象和函数指针</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw"></i>数据结构</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-05-08">2019-05-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 707 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#函数指针">函数指针</a>
+      <ul>
+        <li><a href="#函数指针的声明方法及赋值">函数指针的声明方法及赋值</a></li>
+        <li><a href="#调用方法及测试">调用方法及测试</a></li>
+      </ul>
+    </li>
+    <li><a href="#函数对象">函数对象</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>简单复习一下函数对象和函数指针。</p>
+<!-- raw HTML omitted -->
+<h2 id="函数指针">函数指针</h2>
+<p>函数指针，简单点来理解就是一个指向函数的的指针变量，函数指针所指的是一个函数的入口地址。</p>
+<p>函数指针主要有两个作用：用来调用函数和作为函数的参数。</p>
+<h3 id="函数指针的声明方法及赋值">函数指针的声明方法及赋值</h3>
+<p>声明方式： 数据类型标识符 (指针变量名) (形参列表)<br>
+例如： <code>int (*fun) (int x);</code></p>
+<p>其中需要注意一点，指针变量名一定要用括号括起来，因为如果不加括号，我们的编译器就会默认其为返回值为指针的一个函数。</p>
+<p>为了方便我们的使用，我们可以用typedef进行声明。之后定义函数指针就会方便许多。例如：</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="nf">int</span><span class="p">(</span><span class="o">*</span><span class="n">PF</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">);</span>
+<span class="n">PF</span> <span class="n">pf</span><span class="p">;</span>
+</code></pre></div><p>对一个函数指针赋值我们不需要使用取地址符，因为一个函数的函数名就是该函数的入口指针，我们可以直接对函数指针赋值。</p>
+<p>另外，我认为定义（或者说声明）函数指针时就只是相当于声明一个函数，所以函数指针定义时形参的变量名可以省略，<br>
+即 <code>int (*fun) (int x);</code> 和 <code>int (*fun) (int);</code> 效果是一样的。</p>
+<h3 id="调用方法及测试">调用方法及测试</h3>
+<p>用函数指针调用函数时有两种调用方式：<code>fun(x)</code> 和 <code>(*fun)(x)</code>。<br>
+而函数指针作为函数参数时，只需要在函数定义时将其写在函数的形参中，函数内部可以直接使用函数指针指向的函数。</p>
+<p>测试程序：</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="nf">void</span> <span class="p">(</span><span class="o">*</span><span class="n">PF</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">);</span>
+
+<span class="kt">void</span> <span class="nf">visit</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">visit_usePf</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">pf</span><span class="p">)(</span><span class="kt">int</span><span class="p">)){</span>
+    <span class="n">pf</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">PF</span> <span class="n">pf1</span><span class="p">;</span>
+    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">pf2</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">pf3</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">);</span>
+
+    <span class="c1">//typedef 声明测试
+</span><span class="c1"></span>    <span class="n">pf1</span> <span class="o">=</span> <span class="n">visit</span><span class="p">;</span>
+    <span class="n">pf1</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">(</span><span class="o">*</span><span class="n">pf1</span><span class="p">)(</span><span class="mi">2</span><span class="p">);</span>
+
+    <span class="c1">//第一种定义测试
+</span><span class="c1"></span>    <span class="n">pf2</span> <span class="o">=</span> <span class="n">visit</span><span class="p">;</span>
+    <span class="n">pf2</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+    <span class="n">visit_usePf</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">pf2</span><span class="p">);</span>
+
+    <span class="c1">//第二种定义测试
+</span><span class="c1"></span>    <span class="n">pf3</span> <span class="o">=</span> <span class="n">visit</span><span class="p">;</span>
+    <span class="n">pf3</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+    <span class="n">visit_usePf</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">pf3</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="函数对象">函数对象</h2>
+<p>在C++中，实现了<code>operator()</code>的类或者结构体，都可被称为函数对象并进行直接调用。在学习数据结构时图的优先级遍历所使用的优先级更新器便是一个函数对象。sort函数所需要的比较器也是一个函数对象。</p>
+<p>示例：</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">funA</span><span class="p">{</span>
+    <span class="k">public</span><span class="o">:</span>
+    <span class="kt">void</span> <span class="k">operator</span><span class="p">()(){</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Function Object&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">funB</span><span class="p">{</span>
+    <span class="k">public</span><span class="o">:</span>
+    <span class="c1">//函数输出两个数的和
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="k">operator</span><span class="p">()(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">funA</span> <span class="n">hello</span><span class="p">;</span>
+    <span class="n">funB</span> <span class="n">sum</span><span class="p">;</span>
+    <span class="n">hello</span><span class="p">();</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-05-08</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/tsp/" class="prev" rel="prev" title="数据结构作业六 旅行商（TSP）"><i class="fas fa-angle-left fa-fw"></i>数据结构作业六 旅行商（TSP）</a>
+            <a href="/posts/shengsai-2019/" class="next" rel="next" title="2019年山东省省赛回顾">2019年山东省省赛回顾<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.75.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

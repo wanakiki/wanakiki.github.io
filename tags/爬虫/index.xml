@@ -1,42 +1,28 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>爬虫 on Wanakiki`s Blog</title>
-    <link>https://wanakiki.github.io/tags/%E7%88%AC%E8%99%AB/</link>
-    <description>Recent content in 爬虫 on Wanakiki`s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Thu, 13 Aug 2020 22:16:21 +0800</lastBuildDate>
-    
-	<atom:link href="https://wanakiki.github.io/tags/%E7%88%AC%E8%99%AB/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Python爬虫 代理IP地址获取及使用</title>
-      <link>https://wanakiki.github.io/2020/spider-with-proxy/</link>
-      <pubDate>Thu, 13 Aug 2020 22:16:21 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2020/spider-with-proxy/</guid>
-      <description>最近别人发给了一个邀请链接，问能不能刷满邀请人数，简单试了一下，网站对访问IP进行了记录，不能用一个IP一直访问，想到的解决方案是套上代理来</description>
-    </item>
-    
-    <item>
-      <title>百度翻译爬虫</title>
-      <link>https://wanakiki.github.io/2020/baidufanyi/</link>
-      <pubDate>Mon, 18 May 2020 20:44:50 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2020/baidufanyi/</guid>
-      <description>典型的js加密爬虫实战，本文章内容仅作学习交流。 首先放一下参考文章：爬虫JS破解经典案例之百度翻译 如果没有这篇文章的话，我可能要花很多功夫才</description>
-    </item>
-    
-    <item>
-      <title>爬虫获取力扣题目信息并转为Markdown</title>
-      <link>https://wanakiki.github.io/2020/leetcode-spider/</link>
-      <pubDate>Sat, 02 May 2020 14:38:46 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2020/leetcode-spider/</guid>
-      <description>很早就接触了leetcode，在上面做了不少题，每次整理的时候复制题目信息是个很麻烦的过程，于是便想着要用爬虫来解决这个问题，今天终于实现了</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>爬虫 - 标签 - Wanakiki`s Blog</title>
+        <link>http://example.org/tags/%E7%88%AC%E8%99%AB/</link>
+        <description>爬虫 - 标签 - Wanakiki`s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 13 Aug 2020 22:16:21 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E7%88%AC%E8%99%AB/" rel="self" type="application/rss+xml" /><item>
+    <title>Python爬虫 代理IP地址获取及使用</title>
+    <link>http://example.org/posts/spider-with-proxy/</link>
+    <pubDate>Thu, 13 Aug 2020 22:16:21 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/posts/spider-with-proxy/</guid>
+    <description><![CDATA[最近别人发给了一个邀请链接，问能不能刷满邀请人数，简单试了一下，网站对访问IP进行了记录，不能用一个IP一直访问，想到的解决方案是套上代理来实现刷点击量的目的。 自从学了点爬虫知识之后，这是第一次需要使]]></description>
+</item><item>
+    <title>百度翻译爬虫</title>
+    <link>http://example.org/posts/baidufanyi/</link>
+    <pubDate>Mon, 18 May 2020 20:44:50 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/posts/baidufanyi/</guid>
+    <description><![CDATA[典型的js加密爬虫实战，本文章内容仅作学习交流。 首先放一下参考文章：爬虫JS破解经典案例之百度翻译 如果没有这篇文章的话，我可能要花很多功夫才能找到具体的js代码位置。 页面加载分析 初步探索 打开百度翻译，]]></description>
+</item><item>
+    <title>爬虫获取力扣题目信息并转为Markdown</title>
+    <link>http://example.org/posts/leetcode-spider/</link>
+    <pubDate>Sat, 02 May 2020 14:38:46 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/posts/leetcode-spider/</guid>
+    <description><![CDATA[很早就接触了leetcode，在上面做了不少题，每次整理的时候复制题目信息是个很麻烦的过程，于是便想着要用爬虫来解决这个问题，今天终于实现了这个功能，简单记录。 写在前面 我自己用得比较多的两个语言是C+]]></description>
+</item></channel>
 </rss>

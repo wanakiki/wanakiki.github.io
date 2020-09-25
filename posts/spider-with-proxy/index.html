@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Python爬虫 代理IP地址获取及使用 - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="Python爬虫 代理IP地址获取及使用" />
+<meta property="og:description" content="最近别人发给了一个邀请链接，问能不能刷满邀请人数，简单试了一下，网站对访问IP进行了记录，不能用一个IP一直访问，想到的解决方案是套上代理来实现刷点击量的目的。 自从学了点爬虫知识之后，这是第一次需要使" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/spider-with-proxy/" />
+<meta property="article:published_time" content="2020-08-13T22:16:21+08:00" />
+<meta property="article:modified_time" content="2020-08-13T22:16:21+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python爬虫 代理IP地址获取及使用"/>
+<meta name="twitter:description" content="最近别人发给了一个邀请链接，问能不能刷满邀请人数，简单试了一下，网站对访问IP进行了记录，不能用一个IP一直访问，想到的解决方案是套上代理来实现刷点击量的目的。 自从学了点爬虫知识之后，这是第一次需要使"/>
+<meta name="application-name" content="Wanakiki`s Blog">
+<meta name="apple-mobile-web-app-title" content="Wanakiki`s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/spider-with-proxy/" /><link rel="prev" href="http://example.org/posts/flask-api-exception/" /><link rel="next" href="http://example.org/posts/about-me/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Python爬虫 代理IP地址获取及使用",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/spider-with-proxy\/"
+        },"genre": "posts","keywords": "python, 爬虫","wordcount":  920 ,
+        "url": "http:\/\/example.org\/posts\/spider-with-proxy\/","datePublished": "2020-08-13T22:16:21+08:00","dateModified": "2020-08-13T22:16:21+08:00","publisher": {
+            "@type": "Organization",
+            "name": "wanakiki"},"author": {
+                "@type": "Person",
+                "name": "wanakiki"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Blog </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Blog</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Python爬虫 代理IP地址获取及使用</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-08-13">2020-08-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 920 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#站点分析">站点分析</a></li>
+        <li><a href="#爬虫添加代理">爬虫添加代理</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>最近别人发给了一个邀请链接，问能不能刷满邀请人数，简单试了一下，网站对访问IP进行了记录，不能用一个IP一直访问，想到的解决方案是套上代理来实现刷点击量的目的。</p>
+<!-- raw HTML omitted -->
+<p>自从学了点爬虫知识之后，这是第一次需要使用代理的场景，简单记录一下实现点击量目标所做的工作。</p>
+<h3 id="站点分析">站点分析</h3>
+<p>在接到这个链接之后，先用浏览器访问了一遍查看了一下相关请求，发现并没有与IP地址相关的加载项，于是花几分钟写了个简单的请求脚本，但是发现请求之后点击量一次都没有增加。接着开始对脚本进行了调试，将返回的结果打印之后发现返回的html主体是下面的内容：</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&#34;refresh&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;1;url=xxxx&#34;</span><span class="p">&gt;</span>
+</code></pre></div><p>这行代码的意思是在一秒后刷新到url指向的页面，这个链接和最初的邀请链接是不同的，在实际访问时没有注意到这点。假设网站提供的邀请链接为A，上面代码指向的链接为B，整个流程为：</p>
+<ol>
+<li>网站发布邀请链接A</li>
+<li>用户在互联网传播链接A</li>
+<li>他人点击邀请链接A，1秒后跳转到链接B对应页面</li>
+<li>页面B被访问，邀请人数增加</li>
+</ol>
+<p>也就是说，链接B才是真正的链接，链接A相当于一个外壳，对链接B进行了一定程度的保护。在了解到这些之后，只要把之前脚本中的链接A改为链接B，再加上代理相关的内容便能达到我们的目的了。</p>
+<p>在这一过程中也总结了点经验，在写脚本之前先用postmam访问网站，对返回内容进行核查理清逻辑之后再动手。</p>
+<h3 id="爬虫添加代理">爬虫添加代理</h3>
+<h4 id="获取随机ua">获取随机UA</h4>
+<p>大部分情况下，切换代理的原因是因为此前的IP爬取内容过快导致被封禁，更换代理的同时一般也会对UA进行更换。下面是用别人的接口实现的获取随机UA的函数：</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">get_rand_ua</span><span class="p">():</span>
+    <span class="n">ua_url</span> <span class="o">=</span> <span class="s1">&#39;http://nmsl8.com/getUA&#39;</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ua_url</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">text</span>
+</code></pre></div><p>上面的接口是部署在别人的主机上的，不知道能维持多久，最好的办法还是去网上查找整理好的UA列表，直接读取本地文件。</p>
+<h4 id="requests添加代理">requests添加代理</h4>
+<p>requests库使用代理的方法很简单，<a href="https://cn.python-requests.org/zh_CN/latest/user/advanced.html#proxies" target="_blank" rel="noopener noreffer">官方文档</a>写的很清楚。下面是文档中的示例使用方式：</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&#34;http&#34;</span><span class="p">:</span> <span class="s2">&#34;http://10.10.1.10:3128&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;https&#34;</span><span class="p">:</span> <span class="s2">&#34;http://10.10.1.10:1080&#34;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;http://example.org&#34;</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="n">proxies</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div><p>免费的代理可以在这里获得：https://ip.ihuan.me/</p>
+<p>由于免费，代理的质量不是很高，我在使用的时候添加了timeout参数，避免在一个代理上花费很多时间。</p>
+<h4 id="代理验证">代理验证</h4>
+<p>访问这个地址可以获得自己的IP：http://icanhazip.com/</p>
+<p>可以通过比较返回的IP地址和使用的代理是否相同来判断代理是否有效。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-08-13</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/%E7%88%AC%E8%99%AB/">爬虫</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/flask-api-exception/" class="prev" rel="prev" title="Flask框架下API开发异常处理"><i class="fas fa-angle-left fa-fw"></i>Flask框架下API开发异常处理</a>
+            <a href="/posts/about-me/" class="next" rel="next" title="📄个人介绍">📄个人介绍<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.75.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

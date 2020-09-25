@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>数据结构作业五 Compression - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="数据结构作业五 Compression" />
+<meta property="og:description" content="图片有损压缩大作业 问题分析 &amp; 解决方案 本次编程任务给出了一个纯英文的PDF文件，较为详细地介绍了图像有损压缩算法的实现方式，通过二叉树的树剪枝达到保留图片细节的目的。任务要求达到的效果如下图所示，可以看" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/compression/" />
+<meta property="article:published_time" content="2019-05-03T14:00:51+08:00" />
+<meta property="article:modified_time" content="2019-05-03T14:00:51+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="数据结构作业五 Compression"/>
+<meta name="twitter:description" content="图片有损压缩大作业 问题分析 &amp; 解决方案 本次编程任务给出了一个纯英文的PDF文件，较为详细地介绍了图像有损压缩算法的实现方式，通过二叉树的树剪枝达到保留图片细节的目的。任务要求达到的效果如下图所示，可以看"/>
+<meta name="application-name" content="Wanakiki`s Blog">
+<meta name="apple-mobile-web-app-title" content="Wanakiki`s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/compression/" /><link rel="prev" href="http://example.org/posts/train/" /><link rel="next" href="http://example.org/posts/bin-tree/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "数据结构作业五 Compression",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/compression\/"
+        },"genre": "posts","wordcount":  4499 ,
+        "url": "http:\/\/example.org\/posts\/compression\/","datePublished": "2019-05-03T14:00:51+08:00","dateModified": "2019-05-03T14:00:51+08:00","publisher": {
+            "@type": "Organization",
+            "name": "wanakiki"},"author": {
+                "@type": "Person",
+                "name": "wanakiki"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Blog </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Blog</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">数据结构作业五 Compression</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw"></i>数据结构</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-05-03">2019-05-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4499 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#问题分析--解决方案">问题分析 &amp; 解决方案</a></li>
+    <li><a href="#算法设计">算法设计</a>
+      <ul>
+        <li><a href="#stats类函数的实现">stats类函数的实现</a></li>
+        <li><a href="#twodtree的探索">twoDtree的探索</a></li>
+      </ul>
+    </li>
+    <li><a href="#流程图">流程图</a></li>
+    <li><a href="#编程实现">编程实现</a></li>
+    <li><a href="#结果分析">结果分析</a>
+      <ul>
+        <li><a href="#简单分析">简单分析</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结体会">总结体会</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>图片有损压缩大作业</p>
+<!-- raw HTML omitted -->
+<h2 id="问题分析--解决方案">问题分析 &amp; 解决方案</h2>
+<p>本次编程任务给出了一个纯英文的PDF文件，较为详细地介绍了图像有损压缩算法的实现方式，通过二叉树的树剪枝达到保留图片细节的目的。任务要求达到的效果如下图所示，可以看出较为复杂的图腾部分得到了很好的保留，而树叶和远处的背景则被明显地压缩成了像素区块。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/wanakiki/photo/master/20190503134525.jpg"
+        data-srcset="https://raw.githubusercontent.com/wanakiki/photo/master/20190503134525.jpg, https://raw.githubusercontent.com/wanakiki/photo/master/20190503134525.jpg 1.5x, https://raw.githubusercontent.com/wanakiki/photo/master/20190503134525.jpg 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/wanakiki/photo/master/20190503134525.jpg"
+        title="示例" /></p>
+<p>和编程任务一同给出的源码包中已经实现了绝大部分代码，我们需要按照给出的方法对缺失的代码进行补充，从这方面来讲，整个编程任务相当于一个稍微复杂的程序填空题。另外不得不提的一点是，所给的源码格式较为规范，仔细研究代码的整体框架对日后的编程也有一定的好处，也正因其规范性，代码整体阅读难度较低。</p>
+<p>总体来看，整个工程由五个部分组成，其从属关系为：PNG类包含RGBAPixel类，并且通过loadpng中的函数对图片进行最底层的读写。twoDtree通过一个PNG类进行构建，stats在构建的过程中起到辅助作用，加快整个构建过程。程序的宏观框架大致如此，stats中的所有函数都要我们对其进行具体实现，twoDtree中的大部分关键代码都要我们对其进行补充，而其余的三个文件在了解了类的定义方式及大致的成员函数的用法之后便可不必深究。</p>
+<p>不难看出，任务只要求对twoDtree和stats两个部分进行补充，刚好将整个任务分为两个部分，由于twoDtree对stats有一定依赖性，首先处理stats的部分。</p>
+<h2 id="算法设计">算法设计</h2>
+<p>此前已经叙述清楚，任务可以被分为两个部分，接下来对两个部分算法的设计进行说明。</p>
+<h3 id="stats类函数的实现">stats类函数的实现</h3>
+<p>从任务说明中可以了解到，stats类是通过对图片各个通道的像素值进行预计算，使生成二叉树时每种分割情况下计算variability measurement 的复杂度降到常数时间，并能够返回指定小矩阵的多种信息。其中最大的难点便是如何进行预计算使下面的公式降低到常数时间。这里，为了计算方便我们使用等式右边的公式。</p>
+<p>$$\sum(x-\bar x)^{2}=\sum x^{2}-\frac{(\sum x)^{2}}{\left| R \right|}$$</p>
+<p>结合stats中已经定义的六个二维矩阵不难想到对整个图片各个通道的颜色值及其平方进行累加，如果我们采用当前点的值等于位于该点上方和左侧的两个值及自身三个值累加的方式对整个图片进行递推计算的话，算到最终结果之后会发现很难对这个生成的二维向量进行高效的利用，因为多次累了重复值，起初不明显，等到面积增大之后就会变成很难处理的问题。</p>
+<p>稍加思考（hhh，花了将近一个小时）之后我们得到了另外的一种方法，既然我们之前的问题是每计算一个点的值都会导致之前的值被重复计算，为了解决它，我们在计算的时候直接减去会被重复计算的点，这样，最终生成的二维向量中的每个值都等于以原点和当前点确定的矩形中的所有点的累加。</p>
+<p>具体实现为：在计算一个点的值的时候，除了加上其上方和左侧的两个点，还要减去左上方的点，按照这个规则进行递推计算，最终的结果就是我们想要的情况。</p>
+<p>对于生成矩阵的利用我们用图形进行解释：如图所示，我们已经得到了我们所需的累加和矩阵，矩阵中的每个点的值都等于该点与原点确定的矩形中所有点的累加和。现在我们想要计算出图中绿色矩形所对应的累加和。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/wanakiki/photo/master/compression/20190503135249.png"
+        data-srcset="https://raw.githubusercontent.com/wanakiki/photo/master/compression/20190503135249.png, https://raw.githubusercontent.com/wanakiki/photo/master/compression/20190503135249.png 1.5x, https://raw.githubusercontent.com/wanakiki/photo/master/compression/20190503135249.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/wanakiki/photo/master/compression/20190503135249.png"
+        title="示例图" /></p>
+<pre><code class="language-no" data-lang="no">直观来看，sum = 整体 - 蓝色 - 橙色 - 红色
+已知: 整体 = D, 蓝色 = B - A，橙色 = C - A，红色 = A
+则不难推出，sum = D - B - C + A
+</code></pre><p>按照上述公式我们便可以在常数时间内计算出任何子矩阵对应的累加和。为了方便后续的计算，我在处理矩阵的时候多开辟了额外的空间并存上零，简化了代码。</p>
+<h3 id="twodtree的探索">twoDtree的探索</h3>
+<p>twoDtree中主要让我们实现的功能有两个，建树和剪枝，至于从树还原到图片和树的基础操作函数是相对基本的内容，通过课上的学习以及对程序框架的理解应该可以很轻松地写出来，在这里不浪费笔墨一个个进行阐述。</p>
+<h4 id="建树函数buildtree">建树函数buildTree</h4>
+<p>通过对程序的阅读我们可以了解到，二叉树是从图片构建来的，而buildTree便是构造树的关键函数，我们可以把树的一般初始化先在构造函数内写出来，提前准备好该函数需要的参数，之后在构造函数中对其进行调用，生成整个树的框架。</p>
+<p>首先审视一下作业PDF中对树的构造方法的解释，我理解的方法是：父节点对应于一个大矩形，如果这个大矩形内有大于两个的像素值，我们就要对它进行分割，划为两个矩形，使两个子矩阵的色彩多样性（我反正这么叫）之和达到最小，这两个矩形就分别对应于左右孩子，这里需要注意左右孩子的顺序。这个过程需要一直执行下去，直到图片中的每个像素都对应于树的叶子节点。<strong>需要注意，由于我们不是对称切分，所以最终生成的树并不会是理想结构，我们只能保证的一点是，这个树是一个真二叉树。</strong></p>
+<p>这样我们要做的事情就很清楚了，无非就是从根节点开始这个过程，每到一个节点都假设一条虚拟的线，对这个矩形进行切割，分别计算两个矩形的色彩多样性之和，考虑完所有的横纵情况后选择最好的那种。按着这条线切割后继续进行这个过程，直到分为单个像素点。关于如何在常数时间内计算出一个矩形的色彩多样性，我们在stats相关内容中已经进行了说明。</p>
+<h4 id="剪枝函数prune">剪枝函数prune</h4>
+<p>在我看来，这个函数是整个问题最难的点，因为我想不到一个高效的算法只遍历一遍叶子节点。</p>
+<p>如何剪枝？一个子树的根节点像素值便是这个子树对应矩形所有像素值的平均，我们要做的事情是计算出这个矩形中和各通道色值与平均值差的平方的和小于等于tolerance的个数，然后计算这一部分像素占像素总个数的比例，如果大于给定值，就代表这个矩形中像素之间的差异不大，我们就可以将这个子树的枝叶剪掉，只留下根节点。反映到图形上来，就是将这个矩形的颜色涂成了平均值。</p>
+<p>最终的实现方法很简单，先进行层序遍历，对遍历到的每个节点再进行一次遍历，统计满足条件叶子的个数，最后计算比例，判断是否需要删除。但是这个程序中有这么一句话，让我以为有超级简单的算法可以实现这个过程。但是很不幸，最终还是没有找到。</p>
+<blockquote>
+<p>Pruning criteria should be evaluated on the original tree, not on a pruned subtree. (we only expect that trees would be pruned once.)</p>
+</blockquote>
+<h2 id="流程图">流程图</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/wanakiki/photo/master/20190503134502.png"
+        data-srcset="https://raw.githubusercontent.com/wanakiki/photo/master/20190503134502.png, https://raw.githubusercontent.com/wanakiki/photo/master/20190503134502.png 1.5x, https://raw.githubusercontent.com/wanakiki/photo/master/20190503134502.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/wanakiki/photo/master/20190503134502.png"
+        title="stats" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/wanakiki/photo/master/20190503134518.png"
+        data-srcset="https://raw.githubusercontent.com/wanakiki/photo/master/20190503134518.png, https://raw.githubusercontent.com/wanakiki/photo/master/20190503134518.png 1.5x, https://raw.githubusercontent.com/wanakiki/photo/master/20190503134518.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/wanakiki/photo/master/20190503134518.png"
+        title="建树" /></p>
+<h2 id="编程实现">编程实现</h2>
+<p>stats.cpp</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&#34;stats.h&#34;</span><span class="cp">
+</span><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">cs221util</span><span class="p">;</span>
+
+<span class="n">stats</span><span class="o">::</span><span class="n">stats</span><span class="p">(</span><span class="n">PNG</span> <span class="o">&amp;</span><span class="n">im</span><span class="p">){</span>
+    <span class="c1">//resize
+</span><span class="c1"></span>    <span class="kt">unsigned</span> <span class="n">width</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span><span class="p">();</span>
+    <span class="kt">unsigned</span> <span class="n">height</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">height</span><span class="p">();</span>
+    <span class="n">sumRed</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+    <span class="n">sumGreen</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+    <span class="n">sumBlue</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+    <span class="n">sumsqRed</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+    <span class="n">sumsqGreen</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+    <span class="n">sumsqBlue</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+
+    <span class="n">RGBAPixel</span> <span class="o">*</span><span class="n">tmp</span> <span class="p">;</span>
+    <span class="c1">// sumRed[0][0] = int(tmp-&gt;r);
+</span><span class="c1"></span>    <span class="c1">// sumGreen[0][0] = int(tmp-&gt;g);
+</span><span class="c1"></span>    <span class="c1">// sumBlue[0][0] = int(tmp-&gt;b);
+</span><span class="c1"></span>    <span class="c1">// sumsqRed[0][0] = int(tmp-&gt;r)*int(tmp-&gt;r);
+</span><span class="c1"></span>    <span class="c1">// sumsqBlue[0][0] = int(tmp-&gt;b)*int(tmp-&gt;b);
+</span><span class="c1"></span>    <span class="c1">// sumsqGreen[0][0] = int(tmp-&gt;g)*int(tmp-&gt;g);
+</span><span class="c1"></span>
+    <span class="c1">// for(int i = 1; i &lt; im.width; i++){
+</span><span class="c1"></span>    <span class="c1">//     tmp = im.getPixel(i,0);    
+</span><span class="c1"></span>    <span class="c1">//     sumRed[i][0] = int(tmp-&gt;r);
+</span><span class="c1"></span>    <span class="c1">//     sumGreen[i][0] = int(tmp-&gt;g);
+</span><span class="c1"></span>    <span class="c1">//     sumBlue[i][0] = int(tmp-&gt;b);
+</span><span class="c1"></span>    <span class="c1">//     sumsqRed[i][0] = int(tmp-&gt;r)*int(tmp-&gt;r);
+</span><span class="c1"></span>    <span class="c1">//     sumsqBlue[i][0] = int(tmp-&gt;b)*int(tmp-&gt;b);
+</span><span class="c1"></span>    <span class="c1">//     sumsqGreen[i][0] = int(tmp-&gt;g)*int(tmp-&gt;g);
+</span><span class="c1"></span>    <span class="c1">// }
+</span><span class="c1"></span>    <span class="c1">// for(int i = 1; i &lt; im.height; i++){
+</span><span class="c1"></span>    <span class="c1">//     tmp = im.getPixel(0, i);
+</span><span class="c1"></span>    <span class="c1">//     sumRed[0][i] = int(tmp-&gt;r);
+</span><span class="c1"></span>    <span class="c1">//     sumGreen[0][i] = int(tmp-&gt;g);
+</span><span class="c1"></span>    <span class="c1">//     sumBlue[0][i] = int(tmp-&gt;b);
+</span><span class="c1"></span>    <span class="c1">//     sumsqRed[0][i] = int(tmp-&gt;r)*int(tmp-&gt;r);
+</span><span class="c1"></span>    <span class="c1">//     sumsqBlue[0][i] = int(tmp-&gt;b)*int(tmp-&gt;b);
+</span><span class="c1"></span>    <span class="c1">//     sumsqGreen[0][i] = int(tmp-&gt;g)*int(tmp-&gt;g);
+</span><span class="c1"></span>    <span class="c1">// }
+</span><span class="c1"></span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">width</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">height</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">getPixel</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">sumRed</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">r</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">sumGreen</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">g</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">sumBlue</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">sumsqRed</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">r</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">r</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">g</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">g</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="c1">//没有必要强转为int...
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="kt">long</span> <span class="n">stats</span><span class="o">::</span><span class="n">getSum</span><span class="p">(</span><span class="kt">char</span> <span class="n">channel</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">){</span>
+    <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="k">case</span> <span class="sc">&#39;r&#39;</span><span class="o">:</span>
+        <span class="cm">/* code */</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+        <span class="n">ans</span> <span class="o">+=</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;g&#39;</span><span class="o">:</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+        <span class="n">ans</span> <span class="o">+=</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;b&#39;</span><span class="o">:</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+        <span class="n">ans</span> <span class="o">+=</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">default</span><span class="o">:</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">long</span> <span class="n">stats</span><span class="o">::</span><span class="n">getSumSq</span><span class="p">(</span><span class="kt">char</span> <span class="n">channel</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">){</span>
+    <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="k">case</span> <span class="sc">&#39;r&#39;</span><span class="o">:</span>
+        <span class="cm">/* code */</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+        <span class="n">ans</span> <span class="o">+=</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;g&#39;</span><span class="o">:</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+        <span class="n">ans</span> <span class="o">+=</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;b&#39;</span><span class="o">:</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+        <span class="n">ans</span> <span class="o">+=</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">default</span><span class="o">:</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">long</span> <span class="n">stats</span><span class="o">::</span><span class="n">rectArea</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">){</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">-</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">-</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">RGBAPixel</span> <span class="n">stats</span><span class="o">::</span><span class="n">getAvg</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">){</span>
+    <span class="kt">long</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">rectArea</span><span class="p">(</span><span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
+    <span class="kt">long</span> <span class="n">sum_r</span><span class="p">,</span> <span class="n">sum_g</span><span class="p">,</span> <span class="n">sum_b</span><span class="p">;</span>
+    <span class="n">sum_r</span> <span class="o">=</span> <span class="n">getSum</span><span class="p">(</span><span class="sc">&#39;r&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">)</span> <span class="o">/</span> <span class="n">sum</span><span class="p">;</span>
+    <span class="n">sum_g</span> <span class="o">=</span> <span class="n">getSum</span><span class="p">(</span><span class="sc">&#39;g&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">)</span> <span class="o">/</span> <span class="n">sum</span><span class="p">;</span>
+    <span class="n">sum_b</span> <span class="o">=</span> <span class="n">getSum</span><span class="p">(</span><span class="sc">&#39;b&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">)</span> <span class="o">/</span> <span class="n">sum</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nf">RGBAPixel</span><span class="p">(</span><span class="n">sum_r</span><span class="p">,</span> <span class="n">sum_g</span><span class="p">,</span> <span class="n">sum_b</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">long</span> <span class="n">stats</span><span class="o">::</span><span class="n">getScore</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">){</span>
+    <span class="kt">long</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">rectArea</span><span class="p">(</span><span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
+    <span class="kt">long</span> <span class="n">sum_r</span><span class="p">,</span> <span class="n">sum_g</span><span class="p">,</span> <span class="n">sum_b</span><span class="p">;</span>
+    <span class="kt">long</span> <span class="n">sumsq_r</span><span class="p">,</span> <span class="n">sumsq_g</span><span class="p">,</span> <span class="n">sumsq_b</span><span class="p">;</span>
+    <span class="n">sum_r</span> <span class="o">=</span> <span class="n">getSum</span><span class="p">(</span><span class="sc">&#39;r&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
+    <span class="n">sum_g</span> <span class="o">=</span> <span class="n">getSum</span><span class="p">(</span><span class="sc">&#39;g&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
+    <span class="n">sum_b</span> <span class="o">=</span> <span class="n">getSum</span><span class="p">(</span><span class="sc">&#39;b&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
+    <span class="n">sumsq_r</span> <span class="o">=</span> <span class="n">getSumSq</span><span class="p">(</span><span class="sc">&#39;r&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
+    <span class="n">sumsq_g</span> <span class="o">=</span> <span class="n">getSumSq</span><span class="p">(</span><span class="sc">&#39;g&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
+    <span class="n">sumsq_b</span> <span class="o">=</span> <span class="n">getSumSq</span><span class="p">(</span><span class="sc">&#39;b&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
+
+    <span class="c1">//alpha置一？
+</span><span class="c1"></span>    <span class="c1">//是否考虑溢出？
+</span><span class="c1"></span>    <span class="n">sum_r</span> <span class="o">=</span> <span class="n">sum_r</span> <span class="o">*</span> <span class="n">sum_r</span> <span class="o">/</span> <span class="n">sum</span><span class="p">;</span>
+    <span class="n">sum_g</span> <span class="o">=</span> <span class="n">sum_g</span> <span class="o">*</span> <span class="n">sum_g</span> <span class="o">/</span> <span class="n">sum</span><span class="p">;</span>
+    <span class="n">sum_b</span> <span class="o">=</span> <span class="n">sum_b</span> <span class="o">*</span> <span class="n">sum_b</span> <span class="o">/</span> <span class="n">sum</span><span class="p">;</span>
+    <span class="n">sumsq_r</span> <span class="o">-=</span> <span class="n">sum_r</span><span class="p">;</span>
+    <span class="n">sumsq_g</span> <span class="o">-=</span> <span class="n">sum_g</span><span class="p">;</span>
+    <span class="n">sumsq_b</span> <span class="o">-=</span> <span class="n">sum_b</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">sumsq_r</span> <span class="o">+</span> <span class="n">sumsq_g</span> <span class="o">+</span> <span class="n">sumsq_b</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>twoDtree.cpp</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/**
+</span><span class="cm"> *
+</span><span class="cm"> * twoDtree (pa3)
+</span><span class="cm"> * slight modification of a Kd tree of dimension 2.
+</span><span class="cm"> * twoDtree.cpp
+</span><span class="cm"> * This file will be used for grading.
+</span><span class="cm"> *
+</span><span class="cm"> */</span>
+
+<span class="cp">#include</span> <span class="cpf">&#34;twoDtree.h&#34;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stack&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="cm">/* given */</span>
+<span class="n">twoDtree</span><span class="o">::</span><span class="n">Node</span><span class="o">::</span><span class="n">Node</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">,</span> <span class="n">RGBAPixel</span> <span class="n">a</span><span class="p">)</span>
+    <span class="o">:</span><span class="n">upLeft</span><span class="p">(</span><span class="n">ul</span><span class="p">),</span><span class="n">lowRight</span><span class="p">(</span><span class="n">lr</span><span class="p">),</span><span class="n">avg</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="n">left</span><span class="p">(</span><span class="nb">NULL</span><span class="p">),</span><span class="n">right</span><span class="p">(</span><span class="nb">NULL</span><span class="p">)</span>
+    <span class="p">{}</span>
+
+<span class="cm">/* given */</span>
+<span class="n">twoDtree</span><span class="o">::~</span><span class="n">twoDtree</span><span class="p">(){</span>
+    <span class="n">clear</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="cm">/* given */</span>
+<span class="n">twoDtree</span><span class="o">::</span><span class="n">twoDtree</span><span class="p">(</span><span class="k">const</span> <span class="n">twoDtree</span> <span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">copy</span><span class="p">(</span><span class="n">other</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* given */</span>
+<span class="n">twoDtree</span> <span class="o">&amp;</span> <span class="n">twoDtree</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">twoDtree</span> <span class="o">&amp;</span> <span class="n">rhs</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">clear</span><span class="p">();</span>
+        <span class="n">copy</span><span class="p">(</span><span class="n">rhs</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">twoDtree</span><span class="o">::</span><span class="n">twoDtree</span><span class="p">(</span><span class="n">PNG</span> <span class="o">&amp;</span> <span class="n">imIn</span><span class="p">){</span> 
+    <span class="cm">/* your code here */</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="n">imIn</span><span class="p">.</span><span class="n">height</span><span class="p">();</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">imIn</span><span class="p">.</span><span class="n">width</span><span class="p">();</span>
+    <span class="n">stats</span> <span class="nf">my_stat</span><span class="p">(</span><span class="n">imIn</span><span class="p">);</span>
+    <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">cur_ul</span><span class="p">,</span> <span class="n">cur_lr</span><span class="p">;</span>
+    <span class="n">cur_ul</span> <span class="o">=</span> <span class="n">make_pair</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">cur_lr</span> <span class="o">=</span> <span class="n">make_pair</span><span class="p">(</span><span class="n">width</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">height</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>  
+    <span class="c1">//注意坐标从零开始
+</span><span class="c1"></span>    
+    <span class="n">root</span> <span class="o">=</span> <span class="n">buildTree</span><span class="p">(</span><span class="n">my_stat</span><span class="p">,</span> <span class="n">cur_ul</span><span class="p">,</span> <span class="n">cur_lr</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">twoDtree</span><span class="o">::</span><span class="n">Node</span> <span class="o">*</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">buildTree</span><span class="p">(</span><span class="n">stats</span> <span class="o">&amp;</span> <span class="n">s</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* your code here */</span>
+    <span class="n">Node</span> <span class="o">*</span><span class="n">cur</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">getAvg</span><span class="p">(</span><span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">));</span>
+
+    <span class="c1">//遍历所有情况
+</span><span class="c1"></span>    <span class="c1">//if(s.rectArea(ul,lr) &gt; 1){    条件导致死循环
+</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">ul</span> <span class="o">!=</span> <span class="n">lr</span><span class="p">){</span>
+        <span class="kt">bool</span> <span class="n">flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">//1 means horizontal 0 means vertical
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">line</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="kt">long</span> <span class="n">tmp</span><span class="p">;</span>
+        <span class="kt">long</span> <span class="n">Min</span> <span class="o">=</span> <span class="mi">9999999999</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">getScore</span><span class="p">(</span><span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> <span class="o">+</span> <span class="n">s</span><span class="p">.</span><span class="n">getScore</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="n">lr</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">tmp</span> <span class="o">&lt;</span> <span class="n">Min</span><span class="p">){</span>
+                <span class="n">Min</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">getScore</span><span class="p">(</span><span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="p">))</span> <span class="o">+</span> <span class="n">s</span><span class="p">.</span><span class="n">getScore</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">),</span> <span class="n">lr</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">((</span><span class="n">i</span> <span class="o">==</span> <span class="n">ul</span><span class="p">.</span><span class="n">first</span> <span class="o">&amp;&amp;</span> <span class="n">ul</span><span class="p">.</span><span class="n">second</span> <span class="o">==</span> <span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">)</span> <span class="o">||</span> <span class="n">tmp</span> <span class="o">&lt;</span> <span class="n">Min</span><span class="p">){</span>
+                <span class="n">flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                <span class="n">Min</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        
+        <span class="k">if</span><span class="p">(</span><span class="n">flag</span><span class="p">){</span>
+            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">buildTree</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">line</span><span class="p">));</span>
+            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">buildTree</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">line</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">lr</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span><span class="p">{</span>
+            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">buildTree</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="p">));</span>
+            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">buildTree</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">line</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">),</span> <span class="n">lr</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+        <span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">cur</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">PNG</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">render</span><span class="p">(){</span>
+    <span class="cm">/* your code here */</span>
+    <span class="n">PNG</span> <span class="nf">res</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
+    <span class="n">renderHelper</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">root</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">renderHelper</span><span class="p">(</span><span class="n">PNG</span><span class="o">&amp;</span> <span class="n">res</span><span class="p">,</span> <span class="n">Node</span><span class="o">*</span> <span class="n">cur_node</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">cur_node</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>   <span class="c1">//稍微多余
+</span><span class="c1"></span>
+    <span class="k">if</span><span class="p">(</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">==</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">){</span>
+        <span class="c1">//只有两个都是空也就是叶子节点才会进行操作
+</span><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">upLeft</span><span class="p">.</span><span class="n">first</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">lowRight</span><span class="p">.</span><span class="n">first</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">upLeft</span><span class="p">.</span><span class="n">second</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">lowRight</span><span class="p">.</span><span class="n">second</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="o">*</span><span class="n">res</span><span class="p">.</span><span class="n">getPixel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+        <span class="n">renderHelper</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+        <span class="n">renderHelper</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+
+
+<span class="kt">void</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">prune</span><span class="p">(</span><span class="kt">double</span> <span class="n">pct</span><span class="p">,</span> <span class="kt">int</span> <span class="n">tol</span><span class="p">){</span>
+    <span class="cm">/* your code here */</span>
+    <span class="c1">//先逐层遍历，对每个节点判断是否需要剪枝
+</span><span class="c1"></span>    <span class="n">queue</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">*&gt;</span> <span class="n">traverse_save</span><span class="p">;</span>
+    <span class="n">Node</span><span class="o">*</span> <span class="n">cur</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">sum</span><span class="p">,</span> <span class="n">total</span><span class="p">;</span> <span class="c1">//小于tol个数，矩形像素数
+</span><span class="c1"></span>    <span class="kt">double</span> <span class="n">rate</span><span class="p">;</span>
+    <span class="n">traverse_save</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">traverse_save</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">traverse_save</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+        <span class="n">traverse_save</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">cur</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="n">sum</span> <span class="o">=</span> <span class="n">pruneHelper</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">);</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">lowRight</span><span class="p">.</span><span class="n">first</span><span class="o">-</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">upLeft</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">lowRight</span><span class="p">.</span><span class="n">second</span><span class="o">-</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">upLeft</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">rate</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">/</span> <span class="n">total</span><span class="p">;</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">rate</span> <span class="o">&gt;=</span> <span class="n">pct</span><span class="p">){</span>
+            <span class="n">removeNode</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+            <span class="n">removeNode</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span><span class="p">{</span>
+            <span class="n">traverse_save</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+            <span class="n">traverse_save</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">pruneHelper</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="n">cur</span><span class="p">,</span> <span class="kt">int</span> <span class="n">tol</span><span class="p">,</span> <span class="n">RGBAPixel</span> <span class="n">avg</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">cur</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    
+    <span class="c1">//只计算叶子
+</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="kt">long</span> <span class="n">diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">avg</span><span class="p">.</span><span class="n">r</span> <span class="o">-</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">.</span><span class="n">r</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">avg</span><span class="p">.</span><span class="n">r</span> <span class="o">-</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">.</span><span class="n">r</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">avg</span><span class="p">.</span><span class="n">g</span> <span class="o">-</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">.</span><span class="n">g</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">avg</span><span class="p">.</span><span class="n">g</span> <span class="o">-</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">.</span><span class="n">g</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">avg</span><span class="p">.</span><span class="n">b</span> <span class="o">-</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">.</span><span class="n">b</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">diff</span> <span class="o">&lt;=</span> <span class="n">tol</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nf">pruneHelper</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">avg</span><span class="p">)</span> <span class="o">+</span> <span class="n">pruneHelper</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">avg</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">clear</span><span class="p">()</span> <span class="p">{</span>
+    <span class="cm">/* your code here */</span>
+    <span class="n">removeNode</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">removeNode</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span> <span class="n">x</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="p">;</span>
+    <span class="n">removeNode</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+    <span class="n">removeNode</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+    <span class="k">delete</span> <span class="n">x</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="k">const</span> <span class="n">twoDtree</span> <span class="o">&amp;</span> <span class="n">orig</span><span class="p">){</span>
+    <span class="cm">/* your code here */</span>
+    <span class="c1">//已经对copy进行了说明，不需要进行空间释放
+</span><span class="c1"></span>    <span class="c1">//本程序中仅有两次调用，调用之前都保证空间已经被初始化
+</span><span class="c1"></span>    <span class="n">height</span> <span class="o">=</span> <span class="n">orig</span><span class="p">.</span><span class="n">height</span><span class="p">;</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">orig</span><span class="p">.</span><span class="n">width</span><span class="p">;</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">copyNode</span><span class="p">(</span><span class="n">orig</span><span class="p">.</span><span class="n">root</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">twoDtree</span><span class="o">::</span><span class="n">Node</span><span class="o">*</span>  <span class="n">twoDtree</span><span class="o">::</span><span class="n">copyNode</span><span class="p">(</span><span class="k">const</span> <span class="n">Node</span><span class="o">*</span> <span class="n">x</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">Node</span> <span class="o">*</span><span class="n">tmp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">upLeft</span><span class="p">,</span> <span class="n">x</span><span class="o">-&gt;</span><span class="n">lowRight</span><span class="p">,</span> <span class="n">x</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">);</span>
+    <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">copyNode</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+    <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">copyNode</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="结果分析">结果分析</h2>
+<p>程序在wsl下编译完成，在main函数中添加了显示时间的部分代码，从编译到程序结束的整个过程如下图，对wsl用户名进行了一下处理，不过不影响观察。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/wanakiki/photo/master/20190503134416.png"
+        data-srcset="https://raw.githubusercontent.com/wanakiki/photo/master/20190503134416.png, https://raw.githubusercontent.com/wanakiki/photo/master/20190503134416.png 1.5x, https://raw.githubusercontent.com/wanakiki/photo/master/20190503134416.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/wanakiki/photo/master/20190503134416.png"
+        title="编译运行" /></p>
+<p>下面简单说一下图片的生成情况，自己程序生成的图片和示例图片取得了大体一致的效果，但在细节保留方面以及图片美观程度上稍逊一筹。两个人像画都能做到近乎一致的保留，但稍加观察便可发现细节保留上的差距，下图右侧嘴唇部分处理远不如左侧（效果示例）。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/wanakiki/photo/master/20190503134507.png"
+        data-srcset="https://raw.githubusercontent.com/wanakiki/photo/master/20190503134507.png, https://raw.githubusercontent.com/wanakiki/photo/master/20190503134507.png 1.5x, https://raw.githubusercontent.com/wanakiki/photo/master/20190503134507.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/wanakiki/photo/master/20190503134507.png"
+        title="人像对比" /></p>
+<p>两组图腾的图片，细节较多的图片效果直在几处微小处出现了不同，因为大多数像素都被保留不具备较大的对比价值，在这里不进行详细对比。而另一张则表现出了极大的差别。很容易看出，树丛的细节在我的程序中删除的程度较重，误差最大的一部分甚至直接出现了较大的单色矩形块。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/wanakiki/photo/master/compression/20190503142116.png"
+        data-srcset="https://raw.githubusercontent.com/wanakiki/photo/master/compression/20190503142116.png, https://raw.githubusercontent.com/wanakiki/photo/master/compression/20190503142116.png 1.5x, https://raw.githubusercontent.com/wanakiki/photo/master/compression/20190503142116.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/wanakiki/photo/master/compression/20190503142116.png"
+        title="图腾对比" /></p>
+<h3 id="简单分析">简单分析</h3>
+<p>我个人认为我的代码实现没有太大的问题，都满足了题目的要求。所给代码中给定的pct和tol值可能适合于跑出示例图片的代码，对我的代码达到不了较好的保存程度。这点是可以理解的。</p>
+<p>不同人有不同的实现方式，不同的实现会带来不同的效果，横切还是竖切的选择，数据的计算表达式的书写方式等因素都会带来影响，涉及到浮点数，计算机内部采用的是近似计算，起初微小的误差经历后续计算之后可能会放大很多倍。所以效果有偏差是情理之中的事情。</p>
+<p>对于最后图腾图片的较大色块问题，假如参数真的一致，那就应该是我的算法有一些漏洞，细节处理时有一定的问题。</p>
+<h2 id="总结体会">总结体会</h2>
+<p>我用了一周的时间去想高效的剪枝遍历解决方式，失败之后采用我起初认为最笨最麻烦的方式实现了剪枝函数，最终的运行时间另我很意外，我感觉我一直都在低估自己电脑的运算能力，大多数情况都只停留于感觉，没有进行较为科学的判断和推理，今后应该加强自己这方面的估算能力。另外如果可以的话，我想知道有没有更高效的算法，因为四张图片17秒的速度还是很慢。😕</p>
+<p>另外在帮别人调试代码的时候发现了win和linux下long型所占内存的不同，这导致两种环境下long型对应的最大值也不同，在win下编译出来的程序在计算过程中会直接越界，需要换用long long 类型。这次编程因为之前没有用vscode建过工程所以使用wsl进行的编译。程序中有部分代码直接在win下编译也会有一点点小问题，这难道也是linux的优势🐎？</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-05-03</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/train/" class="prev" rel="prev" title="数据结构作业三 列车调度"><i class="fas fa-angle-left fa-fw"></i>数据结构作业三 列车调度</a>
+            <a href="/posts/bin-tree/" class="next" rel="next" title="数据结构作业四 表达式树">数据结构作业四 表达式树<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.75.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

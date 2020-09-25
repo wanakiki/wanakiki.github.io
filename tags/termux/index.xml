@@ -1,24 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>termux on Wanakiki`s Blog</title>
-    <link>https://wanakiki.github.io/tags/termux/</link>
-    <description>Recent content in termux on Wanakiki`s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Wed, 25 Sep 2019 19:23:03 +0800</lastBuildDate>
-    
-	<atom:link href="https://wanakiki.github.io/tags/termux/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>利用Termux群发短信</title>
-      <link>https://wanakiki.github.io/2019/termux-sms/</link>
-      <pubDate>Wed, 25 Sep 2019 19:23:03 +0800</pubDate>
-      
-      <guid>https://wanakiki.github.io/2019/termux-sms/</guid>
-      <description>Termux的简单应用，为了让群发短信有更便捷高效的解决方案。 前言 Termux是一个Android下一个高级的终端模拟器，开源且不需要roo</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>termux - 标签 - Wanakiki`s Blog</title>
+        <link>http://example.org/tags/termux/</link>
+        <description>termux - 标签 - Wanakiki`s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 25 Sep 2019 19:23:03 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/termux/" rel="self" type="application/rss+xml" /><item>
+    <title>利用Termux群发短信</title>
+    <link>http://example.org/posts/termux-sms/</link>
+    <pubDate>Wed, 25 Sep 2019 19:23:03 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/posts/termux-sms/</guid>
+    <description><![CDATA[Termux的简单应用，为了让群发短信有更便捷高效的解决方案。 前言 Termux是一个Android下一个高级的终端模拟器，开源且不需要root，支持apt管理软件包，十分方便安装软件包，完美支持Pyt]]></description>
+</item></channel>
 </rss>

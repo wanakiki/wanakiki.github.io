@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Flutter 词典APP - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="Flutter 词典APP" />
+<meta property="og:description" content="对自己写的flutter APP的简单记录。 怕自己忘了之前看过的flutter教程，所以趁周末写了这个APP，功能很简单，涉及到的都是基本知识，写的时候稍微花了点时间学习数据库和文件读写。界面不怎么漂亮" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/special-dictionary/" />
+<meta property="article:published_time" content="2020-04-21T09:43:32+08:00" />
+<meta property="article:modified_time" content="2020-04-21T09:43:32+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Flutter 词典APP"/>
+<meta name="twitter:description" content="对自己写的flutter APP的简单记录。 怕自己忘了之前看过的flutter教程，所以趁周末写了这个APP，功能很简单，涉及到的都是基本知识，写的时候稍微花了点时间学习数据库和文件读写。界面不怎么漂亮"/>
+<meta name="application-name" content="Wanakiki`s Blog">
+<meta name="apple-mobile-web-app-title" content="Wanakiki`s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/special-dictionary/" /><link rel="prev" href="http://example.org/posts/vhdl-miaobiao/" /><link rel="next" href="http://example.org/posts/xor/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Flutter 词典APP",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/special-dictionary\/"
+        },"genre": "posts","keywords": "Flutter","wordcount":  2779 ,
+        "url": "http:\/\/example.org\/posts\/special-dictionary\/","datePublished": "2020-04-21T09:43:32+08:00","dateModified": "2020-04-21T09:43:32+08:00","publisher": {
+            "@type": "Organization",
+            "name": "wanakiki"},"author": {
+                "@type": "Person",
+                "name": "wanakiki"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Blog </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Blog</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Flutter 词典APP</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-04-21">2020-04-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2779 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#背景及大体设计">背景及大体设计</a></li>
+        <li><a href="#过程概述">过程概述</a></li>
+        <li><a href="#简单总结">简单总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>对自己写的flutter APP的简单记录。</p>
+<!-- raw HTML omitted -->
+<p>怕自己忘了之前看过的flutter教程，所以趁周末写了这个APP，功能很简单，涉及到的都是基本知识，写的时候稍微花了点时间学习数据库和文件读写。界面不怎么漂亮，过渡动画之类的还没有了解过，flutter的坑要很久才能填上。</p>
+<p><a href="https://www.bilibili.com/video/BV19f4y1U7bH/" target="_blank" rel="noopener noreffer">演示视频地址</a></p>
+<h3 id="背景及大体设计">背景及大体设计</h3>
+<p>因为很久之前用《单词城堡》APP背单词的时候，里面有一项内容要求用户把乱序单词排序，因为没有任何提示，做起来很吃力，于是在海科展当志愿者的时候趁着空闲时间写了一个python版的查乱序单词的脚本。脚本的实现思路很简单，就是对用户输入的字母进行全排列，对每种可能的情况在json文件中查找对应的汉语（json文件是在Github上找到的）。</p>
+<p>之后一段时间都把脚本下载到手机上，用termux执行进行查找，但是这样每次查一个单词都要打开termux然后输入命令，用户体验不是很好，慢慢就有了直接写一个APP的想法，这也是我学习flutter的原因之一。之后在寒假用了两周的时间把基本教程看了一遍，开学后发现有一堆事情等着我去做，暂时没时间对flutter进一步研究，于是趁着周六的空闲用了一天的时间把APP写了出来。</p>
+<p>有三个界面，分别是联网查询界面、本地json查询界面、收藏展示界面。为了简单直接使用一个<code>BottomNavigationBar</code>处理，不需要很复杂的路由。另外本地查询的结果带有收藏选项，勾选后能在收藏展示界面查看。</p>
+<h3 id="过程概述">过程概述</h3>
+<p>首先创建项目，我使用的编辑器是VSCode，安装相关插件之后对flutter的支持很友好，因为电脑性能有限便用自己的手机进行相关调试。在VSCode中创建项目很简单，按下<code>Ctrl+Shift+P</code>打开命令面板，输入flutter之后选择<code>Flutter: New Project</code>，输入项目名后按下回车，之后选择项目位置，项目便会自动创建。</p>
+<p>首先写出来具体的程序框架，实现三个空白的页面，之后再对每个页面进行补充。</p>
+<h4 id="联网查询">联网查询</h4>
+<p>联网查询界面本来计划调用百度的API，但是发现dart有已经封装好的<a href="https://pub.flutter-io.cn/packages/translator#-example-tab" target="_blank" rel="noopener noreffer">第三方库</a>，任务得到了简化，。示例中有多种语言的相互翻译，我只简单实现了中译英，代码很简单：</p>
+<div class="highlight"><pre class="chroma"><code class="language-dart" data-lang="dart"><span class="kt">String</span> <span class="n">_inputWords</span><span class="p">,</span> <span class="n">_res</span><span class="p">;</span>   <span class="c1">// 输入单词 翻译结果
+</span><span class="c1"></span>  
+<span class="c1">// 异步获取单词翻译结果
+</span><span class="c1"></span><span class="kt">void</span> <span class="n">_getRes</span><span class="p">()</span> <span class="kd">async</span><span class="p">{</span>
+  <span class="kd">final</span> <span class="n">translator</span> <span class="o">=</span> <span class="n">GoogleTranslator</span><span class="p">();</span>
+  <span class="n">translator</span><span class="p">.</span><span class="n">baseUrl</span> <span class="o">=</span> <span class="s2">&#34;https://translate.google.cntranslate_a/single&#34;</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="n">res</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">translator</span><span class="p">.</span><span class="n">translate</span><span class="p">(</span><span class="n">_inputWords</span><span class="p">,</span> <span class="nl">to:</span><span class="s1">&#39;zh-cn&#39;</span><span class="p">);</span>
+  <span class="n">setState</span><span class="p">(()</span> <span class="p">{</span>
+    <span class="n">_res</span> <span class="o">=</span> <span class="n">res</span><span class="p">;</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div><p>用<code>TextField</code>获取用户输入，之后用一个按钮触发上面的异步过程就能获得翻译结果并对相应部件进行重绘。</p>
+<h4 id="本地查询">本地查询</h4>
+<p>因为我已经有一个现成的json文件，只要把它读入再对用户的输入进行查询就能实现这个功能，用户输入、字典查询都很简单，对于我来说比较难的点是如何读取json资源。</p>
+<p>首先要明白一点，打包到程序安装包中的json是<code>assets</code>，需要在项目当中对其进行指定，之后项目构建过程中会将其放到<code>asset bundle</code>存档当中，应用程序可以在运行时进行读取。</p>
+<p>这要与用户设备中保存的文件进行区分，我在实现的时候搜索了很久flutter如何读取本地文件，用<code>path_provider</code>插件实现之后却发现自己根本在项目里面找不到对应的目录放json文件，白花了很多时间。对于每个设备当中的文件，一定要先进行创建之后才能读取。</p>
+<p>接下来简单介绍一下我添加资源并进行读取的过程。</p>
+<p>将资源放在项目当中的某个文件夹内（通常是assets文件夹），之后在<code>pubspec.yaml</code>文件当中添加文件及路径，例如：</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">flutter</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">assets</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">assets/data.json</span><span class="w">
+</span></code></pre></div><p>之后在程序当中使用<code>DefalutAssetBundle.of()</code>获取资源，我读入json的代码：</p>
+<div class="highlight"><pre class="chroma"><code class="language-dart" data-lang="dart"><span class="n">Future</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&gt;</span> <span class="n">_loadFile</span><span class="p">()</span> <span class="kd">async</span><span class="p">{</span>
+    <span class="kt">String</span> <span class="n">tmp</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">DefaultAssetBundle</span><span class="p">.</span><span class="n">of</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">loadString</span><span class="p">(</span><span class="s1">&#39;assets/data.json&#39;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">json</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><p>重写<code>initState()</code>函数，在里面调用上面的异步过程便能将json文件加载到内存。几个相关链接：</p>
+<ol>
+<li><a href="https://flutterchina.club/assets-and-images/#%E6%8C%87%E5%AE%9A-assets" target="_blank" rel="noopener noreffer">Flutter中文网：在Flutter中添加资源和图片</a></li>
+<li><a href="https://flutterchina.club/reading-writing-files/" target="_blank" rel="noopener noreffer">Flutter中文网：文件读写</a></li>
+<li><a href="https://flutter.dev/docs/cookbook/persistence/reading-writing-files" target="_blank" rel="noopener noreffer">Flutter官方：文件读写</a></li>
+</ol>
+<p>最后简单提一下全排列的实现方式：将字母与包括自身在内的所有剩余字母交换顺序，然后递归调用，到达字符串末尾输出。</p>
+<div class="highlight"><pre class="chroma"><code class="language-dart" data-lang="dart"><span class="kt">void</span> <span class="n">helper</span><span class="p">(</span><span class="kt">String</span> <span class="n">str</span><span class="p">,</span> <span class="kt">int</span> <span class="n">pos</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">pos</span> <span class="o">==</span> <span class="n">str</span><span class="p">.</span><span class="n">length</span><span class="p">){</span>
+        <span class="n">print</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
+        <span class="k">return</span> <span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">pos</span><span class="p">,</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">str</span><span class="p">.</span><span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">==</span> <span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">pos</span> <span class="o">!=</span> <span class="n">i</span><span class="p">)</span>
+                <span class="k">continue</span><span class="p">;</span>   <span class="c1">// 与非自身的相同字母交换无意义
+</span><span class="c1"></span>            <span class="kd">var</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">str</span><span class="p">[</span><span class="n">pos</span><span class="p">];</span>
+            <span class="n">str</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+            <span class="n">helper</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">pos</span><span class="o">+</span><span class="m">1</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">str</span><span class="p">[</span><span class="n">pos</span><span class="p">];</span>
+            <span class="n">str</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h4 id="收藏展示sqlite数据库">收藏展示（SQLite数据库)</h4>
+<p>这个界面的功能是对已经收藏过的数据进行展示，数据的保存方式可以是json或者使用数据库，因为搜索界面已经实现过文件读写了（虽然最后没用上），所以最终我使用了数据库保存数据。介绍之前先放两个链接：</p>
+<ol>
+<li><a href="https://flutter.dev/docs/cookbook/persistence/sqlite" target="_blank" rel="noopener noreffer">Flutter官方：用SQLite保存数据</a></li>
+<li><a href="https://www.jianshu.com/p/3995ca566d9b" target="_blank" rel="noopener noreffer">简书sirai：Flutter数据库Sqflite</a></li>
+</ol>
+<p>这里强推官方的教程，只要有一定的数据库基础，按照官方教程一步步来会很清楚的了解具体的使用方法。官方教程的唯一遗憾是没有给出具体的调用方式，像我一样的初学者可能没办法直接想到合适的解决方法。在实现过程中我找到了上面简书的文章，里面讲到了通过封装一个<code>SqlManager</code>类来实现部件中相关功能的调用。下面是我的具体实现，数据库很简单，只有一个表，表中只有单词、翻译两列内容。下面是我的实现代码：</p>
+<div class="highlight"><pre class="chroma"><code class="language-dart" data-lang="dart"><span class="k">import</span> <span class="s1">&#39;package:sqflite/sqflite.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;dart:async&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:path/path.dart&#39;</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">MyWord</span> <span class="p">{</span>
+  <span class="kd">final</span> <span class="kt">String</span> <span class="n">word</span><span class="p">;</span>
+  <span class="kd">final</span> <span class="kt">String</span> <span class="n">translation</span><span class="p">;</span>
+
+  <span class="n">MyWord</span><span class="p">({</span><span class="k">this</span><span class="p">.</span><span class="n">word</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="n">translation</span><span class="p">});</span>
+
+  <span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span> <span class="n">toMap</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="s1">&#39;word&#39;</span><span class="o">:</span> <span class="n">word</span><span class="p">,</span>
+      <span class="s1">&#39;translation&#39;</span><span class="o">:</span> <span class="n">translation</span><span class="p">,</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">SqlManager</span> <span class="p">{</span>
+  <span class="kd">static</span> <span class="n">Database</span> <span class="n">database</span><span class="p">;</span>
+
+  <span class="n">SqlManager</span><span class="p">(){</span>
+    <span class="n">print</span><span class="p">(</span><span class="s1">&#39;初始化&#39;</span><span class="p">);</span>
+    <span class="n">init</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="kt">void</span> <span class="n">init</span><span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="n">database</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">openDatabase</span><span class="p">(</span>
+      <span class="n">join</span><span class="p">(</span><span class="kd">await</span> <span class="n">getDatabasesPath</span><span class="p">(),</span> <span class="s2">&#34;english_words.db&#34;</span><span class="p">),</span>
+      <span class="nl">onCreate:</span> <span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">version</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="s2">&#34;CREATE TABLE words(word TEXT PRIMARY KEY, translation TEXT)&#34;</span><span class="p">);</span>
+      <span class="p">},</span>
+      <span class="nl">version:</span> <span class="m">1</span><span class="p">,</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">Database</span><span class="o">&gt;</span> <span class="n">getDatabase</span><span class="p">()</span> <span class="kd">async</span><span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">database</span> <span class="o">==</span> <span class="kc">null</span><span class="p">){</span>
+      <span class="kd">await</span> <span class="n">init</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">database</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 插入单词
+</span><span class="c1"></span>  <span class="n">Future</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span> <span class="n">insertWord</span><span class="p">(</span><span class="n">MyWord</span> <span class="n">word</span><span class="p">)</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="n">print</span><span class="p">(</span><span class="s1">&#39;插入&#39;</span><span class="p">);</span>
+    <span class="kd">final</span> <span class="n">Database</span> <span class="n">db</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">getDatabase</span><span class="p">();</span>
+    <span class="kd">await</span> <span class="n">db</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s1">&#39;words&#39;</span><span class="p">,</span> <span class="n">word</span><span class="p">.</span><span class="n">toMap</span><span class="p">(),</span>
+        <span class="nl">conflictAlgorithm:</span> <span class="n">ConflictAlgorithm</span><span class="p">.</span><span class="n">replace</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 获取数据库内容
+</span><span class="c1"></span>  <span class="n">Future</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">MyWord</span><span class="o">&gt;&gt;</span> <span class="n">words</span><span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="kd">final</span> <span class="n">Database</span> <span class="n">db</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">getDatabase</span><span class="p">();</span>
+    <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;&gt;</span> <span class="n">maps</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;words&#39;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">List</span><span class="p">.</span><span class="n">generate</span><span class="p">(</span><span class="n">maps</span><span class="p">.</span><span class="n">length</span><span class="p">,</span> <span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">MyWord</span><span class="p">(</span>
+          <span class="nl">word:</span> <span class="n">maps</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;word&#39;</span><span class="p">],</span>
+          <span class="nl">translation:</span> <span class="n">maps</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;translation&#39;</span><span class="p">]);</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 检索是否已经收藏
+</span><span class="c1"></span>  <span class="n">Future</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">haveStore</span><span class="p">(</span><span class="kt">String</span> <span class="n">word</span><span class="p">)</span> <span class="kd">async</span><span class="p">{</span>
+    <span class="kd">final</span> <span class="n">db</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">getDatabase</span><span class="p">();</span>
+    <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;&gt;</span> <span class="n">maps</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&#34;words&#34;</span><span class="p">,</span><span class="nl">where:</span> <span class="s2">&#34;word=?&#34;</span><span class="p">,</span> <span class="nl">whereArgs:</span> <span class="p">[</span><span class="n">word</span><span class="p">]);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">maps</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">maps</span><span class="p">.</span><span class="n">length</span> <span class="o">==</span> <span class="m">0</span><span class="p">)</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 更新记录
+</span><span class="c1"></span>  <span class="n">Future</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span> <span class="n">updateWord</span><span class="p">(</span><span class="n">MyWord</span> <span class="n">record</span><span class="p">)</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="kd">final</span> <span class="n">db</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">getDatabase</span><span class="p">();</span>
+    <span class="kd">await</span> <span class="n">db</span>
+        <span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;words&#39;</span><span class="p">,</span> <span class="n">record</span><span class="p">.</span><span class="n">toMap</span><span class="p">(),</span> <span class="nl">where:</span> <span class="s2">&#34;word = ?&#34;</span><span class="p">,</span> <span class="nl">whereArgs:</span> <span class="p">[</span><span class="n">record</span><span class="p">.</span><span class="n">word</span><span class="p">]);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 删除单词
+</span><span class="c1"></span>  <span class="n">Future</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span> <span class="n">deleteWordBys</span><span class="p">(</span><span class="kt">String</span> <span class="n">word</span><span class="p">)</span> <span class="kd">async</span><span class="p">{</span>
+    <span class="kd">final</span> <span class="n">db</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">getDatabase</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">db</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;words&#39;</span><span class="p">,</span> <span class="nl">where:</span> <span class="s2">&#34;word=?&#34;</span><span class="p">,</span><span class="nl">whereArgs:</span> <span class="p">[</span><span class="n">word</span><span class="p">]);</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">res</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// 删除表
+</span><span class="c1"></span>  <span class="n">Future</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span> <span class="n">deleteWords</span><span class="p">()</span><span class="kd">async</span><span class="p">{</span>
+    <span class="kd">final</span> <span class="n">db</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">getDatabase</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span><span class="kd">await</span> <span class="n">db</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;words&#39;</span><span class="p">);</span>
+    <span class="n">print</span><span class="p">(</span><span class="s1">&#39;删除</span><span class="si">$</span><span class="n">res</span><span class="s1">&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>简单概括一下，想要使用sqlite数据库，需要sqflite、async、path三个库。需要对每个表的数据类进行封装，至少写出构造函数和字典转化函数（插入数据的参数格式为字典），之后封装一个SqlManager类，把自己想要实现的功能都准备好，在部件中创建该类的示例便能进行相关调用。</p>
+<p>这里对于数据库的初始化稍微有些不明白，在我的实现当中，有两个部件内部定义了数据库管理类的示例，但是他们能够使用相同的数据库，没有任何冲突。这可能和创建数据库时<code>onCreate</code>参数或者sqflite的内部实现有关系。</p>
+<h3 id="简单总结">简单总结</h3>
+<p>在学习flutter的过程中，我首次接触到了异步的概念，当时只是做了简单的了解，但是在实现这个简单的APP的过程中，我的算法没有花费多少时间，大部分时间都在考虑异步的过程该怎么实现。感觉对<code>Future</code>的理解还远远不够，之后如果还有机会需要加强这方面的理解。</p>
+<p>总之在这个领域只是个初学者，这个简单的APP也只是对前面所学知识的简单总结，还有很多深入工作要做。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-04-21</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/flutter/">Flutter</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/vhdl-miaobiao/" class="prev" rel="prev" title="VHDL设计 秒表"><i class="fas fa-angle-left fa-fw"></i>VHDL设计 秒表</a>
+            <a href="/posts/xor/" class="next" rel="next" title="用异或找到数组中不重复出现的数字">用异或找到数组中不重复出现的数字<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.75.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

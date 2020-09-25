@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Latex 插入图片方式整理 - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="Latex 插入图片方式整理" />
+<meta property="og:description" content="又到期末，承担了帮别人排版论文的工作。因为自己不熟悉图片的插入方式拖慢了进度，趁今天有时间整理一下。当然，最大的目的还是备忘。 新建一个.tex文件，并将下面的代码复制到其中。在同一文件夹中准备一张图片" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/latex-img/" />
+<meta property="article:published_time" content="2019-06-14T23:22:50+08:00" />
+<meta property="article:modified_time" content="2019-06-14T23:22:50+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Latex 插入图片方式整理"/>
+<meta name="twitter:description" content="又到期末，承担了帮别人排版论文的工作。因为自己不熟悉图片的插入方式拖慢了进度，趁今天有时间整理一下。当然，最大的目的还是备忘。 新建一个.tex文件，并将下面的代码复制到其中。在同一文件夹中准备一张图片"/>
+<meta name="application-name" content="Wanakiki`s Blog">
+<meta name="apple-mobile-web-app-title" content="Wanakiki`s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/latex-img/" /><link rel="prev" href="http://example.org/posts/transport/" /><link rel="next" href="http://example.org/posts/python-assignment/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Latex 插入图片方式整理",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/latex-img\/"
+        },"genre": "posts","keywords": "latex","wordcount":  666 ,
+        "url": "http:\/\/example.org\/posts\/latex-img\/","datePublished": "2019-06-14T23:22:50+08:00","dateModified": "2019-06-14T23:22:50+08:00","publisher": {
+            "@type": "Organization",
+            "name": "wanakiki"},"author": {
+                "@type": "Person",
+                "name": "wanakiki"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Blog </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Blog</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Latex 插入图片方式整理</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-06-14">2019-06-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 666 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>又到期末，承担了帮别人排版论文的工作。因为自己不熟悉图片的插入方式拖慢了进度，趁今天有时间整理一下。当然，最大的目的还是备忘。</p>
+<!-- raw HTML omitted -->
+<p>新建一个<code>.tex</code>文件，并将下面的代码复制到其中。在同一文件夹中准备一张图片（最好是方形），命名为<code>test.jpg</code>。构建代码就可以看到效果，自己也可以对更多的细节进行修改。同时插入2<em>3或者3</em>3图片的情况还有待补充😀</p>
+<div class="highlight"><pre class="chroma"><code class="language-tex" data-lang="tex"><span class="k">\documentclass</span><span class="na">[UTF8]</span><span class="nb">{</span>article<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>graphicx<span class="nb">}</span> <span class="c">%use graph format
+</span><span class="c">%\usepackage{subfig}
+</span><span class="c"></span><span class="k">\usepackage</span><span class="nb">{</span>ctex<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>CJK<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>caption<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>subfigure<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>float<span class="nb">}</span>  <span class="c">%引入 H固定图片
+</span><span class="c"></span>
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+    <span class="k">\section</span><span class="nb">{</span>单个图片插入<span class="nb">}</span>
+    <span class="k">\begin</span><span class="nb">{</span>figure<span class="nb">}</span>[h]
+        <span class="k">\centering</span>
+        <span class="k">\includegraphics</span><span class="na">[width = 0.5\linewidth]</span><span class="nb">{</span>test.jpg<span class="nb">}</span>
+        <span class="k">\caption</span><span class="nb">{</span>单个图片插入<span class="nb">}</span>
+    <span class="k">\end</span><span class="nb">{</span>figure<span class="nb">}</span>
+
+    <span class="k">\section</span><span class="nb">{</span>多个图片插入<span class="nb">}</span>
+    一行存在两个同级图片
+    <span class="k">\begin</span><span class="nb">{</span>figure<span class="nb">}</span>[h]
+        <span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[t]<span class="nb">{</span>0.5<span class="k">\linewidth</span><span class="nb">}</span>
+            <span class="k">\centering</span>
+            <span class="k">\includegraphics</span><span class="na">[width = 0.5\linewidth]</span><span class="nb">{</span>test.jpg<span class="nb">}</span>
+            <span class="k">\caption</span><span class="nb">{</span>左侧图片<span class="nb">}</span>
+        <span class="k">\end</span><span class="nb">{</span>minipage<span class="nb">}</span>  <span class="c">%注意不要空开一行
+</span><span class="c"></span>        <span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[t]<span class="nb">{</span>0.5<span class="k">\linewidth</span><span class="nb">}</span>
+            <span class="k">\centering</span>
+            <span class="k">\includegraphics</span><span class="na">[width = 0.5\linewidth]</span><span class="nb">{</span>test.jpg<span class="nb">}</span>
+            <span class="k">\caption</span><span class="nb">{</span>右侧图片<span class="nb">}</span>
+        <span class="k">\end</span><span class="nb">{</span>minipage<span class="nb">}</span>
+    <span class="k">\end</span><span class="nb">{</span>figure<span class="nb">}</span>
+
+    在一行并排两个子图(使用subfigure达到防止两个的目的，minipage起到一侧显示两个的效果)
+    <span class="k">\begin</span><span class="nb">{</span>figure<span class="nb">}</span>[H]
+        <span class="k">\centering</span>
+        <span class="k">\subfigure</span><span class="na">[左子图]</span><span class="nb">{</span>
+            <span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[b]<span class="nb">{</span>0.5<span class="k">\linewidth</span><span class="nb">}</span>
+                <span class="k">\centering</span>
+                <span class="k">\includegraphics</span><span class="na">[width = 0.5\linewidth]</span><span class="nb">{</span>test.jpg<span class="nb">}</span><span class="k">\\</span>
+                <span class="k">\includegraphics</span><span class="na">[width = 0.5\linewidth]</span><span class="nb">{</span>test.jpg<span class="nb">}</span>  
+            <span class="k">\end</span><span class="nb">{</span>minipage<span class="nb">}</span>
+        <span class="nb">}</span><span class="k">\subfigure</span><span class="na">[右子图]</span><span class="nb">{</span>
+            <span class="k">\centering</span>
+            <span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[b]<span class="nb">{</span>0.5<span class="k">\linewidth</span><span class="nb">}</span>
+                <span class="k">\centering</span>
+                <span class="k">\includegraphics</span><span class="na">[width = 0.5\linewidth]</span><span class="nb">{</span>test.jpg<span class="nb">}</span> <span class="k">\\</span>
+                <span class="k">\includegraphics</span><span class="na">[width = 0.5\linewidth]</span><span class="nb">{</span>test.jpg<span class="nb">}</span>
+            <span class="k">\end</span><span class="nb">{</span>minipage<span class="nb">}</span>
+        <span class="nb">}</span>
+        <span class="k">\caption</span><span class="nb">{</span>两个子图<span class="nb">}</span>
+    <span class="k">\end</span><span class="nb">{</span>figure<span class="nb">}</span>
+
+    使用minipage加自定义标签同样可以达到上述目的，自定义标签同样也可以达到表面上并列两个同级图片的效果。
+    <span class="k">\begin</span><span class="nb">{</span>figure<span class="nb">}</span>[!htp]
+        <span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[t]<span class="nb">{</span>0.5<span class="k">\linewidth</span><span class="nb">}</span><span class="c">%设定图片下字的宽度，在此基础尽量满足图片的长宽
+</span><span class="c"></span>        <span class="k">\centering</span>
+        <span class="k">\includegraphics</span><span class="na">[width = 0.5\linewidth]</span><span class="nb">{</span>test.jpg<span class="nb">}</span>
+        <span class="k">\caption*</span><span class="nb">{</span>(a) This is the left picure.<span class="nb">}</span><span class="c">%加*可以去掉默认前缀，作为图片单独的说明
+</span><span class="c"></span>        <span class="k">\label</span><span class="nb">{</span>fig:side:a<span class="nb">}</span>
+        <span class="k">\end</span><span class="nb">{</span>minipage<span class="nb">}</span>
+        <span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[t]<span class="nb">{</span>0.5<span class="k">\linewidth</span><span class="nb">}</span><span class="c">%需要几张添加即可，注意设定合适的linewidth
+</span><span class="c"></span>        <span class="k">\centering</span>
+        <span class="k">\includegraphics</span><span class="na">[width = 0.5\linewidth]</span><span class="nb">{</span>test.jpg<span class="nb">}</span>
+        <span class="k">\caption*</span><span class="nb">{</span>(b)This is the right picture.<span class="nb">}</span>
+        <span class="k">\label</span><span class="nb">{</span>fig:side:b<span class="nb">}</span>
+        <span class="k">\end</span><span class="nb">{</span>minipage<span class="nb">}</span>
+        <span class="k">\caption</span><span class="nb">{</span>两个子图<span class="nb">}</span>
+    <span class="k">\end</span><span class="nb">{</span>figure<span class="nb">}</span>
+    <span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-06-14</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/latex/">latex</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/transport/" class="prev" rel="prev" title="数据结构作业七 Transport"><i class="fas fa-angle-left fa-fw"></i>数据结构作业七 Transport</a>
+            <a href="/posts/python-assignment/" class="next" rel="next" title="PY4E 题目整理（上）">PY4E 题目整理（上）<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.75.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

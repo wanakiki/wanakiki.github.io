@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>利用Termux群发短信 - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="利用Termux群发短信" />
+<meta property="og:description" content="Termux的简单应用，为了让群发短信有更便捷高效的解决方案。 前言 Termux是一个Android下一个高级的终端模拟器，开源且不需要root，支持apt管理软件包，十分方便安装软件包，完美支持Pyt" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/termux-sms/" />
+<meta property="article:published_time" content="2019-09-25T19:23:03+08:00" />
+<meta property="article:modified_time" content="2019-09-25T19:23:03+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="利用Termux群发短信"/>
+<meta name="twitter:description" content="Termux的简单应用，为了让群发短信有更便捷高效的解决方案。 前言 Termux是一个Android下一个高级的终端模拟器，开源且不需要root，支持apt管理软件包，十分方便安装软件包，完美支持Pyt"/>
+<meta name="application-name" content="Wanakiki`s Blog">
+<meta name="apple-mobile-web-app-title" content="Wanakiki`s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/termux-sms/" /><link rel="prev" href="http://example.org/posts/short-message/" /><link rel="next" href="http://example.org/posts/website/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "利用Termux群发短信",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/termux-sms\/"
+        },"genre": "posts","keywords": "termux","wordcount":  987 ,
+        "url": "http:\/\/example.org\/posts\/termux-sms\/","datePublished": "2019-09-25T19:23:03+08:00","dateModified": "2019-09-25T19:23:03+08:00","publisher": {
+            "@type": "Organization",
+            "name": "wanakiki"},"author": {
+                "@type": "Person",
+                "name": "wanakiki"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Blog </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Blog</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">利用Termux群发短信</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-09-25">2019-09-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 987 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#具体实现">具体实现</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Termux的简单应用，为了让群发短信有更便捷高效的解决方案。</p>
+<!-- raw HTML omitted -->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p><code>Termux</code>是一个Android下一个高级的终端模拟器，开源且不需要root，支持apt管理软件包，十分方便安装软件包，完美支持Python、PHP、Ruby、Go、Nodejs、MySQL等。随着智能设备的普及和性能的不断提升，如今的手机、平板等的硬件标准已达到了初级桌面计算机的硬件标准，用心去打造完全可以把手机变成一个强大的工具。</p>
+</blockquote>
+<p>关于软件的更多信息及基本配置，可以去看<a href="https://www.sqlsec.com/2018/05/termux.html" target="_blank" rel="noopener noreffer">国光的教程</a>，写得很赞很全面。</p>
+<p><strong>注意</strong>：由于谷歌的政策更新，Termux最新版本的API没有访问手机短信内容的权限，想要实现发送短信的功能，需要使用相对较久的0.31版本。在这里给Termux API 0.31版本<a href="https://pan.baidu.com/s/1toMtUW2MOEHPY7GOtfEYUg" target="_blank" rel="noopener noreffer">下载地址</a>，提取码：ttx1。API的安装方式在国光的文章中也有给出，不清楚可以去翻看。</p>
+<p>在了解完Termux并安装好API后，我们的教程正式开始。</p>
+<h2 id="具体实现">具体实现</h2>
+<p>虽然如今的QQ、微信已经承担了大部分我们的日常通信任务，但是总有一些情况需要电话短信来解决，比如给陌生人传达某些通知。电话是最优的解决方案，但是也会有一部分人倾向于短信。在经历了无数次的折磨之后，我终于发现了<code>Termux</code>。</p>
+<p>假设你现在有一个含有联系人姓名及电话号码的表格，将无用信息删除，只保留姓名和号码两列具体内容后，可以通过<code>文件 -&gt; 另存为 -&gt; 文本文件(制表符分隔)</code>的方式获得一个格式整齐的文本文档。将其重命名为<code>data.txt</code>，用记事本打开后选择另存为，在另存为界面调整保存编码为<code>UTF-8</code>，这步一定要做，不然程序无法正常读取文件。</p>
+<p>将得到的文件用QQ或者TIM发送到你的手机并接受，<strong>按照国光的教程中建立好文件夹链接</strong>的前提下。以QQ为例，在终端中输入下面几行命令便可下载好程序。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> ~/QQ
+wget https://raw.githubusercontent.com/wanakiki/furry/master/termux-sms/messages.py
+</code></pre></div><p>可以找到默认的信息语句对其进行修改，以达到我们的目的。修改完毕后执行<code>python messages.py</code>命令，运行程序。</p>
+<p>python实现代码：</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+
+<span class="k">def</span> <span class="nf">send_sms</span><span class="p">(</span><span class="n">aim</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;use two argv to send messages
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;termux-sms-send -n &#39;</span> <span class="o">+</span> <span class="n">aim</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span>
+
+
+<span class="k">def</span> <span class="nf">fileMessage</span><span class="p">(</span><span class="n">fileName</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;send messages form an excel(name, number)
+</span><span class="s2">    &#34;&#34;&#34;</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;start read file&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">fh</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Can</span><span class="se">\&#39;</span><span class="s1">t find the data file&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c1"># create list (name, number)</span>
+    <span class="n">group</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fh</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">group</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="n">fh</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># send message</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="s2">&#34; hello, this is termux&#34;</span>  <span class="c1"># Replace it with your own words</span>
+    <span class="k">for</span> <span class="n">people</span> <span class="ow">in</span> <span class="n">group</span><span class="p">:</span>
+        <span class="n">send_sms</span><span class="p">(</span><span class="n">people</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">people</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">words</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;finish&#39;</span><span class="p">)</span>
+    <span class="k">return</span>
+
+
+<span class="k">def</span> <span class="nf">sendOne</span><span class="p">():</span>
+    <span class="n">aim</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Please input your aim number</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Now you can input your message</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;+=======================+&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Please check your input:&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;number: &#39;</span><span class="p">,</span> <span class="n">aim</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;words: &#39;</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+        <span class="s2">&#34;Now, if your input is correct, input &#39;y&#39; or &#39;Y&#39; to send your message: &#34;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">flag</span> <span class="o">==</span> <span class="s1">&#39;y&#39;</span> <span class="ow">or</span> <span class="n">flag</span> <span class="o">==</span> <span class="s1">&#39;Y&#39;</span><span class="p">):</span>
+        <span class="n">send_sms</span><span class="p">(</span><span class="n">aim</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span>
+    <span class="k">return</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;&#34;&#34;Functions:
+</span><span class="s2">1 Only send one message.(Test this program)
+</span><span class="s2">2 Send messages form one file.
+</span><span class="s2">+============================================+&#34;&#34;&#34;</span><span class="p">)</span>
+
+<span class="n">flag</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Choose the function:&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">flag</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+    <span class="n">sendOne</span><span class="p">()</span>
+<span class="k">elif</span> <span class="n">flag</span> <span class="o">==</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span>
+    <span class="n">fileMessage</span><span class="p">(</span><span class="s1">&#39;data.txt&#39;</span><span class="p">)</span>
+</code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/wanakiki/photo/master/shengsai/20190925205425.png"
+        data-srcset="https://raw.githubusercontent.com/wanakiki/photo/master/shengsai/20190925205425.png, https://raw.githubusercontent.com/wanakiki/photo/master/shengsai/20190925205425.png 1.5x, https://raw.githubusercontent.com/wanakiki/photo/master/shengsai/20190925205425.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/wanakiki/photo/master/shengsai/20190925205425.png"
+        title="运行结果" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-09-25</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/termux/">termux</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/short-message/" class="prev" rel="prev" title="提取小米云服务短信"><i class="fas fa-angle-left fa-fw"></i>提取小米云服务短信</a>
+            <a href="/posts/website/" class="next" rel="next" title="🏠班级网站项目">🏠班级网站项目<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.75.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
