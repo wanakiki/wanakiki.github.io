@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>C&#43;&#43; - 标签 - Wanakiki`s Blog</title>
+        <link>https://wanakiki.github.io/tags/c&#43;&#43;/</link>
+        <description>C&#43;&#43; - 标签 - Wanakiki`s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 08 Oct 2020 22:43:54 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/c&#43;&#43;/" rel="self" type="application/rss+xml" /><item>
+    <title>C&#43;&#43; sort函数自定义类型排序</title>
+    <link>https://wanakiki.github.io/posts/custom-sort/</link>
+    <pubDate>Thu, 08 Oct 2020 22:43:54 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/posts/custom-sort/</guid>
+    <description><![CDATA[整理一下自定义类型排序的相关内容，网上可以查找到的实现方法有三种，内部逻辑相同只是写法不同： 自定义比较函数 重载比较运算符（重载小于号） 定义函数对象并传入 下面是我实现的一个简单案例，需要注意的是，网上有]]></description>
+</item></channel>
+</rss>

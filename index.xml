@@ -3,9 +3,16 @@
         <title>Wanakiki`s Blog</title>
         <link>https://wanakiki.github.io/</link>
         <description>Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 25 Sep 2020 17:16:30 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 08 Oct 2020 22:43:54 &#43;0800</lastBuildDate>
             <atom:link href="https://wanakiki.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>C&#43;&#43; sort函数自定义类型排序</title>
+    <link>https://wanakiki.github.io/posts/custom-sort/</link>
+    <pubDate>Thu, 08 Oct 2020 22:43:54 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/posts/custom-sort/</guid>
+    <description><![CDATA[整理一下自定义类型排序的相关内容，网上可以查找到的实现方法有三种，内部逻辑相同只是写法不同： 自定义比较函数 重载比较运算符（重载小于号） 定义函数对象并传入 下面是我实现的一个简单案例，需要注意的是，网上有]]></description>
+</item><item>
     <title>📄个人介绍</title>
     <link>https://wanakiki.github.io/posts/about-me/</link>
     <pubDate>Fri, 25 Sep 2020 17:16:30 &#43;0800</pubDate>
@@ -68,12 +75,5 @@
     <author>作者</author>
     <guid>https://wanakiki.github.io/posts/leetcode-spider/</guid>
     <description><![CDATA[很早就接触了leetcode，在上面做了不少题，每次整理的时候复制题目信息是个很麻烦的过程，于是便想着要用爬虫来解决这个问题，今天终于实现了这个功能，简单记录。 写在前面 我自己用得比较多的两个语言是C+]]></description>
-</item><item>
-    <title>用异或找到数组中不重复出现的数字</title>
-    <link>https://wanakiki.github.io/posts/xor/</link>
-    <pubDate>Thu, 30 Apr 2020 10:51:11 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/xor/</guid>
-    <description><![CDATA[找一个数很简单，但找两个数呢？ 最近做leetcode上面的题目的时候，遇到了一个面试题，需要找到数组中两个只出现过一次的数（其余数均出现过两次），感觉很有意思，简单记录一下。 基本知识 异或（xor）是一]]></description>
 </item></channel>
 </rss>
