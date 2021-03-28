@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Python生成字符动画 - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="Python生成字符动画" />
+<meta property="og:description" content="前段时间（指去年）发现咒术回战的ED做的很棒，翻来覆去看了几遍之后想把它魔改成字符画的形式，拖了快半年终于在这周做出来了！ 主要思路参考了B站UP主“奇乐编程学院”的视频：【编程三分钟】教大家用Pyth" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://wanakiki.github.io/posts/ascii-art/" />
+<meta property="article:published_time" content="2021-03-28T10:55:58+08:00" />
+<meta property="article:modified_time" content="2021-03-28T10:55:58+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python生成字符动画"/>
+<meta name="twitter:description" content="前段时间（指去年）发现咒术回战的ED做的很棒，翻来覆去看了几遍之后想把它魔改成字符画的形式，拖了快半年终于在这周做出来了！ 主要思路参考了B站UP主“奇乐编程学院”的视频：【编程三分钟】教大家用Pyth"/>
+<meta name="application-name" content="Wanakiki`s Blog">
+<meta name="apple-mobile-web-app-title" content="Wanakiki`s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://wanakiki.github.io/posts/ascii-art/" /><link rel="prev" href="https://wanakiki.github.io/posts/custom-sort/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Python生成字符动画",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/wanakiki.github.io\/posts\/ascii-art\/"
+        },"genre": "posts","keywords": "python","wordcount":  1497 ,
+        "url": "https:\/\/wanakiki.github.io\/posts\/ascii-art\/","datePublished": "2021-03-28T10:55:58+08:00","dateModified": "2021-03-28T10:55:58+08:00","publisher": {
+            "@type": "Organization",
+            "name": "wanakiki"},"author": {
+                "@type": "Person",
+                "name": "wanakiki"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Blog </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Blog</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Python生成字符动画</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-03-28">2021-03-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1497 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#主要工具">主要工具</a></li>
+    <li><a href="#实现思路与代码">实现思路与代码</a>
+      <ul>
+        <li><a href="#图片提取">图片提取</a></li>
+        <li><a href="#图片转换">图片转换</a></li>
+        <li><a href="#图片合成">图片合成</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>前段时间（指去年）发现咒术回战的ED做的很棒，翻来覆去看了几遍之后想把它魔改成字符画的形式，拖了快半年终于在这周做出来了！</p>
+<!-- raw HTML omitted -->
+<p>主要思路参考了B站UP主“奇乐编程学院”的视频：<a href="https://www.bilibili.com/video/BV1aT4y1A7EF" target="_blank" rel="noopener noreffer">【编程三分钟】教大家用Python做出漂亮的字符动画！</a>，最终效果点<a href="https://www.bilibili.com/video/BV1L54y1h7AG?share_source=copy_web" target="_blank" rel="noopener noreffer">这里</a>。</p>
+<p>接下来对整个制作过程进行简单梳理，希望能对其他人有所帮助。</p>
+<h2 id="主要工具">主要工具</h2>
+<p>整个制作过程主要用到了Python、FFmpeg两个工具，前者用于实现转换算法，后者用于视频处理。算法实现所需Python第三方库是PIL和numpy。</p>
+<p>工具的安装方法可以很容易地在互联网上找到。</p>
+<h2 id="实现思路与代码">实现思路与代码</h2>
+<p>转换的整体思路分为以下三步：</p>
+<ol>
+<li>从原本彩色视频中逐帧提取图片</li>
+<li>对提取到的图片进行转换</li>
+<li>将转换后的图片拼接成视频</li>
+</ol>
+<h3 id="图片提取">图片提取</h3>
+<p>FFmpeg提取图片非常简单，在准备好视频文件，并创建文件夹用于存放提取出的图片之后，执行下面的命令便能进行提取：</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">ffmpeg -i ed.flv -r 25 -qscale:v 2 source/<span class="nv">%0</span>7d.jpg
+</code></pre></div><p><code>ed.flv</code>为视频文件，25为提取帧率，<code>source/%07d.jpg</code>为生成文件对应路径及文件名格式，按照我的写法，第一张图片的相对路径应该是<code>./source/0000001.jpg</code>。</p>
+<h3 id="图片转换">图片转换</h3>
+<p>首先将图片按照一定比例进行缩放，降低像素数目，之后将图片转化为灰度图，根据每个像素亮度值占整张图片亮度区间的比例选择合适的字符，在输出图片中用每个像素对应的字符代替原有像素点。</p>
+<p>举一个例子，假如转化为灰度图后某个像素值为0，也就是黑色，那么就可以用空格字符来代替这个像素，如果某个像素值为200，一个比较亮的值，那么就可以用'#'、&lsquo;M&rsquo;这样构成像素比较多的字符来表示。</p>
+<p>另外，如果在转化灰度图之前保存每个像素的颜色并在最后绘制字符时使用对应位置的颜色，就可以得到彩色效果的图片。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span><span class="p">,</span> <span class="n">ImageFont</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">sample_rate</span> <span class="o">=</span> <span class="mf">0.07</span>
+
+
+<span class="k">def</span> <span class="nf">ascii_art</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">source_folder</span><span class="p">,</span> <span class="n">aim_folder</span><span class="p">):</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">source_folder</span> <span class="o">+</span> 
+    <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">file</span><span class="p">)</span>
+
+    <span class="c1"># Compute letter aspect ratio</span>
+    <span class="c1"># font = ImageFont.load_default()</span>
+    <span class="n">font</span> <span class="o">=</span> <span class="n">ImageFont</span><span class="o">.</span><span class="n">truetype</span><span class="p">(</span><span class="s2">&#34;SourceCodePro-Bold.ttf&#34;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">38</span><span class="p">)</span>
+    <span class="n">aspect_ratio</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s2">&#34;x&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">font</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s2">&#34;x&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">new_im_size</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">sample_rate</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">sample_rate</span> <span class="o">*</span> <span class="n">aspect_ratio</span><span class="p">]</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="c1"># Downsample the image</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">new_im_size</span><span class="p">)</span>
+
+    <span class="c1"># Keep a copy of image for color sampling</span>
+    <span class="n">im_color</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+
+    <span class="c1"># Convert to gray scale image</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&#34;L&#34;</span><span class="p">)</span>
+
+    <span class="c1"># Convert to numpy array for image manipulation</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+
+    <span class="c1"># Defines all the symbols in ascending order that will form the final ascii</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="s2">&#34;8&amp;WM#*ozh&#34;</span>
+    <span class="c1"># s = &#34;$@B%8&amp;WM#*oahkbdpqw mZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_ +~&lt;&gt;i!lI;:,\&#34;^`&#39;. &#34;</span>
+    <span class="c1"># s = &#34;BMOx. &#34;</span>
+    <span class="n">symbols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">s</span><span class="p">)))</span>
+
+    <span class="c1"># Normalize minimum and maximum to [0, max_symbol_index)</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="p">(</span><span class="n">im</span> <span class="o">-</span> <span class="n">im</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">im</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">*</span> <span class="p">(</span><span class="n">symbols</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Generate the ascii art</span>
+    <span class="n">ascii</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">[</span><span class="n">im</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)]</span>
+
+    <span class="c1"># Create an output image for drawing ascii text</span>
+    <span class="n">letter_size</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s2">&#34;x&#34;</span><span class="p">)</span>
+    <span class="n">im_out_size</span> <span class="o">=</span> <span class="n">new_im_size</span> <span class="o">*</span> <span class="n">letter_size</span>
+    <span class="n">bg_color</span> <span class="o">=</span> <span class="s2">&#34;gray&#34;</span>
+    <span class="n">im_out</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&#34;RGB&#34;</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">im_out_size</span><span class="p">),</span> <span class="n">bg_color</span><span class="p">)</span>
+    <span class="n">draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">im_out</span><span class="p">)</span>
+
+    <span class="c1"># Draw text</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ascii</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">ch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">im_color</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>  <span class="c1"># sample color from original image</span>
+            <span class="c1"># color = &#34;white&#34;</span>
+            <span class="n">draw</span><span class="o">.</span><span class="n">text</span><span class="p">((</span><span class="n">letter_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">j</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">fill</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">+=</span> <span class="n">letter_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># increase y by letter height</span>
+
+    <span class="c1"># Save image file</span>
+    <span class="n">im_out</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">aim_folder</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">file</span><span class="p">)</span>
+
+
+<span class="n">source_folder</span> <span class="o">=</span> <span class="s2">&#34;source&#34;</span>
+<span class="n">aim_folder</span> <span class="o">=</span> <span class="s2">&#34;out&#34;</span>
+<span class="n">source_file</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">source_folder</span><span class="p">)]</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">source_file</span><span class="p">:</span>
+    <span class="n">ascii_art</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">source_folder</span><span class="p">,</span> <span class="n">aim_folder</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+</code></pre></div><p>上面代码主体部分来自奇乐编程学院，我进行了简单的修改，指定原图片路径和输出路径，便能对路径下所有的图片进行转化，可以对采样率、绘制字体大小、替换字符串进行调整得到更好的效果。</p>
+<h3 id="图片合成">图片合成</h3>
+<p>合成图片同样使用FFmpeg实现，执行下面的命令便能得到视频文件。</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">ffmpeg -i out/<span class="nv">%0</span>7d.jpg -c:v libx264 -vf fps=25 -pix_fmt yuv420p out.mp4
+</code></pre></div><p>实现过程中，由于参数不同，我最后得到的图片高度为奇数，执行命令后报告了高度无法被2整除的错误，在网上查找之后改用下面的命令解决：</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">ffmpeg -i out/<span class="nv">%0</span>7d.jpg -c:v libx264 -vf <span class="s2">&#34;pad=ceil(iw/2)*2:ceil(ih/2)*2&#34;</span> -r 25 -pix_fmt yuv420p out.flv
+</code></pre></div><h2 id="总结">总结</h2>
+<p>本来我是计划做成黑白字符效果的，但可能是因为咒术回战ED主要用不同色块进行构图，导致亮度变化比较少，转化成字符画之后感觉比较怪，但是我又说不出来问题在哪，所以改成了彩色，看起来会舒服一些。</p>
+<p>实现过程中我使用了不同的背景色进行测试，发现灰色会有比较好的效果，但是看起来还是感觉灰蒙蒙的，或许可以通过调整字符绘制颜色来得到更好的效果。</p>
+<p>上面问题的主要原因是字符与字符之间存在间隔，导致存在“漏光”现象，当存在连续的面积较小的字符时，主要观察到的是背景颜色。</p>
+<p>另外，网上其他字符画的教程都使用了比较长的替换字符串，但我感觉那样做出来的效果会比较乱，所以就使用了比较短的替换字符串，感觉最后的效果还可以。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2021-03-28</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/custom-sort/" class="prev" rel="prev" title="C&#43;&#43; sort函数自定义类型排序"><i class="fas fa-angle-left fa-fw"></i>C&#43;&#43; sort函数自定义类型排序</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.75.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

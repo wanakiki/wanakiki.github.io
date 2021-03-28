@@ -3,9 +3,16 @@
         <title>Wanakiki`s Blog</title>
         <link>https://wanakiki.github.io/</link>
         <description>Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 08 Oct 2020 22:43:54 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 28 Mar 2021 10:55:58 &#43;0800</lastBuildDate>
             <atom:link href="https://wanakiki.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Python生成字符动画</title>
+    <link>https://wanakiki.github.io/posts/ascii-art/</link>
+    <pubDate>Sun, 28 Mar 2021 10:55:58 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/posts/ascii-art/</guid>
+    <description><![CDATA[前段时间（指去年）发现咒术回战的ED做的很棒，翻来覆去看了几遍之后想把它魔改成字符画的形式，拖了快半年终于在这周做出来了！ 主要思路参考了B站UP主“奇乐编程学院”的视频：【编程三分钟】教大家用Pyth]]></description>
+</item><item>
     <title>C&#43;&#43; sort函数自定义类型排序</title>
     <link>https://wanakiki.github.io/posts/custom-sort/</link>
     <pubDate>Thu, 08 Oct 2020 22:43:54 &#43;0800</pubDate>
@@ -68,12 +75,5 @@
     <author>作者</author>
     <guid>https://wanakiki.github.io/posts/baidufanyi/</guid>
     <description><![CDATA[典型的js加密爬虫实战，本文章内容仅作学习交流。 首先放一下参考文章：爬虫JS破解经典案例之百度翻译 如果没有这篇文章的话，我可能要花很多功夫才能找到具体的js代码位置。 页面加载分析 初步探索 打开百度翻译，]]></description>
-</item><item>
-    <title>爬虫获取力扣题目信息并转为Markdown</title>
-    <link>https://wanakiki.github.io/posts/leetcode-spider/</link>
-    <pubDate>Sat, 02 May 2020 14:38:46 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/leetcode-spider/</guid>
-    <description><![CDATA[很早就接触了leetcode，在上面做了不少题，每次整理的时候复制题目信息是个很麻烦的过程，于是便想着要用爬虫来解决这个问题，今天终于实现了这个功能，简单记录。 写在前面 我自己用得比较多的两个语言是C+]]></description>
 </item></channel>
 </rss>

@@ -1,9 +1,16 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Python - 标签 - Wanakiki`s Blog</title>
+        <title>python - 标签 - Wanakiki`s Blog</title>
         <link>https://wanakiki.github.io/tags/python/</link>
-        <description>Python - 标签 - Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 13 Aug 2020 22:16:21 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/python/" rel="self" type="application/rss+xml" /><item>
+        <description>python - 标签 - Wanakiki`s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 28 Mar 2021 10:55:58 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/python/" rel="self" type="application/rss+xml" /><item>
+    <title>Python生成字符动画</title>
+    <link>https://wanakiki.github.io/posts/ascii-art/</link>
+    <pubDate>Sun, 28 Mar 2021 10:55:58 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/posts/ascii-art/</guid>
+    <description><![CDATA[前段时间（指去年）发现咒术回战的ED做的很棒，翻来覆去看了几遍之后想把它魔改成字符画的形式，拖了快半年终于在这周做出来了！ 主要思路参考了B站UP主“奇乐编程学院”的视频：【编程三分钟】教大家用Pyth]]></description>
+</item><item>
     <title>Python爬虫 代理IP地址获取及使用</title>
     <link>https://wanakiki.github.io/posts/spider-with-proxy/</link>
     <pubDate>Thu, 13 Aug 2020 22:16:21 &#43;0800</pubDate>
