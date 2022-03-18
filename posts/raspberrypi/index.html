@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>树莓派使用记录 - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="树莓派使用记录" />
+<meta property="og:description" content="寒假从学校里拿回来了一块树莓派3B，算是第一次拥有了80%属于自己的树莓派，记录一下使用过程中的一些操作。感觉自己从知道树莓派到真正完全用到树莓派，经历了好长一段时间。 21年年初曾经用顶配的树莓派4B" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://wanakiki.github.io/posts/raspberrypi/" />
+<meta property="article:published_time" content="2022-01-09T21:53:15+08:00" />
+<meta property="article:modified_time" content="2022-01-09T21:53:15+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="树莓派使用记录"/>
+<meta name="twitter:description" content="寒假从学校里拿回来了一块树莓派3B，算是第一次拥有了80%属于自己的树莓派，记录一下使用过程中的一些操作。感觉自己从知道树莓派到真正完全用到树莓派，经历了好长一段时间。 21年年初曾经用顶配的树莓派4B"/>
+<meta name="application-name" content="Wanakiki`s Blog">
+<meta name="apple-mobile-web-app-title" content="Wanakiki`s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://wanakiki.github.io/posts/raspberrypi/" /><link rel="prev" href="https://wanakiki.github.io/posts/ascii-art/" /><link rel="next" href="https://wanakiki.github.io/posts/2022-winter-holiday/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "树莓派使用记录",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/wanakiki.github.io\/posts\/raspberrypi\/"
+        },"genre": "posts","wordcount":  1072 ,
+        "url": "https:\/\/wanakiki.github.io\/posts\/raspberrypi\/","datePublished": "2022-01-09T21:53:15+08:00","dateModified": "2022-01-09T21:53:15+08:00","publisher": {
+            "@type": "Organization",
+            "name": "wanakiki"},"author": {
+                "@type": "Person",
+                "name": "wanakiki"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Blog </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Blog</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">树莓派使用记录</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-09">2022-01-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1072 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#系统烧录">系统烧录</a></li>
+        <li><a href="#关闭图形界面">关闭图形界面</a></li>
+        <li><a href="#换源">换源</a></li>
+        <li><a href="#定时任务">定时任务</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>寒假从学校里拿回来了一块树莓派3B，算是第一次拥有了80%属于自己的树莓派，记录一下使用过程中的一些操作。感觉自己从知道树莓派到真正完全用到树莓派，经历了好长一段时间。</p>
+<!-- raw HTML omitted -->
+<p>21年年初曾经用顶配的树莓派4B编写过深度学习相关的应用，用了很长时间的树莓派。当时给树莓派配了一块触控屏幕和额外的一套键鼠，用起来感觉很方便。虽然用了很久，但是系统和基础软件包的设置都是学弟做的，自己没有完全走过流程。</p>
+<p>年中的时候，有项任务是完成树莓派3B上的rtthread移植，如果有空闲时间的话会把当时的经历整理一下。当时用的板子在任务完成后便收回去了，所以寒假拿回来的是另一块板子。由于不清楚之前使用这块板子的人设置的密码是什么，所以需要重新烧录一次系统，走一遍流程。</p>
+<h3 id="系统烧录">系统烧录</h3>
+<p>由于未能及时发现充电器电压不够的问题，我尝试了多种烧录手段。我最早使用的是Rufus，个人感觉小巧并且快速，很推荐。但如果首次开机没有屏幕的话，我更推荐使用官方提供的烧录程序，并且使用<code>ctrl+shift+x</code>组合键打开高级模式，可以直接开启ssh并配置WIFI。</p>
+<p>需要注意的是高级模式只能使用快捷键打开，没有额外按钮。另外在我个人使用过程中，wifi密码在设置完成之后，最终写进sd卡的内容是不明意义的字符串。我最后通过使用ubuntu子系统修改SD卡中<code>/etc/wpa_supplicant/wpa_supplicant.conf</code>文件内的密码达到了联网目的，个人感觉这个问题在之后的版本中应该会被修复。</p>
+<p>如果使用rufus等其他烧录工具，也可以做到无屏幕启动。需要在SD卡的boot目录下新建<code>wpa_supplicant.conf</code>文件，编辑为以下内容：</p>
+<pre><code class="language-no" data-lang="no">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=CN
+
+network={
+	ssid=&quot;WIFI名&quot;
+	psk=&quot;密码&quot;
+	key_mgmt=WPA-PSK
+}
+</code></pre><p>并额外建立一个空的名为<code>ssh</code>的文件，以开启ssh。</p>
+<h3 id="关闭图形界面">关闭图形界面</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">sudo raspi-config
+</code></pre></div><p>在<code>System options-&gt;Boot / Auto Login</code>中选择单终端自动登录。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">sudo reboot
+</code></pre></div><h3 id="换源">换源</h3>
+<p>使用编辑器打开存储源地址的文件：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">sudo nano /etc/apt/sources.list
+</code></pre></div><p>在文件中新增如下两行内容：</p>
+<pre><code class="language-no" data-lang="no">deb http://mirrors.ustc.edu.cn/raspbian/raspbian/ jessie main contrib non-free rpi 
+deb http://mirrors.ustc.edu.cn/raspbian/raspbian/ stretch main contrib non-free rpi
+</code></pre><p>更新包数据：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">sudo apt-get upgrade 
+</code></pre></div><p>参考教程：https://blog.csdn.net/qq_41676577/article/details/112856422</p>
+<h3 id="定时任务">定时任务</h3>
+<p>执行命令：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">crontab -e
+</code></pre></div><p>选择编辑器后添加任务，格式为<code>分钟 小时 日期 月份 星期几 命令</code>例如：</p>
+<pre><code class="language-no" data-lang="no">0 7 * * * python /home/pi/code/checkin.py
+</code></pre><p>对应在每天的7点钟执行python脚本。</p>
+<p>参考教程：https://shumeipai.nxez.com/2019/12/11/scheduling-tasks-with-cron.html</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-01-09</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/ascii-art/" class="prev" rel="prev" title="Python生成字符动画"><i class="fas fa-angle-left fa-fw"></i>Python生成字符动画</a>
+            <a href="/posts/2022-winter-holiday/" class="next" rel="next" title="2022 Winter Holiday">2022 Winter Holiday<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.75.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

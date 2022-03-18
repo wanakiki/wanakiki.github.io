@@ -3,7 +3,21 @@
         <title>所有文章 - Wanakiki`s Blog</title>
         <link>https://wanakiki.github.io/posts/</link>
         <description>所有文章 | Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 28 Mar 2021 10:55:58 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 18 Feb 2022 12:44:10 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>2022 Winter Holiday</title>
+    <link>https://wanakiki.github.io/posts/2022-winter-holiday/</link>
+    <pubDate>Fri, 18 Feb 2022 12:44:10 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/posts/2022-winter-holiday/</guid>
+    <description><![CDATA[离家前一天，总结一下今年寒假里面做的一些事情。 学习与生活 科研相关📃： 25篇左右 PIM 相关文献 3篇 FPGA EDA 相关文献 强化学习布线代码 看起来东西还算不少，但实际上并没有获得多少有价值的信息。 读完的书📕： 《桶川跟踪狂]]></description>
+</item><item>
+    <title>树莓派使用记录</title>
+    <link>https://wanakiki.github.io/posts/raspberrypi/</link>
+    <pubDate>Sun, 09 Jan 2022 21:53:15 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/posts/raspberrypi/</guid>
+    <description><![CDATA[寒假从学校里拿回来了一块树莓派3B，算是第一次拥有了80%属于自己的树莓派，记录一下使用过程中的一些操作。感觉自己从知道树莓派到真正完全用到树莓派，经历了好长一段时间。 21年年初曾经用顶配的树莓派4B]]></description>
+</item><item>
     <title>Python生成字符动画</title>
     <link>https://wanakiki.github.io/posts/ascii-art/</link>
     <pubDate>Sun, 28 Mar 2021 10:55:58 &#43;0800</pubDate>
@@ -59,19 +73,5 @@
     <author>作者</author>
     <guid>https://wanakiki.github.io/posts/linux-c/</guid>
     <description><![CDATA[跟着别人简单学了下Linux下的系统编程，把做过的几个作业简单记录一下。作业的内容都是针对的具体的知识点，实现难度并不高。 进程间通信 设计一个程序，打开一个匿名管道，然后生成一个子进程，主进程向管道中写]]></description>
-</item><item>
-    <title>Flask&#43;MongoDB CURD微实战</title>
-    <link>https://wanakiki.github.io/posts/mongodb-demo/</link>
-    <pubDate>Sat, 30 May 2020 11:07:16 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/mongodb-demo/</guid>
-    <description><![CDATA[做SRDP的过程中发现关系型数据库在实现问卷效果时比较困难，所以找了个时间熟悉了一下非关系型数据库，做了一个todo小demo。 视频演示地址 过程记录 下载安装mongodb，注意安装的时候不要勾选com]]></description>
-</item><item>
-    <title>百度翻译爬虫</title>
-    <link>https://wanakiki.github.io/posts/baidufanyi/</link>
-    <pubDate>Mon, 18 May 2020 20:44:50 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/baidufanyi/</guid>
-    <description><![CDATA[典型的js加密爬虫实战，本文章内容仅作学习交流。 首先放一下参考文章：爬虫JS破解经典案例之百度翻译 如果没有这篇文章的话，我可能要花很多功夫才能找到具体的js代码位置。 页面加载分析 初步探索 打开百度翻译，]]></description>
 </item></channel>
 </rss>
