@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Arduino - 标签 - Wanakiki`s Blog</title>
+        <link>https://wanakiki.github.io/tags/arduino/</link>
+        <description>Arduino - 标签 - Wanakiki`s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 22 Feb 2023 13:11:28 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/arduino/" rel="self" type="application/rss+xml" /><item>
+    <title>Arduino IDE 2.0 更改软件包位置</title>
+    <link>https://wanakiki.github.io/posts/arduino-library-location/</link>
+    <pubDate>Wed, 22 Feb 2023 13:11:28 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/posts/arduino-library-location/</guid>
+    <description><![CDATA[Arduino IDE 默认将软件包安装到 C 盘，导致 C 盘可用空间不足。发现软件内没有指定软件包下载位置的设置，于是上网查找了一下如何更改软件包的位置，在比较偏僻的地方找到了方法：Arduino IDE 2.0 的設定檔與變更字體 默认情]]></description>
+</item></channel>
+</rss>
