@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>pixel6 - 标签 - Wanakiki`s Blog</title>
+        <link>https://wanakiki.github.io/tags/pixel6/</link>
+        <description>pixel6 - 标签 - Wanakiki`s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 05 Mar 2023 22:04:11 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/pixel6/" rel="self" type="application/rss+xml" /><item>
+    <title>Pixel6 安装 Magisk</title>
+    <link>https://wanakiki.github.io/posts/pixel6-magisk/</link>
+    <pubDate>Sun, 05 Mar 2023 22:04:11 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/posts/pixel6-magisk/</guid>
+    <description><![CDATA[Pixel6 在国内默认不能支持电信手机卡，只能上网但是不能电话和短信，需要安装 Magisk 模块之后才能解决这个问题。本来在咸鱼上淘到的手机已经包含了这个模块，但是在一次更新后，Magisk 被重置，需要重新刷入，进行简单的]]></description>
+</item></channel>
+</rss>
