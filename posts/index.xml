@@ -3,7 +3,14 @@
         <title>所有文章 - Wanakiki`s Blog</title>
         <link>https://wanakiki.github.io/posts/</link>
         <description>所有文章 | Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 05 Mar 2023 22:04:11 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 22 Mar 2023 12:33:06 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>使用 Playwright 获取大众点评店铺评论</title>
+    <link>https://wanakiki.github.io/posts/dazhongdianping-spider/</link>
+    <pubDate>Wed, 22 Mar 2023 12:33:06 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/posts/dazhongdianping-spider/</guid>
+    <description><![CDATA[简单记录使用playwright获取大众点评店铺评论的方法。 大概一年前使用playwright替换了selenium写爬虫，使用playwright自带脚本生成简单的代码并且保存登陆状态更加方便。最近]]></description>
+</item><item>
     <title>Pixel6 安装 Magisk</title>
     <link>https://wanakiki.github.io/posts/pixel6-magisk/</link>
     <pubDate>Sun, 05 Mar 2023 22:04:11 &#43;0800</pubDate>
@@ -66,12 +73,5 @@
     <author>作者</author>
     <guid>https://wanakiki.github.io/posts/flask-api-exception/</guid>
     <description><![CDATA[最近在做SRDP项目的后端开发，但是狗书上面对API相关内容介绍比较少，示例代码中的API部分也不涉及用户登录注册相关内容。不过幸运的是在Github上找到了一个问卷调查项目，通过阅读项目代码发现了在]]></description>
-</item><item>
-    <title>VUE框架入门</title>
-    <link>https://wanakiki.github.io/posts/learn-vue/</link>
-    <pubDate>Wed, 08 Jul 2020 12:19:49 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/learn-vue/</guid>
-    <description><![CDATA[在学习VUE入门视频时记录的知识点和代码，备忘。 基本 el:挂载点，id选择器#，不能挂载到&lt;html&gt; &lt;body&gt;两个标签 Vue指令 内容绑定、事件绑定 v-text设置标签内容，]]></description>
 </item></channel>
 </rss>

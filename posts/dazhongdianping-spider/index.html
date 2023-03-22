@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>使用 Playwright 获取大众点评店铺评论 - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="使用 Playwright 获取大众点评店铺评论" />
+<meta property="og:description" content="简单记录使用playwright获取大众点评店铺评论的方法。 大概一年前使用playwright替换了selenium写爬虫，使用playwright自带脚本生成简单的代码并且保存登陆状态更加方便。最近" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://wanakiki.github.io/posts/dazhongdianping-spider/" />
+<meta property="article:published_time" content="2023-03-22T12:33:06+08:00" />
+<meta property="article:modified_time" content="2023-03-22T12:33:06+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用 Playwright 获取大众点评店铺评论"/>
+<meta name="twitter:description" content="简单记录使用playwright获取大众点评店铺评论的方法。 大概一年前使用playwright替换了selenium写爬虫，使用playwright自带脚本生成简单的代码并且保存登陆状态更加方便。最近"/>
+<meta name="application-name" content="Wanakiki`s Blog">
+<meta name="apple-mobile-web-app-title" content="Wanakiki`s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://wanakiki.github.io/posts/dazhongdianping-spider/" /><link rel="prev" href="https://wanakiki.github.io/posts/pixel6-magisk/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "使用 Playwright 获取大众点评店铺评论",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/wanakiki.github.io\/posts\/dazhongdianping-spider\/"
+        },"genre": "posts","keywords": "playwright, python, 爬虫","wordcount":  943 ,
+        "url": "https:\/\/wanakiki.github.io\/posts\/dazhongdianping-spider\/","datePublished": "2023-03-22T12:33:06+08:00","dateModified": "2023-03-22T12:33:06+08:00","publisher": {
+            "@type": "Organization",
+            "name": "wanakiki"},"author": {
+                "@type": "Person",
+                "name": "wanakiki"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Blog </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Blog</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">使用 Playwright 获取大众点评店铺评论</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-03-22">2023-03-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 943 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>简单记录使用<code>playwright</code>获取大众点评店铺评论的方法。</p>
+<!-- raw HTML omitted -->
+<p>大概一年前使用<code>playwright</code>替换了<code>selenium</code>写爬虫，使用<code>playwright</code>自带脚本生成简单的代码并且保存登陆状态更加方便。最近因为某个原因要写一下大众点评的爬虫，简单记录一下整个过程。</p>
+<p>在终端中执行下面的命令，开始代码生成。在弹出的浏览器窗口中访问网站，并登录。相关的一系列行为都会被记录下来，并生成对应的代码。当关闭代码生成界面之后，登陆状态也会被保存在指定的 <code>session.json</code> 文件下。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">python -m playwright codegen --save-storage<span class="o">=</span>session.json
+</code></pre></div><p>下面是获取评论区脚本的具体实现方式。</p>
+<ul>
+<li>首先加载已经保存过的 session.json 文件,之后创建一个<code>page</code>并且访问到指定的地址，并执行一行js命令让页面滑动到最底部。（页面滑动功能本来我不会写，但使用 copilot 给出注释之后它自动帮我补全了）</li>
+<li>等待所有的评论区被加载完成，这里用到了 <code>wait_for_selector</code> 使脚本强制等待</li>
+<li>定位 comments 列表，把列表中的所有项遍历，保存我们想要的信息</li>
+<li>因为这个网站的下一页按钮是不会发生变化的，所以在执行完访问功能之后会直接点击按钮，并等待几秒钟避免频率过高被反爬</li>
+</ul>
+<p>这段代码执行了大概半个小时爬完了大概是三百多页的数据，每页15个评论。过程中只出现一次要求输入滑动验证的情况，由于设置了等待加载，手动输入验证之后就可以继续工作，之后就再也没有出现过相关的提示，可能是这个访问频率设置还比较合理。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 使用 playwright 加载本地 session.json</span>
+<span class="c1"># 访问 https://www.dianping.com/shop/l9dVct5Ly4pFdw9e/review_all</span>
+<span class="c1"># 记录所有评论ID和链接</span>
+<span class="c1"># 自动翻页</span>
+
+<span class="kn">from</span> <span class="nn">playwright.sync_api</span> <span class="kn">import</span> <span class="n">sync_playwright</span>
+
+<span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;comments.csv&#39;</span>
+
+<span class="k">with</span> <span class="n">sync_playwright</span><span class="p">()</span> <span class="k">as</span> <span class="n">p</span><span class="p">:</span>
+    <span class="n">browser</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">chromium</span><span class="o">.</span><span class="n">launch</span><span class="p">(</span><span class="n">headless</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    
+    <span class="c1"># 加载session</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">(</span><span class="n">storage_state</span><span class="o">=</span><span class="s1">&#39;session.json&#39;</span><span class="p">)</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">new_page</span><span class="p">()</span>
+    
+    <span class="c1"># 访问评论页面</span>
+    <span class="n">page</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="s1">&#39;https://www.dianping.com/shop/l9dVct5Ly4pFdw9e/review_all&#39;</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="c1"># 滑动到底部</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;() =&gt; {
+</span><span class="s1">            window.scrollTo(0, document.body.scrollHeight);
+</span><span class="s1">        }&#39;&#39;&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 等待评论加载完成</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">wait_for_selector</span><span class="p">(</span>
+            <span class="s1">&#39;#review-list &gt; div.review-list-container &gt; div.review-list-main &gt; div.reviews-wrapper &gt; div.reviews-items&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 获取评论ID和链接保存到csv文件</span>
+        <span class="n">comments</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">query_selector_all</span><span class="p">(</span>
+            <span class="s1">&#39;#review-list &gt; div.review-list-container &gt; div.review-list-main &gt; div.reviews-wrapper &gt; div.reviews-items &gt; ul &gt; li&#39;</span><span class="p">)</span>
+        <span class="c1"># 输出评论个数</span>
+        <span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">comments</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">comment</span> <span class="ow">in</span> <span class="n">comments</span><span class="p">:</span>
+            <span class="c1"># 获取用户名和链接 .div &gt; div.dper-info &gt; a</span>
+            <span class="n">user</span> <span class="o">=</span> <span class="n">comment</span><span class="o">.</span><span class="n">query_selector</span><span class="p">(</span><span class="s1">&#39;.dper-info &gt; a&#39;</span><span class="p">)</span>
+
+            <span class="c1"># 用户名被 a 包裹</span>
+            <span class="n">user_name</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">inner_text</span><span class="p">()</span>
+            <span class="n">user_url</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">user_name</span><span class="p">,</span> <span class="n">user_url</span><span class="p">)</span>
+
+            <span class="c1"># 获取评论内容 #review-list &gt; div.review-list-container &gt; div.review-list-main &gt; div.reviews-wrapper &gt; div.reviews-items &gt; ul &gt; li:nth-child(2) &gt; div &gt; div.review-words.Hide</span>
+            <span class="n">comment_content</span> <span class="o">=</span> <span class="n">comment</span><span class="o">.</span><span class="n">query_selector</span><span class="p">(</span><span class="s1">&#39;.review-words&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">inner_text</span><span class="p">()</span>
+            <span class="c1"># 去除评论中的换行符和多余空格</span>
+            <span class="n">comment_content</span> <span class="o">=</span> <span class="n">comment_content</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+            <span class="c1"># 评论时间 #review-list &gt; div.review-list-container &gt; div.review-list-main &gt; div.reviews-wrapper &gt; div.reviews-items &gt; ul &gt; li:nth-child(2) &gt; div &gt; div.misc-info.clearfix &gt; span.time</span>
+            <span class="n">comment_time</span> <span class="o">=</span> <span class="n">comment</span><span class="o">.</span><span class="n">query_selector</span><span class="p">(</span><span class="s1">&#39;.misc-info.clearfix &gt; span.time&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">inner_text</span><span class="p">()</span>
+
+            <span class="c1"># 写入csv文件</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{user_name},{user_url},{comment_content},{comment_time}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 翻页 #review-list &gt; div.review-list-container &gt; div.review-list-main &gt; div.reviews-wrapper &gt; div.bottom-area.clearfix &gt; div &gt; a.NextPage</span>
+        <span class="n">next_page</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">query_selector</span><span class="p">(</span><span class="s1">&#39;#review-list &gt; div.review-list-container &gt; div.review-list-main &gt; div.reviews-wrapper &gt; div.bottom-area.clearfix &gt; div &gt; a.NextPage&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">next_page</span><span class="p">:</span>
+            <span class="c1"># 点击下一页</span>
+            <span class="n">next_page</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="c1"># 等待5秒</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">wait_for_timeout</span><span class="p">(</span><span class="mi">5000</span><span class="p">)</span>
+</code></pre></div><p>一个现实的问题是，大众点评的评论区用到了 CSS 反爬虫，但由于我只需要 ID 和大概的评论内容，就没有深追，网上有很多博客讨论了如何破解 CSS 反爬。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-03-22</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/playwright/">playwright</a>,&nbsp;<a href="/tags/python/">python</a>,&nbsp;<a href="/tags/%E7%88%AC%E8%99%AB/">爬虫</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/pixel6-magisk/" class="prev" rel="prev" title="Pixel6 安装 Magisk"><i class="fas fa-angle-left fa-fw"></i>Pixel6 安装 Magisk</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.75.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
