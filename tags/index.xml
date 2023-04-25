@@ -3,7 +3,14 @@
         <title>Tags - 标签 - Wanakiki`s Blog</title>
         <link>https://wanakiki.github.io/tags/</link>
         <description>Tags - 标签 - Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 22 Mar 2023 12:33:06 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 25 Apr 2023 21:38:07 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>生活</title>
+    <link>https://wanakiki.github.io/tags/%E7%94%9F%E6%B4%BB/</link>
+    <pubDate>Tue, 25 Apr 2023 21:38:07 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/tags/%E7%94%9F%E6%B4%BB/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>playwright</title>
     <link>https://wanakiki.github.io/tags/playwright/</link>
     <pubDate>Wed, 22 Mar 2023 12:33:06 &#43;0800</pubDate>
@@ -65,13 +72,6 @@
     <pubDate>Wed, 08 Jul 2020 12:27:41 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://wanakiki.github.io/tags/flask/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>C语言</title>
-    <link>https://wanakiki.github.io/tags/c%E8%AF%AD%E8%A8%80/</link>
-    <pubDate>Sat, 06 Jun 2020 23:06:09 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/tags/c%E8%AF%AD%E8%A8%80/</guid>
     <description><![CDATA[]]></description>
 </item></channel>
 </rss>

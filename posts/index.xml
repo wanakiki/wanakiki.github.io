@@ -3,7 +3,14 @@
         <title>所有文章 - Wanakiki`s Blog</title>
         <link>https://wanakiki.github.io/posts/</link>
         <description>所有文章 | Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 22 Mar 2023 12:33:06 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 25 Apr 2023 21:38:07 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>2023 Qingdao Marathon</title>
+    <link>https://wanakiki.github.io/posts/2023-qingdao-marathon/</link>
+    <pubDate>Tue, 25 Apr 2023 21:38:07 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/posts/2023-qingdao-marathon/</guid>
+    <description><![CDATA[4月22号，完赛了半马，最终是以两小时二十分钟的净成绩通过了终点，排名6999。 最初报名马拉松的原因是，年初新冠疫情在床上躺了很久，总感觉生命可能随时就要G掉。于是身体恢复之后，就开始有意识地去进行一]]></description>
+</item><item>
     <title>使用 Playwright 获取大众点评店铺评论</title>
     <link>https://wanakiki.github.io/posts/dazhongdianping-spider/</link>
     <pubDate>Wed, 22 Mar 2023 12:33:06 &#43;0800</pubDate>
@@ -66,12 +73,5 @@
     <author>作者</author>
     <guid>https://wanakiki.github.io/posts/spider-with-proxy/</guid>
     <description><![CDATA[最近别人发给了一个邀请链接，问能不能刷满邀请人数，简单试了一下，网站对访问IP进行了记录，不能用一个IP一直访问，想到的解决方案是套上代理来实现刷点击量的目的。 自从学了点爬虫知识之后，这是第一次需要使]]></description>
-</item><item>
-    <title>Flask框架下API开发异常处理</title>
-    <link>https://wanakiki.github.io/posts/flask-api-exception/</link>
-    <pubDate>Wed, 08 Jul 2020 12:27:41 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/flask-api-exception/</guid>
-    <description><![CDATA[最近在做SRDP项目的后端开发，但是狗书上面对API相关内容介绍比较少，示例代码中的API部分也不涉及用户登录注册相关内容。不过幸运的是在Github上找到了一个问卷调查项目，通过阅读项目代码发现了在]]></description>
 </item></channel>
 </rss>
