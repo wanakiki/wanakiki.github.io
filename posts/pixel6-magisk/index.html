@@ -26,7 +26,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/wanakiki.github.io\/posts\/pixel6-magisk\/"
-        },"genre": "posts","keywords": "pixel6, magisk","wordcount":  655 ,
+        },"genre": "posts","keywords": "pixel6, magisk","wordcount":  808 ,
         "url": "https:\/\/wanakiki.github.io\/posts\/pixel6-magisk\/","datePublished": "2023-03-05T22:04:11+08:00","dateModified": "2023-03-05T22:04:11+08:00","publisher": {
             "@type": "Organization",
             "name": "wanakiki"},"author": {
@@ -76,23 +76,30 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Pixel6 安装 Magisk</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-03-05">2023-03-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 655 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-03-05">2023-03-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 808 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#具体操作">具体操作</a></li>
+    <li><a href="#如何避免ota覆盖">如何避免OTA覆盖</a></li>
+  </ul>
+</nav></div>
             </div><div class="content" id="content"><p>Pixel6 在国内默认不能支持电信手机卡，只能上网但是不能电话和短信，需要安装 Magisk 模块之后才能解决这个问题。本来在咸鱼上淘到的手机已经包含了这个模块，但是在一次更新后，Magisk 被重置，需要重新刷入，进行简单的记录。</p>
 <!-- raw HTML omitted -->
+<h2 id="背景">背景</h2>
 <p>首先，在 new bing 上对这一问题进行了提问，得到了以下答复：</p>
 <blockquote>
 <p>根据网上的教程 <a href="https://left024.github.io/pixel5_android12_magisk/" target="_blank" rel="noopener noreffer">1</a> <a href="https://blog.csdn.net/iffy1/article/details/122442912" target="_blank" rel="noopener noreffer">2</a> <a href="https://zhuanlan.zhihu.com/p/479664085" target="_blank" rel="noopener noreffer">3</a>，你需要先解锁 bootloader，然后下载 magisk.apk 和 pixel6 的系统镜像文件，用 magisk.apk 修补 boot.img 文件，再用 fastboot 命令刷入修补后的 boot.img 文件。这样就可以在 pixel6 上获得 root 权限了。</p>
 </blockquote>
 <p>之后在少数派找到了一个比较详细的参考：<a href="https://sspai.com/post/67932" target="_blank" rel="noopener noreffer">Android 玩家必备神器入门：从零开始安装 Magisk</a>，虽然教程是 21 年写的，但是基本的路线是一样的。由于我的手机购买时已经解锁并且已经安装好这个模块，所以接下来的内容并不会包含如何下载 Magisk APP 和解锁 bootloader，但这篇文章里面进行了介绍，并且包含了安装 platform-tools（安卓调试工具包）的内容。</p>
 <hr>
-<p>以下是我的具体操作：</p>
+<h2 id="具体操作">具体操作</h2>
 <p>在谷歌的官网上下载 Pixel6 的固件，<a href="https://developers.google.cn/android/images?hl=zh-cn" target="_blank" rel="noopener noreffer">Nexus 和 Pixel 设备的出厂映像  |  Google Play services  |  Google Developers</a>，解压两次压缩文件之后找到 <code>boot.img</code> 并传输到手机。</p>
 <p>手机端使用 Magisk APP 选中该文件，并进行修补，将修补后的文件再传输回电脑。在电脑端执行以下命令，重启后手机便已经安装好面具了。</p>
 <div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="c"># 重启手机到 boot loader</span>
@@ -103,6 +110,14 @@
 <span class="n">fastboot</span> <span class="n">flash</span> <span class="n">boot</span> <span class="n">magisk-boot</span><span class="p">.</span><span class="n">img</span>
 <span class="n">fastboot</span> <span class="n">reboot</span>
 </code></pre></div><p>如果执行 <code>fastboot flash boot magisk-boot.img</code> 命令提示 <code>&lt; waiting for any device &gt;</code>，则是因为电脑不具备相关驱动，可以去安卓开发者下载并通过设备管理器安装（此时设备管理器中可以看到 pixel 手机的图标）：<a href="https://developer.android.google.cn/studio/run/win-usb?hl=zh-cn" target="_blank" rel="noopener noreffer">获取 Google USB 驱动程序  |  Android 开发者  |  Android Developers</a>。</p>
+<h2 id="如何避免ota覆盖">如何避免OTA覆盖</h2>
+<p>参考该篇博客进行设置：<a href="https://sspai.com/post/57924#!" target="_blank" rel="noopener noreffer">小胡子的干货铺——Pixel 4 XL刷入Magisk后如何OTA更新</a>，具体分为三步：</p>
+<ul>
+<li>检测到更新时先下载更新，但不要立即重启（如果手机一直WIFI使用，大概率会后台静默下载再进行通知）</li>
+<li>进入 Magisk 选择卸载 -&gt; 还原原厂镜像</li>
+<li>点击 安装 -&gt; 安装到未使用的槽位（OTA后）</li>
+<li>重启系统，结束后 Magisk 会被保留</li>
+</ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
