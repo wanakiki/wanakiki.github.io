@@ -3,7 +3,14 @@
         <title>所有文章 - Wanakiki`s Blog</title>
         <link>https://wanakiki.github.io/posts/</link>
         <description>所有文章 | Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 25 Apr 2023 21:38:07 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 06 Jun 2023 12:55:39 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Playwright Tricks</title>
+    <link>https://wanakiki.github.io/posts/playwright-tricks/</link>
+    <pubDate>Tue, 06 Jun 2023 12:55:39 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/posts/playwright-tricks/</guid>
+    <description><![CDATA[使用操作录制提升编码效率，可以对只需要执行一次且相对简单的功能直接进行录制，例如登陆获取cookie。 python -m playwright codegen --save-storage=login_data.json 将获取cookie的代码进行封装，供之后的高层逻辑调用，有助于代码的整洁。一个封装后的例]]></description>
+</item><item>
     <title>2023 Qingdao Marathon</title>
     <link>https://wanakiki.github.io/posts/2023-qingdao-marathon/</link>
     <pubDate>Tue, 25 Apr 2023 21:38:07 &#43;0800</pubDate>
@@ -66,12 +73,5 @@
     <author>作者</author>
     <guid>https://wanakiki.github.io/posts/about-me/</guid>
     <description><![CDATA[本科学校：中国海洋大学，Ocean University of China 入学年份：2017 所修专业：电子信息科学与技术，Electronic Information Science and Technology 实验室经历：学院水下视觉实验室 比赛经历： 山东省ACM程序设计竞赛（2018、2019]]></description>
-</item><item>
-    <title>Python爬虫 代理IP地址获取及使用</title>
-    <link>https://wanakiki.github.io/posts/spider-with-proxy/</link>
-    <pubDate>Thu, 13 Aug 2020 22:16:21 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/spider-with-proxy/</guid>
-    <description><![CDATA[最近别人发给了一个邀请链接，问能不能刷满邀请人数，简单试了一下，网站对访问IP进行了记录，不能用一个IP一直访问，想到的解决方案是套上代理来实现刷点击量的目的。 自从学了点爬虫知识之后，这是第一次需要使]]></description>
 </item></channel>
 </rss>
