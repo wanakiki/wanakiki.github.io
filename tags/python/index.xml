@@ -11,6 +11,13 @@
     <guid>https://wanakiki.github.io/posts/dazhongdianping-spider/</guid>
     <description><![CDATA[简单记录使用playwright获取大众点评店铺评论的方法。 大概一年前使用playwright替换了selenium写爬虫，使用playwright自带脚本生成简单的代码并且保存登陆状态更加方便。最近]]></description>
 </item><item>
+    <title>使用百度 OCR 录入课堂考勤信息</title>
+    <link>https://wanakiki.github.io/posts/baiduocr-checkin/</link>
+    <pubDate>Wed, 20 Apr 2022 23:30:50 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/posts/baiduocr-checkin/</guid>
+    <description><![CDATA[之前在做助教的时候，我写了一个小工具来统计参加课程的学生人数。因为班上有将近一百个人，每次上课都会以小组为单位做一些题目，并且需要每个人写上自己的姓名和学号。如果要在一百个人中去检索有哪些人没有出勤，]]></description>
+</item><item>
     <title>Python生成字符动画</title>
     <link>https://wanakiki.github.io/posts/ascii-art/</link>
     <pubDate>Sun, 28 Mar 2021 10:55:58 &#43;0800</pubDate>

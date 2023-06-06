@@ -41,6 +41,13 @@
     <guid>https://wanakiki.github.io/posts/arduino-library-location/</guid>
     <description><![CDATA[Arduino IDE 默认将软件包安装到 C 盘，导致 C 盘可用空间不足。发现软件内没有指定软件包下载位置的设置，于是上网查找了一下如何更改软件包的位置，在比较偏僻的地方找到了方法：Arduino IDE 2.0 的設定檔與變更字體 默认情]]></description>
 </item><item>
+    <title>使用百度 OCR 录入课堂考勤信息</title>
+    <link>https://wanakiki.github.io/posts/baiduocr-checkin/</link>
+    <pubDate>Wed, 20 Apr 2022 23:30:50 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/posts/baiduocr-checkin/</guid>
+    <description><![CDATA[之前在做助教的时候，我写了一个小工具来统计参加课程的学生人数。因为班上有将近一百个人，每次上课都会以小组为单位做一些题目，并且需要每个人写上自己的姓名和学号。如果要在一百个人中去检索有哪些人没有出勤，]]></description>
+</item><item>
     <title>2022 Winter Holiday</title>
     <link>https://wanakiki.github.io/posts/2022-winter-holiday/</link>
     <pubDate>Fri, 18 Feb 2022 12:44:10 &#43;0800</pubDate>
@@ -68,12 +75,5 @@
     <author>作者</author>
     <guid>https://wanakiki.github.io/posts/custom-sort/</guid>
     <description><![CDATA[整理一下自定义类型排序的相关内容，网上可以查找到的实现方法有三种，内部逻辑相同只是写法不同： 自定义比较函数 重载比较运算符（重载小于号） 定义函数对象并传入 下面是我实现的一个简单案例，需要注意的是，网上有]]></description>
-</item><item>
-    <title>📄个人介绍</title>
-    <link>https://wanakiki.github.io/posts/about-me/</link>
-    <pubDate>Fri, 25 Sep 2020 17:16:30 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/about-me/</guid>
-    <description><![CDATA[本科学校：中国海洋大学，Ocean University of China 入学年份：2017 所修专业：电子信息科学与技术，Electronic Information Science and Technology 实验室经历：学院水下视觉实验室 比赛经历： 山东省ACM程序设计竞赛（2018、2019]]></description>
 </item></channel>
 </rss>
