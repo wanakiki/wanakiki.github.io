@@ -3,7 +3,14 @@
         <title>所有文章 - Wanakiki`s Blog</title>
         <link>https://wanakiki.github.io/posts/</link>
         <description>所有文章 | Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 06 Jun 2023 12:55:39 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 11 Dec 2023 22:02:28 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>记录一次 Playwright 模拟登录</title>
+    <link>https://wanakiki.github.io/posts/playwright-login/</link>
+    <pubDate>Mon, 11 Dec 2023 22:02:28 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/posts/playwright-login/</guid>
+    <description><![CDATA[事情的起因是需要从一个比较有年代的网站上拿到数据存到自己的数据库里面，但是这个网站每次登陆的时候都需要做滑块验证，之前没有搞过相关操作，周末花时间尝试了一下之后感觉整个过程还是比较有意思的，简单记录一]]></description>
+</item><item>
     <title>Playwright Tricks</title>
     <link>https://wanakiki.github.io/posts/playwright-tricks/</link>
     <pubDate>Tue, 06 Jun 2023 12:55:39 &#43;0800</pubDate>
@@ -66,12 +73,5 @@
     <author>作者</author>
     <guid>https://wanakiki.github.io/posts/ascii-art/</guid>
     <description><![CDATA[前段时间（指去年）发现咒术回战的ED做的很棒，翻来覆去看了几遍之后想把它魔改成字符画的形式，拖了快半年终于在这周做出来了！ 主要思路参考了B站UP主“奇乐编程学院”的视频：【编程三分钟】教大家用Pyth]]></description>
-</item><item>
-    <title>C&#43;&#43; sort函数自定义类型排序</title>
-    <link>https://wanakiki.github.io/posts/custom-sort/</link>
-    <pubDate>Thu, 08 Oct 2020 22:43:54 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/custom-sort/</guid>
-    <description><![CDATA[整理一下自定义类型排序的相关内容，网上可以查找到的实现方法有三种，内部逻辑相同只是写法不同： 自定义比较函数 重载比较运算符（重载小于号） 定义函数对象并传入 下面是我实现的一个简单案例，需要注意的是，网上有]]></description>
 </item></channel>
 </rss>
