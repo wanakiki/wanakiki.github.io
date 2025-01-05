@@ -3,7 +3,14 @@
         <title>Flutter - 标签 - Wanakiki`s Blog</title>
         <link>https://wanakiki.github.io/tags/flutter/</link>
         <description>Flutter - 标签 - Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 21 Apr 2020 09:43:32 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/flutter/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 16 Nov 2024 10:33:26 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/flutter/" rel="self" type="application/rss+xml" /><item>
+    <title>Flutter 下的语音识别方案</title>
+    <link>https://wanakiki.github.io/posts/flutter-asr/</link>
+    <pubDate>Sat, 16 Nov 2024 10:33:26 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/posts/flutter-asr/</guid>
+    <description><![CDATA[最近在做龙与地下城角色卡APP，因为手动输入投骰子数量会比较麻烦，想尝试使用语音识别来自动计算投骰子的结果。调研后发现这个效果Flutter上实现还是比较麻烦的。目前查到了三种包： speech_to_text sherpa-onnx speech_xf speech_to_text 第一项是叫做]]></description>
+</item><item>
     <title>Flutter 词典APP</title>
     <link>https://wanakiki.github.io/posts/special-dictionary/</link>
     <pubDate>Tue, 21 Apr 2020 09:43:32 &#43;0800</pubDate>

@@ -3,9 +3,30 @@
         <title>Wanakiki`s Blog</title>
         <link>https://wanakiki.github.io/</link>
         <description>Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 17 May 2024 22:23:21 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 31 Dec 2024 10:53:43 &#43;0800</lastBuildDate>
             <atom:link href="https://wanakiki.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>2024 Summary</title>
+    <link>https://wanakiki.github.io/posts/2024-summary/</link>
+    <pubDate>Tue, 31 Dec 2024 10:53:43 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/posts/2024-summary/</guid>
+    <description><![CDATA[其实感觉写总结是一个很怪的问题，因为我可能主要是会记得最近发生的事情。对于上半年发生的事情印象不是很深。 初印象 今年的新东西，大概是跑团、出国、拔牙、买了第一台苹果设备。然后，一个人出去旅游、海钓。回忆]]></description>
+</item><item>
+    <title>AI Code</title>
+    <link>https://wanakiki.github.io/posts/ai-code/</link>
+    <pubDate>Tue, 19 Nov 2024 15:44:19 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/posts/ai-code/</guid>
+    <description><![CDATA[最近，我在使用Cursor编写代码时，发现它在代码理解方面的能力已经超越了直接使用GPT。其中一个关键功能是全局搜索，它可以检索整个项目的代码并考虑上下文。 作为一个很久没有接触Flutter的人，我用]]></description>
+</item><item>
+    <title>Flutter 下的语音识别方案</title>
+    <link>https://wanakiki.github.io/posts/flutter-asr/</link>
+    <pubDate>Sat, 16 Nov 2024 10:33:26 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/posts/flutter-asr/</guid>
+    <description><![CDATA[最近在做龙与地下城角色卡APP，因为手动输入投骰子数量会比较麻烦，想尝试使用语音识别来自动计算投骰子的结果。调研后发现这个效果Flutter上实现还是比较麻烦的。目前查到了三种包： speech_to_text sherpa-onnx speech_xf speech_to_text 第一项是叫做]]></description>
+</item><item>
     <title>无尽杀戮：牢狱重围 易村点及技巧</title>
     <link>https://wanakiki.github.io/posts/zombicide/</link>
     <pubDate>Fri, 17 May 2024 22:23:21 &#43;0800</pubDate>
@@ -54,26 +75,5 @@
     <author>作者</author>
     <guid>https://wanakiki.github.io/posts/arduino-library-location/</guid>
     <description><![CDATA[Arduino IDE 默认将软件包安装到 C 盘，导致 C 盘可用空间不足。发现软件内没有指定软件包下载位置的设置，于是上网查找了一下如何更改软件包的位置，在比较偏僻的地方找到了方法：Arduino IDE 2.0 的設定檔與變更字體 默认情]]></description>
-</item><item>
-    <title>使用百度 OCR 录入课堂考勤信息</title>
-    <link>https://wanakiki.github.io/posts/baiduocr-checkin/</link>
-    <pubDate>Wed, 20 Apr 2022 23:30:50 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/baiduocr-checkin/</guid>
-    <description><![CDATA[之前在做助教的时候，我写了一个小工具来统计参加课程的学生人数。因为班上有将近一百个人，每次上课都会以小组为单位做一些题目，并且需要每个人写上自己的姓名和学号。如果要在一百个人中去检索有哪些人没有出勤，]]></description>
-</item><item>
-    <title>2022 Winter Holiday</title>
-    <link>https://wanakiki.github.io/posts/2022-winter-holiday/</link>
-    <pubDate>Fri, 18 Feb 2022 12:44:10 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/2022-winter-holiday/</guid>
-    <description><![CDATA[离家前一天，总结一下今年寒假里面做的一些事情。 学习与生活 科研相关📃： 25篇左右 PIM 相关文献 3篇 FPGA EDA 相关文献 强化学习布线代码 看起来东西还算不少，但实际上并没有获得多少有价值的信息。 读完的书📕： 《桶川跟踪狂]]></description>
-</item><item>
-    <title>树莓派使用记录</title>
-    <link>https://wanakiki.github.io/posts/raspberrypi/</link>
-    <pubDate>Sun, 09 Jan 2022 21:53:15 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/raspberrypi/</guid>
-    <description><![CDATA[寒假从学校里拿回来了一块树莓派3B，算是第一次拥有了80%属于自己的树莓派，记录一下使用过程中的一些操作。感觉自己从知道树莓派到真正完全用到树莓派，经历了好长一段时间。 21年年初曾经用顶配的树莓派4B]]></description>
 </item></channel>
 </rss>

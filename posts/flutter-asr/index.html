@@ -5,29 +5,29 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>IIC总线协议 - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="IIC总线协议" />
-<meta property="og:description" content="之前做收音机的时候用到了IIC总线协议，因为用的是别人封装好的库，对协议的具体执行方式不是很了解，于是花了点时间查了一下。 IIC协议大致有下面几个特点： 双向串行通信 两根线：数据线SDA，时钟线SCL，" />
+        <title>Flutter 下的语音识别方案 - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="Flutter 下的语音识别方案" />
+<meta property="og:description" content="最近在做龙与地下城角色卡APP，因为手动输入投骰子数量会比较麻烦，想尝试使用语音识别来自动计算投骰子的结果。调研后发现这个效果Flutter上实现还是比较麻烦的。目前查到了三种包： speech_to_text sherpa-onnx speech_xf speech_to_text 第一项是叫做" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://wanakiki.github.io/posts/about-iic/" />
-<meta property="article:published_time" content="2020-07-01T12:17:49+08:00" />
-<meta property="article:modified_time" content="2020-07-01T12:17:49+08:00" />
+<meta property="og:url" content="https://wanakiki.github.io/posts/flutter-asr/" />
+<meta property="article:published_time" content="2024-11-16T10:33:26+08:00" />
+<meta property="article:modified_time" content="2024-11-16T10:33:26+08:00" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="IIC总线协议"/>
-<meta name="twitter:description" content="之前做收音机的时候用到了IIC总线协议，因为用的是别人封装好的库，对协议的具体执行方式不是很了解，于是花了点时间查了一下。 IIC协议大致有下面几个特点： 双向串行通信 两根线：数据线SDA，时钟线SCL，"/>
+<meta name="twitter:title" content="Flutter 下的语音识别方案"/>
+<meta name="twitter:description" content="最近在做龙与地下城角色卡APP，因为手动输入投骰子数量会比较麻烦，想尝试使用语音识别来自动计算投骰子的结果。调研后发现这个效果Flutter上实现还是比较麻烦的。目前查到了三种包： speech_to_text sherpa-onnx speech_xf speech_to_text 第一项是叫做"/>
 <meta name="application-name" content="Wanakiki`s Blog">
 <meta name="apple-mobile-web-app-title" content="Wanakiki`s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://wanakiki.github.io/posts/about-iic/" /><link rel="prev" href="https://wanakiki.github.io/posts/linux-c/" /><link rel="next" href="https://wanakiki.github.io/posts/learn-vue/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://wanakiki.github.io/posts/flutter-asr/" /><link rel="prev" href="https://wanakiki.github.io/posts/zombicide/" /><link rel="next" href="https://wanakiki.github.io/posts/ai-code/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "IIC总线协议",
+        "headline": "Flutter 下的语音识别方案",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/wanakiki.github.io\/posts\/about-iic\/"
-        },"genre": "posts","wordcount":  492 ,
-        "url": "https:\/\/wanakiki.github.io\/posts\/about-iic\/","datePublished": "2020-07-01T12:17:49+08:00","dateModified": "2020-07-01T12:17:49+08:00","publisher": {
+            "@id": "https:\/\/wanakiki.github.io\/posts\/flutter-asr\/"
+        },"genre": "posts","keywords": "Flutter","wordcount":  840 ,
+        "url": "https:\/\/wanakiki.github.io\/posts\/flutter-asr\/","datePublished": "2024-11-16T10:33:26+08:00","dateModified": "2024-11-16T10:33:26+08:00","publisher": {
             "@type": "Organization",
             "name": "wanakiki"},"author": {
                 "@type": "Person",
@@ -74,10 +74,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">IIC总线协议</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">Flutter 下的语音识别方案</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-07-01">2020-07-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 492 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-11-16">2024-11-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 840 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -85,31 +85,31 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
+    <li><a href="#speech_to_text">speech_to_text</a></li>
+    <li><a href="#sherpa-onnx">sherpa-onnx</a></li>
+    <li><a href="#speech_xf">speech_xf</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><p>之前做收音机的时候用到了IIC总线协议，因为用的是别人封装好的库，对协议的具体执行方式不是很了解，于是花了点时间查了一下。</p>
+            </div><div class="content" id="content"><p>最近在做龙与地下城角色卡APP，因为手动输入投骰子数量会比较麻烦，想尝试使用语音识别来自动计算投骰子的结果。调研后发现这个效果Flutter上实现还是比较麻烦的。目前查到了三种包：</p>
 <!-- raw HTML omitted -->
-<p>IIC协议大致有下面几个特点：</p>
-<ol>
-<li>双向串行通信</li>
-<li>两根线：数据线SDA，时钟线SCL，且支持挂载多个设备</li>
-<li>传递四种信号：起始信号、8bit数据、响应信号、结束信号</li>
-</ol>
-<p><strong>起始信号</strong>：SCL时钟线保持高电平，SDA数据信号由高变低便代表开始信号。当总线上的设备检测到这个开始信号后便知道即将发送数据。</p>
-<p><strong>停止信号</strong>：SCL时钟线保持高电平，SDA数据信号由低变高便代表停止信号。</p>
-<p><strong>8bit数据与响应信号</strong>：发送数据时，接收方在SCL为高电平时读取SDA数据，因此SCL时钟线变为低电平时SDA数据才能发生变化。输出到SDA上的数据一组有八位，传输组数不受限制，但每发送八位后需要接收来自接收方的确认信号才能继续发送下一组数据。数据从高位传输。</p>
-<h4 id="在多设备的情况下一次通信过程可以如下描述">在多设备的情况下，一次通信过程可以如下描述：</h4>
-<p>发送方发出起始信号、发送方发送目标设备地址、发送方接收目标设备响应、发送方传输第一组数据、发送方接收目标设备响应、发送方传输第二组数据、发送方接收目标设备响应&hellip;&hellip;发送方发出停止信号</p>
+<ul>
+<li>speech_to_text</li>
+<li>sherpa-onnx</li>
+<li>speech_xf</li>
+</ul>
+<h2 id="speech_to_text">speech_to_text</h2>
+<p>第一项是叫做 speech_to_text 的库，这个库在Flutter中比较流行，它调用的是安卓端内置的语音识别。我手上的Pixel 6设备和模拟器都能够正常识别，但是对于国产手机来说，可能没有安装谷歌服务，导致需要进行配置。参考GitHub上的方案进行配置之后，并没有成功。</p>
+<h2 id="sherpa-onnx">sherpa-onnx</h2>
+<p>第二项是 sherpa-onnx，这个库定义了一个跨端的方法，其优势在于离线识别，不需要网络参与。参考这个库的官方demo实现了一个基本的例子，发现识别比较好的模型需要的容量可能达到200MB到500MB，而移动端小型模型的尺寸可能在50MB左右。现阶段，不考虑语音识别模型的尺寸，我未优化的打包程序其实也是50MB。这样的应用体积代价是我基本不能承受的。</p>
+<p>不管怎样，我找了一个官方提供的预训练模型 sherpa-onnx-streaming-zipformer-zh-14M-2023-02-23-mobile，这是一个比较小的用于移动端设备的模型。随后用这个数据进行了测试，发现响应速度比较快，但精度并不是很高，可能会有漏识别的情况。</p>
+<p>随后我发现，对我来说最严重的问题是，我的目标功能需要用户说出类似“3D8”这样的输入进行语音识别。但这样的输入在语音识别模型训练集中可能比较少，导致识别时倾向于修改成其他结果。现在手机上有一些方法可以做一些纠正，比方说根据上下文和句子的连贯程度调整识别结果。我在带有修正的讯飞输入法上进行了测试，发现输入“3D8”这样的内容时效果仍旧不太好。至此，我基本放弃了语音识别的方案。</p>
+<h2 id="speech_xf">speech_xf</h2>
+<p>speech_xf 是集成了讯飞语音识别的库，通过联网访问API进行识别。我没有进行更进一步的测试，因为我感觉对我当前的需求来说，这不是一个合适的解决方案。我接下来的计划是调整UI设计，看看能不能在UI设计上加一些功能，让我能够快速创建指定数量的骰子。</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2020-07-01</span>
+                <span>更新于 2024-11-16</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -122,14 +122,14 @@
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/flutter/">Flutter</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/linux-c/" class="prev" rel="prev" title="Linux C语言系统编程作业"><i class="fas fa-angle-left fa-fw"></i>Linux C语言系统编程作业</a>
-            <a href="/posts/learn-vue/" class="next" rel="next" title="VUE框架入门">VUE框架入门<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/posts/zombicide/" class="prev" rel="prev" title="无尽杀戮：牢狱重围 易村点及技巧"><i class="fas fa-angle-left fa-fw"></i>无尽杀戮：牢狱重围 易村点及技巧</a>
+            <a href="/posts/ai-code/" class="next" rel="next" title="AI Code">AI Code<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">
