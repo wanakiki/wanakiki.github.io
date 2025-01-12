@@ -3,19 +3,19 @@
         <title>Tags - 标签 - Wanakiki`s Blog</title>
         <link>https://wanakiki.github.io/tags/</link>
         <description>Tags - 标签 - Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 16 Nov 2024 10:33:26 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 12 Jan 2025 19:59:34 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>桌游</title>
+    <link>https://wanakiki.github.io/tags/%E6%A1%8C%E6%B8%B8/</link>
+    <pubDate>Sun, 12 Jan 2025 19:59:34 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/tags/%E6%A1%8C%E6%B8%B8/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>Flutter</title>
     <link>https://wanakiki.github.io/tags/flutter/</link>
     <pubDate>Sat, 16 Nov 2024 10:33:26 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://wanakiki.github.io/tags/flutter/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>桌游</title>
-    <link>https://wanakiki.github.io/tags/%E6%A1%8C%E6%B8%B8/</link>
-    <pubDate>Fri, 17 May 2024 22:23:21 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/tags/%E6%A1%8C%E6%B8%B8/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>playwright</title>
