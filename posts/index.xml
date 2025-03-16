@@ -3,7 +3,14 @@
         <title>所有文章 - Wanakiki`s Blog</title>
         <link>https://wanakiki.github.io/posts/</link>
         <description>所有文章 | Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 12 Jan 2025 19:59:34 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 16 Mar 2025 16:28:21 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>桌游探店一周年：我的线下桌游之旅</title>
+    <link>https://wanakiki.github.io/posts/250316-tablegame-anniversary/</link>
+    <pubDate>Sun, 16 Mar 2025 16:28:21 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wanakiki.github.io/posts/250316-tablegame-anniversary/</guid>
+    <description><![CDATA[今是大概是我开始探店桌游店一周年的日子。过去的一年里，我经历了许多有趣的桌游体验，也对桌游店有了一些理解，简单记录一下。 探店的起点 最初我产生去桌游店的想法，是因为有一天出门，突然想看看其他人都在玩什么]]></description>
+</item><item>
     <title>龙与地下城跑团 坠入阿弗纳斯 总结</title>
     <link>https://wanakiki.github.io/posts/250112-dnd/</link>
     <pubDate>Sun, 12 Jan 2025 19:59:34 &#43;0800</pubDate>
@@ -66,12 +73,5 @@
     <author>作者</author>
     <guid>https://wanakiki.github.io/posts/dazhongdianping-spider/</guid>
     <description><![CDATA[简单记录使用playwright获取大众点评店铺评论的方法。 大概一年前使用playwright替换了selenium写爬虫，使用playwright自带脚本生成简单的代码并且保存登陆状态更加方便。最近]]></description>
-</item><item>
-    <title>Pixel6 安装 Magisk</title>
-    <link>https://wanakiki.github.io/posts/pixel6-magisk/</link>
-    <pubDate>Sun, 05 Mar 2023 22:04:11 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/pixel6-magisk/</guid>
-    <description><![CDATA[Pixel6 在国内默认不能支持电信手机卡，只能上网但是不能电话和短信，需要安装 Magisk 模块之后才能解决这个问题。本来在咸鱼上淘到的手机已经包含了这个模块，但是在一次更新后，Magisk 被重置，需要重新刷入，进行简单的]]></description>
 </item></channel>
 </rss>
