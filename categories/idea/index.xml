@@ -1,14 +1,19 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>idea - 分类 - Wanakiki`s Blog</title>
-        <link>https://wanakiki.github.io/categories/idea/</link>
-        <description>idea - 分类 - Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 06 Nov 2019 23:04:39 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/categories/idea/" rel="self" type="application/rss+xml" /><item>
-    <title>🏠班级网站项目</title>
-    <link>https://wanakiki.github.io/posts/website/</link>
-    <pubDate>Wed, 06 Nov 2019 23:04:39 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/website/</guid>
-    <description><![CDATA[起因💡 本人有两年大学班委的经验，发现学校团委给班级的一般都是信息整理相关的工作。但现在已经是21世纪，完全没有必要因为收集一些个人信息让每个人都填写一遍excel表再发给班委进行汇总。我之前曾经试过利]]></description>
-</item></channel>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Idea on Wanakiki`s Blog</title>
+    <link>http://localhost:1313/categories/idea/</link>
+    <description>Recent content in Idea on Wanakiki`s Blog</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 06 Nov 2019 23:04:39 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/idea/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>🏠班级网站项目</title>
+      <link>http://localhost:1313/posts/website/</link>
+      <pubDate>Wed, 06 Nov 2019 23:04:39 +0800</pubDate>
+      <guid>http://localhost:1313/posts/website/</guid>
+      <description>&lt;h2 id=&#34;起因&#34;&gt;起因💡&lt;/h2&gt;&#xA;&lt;p&gt;本人有两年大学班委的经验，发现学校团委给班级的一般都是信息整理相关的工作。但现在已经是21世纪，完全没有必要因为收集一些个人信息让每个人都填写一遍excel表再发给班委进行汇总。我之前曾经试过利用腾讯文档进行信息收集，但大部分人都不是很适应，加上&lt;strong&gt;目前市面上找不到从excel生成在线表单的工具，每次问卷都需要花一定时间准备&lt;/strong&gt;，于是我有了写一个自己的网站的想法。&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>

@@ -1,21 +1,26 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>flask - 标签 - Wanakiki`s Blog</title>
-        <link>https://wanakiki.github.io/tags/flask/</link>
-        <description>flask - 标签 - Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 08 Jul 2020 12:27:41 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/flask/" rel="self" type="application/rss+xml" /><item>
-    <title>Flask框架下API开发异常处理</title>
-    <link>https://wanakiki.github.io/posts/flask-api-exception/</link>
-    <pubDate>Wed, 08 Jul 2020 12:27:41 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/flask-api-exception/</guid>
-    <description><![CDATA[最近在做SRDP项目的后端开发，但是狗书上面对API相关内容介绍比较少，示例代码中的API部分也不涉及用户登录注册相关内容。不过幸运的是在Github上找到了一个问卷调查项目，通过阅读项目代码发现了在]]></description>
-</item><item>
-    <title>Flask&#43;MongoDB CURD微实战</title>
-    <link>https://wanakiki.github.io/posts/mongodb-demo/</link>
-    <pubDate>Sat, 30 May 2020 11:07:16 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/mongodb-demo/</guid>
-    <description><![CDATA[做SRDP的过程中发现关系型数据库在实现问卷效果时比较困难，所以找了个时间熟悉了一下非关系型数据库，做了一个todo小demo。 视频演示地址 过程记录 下载安装mongodb，注意安装的时候不要勾选com]]></description>
-</item></channel>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Flask on Wanakiki`s Blog</title>
+    <link>http://localhost:1313/tags/flask/</link>
+    <description>Recent content in Flask on Wanakiki`s Blog</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 08 Jul 2020 12:27:41 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/flask/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Flask框架下API开发异常处理</title>
+      <link>http://localhost:1313/posts/flask-api-exception/</link>
+      <pubDate>Wed, 08 Jul 2020 12:27:41 +0800</pubDate>
+      <guid>http://localhost:1313/posts/flask-api-exception/</guid>
+      <description>&lt;p&gt;最近在做SRDP项目的后端开发，但是狗书上面对API相关内容介绍比较少，示例代码中的API部分也不涉及用户登录注册相关内容。不过幸运的是在Github上找到了一个问卷调查项目，通过阅读项目代码发现了在进行API开发时处理异常的一些技巧。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Flask&#43;MongoDB CURD微实战</title>
+      <link>http://localhost:1313/posts/mongodb-demo/</link>
+      <pubDate>Sat, 30 May 2020 11:07:16 +0800</pubDate>
+      <guid>http://localhost:1313/posts/mongodb-demo/</guid>
+      <description>&lt;p&gt;做SRDP的过程中发现关系型数据库在实现问卷效果时比较困难，所以找了个时间熟悉了一下非关系型数据库，做了一个todo小demo。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1654y1D7jN/&#34; target=&#34;_blank&#34; rel=&#34;noopener noreffer &#34;&gt;视频演示地址&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;过程记录&#34;&gt;过程记录&lt;/h2&gt;&#xA;&lt;p&gt;下载安装&lt;a href=&#34;https://www.mongodb.com/download-center/community&#34; target=&#34;_blank&#34; rel=&#34;noopener noreffer &#34;&gt;mongodb&lt;/a&gt;，注意安装的时候不要勾选compass，我勾选之后直接卡住了。&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>

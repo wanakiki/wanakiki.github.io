@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-    <head>
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>数据结构作业六 旅行商（TSP） - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="数据结构作业六 旅行商（TSP）" />
-<meta property="og:description" content="图论第一次作业，不需要提交报告，在OJ上提交。 描述 Shrek是一个大山里的邮递员，每天负责给所在地区的n个村庄派发信件。但杯具的是，由于道路狭窄，年久失修，村庄间的道路都只能单向通过，甚至有些村庄无法" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://wanakiki.github.io/posts/tsp/" />
-<meta property="article:published_time" content="2019-05-07T23:55:50+08:00" />
-<meta property="article:modified_time" content="2019-05-07T23:55:50+08:00" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="数据结构作业六 旅行商（TSP）"/>
-<meta name="twitter:description" content="图论第一次作业，不需要提交报告，在OJ上提交。 描述 Shrek是一个大山里的邮递员，每天负责给所在地区的n个村庄派发信件。但杯具的是，由于道路狭窄，年久失修，村庄间的道路都只能单向通过，甚至有些村庄无法"/>
-<meta name="application-name" content="Wanakiki`s Blog">
-<meta name="apple-mobile-web-app-title" content="Wanakiki`s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <title>数据结构作业六 旅行商（TSP） - Wanakiki`s Blog</title><meta name="Description" content="This is my cool site"><meta property="og:url" content="http://localhost:1313/posts/tsp/">
+  <meta property="og:site_name" content="Wanakiki`s Blog">
+  <meta property="og:title" content="数据结构作业六 旅行商（TSP）">
+  <meta property="og:description" content="图论第一次作业，不需要提交报告，在OJ上提交。
+描述 Shrek是一个大山里的邮递员，每天负责给所在地区的n个村庄派发信件。但杯具的是，由于道路狭窄，年久失修，村庄间的道路都只能单向通过，甚至有些村庄无法从任意一个村庄到达。这样我们只能希望尽可能多的村庄可以收到投递的信件。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2019-05-07T23:55:50+08:00">
+    <meta property="article:modified_time" content="2019-05-07T23:55:50+08:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="数据结构作业六 旅行商（TSP）">
+  <meta name="twitter:description" content="图论第一次作业，不需要提交报告，在OJ上提交。
+描述 Shrek是一个大山里的邮递员，每天负责给所在地区的n个村庄派发信件。但杯具的是，由于道路狭窄，年久失修，村庄间的道路都只能单向通过，甚至有些村庄无法从任意一个村庄到达。这样我们只能希望尽可能多的村庄可以收到投递的信件。">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://wanakiki.github.io/posts/tsp/" /><link rel="prev" href="https://wanakiki.github.io/posts/bin-tree/" /><link rel="next" href="https://wanakiki.github.io/posts/funs/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/tsp/" /><link rel="prev" href="http://localhost:1313/posts/bin-tree/" /><link rel="next" href="http://localhost:1313/posts/funs/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -25,63 +32,55 @@
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/wanakiki.github.io\/posts\/tsp\/"
-        },"genre": "posts","wordcount":  639 ,
-        "url": "https:\/\/wanakiki.github.io\/posts\/tsp\/","datePublished": "2019-05-07T23:55:50+08:00","dateModified": "2019-05-07T23:55:50+08:00","publisher": {
+            "@id": "http:\/\/localhost:1313\/posts\/tsp\/"
+        },"genre": "posts","wordcount":  640 ,
+        "url": "http:\/\/localhost:1313\/posts\/tsp\/","datePublished": "2019-05-07T23:55:50+08:00","dateModified": "2019-05-07T23:55:50+08:00","publisher": {
             "@type": "Organization",
-            "name": "wanakiki"},"author": {
+            "name": ""},"author": {
                 "@type": "Person",
                 "name": "wanakiki"
             },"description": ""
     }
     </script></head>
-    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+            <a href="/" title="Wanakiki`s Blog">🥰Wanakiki`s Blog</a>
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> Blog </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                    <i class="fas fa-adjust fa-fw"></i>
-                </a>
-            </div>
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
         </div>
     </div>
 </header><header class="mobile" id="header-mobile">
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+                <a href="/" title="Wanakiki`s Blog">🥰Wanakiki`s Blog</a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
             </div>
         </div>
         <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Blog</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                <i class="fas fa-adjust fa-fw"></i>
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a></div>
     </div>
-</header>
-<div class="search-dropdown desktop">
-    <div id="search-dropdown-desktop"></div>
-</div>
-<div class="search-dropdown mobile">
-    <div id="search-dropdown-mobile"></div>
-</div>
-<main class="main">
+</header><main class="main">
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">数据结构作业六 旅行商（TSP）</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw"></i>数据结构</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-05-07">2019-05-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 639 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
-        </div><div class="details toc" id="toc-static"  kept="">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">数据结构作业六 旅行商（TSP）</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>wanakiki</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>数据结构</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2019-05-07">2019-05-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 640 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
-                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
@@ -97,7 +96,6 @@
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>图论第一次作业，不需要提交报告，在OJ上提交。</p>
-<!-- raw HTML omitted -->
 <h2 id="描述">描述</h2>
 <p>Shrek是一个大山里的邮递员，每天负责给所在地区的n个村庄派发信件。但杯具的是，由于道路狭窄，年久失修，村庄间的道路都只能单向通过，甚至有些村庄无法从任意一个村庄到达。这样我们只能希望尽可能多的村庄可以收到投递的信件。</p>
 <p>Shrek希望知道如何选定一个村庄A作为起点（我们将他空投到该村庄），依次经过尽可能多的村庄，路途中的每个村庄都经过仅一次，最终到达终点村庄B，完成整个送信过程。这个任务交给你来完成。</p>
@@ -110,89 +108,87 @@
 <h3 id="输出">输出</h3>
 <p>输出一个数字，表示符合条件的最长道路经过的村庄数。</p>
 <h3 id="输入样例-1">输入样例 1</h3>
-<pre><code class="language-no" data-lang="no">4 3
+<pre tabindex="0"><code class="language-no" data-lang="no">4 3
 1 4
 2 4
 4 3
 </code></pre><h3 id="输出样例-1">输出样例 1</h3>
-<pre><code class="language-no" data-lang="no">3
+<pre tabindex="0"><code class="language-no" data-lang="no">3
 </code></pre><h2 id="代码">代码</h2>
 <p>先进性拓扑排序，之后dp找到最大值。</p>
-<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="cp">#define myMax(x,y) ((x) &gt; (y) ? (x) : (y))
-</span><span class="cp"></span><span class="kt">int</span> <span class="n">inDeg</span><span class="p">[</span><span class="mi">1000005</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>   <span class="c1">//入度 用于拓扑排序
-</span><span class="c1"></span><span class="kt">int</span> <span class="n">tpSorted</span><span class="p">[</span><span class="mi">1000005</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>    <span class="c1">//拓扑排序的顺序
-</span><span class="c1"></span>
-<span class="c1">//单个村庄
-</span><span class="c1"></span><span class="k">struct</span> <span class="nc">village</span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">id</span><span class="p">;</span>
-    <span class="n">village</span> <span class="o">*</span> <span class="n">next_village</span><span class="p">;</span>
-    <span class="n">village</span><span class="p">(</span><span class="kt">int</span> <span class="n">_id</span><span class="p">,</span> <span class="n">village</span><span class="o">*</span> <span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">)</span><span class="o">:</span><span class="n">id</span><span class="p">(</span><span class="n">_id</span><span class="p">),</span><span class="n">next_village</span><span class="p">(</span><span class="n">next</span><span class="p">){}</span>
-<span class="p">};</span>
-
-<span class="k">struct</span> <span class="nc">villages</span><span class="p">{</span>
-    <span class="n">village</span><span class="o">*</span> <span class="n">_next</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">dp</span><span class="p">;</span> <span class="c1">//直接写入属性
-</span><span class="c1"></span>    <span class="n">villages</span><span class="p">()</span><span class="o">:</span><span class="n">_next</span><span class="p">(</span><span class="nb">NULL</span><span class="p">),</span> <span class="n">dp</span><span class="p">(</span><span class="mi">1</span><span class="p">){}</span>
-    <span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">next_id</span><span class="p">);</span>
-<span class="p">}</span><span class="n">Villages</span><span class="p">[</span><span class="mi">1000005</span><span class="p">];</span>
-
-<span class="kt">void</span> <span class="n">villages</span><span class="o">::</span><span class="n">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">next_id</span><span class="p">){</span>
-    <span class="n">inDeg</span><span class="p">[</span><span class="n">next_id</span><span class="p">]</span> <span class="o">++</span><span class="p">;</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">_next</span><span class="p">){</span>
-        <span class="n">_next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">village</span><span class="p">(</span><span class="n">next_id</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">else</span><span class="p">{</span>
-        <span class="n">_next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">village</span><span class="p">(</span><span class="n">next_id</span><span class="p">,</span> <span class="n">_next</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">//全局变量真好用...
-</span><span class="c1"></span><span class="kt">int</span> <span class="nf">topologicalSort</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>    <span class="c1">//记录最大值
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>   <span class="c1">//拓扑数组长度
-</span><span class="c1"></span>    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">inDeg</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="n">tpSorted</span><span class="p">[</span><span class="n">size</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
-    
-    <span class="c1">//对数组进行操作
-</span><span class="c1"></span>    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">village</span><span class="o">*</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">Villages</span><span class="p">[</span><span class="n">tpSorted</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">_next</span><span class="p">;</span>
-        <span class="k">while</span><span class="p">(</span><span class="n">cur</span><span class="p">){</span>
-            <span class="n">Villages</span><span class="p">[</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">].</span><span class="n">dp</span> <span class="o">=</span> <span class="n">myMax</span><span class="p">(</span><span class="n">Villages</span><span class="p">[</span><span class="n">tpSorted</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">dp</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">Villages</span><span class="p">[</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">].</span><span class="n">dp</span><span class="p">);</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="n">myMax</span><span class="p">(</span><span class="n">Villages</span><span class="p">[</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">].</span><span class="n">dp</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
-
-            <span class="n">inDeg</span><span class="p">[</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>
-            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">inDeg</span><span class="p">[</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">])</span>
-                <span class="n">tpSorted</span><span class="p">[</span><span class="n">size</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">;</span>
-            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">next_village</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">;</span>
-    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">m</span><span class="o">--</span><span class="p">){</span>
-        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">v1</span> <span class="o">&gt;&gt;</span> <span class="n">v2</span><span class="p">;</span>
-        <span class="n">Villages</span><span class="p">[</span><span class="n">v1</span><span class="p">].</span><span class="n">add</span><span class="p">(</span><span class="n">v2</span><span class="p">);</span>        
-    <span class="p">}</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">topologicalSort</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div><div class="post-footer" id="post-footer">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include&lt;iostream&gt;
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define myMax(x,y) ((x) &gt; (y) ? (x) : (y))
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="n">inDeg</span><span class="p">[</span><span class="mi">1000005</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>   <span class="c1">//入度 用于拓扑排序
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">tpSorted</span><span class="p">[</span><span class="mi">1000005</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>    <span class="c1">//拓扑排序的顺序
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">//单个村庄
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">village</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">village</span> <span class="o">*</span> <span class="n">next_village</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">village</span><span class="p">(</span><span class="kt">int</span> <span class="n">_id</span><span class="p">,</span> <span class="n">village</span><span class="o">*</span> <span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">)</span><span class="o">:</span><span class="n">id</span><span class="p">(</span><span class="n">_id</span><span class="p">),</span><span class="n">next_village</span><span class="p">(</span><span class="n">next</span><span class="p">){}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">villages</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">village</span><span class="o">*</span> <span class="n">_next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">dp</span><span class="p">;</span> <span class="c1">//直接写入属性
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">villages</span><span class="p">()</span><span class="o">:</span><span class="n">_next</span><span class="p">(</span><span class="nb">NULL</span><span class="p">),</span> <span class="n">dp</span><span class="p">(</span><span class="mi">1</span><span class="p">){}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">next_id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="n">Villages</span><span class="p">[</span><span class="mi">1000005</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">villages</span><span class="o">::</span><span class="n">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">next_id</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">inDeg</span><span class="p">[</span><span class="n">next_id</span><span class="p">]</span> <span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">_next</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">village</span><span class="p">(</span><span class="n">next_id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">village</span><span class="p">(</span><span class="n">next_id</span><span class="p">,</span> <span class="n">_next</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//全局变量真好用...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">topologicalSort</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>    <span class="c1">//记录最大值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>   <span class="c1">//拓扑数组长度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">inDeg</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tpSorted</span><span class="p">[</span><span class="n">size</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">//对数组进行操作
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">village</span><span class="o">*</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">Villages</span><span class="p">[</span><span class="n">tpSorted</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">_next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">cur</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Villages</span><span class="p">[</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">].</span><span class="n">dp</span> <span class="o">=</span> <span class="n">myMax</span><span class="p">(</span><span class="n">Villages</span><span class="p">[</span><span class="n">tpSorted</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">dp</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">Villages</span><span class="p">[</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">].</span><span class="n">dp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="n">myMax</span><span class="p">(</span><span class="n">Villages</span><span class="p">[</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">].</span><span class="n">dp</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">inDeg</span><span class="p">[</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">inDeg</span><span class="p">[</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tpSorted</span><span class="p">[</span><span class="n">size</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">next_village</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">m</span><span class="o">--</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">v1</span> <span class="o">&gt;&gt;</span> <span class="n">v2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Villages</span><span class="p">[</span><span class="n">v1</span><span class="p">].</span><span class="n">add</span><span class="p">(</span><span class="n">v2</span><span class="p">);</span>        
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">topologicalSort</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
                 <span>更新于 2019-05-07</span>
-            </div>
-            <div class="post-info-license"></div>
-        </div>
+            </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/tsp/" data-title="数据结构作业六 旅行商（TSP）"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/tsp/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/tsp/" data-title="数据结构作业六 旅行商（TSP）"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://localhost:1313/posts/tsp/" data-title="数据结构作业六 旅行商（TSP）"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/tsp/" data-title="数据结构作业六 旅行商（TSP）"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -204,20 +200,20 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/bin-tree/" class="prev" rel="prev" title="数据结构作业四 表达式树"><i class="fas fa-angle-left fa-fw"></i>数据结构作业四 表达式树</a>
-            <a href="/posts/funs/" class="next" rel="next" title="函数对象和函数指针">函数对象和函数指针<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/posts/bin-tree/" class="prev" rel="prev" title="数据结构作业四 表达式树"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>数据结构作业四 表达式树</a>
+            <a href="/posts/funs/" class="next" rel="next" title="函数对象和函数指针">函数对象和函数指针<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.75.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.147.5">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
         </div>
     </footer></div>
 
         <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
-                <i class="fas fa-arrow-up fa-fw"></i>
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
             </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
-                <i class="fas fa-comment fa-fw"></i>
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
             </a>
-        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

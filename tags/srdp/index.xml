@@ -1,21 +1,26 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>SRDP - 标签 - Wanakiki`s Blog</title>
-        <link>https://wanakiki.github.io/tags/srdp/</link>
-        <description>SRDP - 标签 - Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 25 Nov 2019 16:15:58 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/srdp/" rel="self" type="application/rss+xml" /><item>
-    <title>Git 及 Github 上手</title>
-    <link>https://wanakiki.github.io/posts/use-github/</link>
-    <pubDate>Mon, 25 Nov 2019 16:15:58 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/use-github/</guid>
-    <description><![CDATA[记录使用git及GitHub的过程 准备工作 在GitHub官网注册账号，之后去Git官网下载git并安装。安装完成后打开终端，输入下面的命令，在电脑上设置github邮箱和账户名 git config --global user.name &#34;用户名]]></description>
-</item><item>
-    <title>🏠班级网站项目</title>
-    <link>https://wanakiki.github.io/posts/website/</link>
-    <pubDate>Wed, 06 Nov 2019 23:04:39 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/website/</guid>
-    <description><![CDATA[起因💡 本人有两年大学班委的经验，发现学校团委给班级的一般都是信息整理相关的工作。但现在已经是21世纪，完全没有必要因为收集一些个人信息让每个人都填写一遍excel表再发给班委进行汇总。我之前曾经试过利]]></description>
-</item></channel>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SRDP on Wanakiki`s Blog</title>
+    <link>http://localhost:1313/tags/srdp/</link>
+    <description>Recent content in SRDP on Wanakiki`s Blog</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 25 Nov 2019 16:15:58 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/srdp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git 及 Github 上手</title>
+      <link>http://localhost:1313/posts/use-github/</link>
+      <pubDate>Mon, 25 Nov 2019 16:15:58 +0800</pubDate>
+      <guid>http://localhost:1313/posts/use-github/</guid>
+      <description>&lt;p&gt;记录使用git及GitHub的过程&lt;/p&gt;&#xA;&lt;h2 id=&#34;准备工作&#34;&gt;准备工作&lt;/h2&gt;&#xA;&lt;p&gt;在&lt;a href=&#34;https://github.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener noreffer &#34;&gt;GitHub官网&lt;/a&gt;注册账号，之后去&lt;a href=&#34;https://git-scm.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener noreffer &#34;&gt;Git官网&lt;/a&gt;下载git并安装。安装完成后打开终端，输入下面的命令，在电脑上设置github邮箱和账户名&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git config --global user.name &lt;span class=&#34;s2&#34;&gt;&amp;#34;用户名&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git config --global user.email &lt;span class=&#34;s2&#34;&gt;&amp;#34;邮箱&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;之后，输入下面的命令生成SSH key，完成后将公钥添加到GitHub上&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>🏠班级网站项目</title>
+      <link>http://localhost:1313/posts/website/</link>
+      <pubDate>Wed, 06 Nov 2019 23:04:39 +0800</pubDate>
+      <guid>http://localhost:1313/posts/website/</guid>
+      <description>&lt;h2 id=&#34;起因&#34;&gt;起因💡&lt;/h2&gt;&#xA;&lt;p&gt;本人有两年大学班委的经验，发现学校团委给班级的一般都是信息整理相关的工作。但现在已经是21世纪，完全没有必要因为收集一些个人信息让每个人都填写一遍excel表再发给班委进行汇总。我之前曾经试过利用腾讯文档进行信息收集，但大部分人都不是很适应，加上&lt;strong&gt;目前市面上找不到从excel生成在线表单的工具，每次问卷都需要花一定时间准备&lt;/strong&gt;，于是我有了写一个自己的网站的想法。&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>

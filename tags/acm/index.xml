@@ -1,14 +1,19 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>ACM - 标签 - Wanakiki`s Blog</title>
-        <link>https://wanakiki.github.io/tags/acm/</link>
-        <description>ACM - 标签 - Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 12 May 2019 23:24:12 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/acm/" rel="self" type="application/rss+xml" /><item>
-    <title>2019年山东省省赛回顾</title>
-    <link>https://wanakiki.github.io/posts/shengsai-2019/</link>
-    <pubDate>Sun, 12 May 2019 23:24:12 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/shengsai-2019/</guid>
-    <description><![CDATA[2019年5月11-12号山东省ACM竞赛回顾（想起来什么写什么，绝大部分内容和比赛内容无关） 第一天中午到济南大学，开幕式之后开始热身赛（开幕式上那个山东大学的老师再一次提到了山大夺冠的问题）。 热身赛]]></description>
-</item></channel>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ACM on Wanakiki`s Blog</title>
+    <link>http://localhost:1313/tags/acm/</link>
+    <description>Recent content in ACM on Wanakiki`s Blog</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 12 May 2019 23:24:12 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/acm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2019年山东省省赛回顾</title>
+      <link>http://localhost:1313/posts/shengsai-2019/</link>
+      <pubDate>Sun, 12 May 2019 23:24:12 +0800</pubDate>
+      <guid>http://localhost:1313/posts/shengsai-2019/</guid>
+      <description>&lt;p&gt;2019年5月11-12号山东省ACM竞赛回顾（想起来什么写什么，绝大部分内容和比赛内容无关）&lt;/p&gt;&#xA;&lt;p&gt;第一天中午到济南大学，开幕式之后开始热身赛（开幕式上那个山东大学的老师再一次提到了山大夺冠的问题）。&lt;/p&gt;&#xA;&lt;h2 id=&#34;热身赛&#34;&gt;热身赛&lt;/h2&gt;&#xA;&lt;p&gt;今年的操作环境是64位win7，题目编译环境还是Linux。电脑上面自带的IDE是codeblocks和DevC++，比较令我意外的是，他们居然还有VSCode。在热身赛开始前稍微鼓捣了一下VSCode，发现只装了一个C++高亮的插件，也没有给好的debug配置文件。我们队只有我平时用VSCode写代码，但我发现我还是不会整配置文件，毕竟原来自己用的时候折腾好了之后就一直用下去，当时也是在别人文件的基础上修改的，有时间的话，还得研究一下这个文件怎么写。&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>

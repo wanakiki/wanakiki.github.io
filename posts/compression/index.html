@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-    <head>
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>数据结构作业五 Compression - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="数据结构作业五 Compression" />
-<meta property="og:description" content="图片有损压缩大作业 问题分析 &amp; 解决方案 本次编程任务给出了一个纯英文的PDF文件，较为详细地介绍了图像有损压缩算法的实现方式，通过二叉树的树剪枝达到保留图片细节的目的。任务要求达到的效果如下图所示，可以看" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://wanakiki.github.io/posts/compression/" />
-<meta property="article:published_time" content="2019-05-03T14:00:51+08:00" />
-<meta property="article:modified_time" content="2019-05-03T14:00:51+08:00" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="数据结构作业五 Compression"/>
-<meta name="twitter:description" content="图片有损压缩大作业 问题分析 &amp; 解决方案 本次编程任务给出了一个纯英文的PDF文件，较为详细地介绍了图像有损压缩算法的实现方式，通过二叉树的树剪枝达到保留图片细节的目的。任务要求达到的效果如下图所示，可以看"/>
-<meta name="application-name" content="Wanakiki`s Blog">
-<meta name="apple-mobile-web-app-title" content="Wanakiki`s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <title>数据结构作业五 Compression - Wanakiki`s Blog</title><meta name="Description" content="This is my cool site"><meta property="og:url" content="http://localhost:1313/posts/compression/">
+  <meta property="og:site_name" content="Wanakiki`s Blog">
+  <meta property="og:title" content="数据结构作业五 Compression">
+  <meta property="og:description" content="图片有损压缩大作业
+问题分析 &amp; 解决方案 本次编程任务给出了一个纯英文的PDF文件，较为详细地介绍了图像有损压缩算法的实现方式，通过二叉树的树剪枝达到保留图片细节的目的。任务要求达到的效果如下图所示，可以看出较为复杂的图腾部分得到了很好的保留，而树叶和远处的背景则被明显地压缩成了像素区块。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2019-05-03T14:00:51+08:00">
+    <meta property="article:modified_time" content="2019-05-03T14:00:51+08:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="数据结构作业五 Compression">
+  <meta name="twitter:description" content="图片有损压缩大作业
+问题分析 &amp; 解决方案 本次编程任务给出了一个纯英文的PDF文件，较为详细地介绍了图像有损压缩算法的实现方式，通过二叉树的树剪枝达到保留图片细节的目的。任务要求达到的效果如下图所示，可以看出较为复杂的图腾部分得到了很好的保留，而树叶和远处的背景则被明显地压缩成了像素区块。">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://wanakiki.github.io/posts/compression/" /><link rel="prev" href="https://wanakiki.github.io/posts/train/" /><link rel="next" href="https://wanakiki.github.io/posts/bin-tree/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/compression/" /><link rel="prev" href="http://localhost:1313/posts/train/" /><link rel="next" href="http://localhost:1313/posts/bin-tree/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -25,63 +32,55 @@
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/wanakiki.github.io\/posts\/compression\/"
-        },"genre": "posts","wordcount":  4499 ,
-        "url": "https:\/\/wanakiki.github.io\/posts\/compression\/","datePublished": "2019-05-03T14:00:51+08:00","dateModified": "2019-05-03T14:00:51+08:00","publisher": {
+            "@id": "http:\/\/localhost:1313\/posts\/compression\/"
+        },"genre": "posts","wordcount":  4503 ,
+        "url": "http:\/\/localhost:1313\/posts\/compression\/","datePublished": "2019-05-03T14:00:51+08:00","dateModified": "2019-05-03T14:00:51+08:00","publisher": {
             "@type": "Organization",
-            "name": "wanakiki"},"author": {
+            "name": ""},"author": {
                 "@type": "Person",
                 "name": "wanakiki"
             },"description": ""
     }
     </script></head>
-    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+            <a href="/" title="Wanakiki`s Blog">🥰Wanakiki`s Blog</a>
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> Blog </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                    <i class="fas fa-adjust fa-fw"></i>
-                </a>
-            </div>
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
         </div>
     </div>
 </header><header class="mobile" id="header-mobile">
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+                <a href="/" title="Wanakiki`s Blog">🥰Wanakiki`s Blog</a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
             </div>
         </div>
         <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Blog</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                <i class="fas fa-adjust fa-fw"></i>
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a></div>
     </div>
-</header>
-<div class="search-dropdown desktop">
-    <div id="search-dropdown-desktop"></div>
-</div>
-<div class="search-dropdown mobile">
-    <div id="search-dropdown-mobile"></div>
-</div>
-<main class="main">
+</header><main class="main">
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">数据结构作业五 Compression</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw"></i>数据结构</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-05-03">2019-05-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4499 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
-        </div><div class="details toc" id="toc-static"  kept="">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">数据结构作业五 Compression</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>wanakiki</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>数据结构</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2019-05-03">2019-05-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 4503 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
-                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
@@ -103,7 +102,6 @@
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>图片有损压缩大作业</p>
-<!-- raw HTML omitted -->
 <h2 id="问题分析--解决方案">问题分析 &amp; 解决方案</h2>
 <p>本次编程任务给出了一个纯英文的PDF文件，较为详细地介绍了图像有损压缩算法的实现方式，通过二叉树的树剪枝达到保留图片细节的目的。任务要求达到的效果如下图所示，可以看出较为复杂的图腾部分得到了很好的保留，而树叶和远处的背景则被明显地压缩成了像素区块。</p>
 <p><img
@@ -134,7 +132,7 @@
         data-sizes="auto"
         alt="https://raw.githubusercontent.com/wanakiki/photo/master/compression/20190503135249.png"
         title="示例图" /></p>
-<pre><code class="language-no" data-lang="no">直观来看，sum = 整体 - 蓝色 - 橙色 - 红色
+<pre tabindex="0"><code class="language-no" data-lang="no">直观来看，sum = 整体 - 蓝色 - 橙色 - 红色
 已知: 整体 = D, 蓝色 = B - A，橙色 = C - A，红色 = A
 则不难推出，sum = D - B - C + A
 </code></pre><p>按照上述公式我们便可以在常数时间内计算出任何子矩阵对应的累加和。为了方便后续的计算，我在处理矩阵的时候多开辟了额外的空间并存上零，简化了代码。</p>
@@ -149,8 +147,7 @@
 <p>如何剪枝？一个子树的根节点像素值便是这个子树对应矩形所有像素值的平均，我们要做的事情是计算出这个矩形中和各通道色值与平均值差的平方的和小于等于tolerance的个数，然后计算这一部分像素占像素总个数的比例，如果大于给定值，就代表这个矩形中像素之间的差异不大，我们就可以将这个子树的枝叶剪掉，只留下根节点。反映到图形上来，就是将这个矩形的颜色涂成了平均值。</p>
 <p>最终的实现方法很简单，先进行层序遍历，对遍历到的每个节点再进行一次遍历，统计满足条件叶子的个数，最后计算比例，判断是否需要删除。但是这个程序中有这么一句话，让我以为有超级简单的算法可以实现这个过程。但是很不幸，最终还是没有找到。</p>
 <blockquote>
-<p>Pruning criteria should be evaluated on the original tree, not on a pruned subtree. (we only expect that trees would be pruned once.)</p>
-</blockquote>
+<p>Pruning criteria should be evaluated on the original tree, not on a pruned subtree. (we only expect that trees would be pruned once.)</p></blockquote>
 <h2 id="流程图">流程图</h2>
 <p><img
         class="lazyload"
@@ -170,351 +167,351 @@
         title="建树" /></p>
 <h2 id="编程实现">编程实现</h2>
 <p>stats.cpp</p>
-<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&#34;stats.h&#34;</span><span class="cp">
-</span><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">cs221util</span><span class="p">;</span>
-
-<span class="n">stats</span><span class="o">::</span><span class="n">stats</span><span class="p">(</span><span class="n">PNG</span> <span class="o">&amp;</span><span class="n">im</span><span class="p">){</span>
-    <span class="c1">//resize
-</span><span class="c1"></span>    <span class="kt">unsigned</span> <span class="n">width</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span><span class="p">();</span>
-    <span class="kt">unsigned</span> <span class="n">height</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">height</span><span class="p">();</span>
-    <span class="n">sumRed</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
-    <span class="n">sumGreen</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
-    <span class="n">sumBlue</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
-    <span class="n">sumsqRed</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
-    <span class="n">sumsqGreen</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
-    <span class="n">sumsqBlue</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
-
-    <span class="n">RGBAPixel</span> <span class="o">*</span><span class="n">tmp</span> <span class="p">;</span>
-    <span class="c1">// sumRed[0][0] = int(tmp-&gt;r);
-</span><span class="c1"></span>    <span class="c1">// sumGreen[0][0] = int(tmp-&gt;g);
-</span><span class="c1"></span>    <span class="c1">// sumBlue[0][0] = int(tmp-&gt;b);
-</span><span class="c1"></span>    <span class="c1">// sumsqRed[0][0] = int(tmp-&gt;r)*int(tmp-&gt;r);
-</span><span class="c1"></span>    <span class="c1">// sumsqBlue[0][0] = int(tmp-&gt;b)*int(tmp-&gt;b);
-</span><span class="c1"></span>    <span class="c1">// sumsqGreen[0][0] = int(tmp-&gt;g)*int(tmp-&gt;g);
-</span><span class="c1"></span>
-    <span class="c1">// for(int i = 1; i &lt; im.width; i++){
-</span><span class="c1"></span>    <span class="c1">//     tmp = im.getPixel(i,0);    
-</span><span class="c1"></span>    <span class="c1">//     sumRed[i][0] = int(tmp-&gt;r);
-</span><span class="c1"></span>    <span class="c1">//     sumGreen[i][0] = int(tmp-&gt;g);
-</span><span class="c1"></span>    <span class="c1">//     sumBlue[i][0] = int(tmp-&gt;b);
-</span><span class="c1"></span>    <span class="c1">//     sumsqRed[i][0] = int(tmp-&gt;r)*int(tmp-&gt;r);
-</span><span class="c1"></span>    <span class="c1">//     sumsqBlue[i][0] = int(tmp-&gt;b)*int(tmp-&gt;b);
-</span><span class="c1"></span>    <span class="c1">//     sumsqGreen[i][0] = int(tmp-&gt;g)*int(tmp-&gt;g);
-</span><span class="c1"></span>    <span class="c1">// }
-</span><span class="c1"></span>    <span class="c1">// for(int i = 1; i &lt; im.height; i++){
-</span><span class="c1"></span>    <span class="c1">//     tmp = im.getPixel(0, i);
-</span><span class="c1"></span>    <span class="c1">//     sumRed[0][i] = int(tmp-&gt;r);
-</span><span class="c1"></span>    <span class="c1">//     sumGreen[0][i] = int(tmp-&gt;g);
-</span><span class="c1"></span>    <span class="c1">//     sumBlue[0][i] = int(tmp-&gt;b);
-</span><span class="c1"></span>    <span class="c1">//     sumsqRed[0][i] = int(tmp-&gt;r)*int(tmp-&gt;r);
-</span><span class="c1"></span>    <span class="c1">//     sumsqBlue[0][i] = int(tmp-&gt;b)*int(tmp-&gt;b);
-</span><span class="c1"></span>    <span class="c1">//     sumsqGreen[0][i] = int(tmp-&gt;g)*int(tmp-&gt;g);
-</span><span class="c1"></span>    <span class="c1">// }
-</span><span class="c1"></span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">width</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">height</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">tmp</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">getPixel</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-        <span class="n">sumRed</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">r</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
-        <span class="n">sumGreen</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">g</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
-        <span class="n">sumBlue</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
-        <span class="n">sumsqRed</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">r</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">r</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
-        <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
-        <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">g</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">g</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
-    <span class="p">}</span>
-    <span class="c1">//没有必要强转为int...
-</span><span class="c1"></span><span class="p">}</span>
-
-<span class="kt">long</span> <span class="n">stats</span><span class="o">::</span><span class="n">getSum</span><span class="p">(</span><span class="kt">char</span> <span class="n">channel</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">){</span>
-    <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">switch</span> <span class="p">(</span><span class="n">channel</span><span class="p">)</span>
-    <span class="p">{</span>
-    <span class="k">case</span> <span class="sc">&#39;r&#39;</span><span class="o">:</span>
-        <span class="cm">/* code */</span>
-        <span class="n">ans</span> <span class="o">=</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
-        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
-        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
-        <span class="n">ans</span> <span class="o">+=</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
-        <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="sc">&#39;g&#39;</span><span class="o">:</span>
-        <span class="n">ans</span> <span class="o">=</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
-        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
-        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
-        <span class="n">ans</span> <span class="o">+=</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
-        <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="sc">&#39;b&#39;</span><span class="o">:</span>
-        <span class="n">ans</span> <span class="o">=</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
-        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
-        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
-        <span class="n">ans</span> <span class="o">+=</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
-        <span class="k">break</span><span class="p">;</span>
-    <span class="k">default</span><span class="o">:</span>
-        <span class="k">break</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">long</span> <span class="n">stats</span><span class="o">::</span><span class="n">getSumSq</span><span class="p">(</span><span class="kt">char</span> <span class="n">channel</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">){</span>
-    <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">switch</span> <span class="p">(</span><span class="n">channel</span><span class="p">)</span>
-    <span class="p">{</span>
-    <span class="k">case</span> <span class="sc">&#39;r&#39;</span><span class="o">:</span>
-        <span class="cm">/* code */</span>
-        <span class="n">ans</span> <span class="o">=</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
-        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
-        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
-        <span class="n">ans</span> <span class="o">+=</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
-        <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="sc">&#39;g&#39;</span><span class="o">:</span>
-        <span class="n">ans</span> <span class="o">=</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
-        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
-        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
-        <span class="n">ans</span> <span class="o">+=</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
-        <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="sc">&#39;b&#39;</span><span class="o">:</span>
-        <span class="n">ans</span> <span class="o">=</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
-        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
-        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
-        <span class="n">ans</span> <span class="o">+=</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
-        <span class="k">break</span><span class="p">;</span>
-    <span class="k">default</span><span class="o">:</span>
-        <span class="k">break</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">long</span> <span class="n">stats</span><span class="o">::</span><span class="n">rectArea</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">){</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">-</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">-</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="n">RGBAPixel</span> <span class="n">stats</span><span class="o">::</span><span class="n">getAvg</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">){</span>
-    <span class="kt">long</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">rectArea</span><span class="p">(</span><span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
-    <span class="kt">long</span> <span class="n">sum_r</span><span class="p">,</span> <span class="n">sum_g</span><span class="p">,</span> <span class="n">sum_b</span><span class="p">;</span>
-    <span class="n">sum_r</span> <span class="o">=</span> <span class="n">getSum</span><span class="p">(</span><span class="sc">&#39;r&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">)</span> <span class="o">/</span> <span class="n">sum</span><span class="p">;</span>
-    <span class="n">sum_g</span> <span class="o">=</span> <span class="n">getSum</span><span class="p">(</span><span class="sc">&#39;g&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">)</span> <span class="o">/</span> <span class="n">sum</span><span class="p">;</span>
-    <span class="n">sum_b</span> <span class="o">=</span> <span class="n">getSum</span><span class="p">(</span><span class="sc">&#39;b&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">)</span> <span class="o">/</span> <span class="n">sum</span><span class="p">;</span>
-    <span class="k">return</span> <span class="nf">RGBAPixel</span><span class="p">(</span><span class="n">sum_r</span><span class="p">,</span> <span class="n">sum_g</span><span class="p">,</span> <span class="n">sum_b</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="kt">long</span> <span class="n">stats</span><span class="o">::</span><span class="n">getScore</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">){</span>
-    <span class="kt">long</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">rectArea</span><span class="p">(</span><span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
-    <span class="kt">long</span> <span class="n">sum_r</span><span class="p">,</span> <span class="n">sum_g</span><span class="p">,</span> <span class="n">sum_b</span><span class="p">;</span>
-    <span class="kt">long</span> <span class="n">sumsq_r</span><span class="p">,</span> <span class="n">sumsq_g</span><span class="p">,</span> <span class="n">sumsq_b</span><span class="p">;</span>
-    <span class="n">sum_r</span> <span class="o">=</span> <span class="n">getSum</span><span class="p">(</span><span class="sc">&#39;r&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
-    <span class="n">sum_g</span> <span class="o">=</span> <span class="n">getSum</span><span class="p">(</span><span class="sc">&#39;g&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
-    <span class="n">sum_b</span> <span class="o">=</span> <span class="n">getSum</span><span class="p">(</span><span class="sc">&#39;b&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
-    <span class="n">sumsq_r</span> <span class="o">=</span> <span class="n">getSumSq</span><span class="p">(</span><span class="sc">&#39;r&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
-    <span class="n">sumsq_g</span> <span class="o">=</span> <span class="n">getSumSq</span><span class="p">(</span><span class="sc">&#39;g&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
-    <span class="n">sumsq_b</span> <span class="o">=</span> <span class="n">getSumSq</span><span class="p">(</span><span class="sc">&#39;b&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
-
-    <span class="c1">//alpha置一？
-</span><span class="c1"></span>    <span class="c1">//是否考虑溢出？
-</span><span class="c1"></span>    <span class="n">sum_r</span> <span class="o">=</span> <span class="n">sum_r</span> <span class="o">*</span> <span class="n">sum_r</span> <span class="o">/</span> <span class="n">sum</span><span class="p">;</span>
-    <span class="n">sum_g</span> <span class="o">=</span> <span class="n">sum_g</span> <span class="o">*</span> <span class="n">sum_g</span> <span class="o">/</span> <span class="n">sum</span><span class="p">;</span>
-    <span class="n">sum_b</span> <span class="o">=</span> <span class="n">sum_b</span> <span class="o">*</span> <span class="n">sum_b</span> <span class="o">/</span> <span class="n">sum</span><span class="p">;</span>
-    <span class="n">sumsq_r</span> <span class="o">-=</span> <span class="n">sum_r</span><span class="p">;</span>
-    <span class="n">sumsq_g</span> <span class="o">-=</span> <span class="n">sum_g</span><span class="p">;</span>
-    <span class="n">sumsq_b</span> <span class="o">-=</span> <span class="n">sum_b</span><span class="p">;</span>
-    <span class="k">return</span> <span class="n">sumsq_r</span> <span class="o">+</span> <span class="n">sumsq_g</span> <span class="o">+</span> <span class="n">sumsq_b</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div><p>twoDtree.cpp</p>
-<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/**
-</span><span class="cm"> *
-</span><span class="cm"> * twoDtree (pa3)
-</span><span class="cm"> * slight modification of a Kd tree of dimension 2.
-</span><span class="cm"> * twoDtree.cpp
-</span><span class="cm"> * This file will be used for grading.
-</span><span class="cm"> *
-</span><span class="cm"> */</span>
-
-<span class="cp">#include</span> <span class="cpf">&#34;twoDtree.h&#34;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;stack&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="cm">/* given */</span>
-<span class="n">twoDtree</span><span class="o">::</span><span class="n">Node</span><span class="o">::</span><span class="n">Node</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">,</span> <span class="n">RGBAPixel</span> <span class="n">a</span><span class="p">)</span>
-    <span class="o">:</span><span class="n">upLeft</span><span class="p">(</span><span class="n">ul</span><span class="p">),</span><span class="n">lowRight</span><span class="p">(</span><span class="n">lr</span><span class="p">),</span><span class="n">avg</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="n">left</span><span class="p">(</span><span class="nb">NULL</span><span class="p">),</span><span class="n">right</span><span class="p">(</span><span class="nb">NULL</span><span class="p">)</span>
-    <span class="p">{}</span>
-
-<span class="cm">/* given */</span>
-<span class="n">twoDtree</span><span class="o">::~</span><span class="n">twoDtree</span><span class="p">(){</span>
-    <span class="n">clear</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="cm">/* given */</span>
-<span class="n">twoDtree</span><span class="o">::</span><span class="n">twoDtree</span><span class="p">(</span><span class="k">const</span> <span class="n">twoDtree</span> <span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">copy</span><span class="p">(</span><span class="n">other</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="cm">/* given */</span>
-<span class="n">twoDtree</span> <span class="o">&amp;</span> <span class="n">twoDtree</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">twoDtree</span> <span class="o">&amp;</span> <span class="n">rhs</span><span class="p">){</span>
-    <span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">clear</span><span class="p">();</span>
-        <span class="n">copy</span><span class="p">(</span><span class="n">rhs</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="n">twoDtree</span><span class="o">::</span><span class="n">twoDtree</span><span class="p">(</span><span class="n">PNG</span> <span class="o">&amp;</span> <span class="n">imIn</span><span class="p">){</span> 
-    <span class="cm">/* your code here */</span>
-    <span class="n">height</span> <span class="o">=</span> <span class="n">imIn</span><span class="p">.</span><span class="n">height</span><span class="p">();</span>
-    <span class="n">width</span> <span class="o">=</span> <span class="n">imIn</span><span class="p">.</span><span class="n">width</span><span class="p">();</span>
-    <span class="n">stats</span> <span class="nf">my_stat</span><span class="p">(</span><span class="n">imIn</span><span class="p">);</span>
-    <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">cur_ul</span><span class="p">,</span> <span class="n">cur_lr</span><span class="p">;</span>
-    <span class="n">cur_ul</span> <span class="o">=</span> <span class="n">make_pair</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
-    <span class="n">cur_lr</span> <span class="o">=</span> <span class="n">make_pair</span><span class="p">(</span><span class="n">width</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">height</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>  
-    <span class="c1">//注意坐标从零开始
-</span><span class="c1"></span>    
-    <span class="n">root</span> <span class="o">=</span> <span class="n">buildTree</span><span class="p">(</span><span class="n">my_stat</span><span class="p">,</span> <span class="n">cur_ul</span><span class="p">,</span> <span class="n">cur_lr</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="n">twoDtree</span><span class="o">::</span><span class="n">Node</span> <span class="o">*</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">buildTree</span><span class="p">(</span><span class="n">stats</span> <span class="o">&amp;</span> <span class="n">s</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">)</span> <span class="p">{</span>
-    <span class="cm">/* your code here */</span>
-    <span class="n">Node</span> <span class="o">*</span><span class="n">cur</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">getAvg</span><span class="p">(</span><span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">));</span>
-
-    <span class="c1">//遍历所有情况
-</span><span class="c1"></span>    <span class="c1">//if(s.rectArea(ul,lr) &gt; 1){    条件导致死循环
-</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">ul</span> <span class="o">!=</span> <span class="n">lr</span><span class="p">){</span>
-        <span class="kt">bool</span> <span class="n">flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">//1 means horizontal 0 means vertical
-</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">line</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="kt">long</span> <span class="n">tmp</span><span class="p">;</span>
-        <span class="kt">long</span> <span class="n">Min</span> <span class="o">=</span> <span class="mi">9999999999</span><span class="p">;</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-            <span class="n">tmp</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">getScore</span><span class="p">(</span><span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> <span class="o">+</span> <span class="n">s</span><span class="p">.</span><span class="n">getScore</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="n">lr</span><span class="p">);</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">tmp</span> <span class="o">&lt;</span> <span class="n">Min</span><span class="p">){</span>
-                <span class="n">Min</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
-                <span class="n">line</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-            <span class="n">tmp</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">getScore</span><span class="p">(</span><span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="p">))</span> <span class="o">+</span> <span class="n">s</span><span class="p">.</span><span class="n">getScore</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">),</span> <span class="n">lr</span><span class="p">);</span>
-            <span class="k">if</span><span class="p">((</span><span class="n">i</span> <span class="o">==</span> <span class="n">ul</span><span class="p">.</span><span class="n">first</span> <span class="o">&amp;&amp;</span> <span class="n">ul</span><span class="p">.</span><span class="n">second</span> <span class="o">==</span> <span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">)</span> <span class="o">||</span> <span class="n">tmp</span> <span class="o">&lt;</span> <span class="n">Min</span><span class="p">){</span>
-                <span class="n">flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-                <span class="n">Min</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
-                <span class="n">line</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        
-        <span class="k">if</span><span class="p">(</span><span class="n">flag</span><span class="p">){</span>
-            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">buildTree</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">line</span><span class="p">));</span>
-            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">buildTree</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">line</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">lr</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">else</span><span class="p">{</span>
-            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">buildTree</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="p">));</span>
-            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">buildTree</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">line</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">),</span> <span class="n">lr</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">else</span><span class="p">{</span>
-        <span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-        <span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">cur</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="n">PNG</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">render</span><span class="p">(){</span>
-    <span class="cm">/* your code here */</span>
-    <span class="n">PNG</span> <span class="nf">res</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
-    <span class="n">renderHelper</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">root</span><span class="p">);</span>
-    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">renderHelper</span><span class="p">(</span><span class="n">PNG</span><span class="o">&amp;</span> <span class="n">res</span><span class="p">,</span> <span class="n">Node</span><span class="o">*</span> <span class="n">cur_node</span><span class="p">){</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">cur_node</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>   <span class="c1">//稍微多余
-</span><span class="c1"></span>
-    <span class="k">if</span><span class="p">(</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">==</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">){</span>
-        <span class="c1">//只有两个都是空也就是叶子节点才会进行操作
-</span><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">upLeft</span><span class="p">.</span><span class="n">first</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">lowRight</span><span class="p">.</span><span class="n">first</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">upLeft</span><span class="p">.</span><span class="n">second</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">lowRight</span><span class="p">.</span><span class="n">second</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
-            <span class="o">*</span><span class="n">res</span><span class="p">.</span><span class="n">getPixel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">else</span><span class="p">{</span>
-        <span class="n">renderHelper</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
-        <span class="n">renderHelper</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-
-
-
-<span class="kt">void</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">prune</span><span class="p">(</span><span class="kt">double</span> <span class="n">pct</span><span class="p">,</span> <span class="kt">int</span> <span class="n">tol</span><span class="p">){</span>
-    <span class="cm">/* your code here */</span>
-    <span class="c1">//先逐层遍历，对每个节点判断是否需要剪枝
-</span><span class="c1"></span>    <span class="n">queue</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">*&gt;</span> <span class="n">traverse_save</span><span class="p">;</span>
-    <span class="n">Node</span><span class="o">*</span> <span class="n">cur</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">sum</span><span class="p">,</span> <span class="n">total</span><span class="p">;</span> <span class="c1">//小于tol个数，矩形像素数
-</span><span class="c1"></span>    <span class="kt">double</span> <span class="n">rate</span><span class="p">;</span>
-    <span class="n">traverse_save</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">traverse_save</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
-        <span class="n">cur</span> <span class="o">=</span> <span class="n">traverse_save</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
-        <span class="n">traverse_save</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-
-        <span class="k">if</span><span class="p">(</span><span class="n">cur</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
-            <span class="k">continue</span><span class="p">;</span>
-        <span class="n">sum</span> <span class="o">=</span> <span class="n">pruneHelper</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">);</span>
-        <span class="n">total</span> <span class="o">=</span> <span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">lowRight</span><span class="p">.</span><span class="n">first</span><span class="o">-</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">upLeft</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">lowRight</span><span class="p">.</span><span class="n">second</span><span class="o">-</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">upLeft</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
-        <span class="n">rate</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">/</span> <span class="n">total</span><span class="p">;</span>
-
-        <span class="k">if</span><span class="p">(</span><span class="n">rate</span> <span class="o">&gt;=</span> <span class="n">pct</span><span class="p">){</span>
-            <span class="n">removeNode</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
-            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-            <span class="n">removeNode</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
-            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">else</span><span class="p">{</span>
-            <span class="n">traverse_save</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
-            <span class="n">traverse_save</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kt">int</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">pruneHelper</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="n">cur</span><span class="p">,</span> <span class="kt">int</span> <span class="n">tol</span><span class="p">,</span> <span class="n">RGBAPixel</span> <span class="n">avg</span><span class="p">){</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">cur</span><span class="p">)</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-    
-    <span class="c1">//只计算叶子
-</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
-        <span class="kt">long</span> <span class="n">diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">avg</span><span class="p">.</span><span class="n">r</span> <span class="o">-</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">.</span><span class="n">r</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">avg</span><span class="p">.</span><span class="n">r</span> <span class="o">-</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">.</span><span class="n">r</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">avg</span><span class="p">.</span><span class="n">g</span> <span class="o">-</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">.</span><span class="n">g</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">avg</span><span class="p">.</span><span class="n">g</span> <span class="o">-</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">.</span><span class="n">g</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">avg</span><span class="p">.</span><span class="n">b</span> <span class="o">-</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">.</span><span class="n">b</span><span class="p">);</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">diff</span> <span class="o">&lt;=</span> <span class="n">tol</span><span class="p">)</span>
-            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="k">else</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="nf">pruneHelper</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">avg</span><span class="p">)</span> <span class="o">+</span> <span class="n">pruneHelper</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">avg</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">clear</span><span class="p">()</span> <span class="p">{</span>
-    <span class="cm">/* your code here */</span>
-    <span class="n">removeNode</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-    <span class="n">root</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">removeNode</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span> <span class="n">x</span><span class="p">){</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="p">;</span>
-    <span class="n">removeNode</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
-    <span class="n">removeNode</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
-    <span class="k">delete</span> <span class="n">x</span><span class="p">;</span>
-    <span class="k">return</span> <span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="k">const</span> <span class="n">twoDtree</span> <span class="o">&amp;</span> <span class="n">orig</span><span class="p">){</span>
-    <span class="cm">/* your code here */</span>
-    <span class="c1">//已经对copy进行了说明，不需要进行空间释放
-</span><span class="c1"></span>    <span class="c1">//本程序中仅有两次调用，调用之前都保证空间已经被初始化
-</span><span class="c1"></span>    <span class="n">height</span> <span class="o">=</span> <span class="n">orig</span><span class="p">.</span><span class="n">height</span><span class="p">;</span>
-    <span class="n">width</span> <span class="o">=</span> <span class="n">orig</span><span class="p">.</span><span class="n">width</span><span class="p">;</span>
-    <span class="n">root</span> <span class="o">=</span> <span class="n">copyNode</span><span class="p">(</span><span class="n">orig</span><span class="p">.</span><span class="n">root</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="n">twoDtree</span><span class="o">::</span><span class="n">Node</span><span class="o">*</span>  <span class="n">twoDtree</span><span class="o">::</span><span class="n">copyNode</span><span class="p">(</span><span class="k">const</span> <span class="n">Node</span><span class="o">*</span> <span class="n">x</span><span class="p">){</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
-    <span class="n">Node</span> <span class="o">*</span><span class="n">tmp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">upLeft</span><span class="p">,</span> <span class="n">x</span><span class="o">-&gt;</span><span class="n">lowRight</span><span class="p">,</span> <span class="n">x</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">);</span>
-    <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">copyNode</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
-    <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">copyNode</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
-    <span class="k">return</span> <span class="n">tmp</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div><h2 id="结果分析">结果分析</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;stats.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">cs221util</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">stats</span><span class="o">::</span><span class="n">stats</span><span class="p">(</span><span class="n">PNG</span> <span class="o">&amp;</span><span class="n">im</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//resize
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">unsigned</span> <span class="n">width</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">width</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="n">height</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">height</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sumRed</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sumGreen</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sumBlue</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sumsqRed</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sumsqGreen</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sumsqBlue</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">RGBAPixel</span> <span class="o">*</span><span class="n">tmp</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// sumRed[0][0] = int(tmp-&gt;r);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// sumGreen[0][0] = int(tmp-&gt;g);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// sumBlue[0][0] = int(tmp-&gt;b);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// sumsqRed[0][0] = int(tmp-&gt;r)*int(tmp-&gt;r);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// sumsqBlue[0][0] = int(tmp-&gt;b)*int(tmp-&gt;b);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// sumsqGreen[0][0] = int(tmp-&gt;g)*int(tmp-&gt;g);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// for(int i = 1; i &lt; im.width; i++){
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//     tmp = im.getPixel(i,0);    
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//     sumRed[i][0] = int(tmp-&gt;r);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//     sumGreen[i][0] = int(tmp-&gt;g);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//     sumBlue[i][0] = int(tmp-&gt;b);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//     sumsqRed[i][0] = int(tmp-&gt;r)*int(tmp-&gt;r);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//     sumsqBlue[i][0] = int(tmp-&gt;b)*int(tmp-&gt;b);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//     sumsqGreen[i][0] = int(tmp-&gt;g)*int(tmp-&gt;g);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// }
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// for(int i = 1; i &lt; im.height; i++){
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//     tmp = im.getPixel(0, i);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//     sumRed[0][i] = int(tmp-&gt;r);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//     sumGreen[0][i] = int(tmp-&gt;g);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//     sumBlue[0][i] = int(tmp-&gt;b);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//     sumsqRed[0][i] = int(tmp-&gt;r)*int(tmp-&gt;r);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//     sumsqBlue[0][i] = int(tmp-&gt;b)*int(tmp-&gt;b);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//     sumsqGreen[0][i] = int(tmp-&gt;g)*int(tmp-&gt;g);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// }
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">width</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">height</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tmp</span> <span class="o">=</span> <span class="n">im</span><span class="p">.</span><span class="n">getPixel</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sumRed</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">r</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sumGreen</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">g</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sumBlue</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sumsqRed</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">r</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">r</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">g</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">g</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//没有必要强转为int...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">long</span> <span class="n">stats</span><span class="o">::</span><span class="n">getSum</span><span class="p">(</span><span class="kt">char</span> <span class="n">channel</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">switch</span> <span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="sc">&#39;r&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* code */</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">+=</span> <span class="n">sumRed</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="sc">&#39;g&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">+=</span> <span class="n">sumGreen</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="sc">&#39;b&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">+=</span> <span class="n">sumBlue</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">long</span> <span class="n">stats</span><span class="o">::</span><span class="n">getSumSq</span><span class="p">(</span><span class="kt">char</span> <span class="n">channel</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">switch</span> <span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="sc">&#39;r&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* code */</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">+=</span> <span class="n">sumsqRed</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="sc">&#39;g&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">+=</span> <span class="n">sumsqGreen</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="sc">&#39;b&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">-=</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">+=</span> <span class="n">sumsqBlue</span><span class="p">[</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">long</span> <span class="n">stats</span><span class="o">::</span><span class="n">rectArea</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="o">-</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="o">-</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">RGBAPixel</span> <span class="n">stats</span><span class="o">::</span><span class="n">getAvg</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">rectArea</span><span class="p">(</span><span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">sum_r</span><span class="p">,</span> <span class="n">sum_g</span><span class="p">,</span> <span class="n">sum_b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sum_r</span> <span class="o">=</span> <span class="n">getSum</span><span class="p">(</span><span class="sc">&#39;r&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">)</span> <span class="o">/</span> <span class="n">sum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sum_g</span> <span class="o">=</span> <span class="n">getSum</span><span class="p">(</span><span class="sc">&#39;g&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">)</span> <span class="o">/</span> <span class="n">sum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sum_b</span> <span class="o">=</span> <span class="n">getSum</span><span class="p">(</span><span class="sc">&#39;b&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">)</span> <span class="o">/</span> <span class="n">sum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nf">RGBAPixel</span><span class="p">(</span><span class="n">sum_r</span><span class="p">,</span> <span class="n">sum_g</span><span class="p">,</span> <span class="n">sum_b</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">long</span> <span class="n">stats</span><span class="o">::</span><span class="n">getScore</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">rectArea</span><span class="p">(</span><span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">sum_r</span><span class="p">,</span> <span class="n">sum_g</span><span class="p">,</span> <span class="n">sum_b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">sumsq_r</span><span class="p">,</span> <span class="n">sumsq_g</span><span class="p">,</span> <span class="n">sumsq_b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sum_r</span> <span class="o">=</span> <span class="n">getSum</span><span class="p">(</span><span class="sc">&#39;r&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sum_g</span> <span class="o">=</span> <span class="n">getSum</span><span class="p">(</span><span class="sc">&#39;g&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sum_b</span> <span class="o">=</span> <span class="n">getSum</span><span class="p">(</span><span class="sc">&#39;b&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sumsq_r</span> <span class="o">=</span> <span class="n">getSumSq</span><span class="p">(</span><span class="sc">&#39;r&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sumsq_g</span> <span class="o">=</span> <span class="n">getSumSq</span><span class="p">(</span><span class="sc">&#39;g&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sumsq_b</span> <span class="o">=</span> <span class="n">getSumSq</span><span class="p">(</span><span class="sc">&#39;b&#39;</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//alpha置一？
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//是否考虑溢出？
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">sum_r</span> <span class="o">=</span> <span class="n">sum_r</span> <span class="o">*</span> <span class="n">sum_r</span> <span class="o">/</span> <span class="n">sum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sum_g</span> <span class="o">=</span> <span class="n">sum_g</span> <span class="o">*</span> <span class="n">sum_g</span> <span class="o">/</span> <span class="n">sum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sum_b</span> <span class="o">=</span> <span class="n">sum_b</span> <span class="o">*</span> <span class="n">sum_b</span> <span class="o">/</span> <span class="n">sum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sumsq_r</span> <span class="o">-=</span> <span class="n">sum_r</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sumsq_g</span> <span class="o">-=</span> <span class="n">sum_g</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sumsq_b</span> <span class="o">-=</span> <span class="n">sum_b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">sumsq_r</span> <span class="o">+</span> <span class="n">sumsq_g</span> <span class="o">+</span> <span class="n">sumsq_b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>twoDtree.cpp</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * twoDtree (pa3)
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * slight modification of a Kd tree of dimension 2.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * twoDtree.cpp
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * This file will be used for grading.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;twoDtree.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stack&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* given */</span>
+</span></span><span class="line"><span class="cl"><span class="n">twoDtree</span><span class="o">::</span><span class="n">Node</span><span class="o">::</span><span class="n">Node</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">,</span> <span class="n">RGBAPixel</span> <span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">:</span><span class="n">upLeft</span><span class="p">(</span><span class="n">ul</span><span class="p">),</span><span class="n">lowRight</span><span class="p">(</span><span class="n">lr</span><span class="p">),</span><span class="n">avg</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="n">left</span><span class="p">(</span><span class="nb">NULL</span><span class="p">),</span><span class="n">right</span><span class="p">(</span><span class="nb">NULL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* given */</span>
+</span></span><span class="line"><span class="cl"><span class="n">twoDtree</span><span class="o">::~</span><span class="n">twoDtree</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* given */</span>
+</span></span><span class="line"><span class="cl"><span class="n">twoDtree</span><span class="o">::</span><span class="n">twoDtree</span><span class="p">(</span><span class="k">const</span> <span class="n">twoDtree</span> <span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">copy</span><span class="p">(</span><span class="n">other</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* given */</span>
+</span></span><span class="line"><span class="cl"><span class="n">twoDtree</span> <span class="o">&amp;</span> <span class="n">twoDtree</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">twoDtree</span> <span class="o">&amp;</span> <span class="n">rhs</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">copy</span><span class="p">(</span><span class="n">rhs</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">twoDtree</span><span class="o">::</span><span class="n">twoDtree</span><span class="p">(</span><span class="n">PNG</span> <span class="o">&amp;</span> <span class="n">imIn</span><span class="p">){</span> 
+</span></span><span class="line"><span class="cl">    <span class="cm">/* your code here */</span>
+</span></span><span class="line"><span class="cl">    <span class="n">height</span> <span class="o">=</span> <span class="n">imIn</span><span class="p">.</span><span class="n">height</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">width</span> <span class="o">=</span> <span class="n">imIn</span><span class="p">.</span><span class="n">width</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">stats</span> <span class="nf">my_stat</span><span class="p">(</span><span class="n">imIn</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">cur_ul</span><span class="p">,</span> <span class="n">cur_lr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cur_ul</span> <span class="o">=</span> <span class="n">make_pair</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cur_lr</span> <span class="o">=</span> <span class="n">make_pair</span><span class="p">(</span><span class="n">width</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">height</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="c1">//注意坐标从零开始
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span><span class="line"><span class="cl">    <span class="n">root</span> <span class="o">=</span> <span class="n">buildTree</span><span class="p">(</span><span class="n">my_stat</span><span class="p">,</span> <span class="n">cur_ul</span><span class="p">,</span> <span class="n">cur_lr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">twoDtree</span><span class="o">::</span><span class="n">Node</span> <span class="o">*</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">buildTree</span><span class="p">(</span><span class="n">stats</span> <span class="o">&amp;</span> <span class="n">s</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">lr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* your code here */</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span> <span class="o">*</span><span class="n">cur</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">getAvg</span><span class="p">(</span><span class="n">ul</span><span class="p">,</span> <span class="n">lr</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//遍历所有情况
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//if(s.rectArea(ul,lr) &gt; 1){    条件导致死循环
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">ul</span> <span class="o">!=</span> <span class="n">lr</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">bool</span> <span class="n">flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">//1 means horizontal 0 means vertical
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">line</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">Min</span> <span class="o">=</span> <span class="mi">9999999999</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tmp</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">getScore</span><span class="p">(</span><span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> <span class="o">+</span> <span class="n">s</span><span class="p">.</span><span class="n">getScore</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="n">lr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">tmp</span> <span class="o">&lt;</span> <span class="n">Min</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Min</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">line</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tmp</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">getScore</span><span class="p">(</span><span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="p">))</span> <span class="o">+</span> <span class="n">s</span><span class="p">.</span><span class="n">getScore</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">),</span> <span class="n">lr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">((</span><span class="n">i</span> <span class="o">==</span> <span class="n">ul</span><span class="p">.</span><span class="n">first</span> <span class="o">&amp;&amp;</span> <span class="n">ul</span><span class="p">.</span><span class="n">second</span> <span class="o">==</span> <span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">)</span> <span class="o">||</span> <span class="n">tmp</span> <span class="o">&lt;</span> <span class="n">Min</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                <span class="n">flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Min</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">line</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">flag</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">buildTree</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">lr</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">line</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">buildTree</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">ul</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">line</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">lr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">buildTree</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">lr</span><span class="p">.</span><span class="n">second</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">buildTree</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">line</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">ul</span><span class="p">.</span><span class="n">second</span><span class="p">),</span> <span class="n">lr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">cur</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">PNG</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">render</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* your code here */</span>
+</span></span><span class="line"><span class="cl">    <span class="n">PNG</span> <span class="nf">res</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">renderHelper</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">root</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">renderHelper</span><span class="p">(</span><span class="n">PNG</span><span class="o">&amp;</span> <span class="n">res</span><span class="p">,</span> <span class="n">Node</span><span class="o">*</span> <span class="n">cur_node</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">cur_node</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>   <span class="c1">//稍微多余
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">==</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//只有两个都是空也就是叶子节点才会进行操作
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">upLeft</span><span class="p">.</span><span class="n">first</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">lowRight</span><span class="p">.</span><span class="n">first</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">upLeft</span><span class="p">.</span><span class="n">second</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">lowRight</span><span class="p">.</span><span class="n">second</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="o">*</span><span class="n">res</span><span class="p">.</span><span class="n">getPixel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">renderHelper</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">renderHelper</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">prune</span><span class="p">(</span><span class="kt">double</span> <span class="n">pct</span><span class="p">,</span> <span class="kt">int</span> <span class="n">tol</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* your code here */</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//先逐层遍历，对每个节点判断是否需要剪枝
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">queue</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">*&gt;</span> <span class="n">traverse_save</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="o">*</span> <span class="n">cur</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">sum</span><span class="p">,</span> <span class="n">total</span><span class="p">;</span> <span class="c1">//小于tol个数，矩形像素数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">double</span> <span class="n">rate</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">traverse_save</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">traverse_save</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cur</span> <span class="o">=</span> <span class="n">traverse_save</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">traverse_save</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">cur</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sum</span> <span class="o">=</span> <span class="n">pruneHelper</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">total</span> <span class="o">=</span> <span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">lowRight</span><span class="p">.</span><span class="n">first</span><span class="o">-</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">upLeft</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">lowRight</span><span class="p">.</span><span class="n">second</span><span class="o">-</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">upLeft</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rate</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">/</span> <span class="n">total</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">rate</span> <span class="o">&gt;=</span> <span class="n">pct</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">removeNode</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">removeNode</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">traverse_save</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">traverse_save</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">pruneHelper</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="n">cur</span><span class="p">,</span> <span class="kt">int</span> <span class="n">tol</span><span class="p">,</span> <span class="n">RGBAPixel</span> <span class="n">avg</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">cur</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">//只计算叶子
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">avg</span><span class="p">.</span><span class="n">r</span> <span class="o">-</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">.</span><span class="n">r</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">avg</span><span class="p">.</span><span class="n">r</span> <span class="o">-</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">.</span><span class="n">r</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">avg</span><span class="p">.</span><span class="n">g</span> <span class="o">-</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">.</span><span class="n">g</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">avg</span><span class="p">.</span><span class="n">g</span> <span class="o">-</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">.</span><span class="n">g</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">avg</span><span class="p">.</span><span class="n">b</span> <span class="o">-</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">.</span><span class="n">b</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">diff</span> <span class="o">&lt;=</span> <span class="n">tol</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nf">pruneHelper</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">avg</span><span class="p">)</span> <span class="o">+</span> <span class="n">pruneHelper</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">avg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">clear</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* your code here */</span>
+</span></span><span class="line"><span class="cl">    <span class="n">removeNode</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">root</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">removeNode</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span> <span class="n">x</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">removeNode</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">removeNode</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">delete</span> <span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">twoDtree</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="k">const</span> <span class="n">twoDtree</span> <span class="o">&amp;</span> <span class="n">orig</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* your code here */</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//已经对copy进行了说明，不需要进行空间释放
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//本程序中仅有两次调用，调用之前都保证空间已经被初始化
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">height</span> <span class="o">=</span> <span class="n">orig</span><span class="p">.</span><span class="n">height</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">width</span> <span class="o">=</span> <span class="n">orig</span><span class="p">.</span><span class="n">width</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">root</span> <span class="o">=</span> <span class="n">copyNode</span><span class="p">(</span><span class="n">orig</span><span class="p">.</span><span class="n">root</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">twoDtree</span><span class="o">::</span><span class="n">Node</span><span class="o">*</span>  <span class="n">twoDtree</span><span class="o">::</span><span class="n">copyNode</span><span class="p">(</span><span class="k">const</span> <span class="n">Node</span><span class="o">*</span> <span class="n">x</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span> <span class="o">*</span><span class="n">tmp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">upLeft</span><span class="p">,</span> <span class="n">x</span><span class="o">-&gt;</span><span class="n">lowRight</span><span class="p">,</span> <span class="n">x</span><span class="o">-&gt;</span><span class="n">avg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">copyNode</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">copyNode</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="结果分析">结果分析</h2>
 <p>程序在wsl下编译完成，在main函数中添加了显示时间的部分代码，从编译到程序结束的整个过程如下图，对wsl用户名进行了一下处理，不过不影响观察。</p>
 <p><img
         class="lazyload"
@@ -554,13 +551,11 @@
         <div class="post-info-line">
             <div class="post-info-mod">
                 <span>更新于 2019-05-03</span>
-            </div>
-            <div class="post-info-license"></div>
-        </div>
+            </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/compression/" data-title="数据结构作业五 Compression"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/compression/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/compression/" data-title="数据结构作业五 Compression"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://localhost:1313/posts/compression/" data-title="数据结构作业五 Compression"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/compression/" data-title="数据结构作业五 Compression"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -572,20 +567,20 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/train/" class="prev" rel="prev" title="数据结构作业三 列车调度"><i class="fas fa-angle-left fa-fw"></i>数据结构作业三 列车调度</a>
-            <a href="/posts/bin-tree/" class="next" rel="next" title="数据结构作业四 表达式树">数据结构作业四 表达式树<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/posts/train/" class="prev" rel="prev" title="数据结构作业三 列车调度"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>数据结构作业三 列车调度</a>
+            <a href="/posts/bin-tree/" class="next" rel="next" title="数据结构作业四 表达式树">数据结构作业四 表达式树<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.75.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.147.5">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
         </div>
     </footer></div>
 
         <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
-                <i class="fas fa-arrow-up fa-fw"></i>
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
             </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
-                <i class="fas fa-comment fa-fw"></i>
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
             </a>
-        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

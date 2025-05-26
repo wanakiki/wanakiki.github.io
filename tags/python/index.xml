@@ -1,63 +1,68 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>python - 标签 - Wanakiki`s Blog</title>
-        <link>https://wanakiki.github.io/tags/python/</link>
-        <description>python - 标签 - Wanakiki`s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 22 Mar 2023 12:33:06 &#43;0800</lastBuildDate><atom:link href="https://wanakiki.github.io/tags/python/" rel="self" type="application/rss+xml" /><item>
-    <title>使用 Playwright 获取大众点评店铺评论</title>
-    <link>https://wanakiki.github.io/posts/dazhongdianping-spider/</link>
-    <pubDate>Wed, 22 Mar 2023 12:33:06 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/dazhongdianping-spider/</guid>
-    <description><![CDATA[简单记录使用playwright获取大众点评店铺评论的方法。 大概一年前使用playwright替换了selenium写爬虫，使用playwright自带脚本生成简单的代码并且保存登陆状态更加方便。最近]]></description>
-</item><item>
-    <title>使用百度 OCR 录入课堂考勤信息</title>
-    <link>https://wanakiki.github.io/posts/baiduocr-checkin/</link>
-    <pubDate>Wed, 20 Apr 2022 23:30:50 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/baiduocr-checkin/</guid>
-    <description><![CDATA[之前在做助教的时候，我写了一个小工具来统计参加课程的学生人数。因为班上有将近一百个人，每次上课都会以小组为单位做一些题目，并且需要每个人写上自己的姓名和学号。如果要在一百个人中去检索有哪些人没有出勤，]]></description>
-</item><item>
-    <title>Python生成字符动画</title>
-    <link>https://wanakiki.github.io/posts/ascii-art/</link>
-    <pubDate>Sun, 28 Mar 2021 10:55:58 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/ascii-art/</guid>
-    <description><![CDATA[前段时间（指去年）发现咒术回战的ED做的很棒，翻来覆去看了几遍之后想把它魔改成字符画的形式，拖了快半年终于在这周做出来了！ 主要思路参考了B站UP主“奇乐编程学院”的视频：【编程三分钟】教大家用Pyth]]></description>
-</item><item>
-    <title>Python爬虫 代理IP地址获取及使用</title>
-    <link>https://wanakiki.github.io/posts/spider-with-proxy/</link>
-    <pubDate>Thu, 13 Aug 2020 22:16:21 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/spider-with-proxy/</guid>
-    <description><![CDATA[最近别人发给了一个邀请链接，问能不能刷满邀请人数，简单试了一下，网站对访问IP进行了记录，不能用一个IP一直访问，想到的解决方案是套上代理来实现刷点击量的目的。 自从学了点爬虫知识之后，这是第一次需要使]]></description>
-</item><item>
-    <title>Flask框架下API开发异常处理</title>
-    <link>https://wanakiki.github.io/posts/flask-api-exception/</link>
-    <pubDate>Wed, 08 Jul 2020 12:27:41 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/flask-api-exception/</guid>
-    <description><![CDATA[最近在做SRDP项目的后端开发，但是狗书上面对API相关内容介绍比较少，示例代码中的API部分也不涉及用户登录注册相关内容。不过幸运的是在Github上找到了一个问卷调查项目，通过阅读项目代码发现了在]]></description>
-</item><item>
-    <title>百度翻译爬虫</title>
-    <link>https://wanakiki.github.io/posts/baidufanyi/</link>
-    <pubDate>Mon, 18 May 2020 20:44:50 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/baidufanyi/</guid>
-    <description><![CDATA[典型的js加密爬虫实战，本文章内容仅作学习交流。 首先放一下参考文章：爬虫JS破解经典案例之百度翻译 如果没有这篇文章的话，我可能要花很多功夫才能找到具体的js代码位置。 页面加载分析 初步探索 打开百度翻译，]]></description>
-</item><item>
-    <title>爬虫获取力扣题目信息并转为Markdown</title>
-    <link>https://wanakiki.github.io/posts/leetcode-spider/</link>
-    <pubDate>Sat, 02 May 2020 14:38:46 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/leetcode-spider/</guid>
-    <description><![CDATA[很早就接触了leetcode，在上面做了不少题，每次整理的时候复制题目信息是个很麻烦的过程，于是便想着要用爬虫来解决这个问题，今天终于实现了这个功能，简单记录。 写在前面 我自己用得比较多的两个语言是C+]]></description>
-</item><item>
-    <title>PY4E 题目整理（上）</title>
-    <link>https://wanakiki.github.io/posts/python-assignment/</link>
-    <pubDate>Sun, 04 Aug 2019 17:39:49 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wanakiki.github.io/posts/python-assignment/</guid>
-    <description><![CDATA[Coursera中python教程同步题目整理，因为旁听课程不能直接对每章的编程作业进行提交，学到中期之后才发现py4e上有几乎所有题目的在线测试环境，在看完所有的教学视频之后重新刷题，回顾知识点，在]]></description>
-</item></channel>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Wanakiki`s Blog</title>
+    <link>http://localhost:1313/tags/python/</link>
+    <description>Recent content in Python on Wanakiki`s Blog</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 22 Mar 2023 12:33:06 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用 Playwright 获取大众点评店铺评论</title>
+      <link>http://localhost:1313/posts/dazhongdianping-spider/</link>
+      <pubDate>Wed, 22 Mar 2023 12:33:06 +0800</pubDate>
+      <guid>http://localhost:1313/posts/dazhongdianping-spider/</guid>
+      <description>&lt;p&gt;简单记录使用&lt;code&gt;playwright&lt;/code&gt;获取大众点评店铺评论的方法。&lt;/p&gt;&#xA;&lt;p&gt;大概一年前使用&lt;code&gt;playwright&lt;/code&gt;替换了&lt;code&gt;selenium&lt;/code&gt;写爬虫，使用&lt;code&gt;playwright&lt;/code&gt;自带脚本生成简单的代码并且保存登陆状态更加方便。最近因为某个原因要写一下大众点评的爬虫，简单记录一下整个过程。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>使用百度 OCR 录入课堂考勤信息</title>
+      <link>http://localhost:1313/posts/baiduocr-checkin/</link>
+      <pubDate>Wed, 20 Apr 2022 23:30:50 +0800</pubDate>
+      <guid>http://localhost:1313/posts/baiduocr-checkin/</guid>
+      <description>&lt;p&gt;之前在做助教的时候，我写了一个小工具来统计参加课程的学生人数。因为班上有将近一百个人，每次上课都会以小组为单位做一些题目，并且需要每个人写上自己的姓名和学号。如果要在一百个人中去检索有哪些人没有出勤，不管是在 Excel 里面找，还是再去做对比，都需要花比较多的功夫。所以我就想到了用程序来解决这个问题。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Python生成字符动画</title>
+      <link>http://localhost:1313/posts/ascii-art/</link>
+      <pubDate>Sun, 28 Mar 2021 10:55:58 +0800</pubDate>
+      <guid>http://localhost:1313/posts/ascii-art/</guid>
+      <description>&lt;p&gt;前段时间（指去年）发现咒术回战的ED做的很棒，翻来覆去看了几遍之后想把它魔改成字符画的形式，拖了快半年终于在这周做出来了！&lt;/p&gt;&#xA;&lt;p&gt;主要思路参考了B站UP主“奇乐编程学院”的视频：&lt;a href=&#34;https://www.bilibili.com/video/BV1aT4y1A7EF&#34; target=&#34;_blank&#34; rel=&#34;noopener noreffer &#34;&gt;【编程三分钟】教大家用Python做出漂亮的字符动画！&lt;/a&gt;，最终效果点&lt;a href=&#34;https://www.bilibili.com/video/BV1L54y1h7AG?share_source=copy_web&#34; target=&#34;_blank&#34; rel=&#34;noopener noreffer &#34;&gt;这里&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Python爬虫 代理IP地址获取及使用</title>
+      <link>http://localhost:1313/posts/spider-with-proxy/</link>
+      <pubDate>Thu, 13 Aug 2020 22:16:21 +0800</pubDate>
+      <guid>http://localhost:1313/posts/spider-with-proxy/</guid>
+      <description>&lt;p&gt;最近别人发给了一个邀请链接，问能不能刷满邀请人数，简单试了一下，网站对访问IP进行了记录，不能用一个IP一直访问，想到的解决方案是套上代理来实现刷点击量的目的。&lt;/p&gt;&#xA;&lt;p&gt;自从学了点爬虫知识之后，这是第一次需要使用代理的场景，简单记录一下实现点击量目标所做的工作。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Flask框架下API开发异常处理</title>
+      <link>http://localhost:1313/posts/flask-api-exception/</link>
+      <pubDate>Wed, 08 Jul 2020 12:27:41 +0800</pubDate>
+      <guid>http://localhost:1313/posts/flask-api-exception/</guid>
+      <description>&lt;p&gt;最近在做SRDP项目的后端开发，但是狗书上面对API相关内容介绍比较少，示例代码中的API部分也不涉及用户登录注册相关内容。不过幸运的是在Github上找到了一个问卷调查项目，通过阅读项目代码发现了在进行API开发时处理异常的一些技巧。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>百度翻译爬虫</title>
+      <link>http://localhost:1313/posts/baidufanyi/</link>
+      <pubDate>Mon, 18 May 2020 20:44:50 +0800</pubDate>
+      <guid>http://localhost:1313/posts/baidufanyi/</guid>
+      <description>&lt;p&gt;典型的js加密爬虫实战，本文章内容仅作学习交流。&lt;/p&gt;&#xA;&lt;p&gt;首先放一下参考文章：&lt;a href=&#34;https://zhuanlan.zhihu.com/p/76239929&#34; target=&#34;_blank&#34; rel=&#34;noopener noreffer &#34;&gt;爬虫JS破解经典案例之百度翻译&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;如果没有这篇文章的话，我可能要花很多功夫才能找到具体的js代码位置。&lt;/p&gt;&#xA;&lt;h2 id=&#34;页面加载分析&#34;&gt;页面加载分析&lt;/h2&gt;&#xA;&lt;h3 id=&#34;初步探索&#34;&gt;初步探索&lt;/h3&gt;&#xA;&lt;p&gt;打开&lt;a href=&#34;https://fanyi.baidu.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener noreffer &#34;&gt;百度翻译&lt;/a&gt;，然后右键、检查、network，刷新页面即可看到网页的加载过程。具体的图示可以在之前的&lt;a href=&#34;../leetcode-spider&#34; rel=&#34;&#34;&gt;leetcode爬虫&lt;/a&gt;中找到。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>爬虫获取力扣题目信息并转为Markdown</title>
+      <link>http://localhost:1313/posts/leetcode-spider/</link>
+      <pubDate>Sat, 02 May 2020 14:38:46 +0800</pubDate>
+      <guid>http://localhost:1313/posts/leetcode-spider/</guid>
+      <description>&lt;p&gt;很早就接触了leetcode，在上面做了不少题，每次整理的时候复制题目信息是个很麻烦的过程，于是便想着要用爬虫来解决这个问题，今天终于实现了这个功能，简单记录。&lt;/p&gt;&#xA;&lt;h2 id=&#34;写在前面&#34;&gt;写在前面&lt;/h2&gt;&#xA;&lt;p&gt;我自己用得比较多的两个语言是C++和Python，爬虫是去年五一假期简单入门的，到现在刚好过了一年。这一年里面也写了点小的爬虫脚本，比如查询图书馆某本书的借阅状态、学校官网信息的收集。之前访问的网站都是偏老的网站，界面都是一些静态界面，不需要动态加载，一般都是简单访问页面之后解析数据就能获得想要的信息。但是leetcode网页的加载方式跟之前那些网站不一样，它的绝大部分内容都是动态加载出来的，首次请求只会返回一个基本的网页模板，之后会自动发起（或者用户调用）请求获得页面更详细的信息。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PY4E 题目整理（上）</title>
+      <link>http://localhost:1313/posts/python-assignment/</link>
+      <pubDate>Sun, 04 Aug 2019 17:39:49 +0800</pubDate>
+      <guid>http://localhost:1313/posts/python-assignment/</guid>
+      <description>&lt;p&gt;Coursera中python教程同步题目整理，因为旁听课程不能直接对每章的编程作业进行提交，学到中期之后才发现&lt;a href=&#34;https://www.py4e.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener noreffer &#34;&gt;py4e&lt;/a&gt;上有几乎所有题目的在线测试环境，在看完所有的教学视频之后重新刷题，回顾知识点，在此进行整理。分为基础部分和网络及数据库编程部分。&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>

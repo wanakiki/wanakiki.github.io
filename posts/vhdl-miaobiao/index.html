@@ -1,23 +1,34 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-    <head>
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>VHDL设计 秒表 - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="VHDL设计 秒表" />
-<meta property="og:description" content="VHDL课程作业，设计一个带存储功能的秒表。 演示视频：https://www.bilibili.com/video/av79725799/ 秒表由以下模块组成： 按键消抖 xd 分频器 clock_gen 计数器 cnt 译码器 dec 串行扫描" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://wanakiki.github.io/posts/vhdl-miaobiao/" />
-<meta property="article:published_time" content="2020-01-01T21:50:14+08:00" />
-<meta property="article:modified_time" content="2020-01-01T21:50:14+08:00" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="VHDL设计 秒表"/>
-<meta name="twitter:description" content="VHDL课程作业，设计一个带存储功能的秒表。 演示视频：https://www.bilibili.com/video/av79725799/ 秒表由以下模块组成： 按键消抖 xd 分频器 clock_gen 计数器 cnt 译码器 dec 串行扫描"/>
-<meta name="application-name" content="Wanakiki`s Blog">
-<meta name="apple-mobile-web-app-title" content="Wanakiki`s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <title>VHDL设计 秒表 - Wanakiki`s Blog</title><meta name="Description" content="This is my cool site"><meta property="og:url" content="http://localhost:1313/posts/vhdl-miaobiao/">
+  <meta property="og:site_name" content="Wanakiki`s Blog">
+  <meta property="og:title" content="VHDL设计 秒表">
+  <meta property="og:description" content="VHDL课程作业，设计一个带存储功能的秒表。
+演示视频：https://www.bilibili.com/video/av79725799/
+秒表由以下模块组成：
+按键消抖 xd 分频器 clock_gen 计数器 cnt 译码器 dec 串行扫描 scan 寄存器 reg 蜂鸣器 ling 顶层秒表 miaobiao 连接示意图，画的很垃圾😑">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-01-01T21:50:14+08:00">
+    <meta property="article:modified_time" content="2020-01-01T21:50:14+08:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="VHDL设计 秒表">
+  <meta name="twitter:description" content="VHDL课程作业，设计一个带存储功能的秒表。
+演示视频：https://www.bilibili.com/video/av79725799/
+秒表由以下模块组成：
+按键消抖 xd 分频器 clock_gen 计数器 cnt 译码器 dec 串行扫描 scan 寄存器 reg 蜂鸣器 ling 顶层秒表 miaobiao 连接示意图，画的很垃圾😑">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://wanakiki.github.io/posts/vhdl-miaobiao/" /><link rel="prev" href="https://wanakiki.github.io/posts/use-github/" /><link rel="next" href="https://wanakiki.github.io/posts/special-dictionary/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/vhdl-miaobiao/" /><link rel="prev" href="http://localhost:1313/posts/use-github/" /><link rel="next" href="http://localhost:1313/posts/special-dictionary/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -25,63 +36,55 @@
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/wanakiki.github.io\/posts\/vhdl-miaobiao\/"
+            "@id": "http:\/\/localhost:1313\/posts\/vhdl-miaobiao\/"
         },"genre": "posts","wordcount":  2403 ,
-        "url": "https:\/\/wanakiki.github.io\/posts\/vhdl-miaobiao\/","datePublished": "2020-01-01T21:50:14+08:00","dateModified": "2020-01-01T21:50:14+08:00","publisher": {
+        "url": "http:\/\/localhost:1313\/posts\/vhdl-miaobiao\/","datePublished": "2020-01-01T21:50:14+08:00","dateModified": "2020-01-01T21:50:14+08:00","publisher": {
             "@type": "Organization",
-            "name": "wanakiki"},"author": {
+            "name": ""},"author": {
                 "@type": "Person",
                 "name": "wanakiki"
             },"description": ""
     }
     </script></head>
-    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+            <a href="/" title="Wanakiki`s Blog">🥰Wanakiki`s Blog</a>
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> Blog </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                    <i class="fas fa-adjust fa-fw"></i>
-                </a>
-            </div>
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
         </div>
     </div>
 </header><header class="mobile" id="header-mobile">
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+                <a href="/" title="Wanakiki`s Blog">🥰Wanakiki`s Blog</a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
             </div>
         </div>
         <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Blog</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                <i class="fas fa-adjust fa-fw"></i>
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a></div>
     </div>
-</header>
-<div class="search-dropdown desktop">
-    <div id="search-dropdown-desktop"></div>
-</div>
-<div class="search-dropdown mobile">
-    <div id="search-dropdown-mobile"></div>
-</div>
-<main class="main">
+</header><main class="main">
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">VHDL设计 秒表</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-01-01">2020-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2403 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
-        </div><div class="details toc" id="toc-static"  kept="">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VHDL设计 秒表</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>wanakiki</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2020-01-01">2020-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 2403 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
-                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
@@ -96,7 +99,6 @@
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>VHDL课程作业，设计一个带存储功能的秒表。</p>
-<!-- raw HTML omitted -->
 <p>演示视频：https://www.bilibili.com/video/av79725799/</p>
 <p>秒表由以下模块组成：</p>
 <ol>
@@ -128,579 +130,577 @@
         alt="https://raw.githubusercontent.com/wanakiki/photo/master/vhdl/20200101220658.jpg"
         title="引脚分配图" /></p>
 <h2 id="顶层模块">顶层模块</h2>
-<div class="highlight"><pre class="chroma"><code class="language-vhdl" data-lang="vhdl"><span class="k">library</span> <span class="nn">ieee</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">ieee.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">ieee.std_logic_unsigned.</span><span class="k">all</span><span class="p">;</span>
-
-<span class="k">entity</span> <span class="nc">miaobiao</span> <span class="k">is</span>
-    <span class="k">port</span><span class="p">(</span>
-        <span class="n">clk</span><span class="p">,</span> <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">k3</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
-        <span class="n">selector</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-        <span class="n">num</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-        <span class="n">ling_out</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span>
-    <span class="p">);</span>
-<span class="k">end</span> <span class="k">entity</span> <span class="nc">miaobiao</span><span class="p">;</span>
-
-<span class="k">architecture</span> <span class="nc">rtl</span> <span class="k">of</span> <span class="nc">miaobiao</span> <span class="k">is</span>
-    
-    <span class="k">component</span> <span class="nc">clock_gen</span> <span class="k">is</span>
-        <span class="k">port</span><span class="p">(</span>
-            <span class="n">clk</span>     <span class="o">:</span> <span class="k">IN</span> <span class="kt">STD_LOGIC</span><span class="p">;</span> 
-            <span class="n">clk_us</span>     <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
-            <span class="n">clk_ms</span> 	   <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
-            <span class="n">clk_10ms</span>   <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
-            <span class="n">clk_100ms</span> 	   <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
-            <span class="n">clk_500ms</span>   <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
-            <span class="n">clk_second</span> <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span>
-        <span class="p">);</span>
-    <span class="k">end</span> <span class="k">component</span><span class="p">;</span>
-
-    <span class="k">component</span> <span class="nc">cnt</span> <span class="k">is</span>
-        <span class="k">port</span><span class="p">(</span>
-            <span class="n">reset</span><span class="p">,</span> <span class="n">clk</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
-            <span class="n">carry</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span><span class="p">;</span>
-            <span class="n">nums</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="p">);</span>
-    <span class="k">end</span> <span class="k">component</span> <span class="nc">cnt</span><span class="p">;</span>
-
-    <span class="k">component</span> <span class="nc">cnt6</span> <span class="k">is</span>
-        <span class="k">port</span><span class="p">(</span>
-            <span class="n">reset</span><span class="p">,</span> <span class="n">clk</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
-            <span class="n">carry</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span><span class="p">;</span>
-            <span class="n">nums</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="p">);</span>
-    <span class="k">end</span> <span class="k">component</span> <span class="nc">cnt6</span><span class="p">;</span>
-
-    <span class="k">component</span> <span class="nc">dec</span> <span class="k">is</span>
-        <span class="k">port</span><span class="p">(</span>
-            <span class="n">nums</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-            <span class="n">res</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="p">);</span>
-    <span class="k">end</span> <span class="k">component</span> <span class="nc">dec</span><span class="p">;</span>
-
-    <span class="k">component</span> <span class="nc">dec_node</span> <span class="k">is</span>
-        <span class="k">port</span><span class="p">(</span>
-            <span class="n">nums</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-            <span class="n">res</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="p">);</span>
-    <span class="k">end</span> <span class="k">component</span> <span class="nc">dec_node</span><span class="p">;</span>
-
-    <span class="k">component</span> <span class="nc">ling</span> <span class="k">is</span>
-        <span class="k">port</span><span class="p">(</span>
-            <span class="n">enable</span><span class="p">,</span> <span class="n">clk1</span><span class="p">,</span> <span class="n">clk2</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
-            <span class="n">clk_out</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span>
-        <span class="p">);</span>
-    <span class="k">end</span> <span class="k">component</span><span class="p">;</span>
-
-    <span class="k">component</span> <span class="nc">reg</span> <span class="k">is</span>
-        <span class="k">port</span><span class="p">(</span>
-            <span class="n">clk</span><span class="p">,</span> <span class="n">clear</span><span class="p">,</span> <span class="n">enable</span><span class="p">,</span> <span class="n">st</span><span class="o">:</span><span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
-            <span class="n">data</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-            <span class="n">l_st</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span><span class="p">;</span>
-            <span class="n">out_num0</span><span class="p">,</span> <span class="n">out_num1</span><span class="p">,</span> <span class="n">out_num2</span><span class="p">,</span> <span class="n">out_num3</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="p">);</span>
-    <span class="k">end</span> <span class="k">component</span> <span class="nc">reg</span><span class="p">;</span>
-
-    <span class="k">component</span> <span class="nc">scan</span> <span class="k">is</span>
-        <span class="k">port</span><span class="p">(</span>
-            <span class="n">num0</span><span class="p">,</span> <span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="p">,</span> <span class="n">num3</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-            <span class="n">clk</span><span class="p">,</span> <span class="n">clk_l</span><span class="p">,</span> <span class="n">st</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
-            <span class="n">selector</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-            <span class="n">nums</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="p">);</span>
-    <span class="k">end</span> <span class="k">component</span> <span class="nc">scan</span><span class="p">;</span>
-
-    <span class="k">component</span> <span class="nc">xd</span> <span class="k">is</span>
-        <span class="k">generic</span><span class="p">(</span><span class="n">n</span><span class="o">:</span><span class="kt">integer</span><span class="o">:=</span><span class="mi">30</span><span class="p">);</span>
-        <span class="k">port</span><span class="p">(</span><span class="n">clk</span><span class="p">,</span><span class="n">k1</span><span class="o">:</span><span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
-             <span class="n">y</span> <span class="o">:</span><span class="k">out</span> <span class="kt">std_logic</span><span class="p">);</span>
-    <span class="k">end</span> <span class="k">component</span> <span class="nc">xd</span><span class="p">;</span>
-<span class="c1">--===================================================</span>
-    <span class="k">signal</span> <span class="n">vcc</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="n">clear</span><span class="o">:</span> <span class="kt">std_logic</span><span class="p">;</span>
-    <span class="k">signal</span> <span class="n">k1_xd</span><span class="p">,</span> <span class="n">k2_xd</span><span class="p">,</span> <span class="n">k3_xd</span><span class="p">,</span> <span class="n">clk_10ms</span><span class="p">,</span> <span class="n">clk_l</span><span class="p">,</span> <span class="n">clk_xd</span><span class="p">,</span> <span class="n">clk_cnt</span><span class="o">:</span> <span class="kt">std_logic</span><span class="p">;</span>
-    <span class="k">signal</span> <span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">c3</span><span class="o">:</span> <span class="kt">std_logic</span><span class="p">;</span>       <span class="c1">--cnt</span>
-	 <span class="k">signal</span> <span class="n">num0</span><span class="p">,</span> <span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="p">,</span> <span class="n">num3</span><span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-    <span class="k">signal</span> <span class="n">nums</span><span class="o">:</span><span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>      <span class="c1">--reg</span>
-    <span class="k">signal</span> <span class="n">di_num0</span><span class="p">,</span> <span class="n">di_num1</span><span class="p">,</span> <span class="n">di_num2</span><span class="p">,</span> <span class="n">di_num3</span><span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>      <span class="c1">--decoder</span>
-    <span class="k">signal</span> <span class="n">sc_num0</span><span class="p">,</span> <span class="n">sc_num1</span><span class="p">,</span> <span class="n">sc_num2</span><span class="p">,</span> <span class="n">sc_num3</span><span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>   <span class="c1">--scan</span>
-	 <span class="k">signal</span> <span class="n">l_st</span><span class="o">:</span><span class="kt">std_logic</span><span class="p">;</span>
-    <span class="k">signal</span> <span class="n">push</span><span class="o">:</span> <span class="kt">std_logic</span><span class="p">;</span>
-<span class="k">begin</span>
-    <span class="n">vcc</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
-    <span class="n">u0</span><span class="o">:</span> <span class="n">clock_gen</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">clk</span><span class="o">=&gt;</span><span class="n">clk</span><span class="p">,</span> <span class="n">clk_10ms</span><span class="o">=&gt;</span><span class="n">clk_cnt</span><span class="p">,</span> <span class="n">clk_us</span><span class="o">=&gt;</span><span class="k">open</span><span class="p">,</span> <span class="n">clk_ms</span><span class="o">=&gt;</span><span class="n">clk_xd</span><span class="p">,</span> <span class="n">clk_100ms</span><span class="o">=&gt;</span><span class="n">clk_l</span><span class="p">,</span> <span class="n">clk_500ms</span><span class="o">=&gt;</span><span class="k">open</span><span class="p">,</span> <span class="n">clk_second</span><span class="o">=&gt;</span><span class="k">open</span><span class="p">);</span>
-    <span class="n">u1</span><span class="o">:</span> <span class="n">xd</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">clk</span><span class="o">=&gt;</span><span class="n">clk_xd</span><span class="p">,</span> <span class="n">k1</span><span class="o">=&gt;</span><span class="n">k1</span><span class="p">,</span> <span class="n">y</span><span class="o">=&gt;</span><span class="n">k1_xd</span><span class="p">);</span>
-    <span class="n">u2</span><span class="o">:</span> <span class="n">xd</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">clk</span><span class="o">=&gt;</span><span class="n">clk_xd</span><span class="p">,</span> <span class="n">k1</span><span class="o">=&gt;</span><span class="n">k2</span><span class="p">,</span> <span class="n">y</span><span class="o">=&gt;</span><span class="n">k2_xd</span><span class="p">);</span>
-    <span class="n">u3</span><span class="o">:</span> <span class="n">xd</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">clk</span><span class="o">=&gt;</span><span class="n">clk_xd</span><span class="p">,</span> <span class="n">k1</span><span class="o">=&gt;</span><span class="n">k3</span><span class="p">,</span> <span class="n">y</span><span class="o">=&gt;</span><span class="n">k3_xd</span><span class="p">);</span>
-    
-    <span class="n">c0</span> <span class="o">&lt;=</span> <span class="n">clk_cnt</span> <span class="k">and</span> <span class="n">st</span><span class="p">;</span>
-    <span class="n">clear</span> <span class="o">&lt;=</span> <span class="n">st</span> <span class="k">or</span> <span class="n">k2_xd</span><span class="p">;</span>
-    <span class="n">u4</span><span class="o">:</span> <span class="n">cnt</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">reset</span><span class="o">=&gt;</span><span class="n">clear</span><span class="p">,</span> <span class="n">clk</span><span class="o">=&gt;</span><span class="n">c0</span><span class="p">,</span> <span class="n">carry</span><span class="o">=&gt;</span><span class="n">c1</span><span class="p">,</span> <span class="n">nums</span><span class="o">=&gt;</span><span class="n">num0</span><span class="p">);</span>
-    <span class="n">u5</span><span class="o">:</span> <span class="n">cnt</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">reset</span><span class="o">=&gt;</span><span class="n">clear</span><span class="p">,</span> <span class="n">clk</span><span class="o">=&gt;</span><span class="n">c1</span><span class="p">,</span> <span class="n">carry</span><span class="o">=&gt;</span><span class="n">c2</span><span class="p">,</span> <span class="n">nums</span><span class="o">=&gt;</span><span class="n">num1</span><span class="p">);</span>
-    <span class="n">u6</span><span class="o">:</span> <span class="n">cnt</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">reset</span><span class="o">=&gt;</span><span class="n">clear</span><span class="p">,</span> <span class="n">clk</span><span class="o">=&gt;</span><span class="n">c2</span><span class="p">,</span> <span class="n">carry</span><span class="o">=&gt;</span><span class="n">c3</span><span class="p">,</span> <span class="n">nums</span><span class="o">=&gt;</span><span class="n">num2</span><span class="p">);</span>
-    <span class="n">u7</span><span class="o">:</span> <span class="n">cnt6</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">reset</span><span class="o">=&gt;</span><span class="n">clear</span><span class="p">,</span> <span class="n">clk</span><span class="o">=&gt;</span><span class="n">c3</span><span class="p">,</span> <span class="n">carry</span><span class="o">=&gt;</span><span class="k">open</span><span class="p">,</span> <span class="n">nums</span><span class="o">=&gt;</span><span class="n">num3</span><span class="p">);</span>
-
-    <span class="n">nums</span><span class="o">&lt;=</span> <span class="n">num3</span> <span class="o">&amp;</span> <span class="n">num2</span> <span class="o">&amp;</span> <span class="n">num1</span> <span class="o">&amp;</span> <span class="n">num0</span><span class="p">;</span>
-    <span class="n">u8</span><span class="o">:</span> <span class="n">reg</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">clk</span><span class="o">=&gt;</span><span class="n">k3_xd</span><span class="p">,</span> <span class="n">clear</span><span class="o">=&gt;</span><span class="n">clear</span><span class="p">,</span> <span class="n">enable</span><span class="o">=&gt;</span><span class="n">vcc</span><span class="p">,</span> <span class="n">st</span><span class="o">=&gt;</span><span class="n">st</span><span class="p">,</span> <span class="n">data</span><span class="o">=&gt;</span><span class="n">nums</span><span class="p">,</span> <span class="n">l_st</span><span class="o">=&gt;</span><span class="n">l_st</span><span class="p">,</span><span class="n">out_num0</span><span class="o">=&gt;</span><span class="n">di_num0</span><span class="p">,</span> <span class="n">out_num1</span><span class="o">=&gt;</span><span class="n">di_num1</span><span class="p">,</span> <span class="n">out_num2</span><span class="o">=&gt;</span><span class="n">di_num2</span><span class="p">,</span> <span class="n">out_num3</span><span class="o">=&gt;</span><span class="n">di_num3</span><span class="p">);</span>
-    
-    <span class="n">u9</span><span class="o">:</span> <span class="n">dec</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">nums</span><span class="o">=&gt;</span><span class="n">di_num0</span><span class="p">,</span> <span class="n">res</span><span class="o">=&gt;</span><span class="n">sc_num0</span><span class="p">);</span>
-    <span class="n">u10</span><span class="o">:</span> <span class="n">dec</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">nums</span><span class="o">=&gt;</span><span class="n">di_num1</span><span class="p">,</span> <span class="n">res</span><span class="o">=&gt;</span><span class="n">sc_num1</span><span class="p">);</span>
-    <span class="n">u11</span><span class="o">:</span> <span class="n">dec_node</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">nums</span><span class="o">=&gt;</span><span class="n">di_num2</span><span class="p">,</span> <span class="n">res</span><span class="o">=&gt;</span><span class="n">sc_num2</span><span class="p">);</span>
-    <span class="n">u12</span><span class="o">:</span> <span class="n">dec</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">nums</span><span class="o">=&gt;</span><span class="n">di_num3</span><span class="p">,</span> <span class="n">res</span><span class="o">=&gt;</span><span class="n">sc_num3</span><span class="p">);</span>
-    
-    <span class="n">u13</span><span class="o">:</span> <span class="n">scan</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">num0</span><span class="o">=&gt;</span><span class="n">sc_num0</span><span class="p">,</span> <span class="n">num1</span><span class="o">=&gt;</span><span class="n">sc_num1</span><span class="p">,</span> <span class="n">num2</span><span class="o">=&gt;</span><span class="n">sc_num2</span><span class="p">,</span> <span class="n">num3</span><span class="o">=&gt;</span><span class="n">sc_num3</span><span class="p">,</span> <span class="n">clk</span><span class="o">=&gt;</span><span class="n">clk_xd</span><span class="p">,</span> <span class="n">clk_l</span><span class="o">=&gt;</span><span class="n">clk_l</span><span class="p">,</span> <span class="n">st</span><span class="o">=&gt;</span><span class="n">l_st</span><span class="p">,</span> <span class="n">selector</span><span class="o">=&gt;</span><span class="n">selector</span><span class="p">,</span> <span class="n">nums</span><span class="o">=&gt;</span><span class="n">num</span><span class="p">);</span>
-    
-    <span class="n">push</span> <span class="o">&lt;=</span> <span class="n">k1_xd</span> <span class="k">and</span> <span class="n">k2_xd</span> <span class="k">and</span> <span class="n">k3_xd</span><span class="p">;</span>
-    <span class="n">u14</span><span class="o">:</span> <span class="n">ling</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">enable</span><span class="o">=&gt;</span> <span class="n">push</span><span class="p">,</span> <span class="n">clk1</span><span class="o">=&gt;</span><span class="n">clk_l</span><span class="p">,</span> <span class="n">clk2</span><span class="o">=&gt;</span><span class="n">clk_xd</span><span class="p">,</span> <span class="n">clk_out</span><span class="o">=&gt;</span><span class="n">ling_out</span><span class="p">);</span>
-    
-    <span class="c1">--zhuangtaikongzhi</span>
-    <span class="k">process</span><span class="p">(</span><span class="n">k1_xd</span><span class="p">)</span>
-    <span class="k">begin</span>
-        <span class="k">if</span> <span class="n">k1_xd</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">k1_xd</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="k">then</span>
-            <span class="k">if</span> <span class="n">st</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="k">then</span>
-                <span class="n">st</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
-            <span class="k">else</span>
-                <span class="n">st</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
-            <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-    <span class="k">end</span> <span class="k">process</span><span class="p">;</span>
-<span class="k">end</span> <span class="k">architecture</span> <span class="nc">rtl</span><span class="p">;</span>
-</code></pre></div><h2 id="消抖模块">消抖模块</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-vhdl" data-lang="vhdl"><span class="line"><span class="cl"><span class="k">library</span> <span class="nn">ieee</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nn">ieee.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nn">ieee.std_logic_unsigned.</span><span class="k">all</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">entity</span> <span class="nc">miaobiao</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">    <span class="k">port</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">clk</span><span class="p">,</span> <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">k3</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">selector</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">num</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ling_out</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">entity</span> <span class="nc">miaobiao</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">architecture</span> <span class="nc">rtl</span> <span class="k">of</span> <span class="nc">miaobiao</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">component</span> <span class="nc">clock_gen</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">        <span class="k">port</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">clk</span>     <span class="o">:</span> <span class="k">IN</span> <span class="kt">STD_LOGIC</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">            <span class="n">clk_us</span>     <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">clk_ms</span> 	   <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">clk_10ms</span>   <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">clk_100ms</span> 	   <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">clk_500ms</span>   <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">clk_second</span> <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span>
+</span></span><span class="line"><span class="cl">        <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span> <span class="k">component</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">component</span> <span class="nc">cnt</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">        <span class="k">port</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">reset</span><span class="p">,</span> <span class="n">clk</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">carry</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">nums</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span> <span class="k">component</span> <span class="nc">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">component</span> <span class="nc">cnt6</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">        <span class="k">port</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">reset</span><span class="p">,</span> <span class="n">clk</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">carry</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">nums</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span> <span class="k">component</span> <span class="nc">cnt6</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">component</span> <span class="nc">dec</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">        <span class="k">port</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">nums</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span> <span class="k">component</span> <span class="nc">dec</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">component</span> <span class="nc">dec_node</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">        <span class="k">port</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">nums</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span> <span class="k">component</span> <span class="nc">dec_node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">component</span> <span class="nc">ling</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">        <span class="k">port</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">enable</span><span class="p">,</span> <span class="n">clk1</span><span class="p">,</span> <span class="n">clk2</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">clk_out</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span>
+</span></span><span class="line"><span class="cl">        <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span> <span class="k">component</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">component</span> <span class="nc">reg</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">        <span class="k">port</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">clk</span><span class="p">,</span> <span class="n">clear</span><span class="p">,</span> <span class="n">enable</span><span class="p">,</span> <span class="n">st</span><span class="o">:</span><span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">data</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">l_st</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">out_num0</span><span class="p">,</span> <span class="n">out_num1</span><span class="p">,</span> <span class="n">out_num2</span><span class="p">,</span> <span class="n">out_num3</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span> <span class="k">component</span> <span class="nc">reg</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">component</span> <span class="nc">scan</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">        <span class="k">port</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">num0</span><span class="p">,</span> <span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="p">,</span> <span class="n">num3</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">clk</span><span class="p">,</span> <span class="n">clk_l</span><span class="p">,</span> <span class="n">st</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">selector</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">nums</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span> <span class="k">component</span> <span class="nc">scan</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">component</span> <span class="nc">xd</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">        <span class="k">generic</span><span class="p">(</span><span class="n">n</span><span class="o">:</span><span class="kt">integer</span><span class="o">:=</span><span class="mi">30</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">port</span><span class="p">(</span><span class="n">clk</span><span class="p">,</span><span class="n">k1</span><span class="o">:</span><span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">             <span class="n">y</span> <span class="o">:</span><span class="k">out</span> <span class="kt">std_logic</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span> <span class="k">component</span> <span class="nc">xd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">--===================================================</span>
+</span></span><span class="line"><span class="cl">    <span class="k">signal</span> <span class="n">vcc</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="n">clear</span><span class="o">:</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">signal</span> <span class="n">k1_xd</span><span class="p">,</span> <span class="n">k2_xd</span><span class="p">,</span> <span class="n">k3_xd</span><span class="p">,</span> <span class="n">clk_10ms</span><span class="p">,</span> <span class="n">clk_l</span><span class="p">,</span> <span class="n">clk_xd</span><span class="p">,</span> <span class="n">clk_cnt</span><span class="o">:</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">signal</span> <span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">c3</span><span class="o">:</span> <span class="kt">std_logic</span><span class="p">;</span>       <span class="c1">--cnt</span>
+</span></span><span class="line"><span class="cl">	 <span class="k">signal</span> <span class="n">num0</span><span class="p">,</span> <span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="p">,</span> <span class="n">num3</span><span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">signal</span> <span class="n">nums</span><span class="o">:</span><span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>      <span class="c1">--reg</span>
+</span></span><span class="line"><span class="cl">    <span class="k">signal</span> <span class="n">di_num0</span><span class="p">,</span> <span class="n">di_num1</span><span class="p">,</span> <span class="n">di_num2</span><span class="p">,</span> <span class="n">di_num3</span><span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>      <span class="c1">--decoder</span>
+</span></span><span class="line"><span class="cl">    <span class="k">signal</span> <span class="n">sc_num0</span><span class="p">,</span> <span class="n">sc_num1</span><span class="p">,</span> <span class="n">sc_num2</span><span class="p">,</span> <span class="n">sc_num3</span><span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>   <span class="c1">--scan</span>
+</span></span><span class="line"><span class="cl">	 <span class="k">signal</span> <span class="n">l_st</span><span class="o">:</span><span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">signal</span> <span class="n">push</span><span class="o">:</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">begin</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vcc</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">u0</span><span class="o">:</span> <span class="n">clock_gen</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">clk</span><span class="o">=&gt;</span><span class="n">clk</span><span class="p">,</span> <span class="n">clk_10ms</span><span class="o">=&gt;</span><span class="n">clk_cnt</span><span class="p">,</span> <span class="n">clk_us</span><span class="o">=&gt;</span><span class="k">open</span><span class="p">,</span> <span class="n">clk_ms</span><span class="o">=&gt;</span><span class="n">clk_xd</span><span class="p">,</span> <span class="n">clk_100ms</span><span class="o">=&gt;</span><span class="n">clk_l</span><span class="p">,</span> <span class="n">clk_500ms</span><span class="o">=&gt;</span><span class="k">open</span><span class="p">,</span> <span class="n">clk_second</span><span class="o">=&gt;</span><span class="k">open</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">u1</span><span class="o">:</span> <span class="n">xd</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">clk</span><span class="o">=&gt;</span><span class="n">clk_xd</span><span class="p">,</span> <span class="n">k1</span><span class="o">=&gt;</span><span class="n">k1</span><span class="p">,</span> <span class="n">y</span><span class="o">=&gt;</span><span class="n">k1_xd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">u2</span><span class="o">:</span> <span class="n">xd</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">clk</span><span class="o">=&gt;</span><span class="n">clk_xd</span><span class="p">,</span> <span class="n">k1</span><span class="o">=&gt;</span><span class="n">k2</span><span class="p">,</span> <span class="n">y</span><span class="o">=&gt;</span><span class="n">k2_xd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">u3</span><span class="o">:</span> <span class="n">xd</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">clk</span><span class="o">=&gt;</span><span class="n">clk_xd</span><span class="p">,</span> <span class="n">k1</span><span class="o">=&gt;</span><span class="n">k3</span><span class="p">,</span> <span class="n">y</span><span class="o">=&gt;</span><span class="n">k3_xd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">c0</span> <span class="o">&lt;=</span> <span class="n">clk_cnt</span> <span class="k">and</span> <span class="n">st</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">clear</span> <span class="o">&lt;=</span> <span class="n">st</span> <span class="k">or</span> <span class="n">k2_xd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">u4</span><span class="o">:</span> <span class="n">cnt</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">reset</span><span class="o">=&gt;</span><span class="n">clear</span><span class="p">,</span> <span class="n">clk</span><span class="o">=&gt;</span><span class="n">c0</span><span class="p">,</span> <span class="n">carry</span><span class="o">=&gt;</span><span class="n">c1</span><span class="p">,</span> <span class="n">nums</span><span class="o">=&gt;</span><span class="n">num0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">u5</span><span class="o">:</span> <span class="n">cnt</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">reset</span><span class="o">=&gt;</span><span class="n">clear</span><span class="p">,</span> <span class="n">clk</span><span class="o">=&gt;</span><span class="n">c1</span><span class="p">,</span> <span class="n">carry</span><span class="o">=&gt;</span><span class="n">c2</span><span class="p">,</span> <span class="n">nums</span><span class="o">=&gt;</span><span class="n">num1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">u6</span><span class="o">:</span> <span class="n">cnt</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">reset</span><span class="o">=&gt;</span><span class="n">clear</span><span class="p">,</span> <span class="n">clk</span><span class="o">=&gt;</span><span class="n">c2</span><span class="p">,</span> <span class="n">carry</span><span class="o">=&gt;</span><span class="n">c3</span><span class="p">,</span> <span class="n">nums</span><span class="o">=&gt;</span><span class="n">num2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">u7</span><span class="o">:</span> <span class="n">cnt6</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">reset</span><span class="o">=&gt;</span><span class="n">clear</span><span class="p">,</span> <span class="n">clk</span><span class="o">=&gt;</span><span class="n">c3</span><span class="p">,</span> <span class="n">carry</span><span class="o">=&gt;</span><span class="k">open</span><span class="p">,</span> <span class="n">nums</span><span class="o">=&gt;</span><span class="n">num3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">nums</span><span class="o">&lt;=</span> <span class="n">num3</span> <span class="o">&amp;</span> <span class="n">num2</span> <span class="o">&amp;</span> <span class="n">num1</span> <span class="o">&amp;</span> <span class="n">num0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">u8</span><span class="o">:</span> <span class="n">reg</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">clk</span><span class="o">=&gt;</span><span class="n">k3_xd</span><span class="p">,</span> <span class="n">clear</span><span class="o">=&gt;</span><span class="n">clear</span><span class="p">,</span> <span class="n">enable</span><span class="o">=&gt;</span><span class="n">vcc</span><span class="p">,</span> <span class="n">st</span><span class="o">=&gt;</span><span class="n">st</span><span class="p">,</span> <span class="n">data</span><span class="o">=&gt;</span><span class="n">nums</span><span class="p">,</span> <span class="n">l_st</span><span class="o">=&gt;</span><span class="n">l_st</span><span class="p">,</span><span class="n">out_num0</span><span class="o">=&gt;</span><span class="n">di_num0</span><span class="p">,</span> <span class="n">out_num1</span><span class="o">=&gt;</span><span class="n">di_num1</span><span class="p">,</span> <span class="n">out_num2</span><span class="o">=&gt;</span><span class="n">di_num2</span><span class="p">,</span> <span class="n">out_num3</span><span class="o">=&gt;</span><span class="n">di_num3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">u9</span><span class="o">:</span> <span class="n">dec</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">nums</span><span class="o">=&gt;</span><span class="n">di_num0</span><span class="p">,</span> <span class="n">res</span><span class="o">=&gt;</span><span class="n">sc_num0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">u10</span><span class="o">:</span> <span class="n">dec</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">nums</span><span class="o">=&gt;</span><span class="n">di_num1</span><span class="p">,</span> <span class="n">res</span><span class="o">=&gt;</span><span class="n">sc_num1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">u11</span><span class="o">:</span> <span class="n">dec_node</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">nums</span><span class="o">=&gt;</span><span class="n">di_num2</span><span class="p">,</span> <span class="n">res</span><span class="o">=&gt;</span><span class="n">sc_num2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">u12</span><span class="o">:</span> <span class="n">dec</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">nums</span><span class="o">=&gt;</span><span class="n">di_num3</span><span class="p">,</span> <span class="n">res</span><span class="o">=&gt;</span><span class="n">sc_num3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">u13</span><span class="o">:</span> <span class="n">scan</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">num0</span><span class="o">=&gt;</span><span class="n">sc_num0</span><span class="p">,</span> <span class="n">num1</span><span class="o">=&gt;</span><span class="n">sc_num1</span><span class="p">,</span> <span class="n">num2</span><span class="o">=&gt;</span><span class="n">sc_num2</span><span class="p">,</span> <span class="n">num3</span><span class="o">=&gt;</span><span class="n">sc_num3</span><span class="p">,</span> <span class="n">clk</span><span class="o">=&gt;</span><span class="n">clk_xd</span><span class="p">,</span> <span class="n">clk_l</span><span class="o">=&gt;</span><span class="n">clk_l</span><span class="p">,</span> <span class="n">st</span><span class="o">=&gt;</span><span class="n">l_st</span><span class="p">,</span> <span class="n">selector</span><span class="o">=&gt;</span><span class="n">selector</span><span class="p">,</span> <span class="n">nums</span><span class="o">=&gt;</span><span class="n">num</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">push</span> <span class="o">&lt;=</span> <span class="n">k1_xd</span> <span class="k">and</span> <span class="n">k2_xd</span> <span class="k">and</span> <span class="n">k3_xd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">u14</span><span class="o">:</span> <span class="n">ling</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">enable</span><span class="o">=&gt;</span> <span class="n">push</span><span class="p">,</span> <span class="n">clk1</span><span class="o">=&gt;</span><span class="n">clk_l</span><span class="p">,</span> <span class="n">clk2</span><span class="o">=&gt;</span><span class="n">clk_xd</span><span class="p">,</span> <span class="n">clk_out</span><span class="o">=&gt;</span><span class="n">ling_out</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">--zhuangtaikongzhi</span>
+</span></span><span class="line"><span class="cl">    <span class="k">process</span><span class="p">(</span><span class="n">k1_xd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">begin</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">k1_xd</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">k1_xd</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">st</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">                <span class="n">st</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span>
+</span></span><span class="line"><span class="cl">                <span class="n">st</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span> <span class="k">process</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">architecture</span> <span class="nc">rtl</span><span class="p">;</span>
+</span></span></code></pre></div><h2 id="消抖模块">消抖模块</h2>
 <p>通常情况下，消抖时间为20ms。以下代码同样由老师提供，时钟输入为1ms。</p>
-<div class="highlight"><pre class="chroma"><code class="language-vhdl" data-lang="vhdl"><span class="k">library</span> <span class="nn">ieee</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">ieee.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">ieee.std_logic_unsigned.</span><span class="k">all</span><span class="p">;</span>
-
-<span class="k">entity</span> <span class="nc">xd</span> <span class="k">is</span>
-<span class="k">generic</span><span class="p">(</span><span class="n">n</span><span class="o">:</span><span class="kt">integer</span><span class="o">:=</span><span class="mi">30</span><span class="p">);</span>
-<span class="k">port</span><span class="p">(</span><span class="n">clk</span><span class="p">,</span><span class="n">k1</span><span class="o">:</span><span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
-     <span class="n">y</span> <span class="o">:</span><span class="k">out</span> <span class="kt">std_logic</span><span class="p">);</span>
-<span class="k">end</span> <span class="nc">xd</span><span class="p">;</span>
-
-<span class="k">architecture</span> <span class="nc">a</span> <span class="k">of</span> <span class="nc">xd</span> <span class="k">is</span>
-<span class="k">begin</span>
-<span class="k">process</span><span class="p">(</span><span class="n">clk</span><span class="p">)</span>
-<span class="k">variable</span> <span class="n">sum</span><span class="o">:</span><span class="kt">integer</span> <span class="k">range</span> <span class="mi">1</span> <span class="k">to</span> <span class="n">n</span><span class="p">;</span>
-<span class="k">begin</span>
-<span class="k">if</span> <span class="n">clk</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">clk</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="k">then</span> 
-	<span class="k">if</span> <span class="n">k1</span><span class="o">=</span><span class="sc">&#39;0&#39;</span> <span class="k">then</span> 
-		<span class="k">if</span> <span class="n">sum</span><span class="o">=</span><span class="n">n</span> <span class="k">then</span> 
-			<span class="n">sum</span><span class="o">:=</span><span class="n">sum</span><span class="p">;</span> 
-		<span class="k">else</span>
-			<span class="n">sum</span><span class="o">:=</span><span class="n">sum</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-		
-		<span class="k">if</span> <span class="n">sum</span><span class="o">=</span><span class="n">n</span> <span class="k">then</span> 
-			<span class="n">y</span><span class="o">&lt;=</span><span class="sc">&#39;0&#39;</span><span class="p">;</span>
-		<span class="k">else</span> 
-			<span class="n">y</span><span class="o">&lt;=</span><span class="sc">&#39;1&#39;</span><span class="p">;</span>
-		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-		
-	<span class="k">else</span> 
-		<span class="n">sum</span><span class="o">:=</span><span class="mi">1</span><span class="p">;</span>
-		<span class="n">y</span><span class="o">&lt;=</span><span class="sc">&#39;1&#39;</span><span class="p">;</span>
-	<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
-<span class="k">end</span><span class="p">;</span>
-</code></pre></div><h2 id="分频器模块">分频器模块</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-vhdl" data-lang="vhdl"><span class="line"><span class="cl"><span class="k">library</span> <span class="nn">ieee</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nn">ieee.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nn">ieee.std_logic_unsigned.</span><span class="k">all</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">entity</span> <span class="nc">xd</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl"><span class="k">generic</span><span class="p">(</span><span class="n">n</span><span class="o">:</span><span class="kt">integer</span><span class="o">:=</span><span class="mi">30</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">port</span><span class="p">(</span><span class="n">clk</span><span class="p">,</span><span class="n">k1</span><span class="o">:</span><span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">     <span class="n">y</span> <span class="o">:</span><span class="k">out</span> <span class="kt">std_logic</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="nc">xd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">architecture</span> <span class="nc">a</span> <span class="k">of</span> <span class="nc">xd</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl"><span class="k">begin</span>
+</span></span><span class="line"><span class="cl"><span class="k">process</span><span class="p">(</span><span class="n">clk</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">variable</span> <span class="n">sum</span><span class="o">:</span><span class="kt">integer</span> <span class="k">range</span> <span class="mi">1</span> <span class="k">to</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">begin</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">clk</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">clk</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="k">then</span> 
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="n">k1</span><span class="o">=</span><span class="sc">&#39;0&#39;</span> <span class="k">then</span> 
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="n">sum</span><span class="o">=</span><span class="n">n</span> <span class="k">then</span> 
+</span></span><span class="line"><span class="cl">			<span class="n">sum</span><span class="o">:=</span><span class="n">sum</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">		<span class="k">else</span>
+</span></span><span class="line"><span class="cl">			<span class="n">sum</span><span class="o">:=</span><span class="n">sum</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="n">sum</span><span class="o">=</span><span class="n">n</span> <span class="k">then</span> 
+</span></span><span class="line"><span class="cl">			<span class="n">y</span><span class="o">&lt;=</span><span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span> 
+</span></span><span class="line"><span class="cl">			<span class="n">y</span><span class="o">&lt;=</span><span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">	<span class="k">else</span> 
+</span></span><span class="line"><span class="cl">		<span class="n">sum</span><span class="o">:=</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">y</span><span class="o">&lt;=</span><span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">process</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span><span class="p">;</span>
+</span></span></code></pre></div><h2 id="分频器模块">分频器模块</h2>
 <p>由老师直接提供，能够产生的频率见引脚定义处。</p>
-<div class="highlight"><pre class="chroma"><code class="language-vhdl" data-lang="vhdl"><span class="k">LIBRARY</span> <span class="nn">ieee</span><span class="p">;</span>
-<span class="k">USE</span> <span class="nn">ieee.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
-<span class="k">USE</span> <span class="nn">ieee.std_logic_unsigned.</span><span class="k">all</span><span class="p">;</span>
-<span class="k">USE</span> <span class="nn">ieee.STD_LOGIC_ARITH.</span><span class="k">all</span><span class="p">;</span>
-
-<span class="c1">------------------------------------------------------------------------------------------</span>
-<span class="c1">------------------------------------------------------------------------------------------</span>
-<span class="k">ENTITY</span> <span class="nc">clock_gen</span> <span class="k">IS</span>
-<span class="k">PORT</span><span class="p">(</span>
-	<span class="n">clk</span>     <span class="o">:</span> <span class="k">IN</span> <span class="kt">STD_LOGIC</span><span class="p">;</span> 
-	<span class="n">clk_us</span>     <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
-	<span class="n">clk_ms</span> 	   <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
-	<span class="n">clk_10ms</span>   <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
-	<span class="n">clk_100ms</span> 	   <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
-	<span class="n">clk_500ms</span>   <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
-	<span class="n">clk_second</span> <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span>
-	<span class="p">);</span>
-<span class="k">END</span> <span class="nc">clock_gen</span><span class="p">;</span>
-<span class="c1">------------------------------------------------------------------------------------------</span>
-<span class="c1">------------------------------------------------------------------------------------------</span>
-<span class="k">ARCHITECTURE</span>  <span class="nc">behav</span> <span class="k">OF</span> <span class="nc">clock_gen</span> <span class="k">IS</span>
-    <span class="k">CONSTANT</span> <span class="n">shake_constant</span> <span class="o">:</span><span class="kt">integer</span><span class="o">:=</span><span class="mi">10</span><span class="p">;</span>    <span class="c1">-- shake wait for shake_constant us</span>
-    <span class="k">signal</span> <span class="n">q_1us</span> <span class="o">:</span><span class="kt">integer</span> <span class="k">range</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">50</span><span class="p">;</span>    <span class="c1">--us��Ƶϵ��</span>
-	<span class="k">signal</span> <span class="n">q_1ms</span> <span class="o">:</span><span class="kt">integer</span> <span class="k">range</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">1000</span><span class="p">;</span>  <span class="c1">--ms��Ƶϵ��</span>
-	<span class="k">signal</span> <span class="n">q_10ms</span><span class="o">:</span><span class="kt">integer</span> <span class="k">range</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">10</span><span class="p">;</span>    <span class="c1">--10ms��Ƶϵ��</span>
-	<span class="k">signal</span> <span class="n">q_100ms</span> <span class="o">:</span><span class="kt">integer</span> <span class="k">range</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">10</span><span class="p">;</span>  <span class="c1">--100ms��Ƶϵ��</span>
-	<span class="k">signal</span> <span class="n">q_500ms</span><span class="o">:</span><span class="kt">integer</span> <span class="k">range</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">5</span><span class="p">;</span>    <span class="c1">--500ms��Ƶϵ��	</span>
-	<span class="k">signal</span> <span class="n">q_1s</span> <span class="o">:</span><span class="kt">integer</span> <span class="k">range</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">1</span><span class="p">;</span>   <span class="c1">--����Ƶϵ��</span>
-	
-	<span class="k">SIGNAL</span> <span class="n">sig_second</span> <span class="o">:</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
-	<span class="k">SIGNAL</span> <span class="n">sig_500ms</span> <span class="o">:</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>	
-	<span class="k">SIGNAL</span> <span class="n">sig_100ms</span> <span class="o">:</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>	
-	<span class="k">SIGNAL</span> <span class="n">sig_ms</span> <span class="o">:</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
-	<span class="k">SIGNAL</span> <span class="n">sig_10ms</span> <span class="o">:</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
-	<span class="k">SIGNAL</span> <span class="n">sig_us</span> <span class="o">:</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
-    
-<span class="c1">-------------------------------------------------------------------------------------------</span>
-<span class="k">begin</span>
-
-<span class="n">output_clock</span><span class="o">:</span><span class="k">process</span><span class="p">(</span><span class="n">clk</span><span class="p">)</span>                     
-<span class="k">begin</span>	
-	<span class="k">if</span> 	<span class="n">clk</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">clk</span><span class="o">=</span><span class="sc">&#39;1&#39;</span> <span class="k">then</span>
-		<span class="n">clk_us</span>     <span class="o">&lt;=</span> <span class="n">sig_us</span><span class="p">;</span>	
-		<span class="n">clk_ms</span>     <span class="o">&lt;=</span> <span class="n">sig_ms</span><span class="p">;</span>
-		<span class="n">clk_10ms</span>   <span class="o">&lt;=</span> <span class="n">sig_10ms</span><span class="p">;</span><span class="n">clk_100ms</span>   <span class="o">&lt;=</span> <span class="n">sig_100ms</span><span class="p">;</span>
-		<span class="n">clk_second</span> <span class="o">&lt;=</span> <span class="n">sig_second</span><span class="p">;</span>
-	<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-
-<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
-
-<span class="c1">-------------------------------------------------------------------------------------------</span>
-<span class="c1">----**************��Ƶ�� 1 us clock*******************	</span>
-<span class="n">u_second</span><span class="o">:</span><span class="k">process</span><span class="p">(</span><span class="n">clk</span><span class="p">)</span>         
-<span class="k">begin</span>	
-	<span class="k">if</span> 	<span class="n">clk</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">clk</span><span class="o">=</span><span class="sc">&#39;1&#39;</span> <span class="k">then</span>
-        <span class="k">if</span>  <span class="n">q_1us</span> <span class="o">&lt;</span> <span class="mi">49</span>	<span class="k">then</span>
-			<span class="n">q_1us</span> <span class="o">&lt;=</span>  <span class="n">q_1us</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-			<span class="n">sig_us</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
-		<span class="k">else</span>  
-			<span class="n">q_1us</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">;</span>
-			<span class="n">sig_us</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
-			
-		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-	<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
-<span class="c1">-------------------------------------------------------------------------------------------</span>
-<span class="c1">----**************��Ƶ�� 1 ms clock*******************</span>
-<span class="n">m_second</span><span class="o">:</span><span class="k">process</span><span class="p">(</span><span class="n">sig_us</span><span class="p">)</span>                    
-<span class="k">begin</span>
-	<span class="k">if</span> <span class="n">sig_us</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">sig_us</span><span class="o">=</span><span class="sc">&#39;1&#39;</span> <span class="k">then</span>
-		<span class="k">if</span>  <span class="n">q_1ms</span> <span class="o">&lt;</span> <span class="mi">999</span> <span class="k">then</span>
-			<span class="n">q_1ms</span> <span class="o">&lt;=</span>  <span class="n">q_1ms</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-			<span class="n">sig_ms</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
-		<span class="k">else</span>
-			<span class="n">q_1ms</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">;</span>
-			<span class="n">sig_ms</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span> 
-		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-	<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
-
-<span class="c1">-------------------------------------------------------------------------</span>
-<span class="c1">-------------------------------------------------------------------------------------------</span>
-<span class="c1">----**************��Ƶ�� 10 ms clock*******************</span>
-<span class="n">m_second10</span><span class="o">:</span><span class="k">process</span><span class="p">(</span><span class="n">sig_ms</span><span class="p">)</span>                    
-<span class="k">begin</span>
-	<span class="k">if</span> <span class="n">sig_ms</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">sig_ms</span><span class="o">=</span><span class="sc">&#39;1&#39;</span> <span class="k">then</span>
-		<span class="k">if</span>  <span class="n">q_10ms</span> <span class="o">&lt;</span> <span class="mi">9</span> <span class="k">then</span>
-			<span class="n">q_10ms</span> <span class="o">&lt;=</span>  <span class="n">q_10ms</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-			<span class="n">sig_10ms</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
-		<span class="k">else</span>
-			<span class="n">q_10ms</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">;</span>
-			<span class="n">sig_10ms</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span> 
-		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-	<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
-
-<span class="c1">-------------------------------------------------------------------------</span>
-<span class="c1">-------------------------------------------------------------------------------------------</span>
-<span class="c1">----**************��Ƶ�� 100 ms clock*******************</span>
-<span class="n">m_second100</span><span class="o">:</span><span class="k">process</span><span class="p">(</span><span class="n">sig_10ms</span><span class="p">)</span>                    
-<span class="k">begin</span>
-	<span class="k">if</span> <span class="n">sig_10ms</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">sig_10ms</span><span class="o">=</span><span class="sc">&#39;1&#39;</span> <span class="k">then</span>
-		<span class="k">if</span>  <span class="n">q_100ms</span> <span class="o">&lt;</span> <span class="mi">9</span> <span class="k">then</span>
-			<span class="n">q_100ms</span> <span class="o">&lt;=</span>  <span class="n">q_100ms</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-			<span class="n">sig_100ms</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
-		<span class="k">else</span>
-			<span class="n">q_100ms</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">;</span>
-			<span class="n">sig_100ms</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span> 
-		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-	<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
-
-<span class="c1">-------------------------------------------------------------------------</span>
-<span class="c1">-------------------------------------------------------------------------------------------</span>
-<span class="c1">----**************��Ƶ�� 500 ms clock*******************</span>
-<span class="n">m_second500</span><span class="o">:</span><span class="k">process</span><span class="p">(</span><span class="n">sig_100ms</span><span class="p">)</span>                    
-<span class="k">begin</span>
-	<span class="k">if</span> <span class="n">sig_100ms</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">sig_100ms</span><span class="o">=</span><span class="sc">&#39;1&#39;</span> <span class="k">then</span>
-		<span class="k">if</span>  <span class="n">q_500ms</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="k">then</span>
-			<span class="n">q_500ms</span> <span class="o">&lt;=</span>  <span class="n">q_500ms</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-			<span class="n">sig_500ms</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
-		<span class="k">else</span>
-			<span class="n">q_500ms</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">;</span>
-			<span class="n">sig_500ms</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span> 
-		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-	<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
-
-<span class="c1">-------------------------------------------------------------------------</span>
-<span class="c1">----**************��Ƶ�� 1 second clock*******************</span>
-<span class="n">second</span><span class="o">:</span><span class="k">process</span><span class="p">(</span><span class="n">sig_500ms</span><span class="p">)</span>                    
-<span class="k">begin</span>
-	<span class="k">if</span> 	<span class="n">sig_500ms</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">sig_500ms</span><span class="o">=</span><span class="sc">&#39;1&#39;</span> <span class="k">then</span>
-		<span class="k">if</span>  <span class="n">q_1s</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="k">then</span>
-			<span class="n">q_1s</span> <span class="o">&lt;=</span> <span class="n">q_1s</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-			<span class="n">sig_second</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
-		<span class="k">else</span>
-			<span class="n">q_1s</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">;</span>
-			<span class="n">sig_second</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span> 
-		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-	<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
-<span class="c1">-------------------------------------------------------------------------</span>
-<span class="k">END</span> <span class="nc">behav</span><span class="p">;</span>
-<span class="c1">------------------------------------------------------------------------------------------	</span>
-</code></pre></div><h2 id="计数器模块">计数器模块</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-vhdl" data-lang="vhdl"><span class="line"><span class="cl"><span class="k">LIBRARY</span> <span class="nn">ieee</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">USE</span> <span class="nn">ieee.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">USE</span> <span class="nn">ieee.std_logic_unsigned.</span><span class="k">all</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">USE</span> <span class="nn">ieee.STD_LOGIC_ARITH.</span><span class="k">all</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">------------------------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="c1">------------------------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="k">ENTITY</span> <span class="nc">clock_gen</span> <span class="k">IS</span>
+</span></span><span class="line"><span class="cl"><span class="k">PORT</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="n">clk</span>     <span class="o">:</span> <span class="k">IN</span> <span class="kt">STD_LOGIC</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">	<span class="n">clk_us</span>     <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">clk_ms</span> 	   <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">clk_10ms</span>   <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">clk_100ms</span> 	   <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">clk_500ms</span>   <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">clk_second</span> <span class="o">:</span> <span class="k">OUT</span> <span class="kt">STD_LOGIC</span>
+</span></span><span class="line"><span class="cl">	<span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">END</span> <span class="nc">clock_gen</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">------------------------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="c1">------------------------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="k">ARCHITECTURE</span>  <span class="nc">behav</span> <span class="k">OF</span> <span class="nc">clock_gen</span> <span class="k">IS</span>
+</span></span><span class="line"><span class="cl">    <span class="k">CONSTANT</span> <span class="n">shake_constant</span> <span class="o">:</span><span class="kt">integer</span><span class="o">:=</span><span class="mi">10</span><span class="p">;</span>    <span class="c1">-- shake wait for shake_constant us</span>
+</span></span><span class="line"><span class="cl">    <span class="k">signal</span> <span class="n">q_1us</span> <span class="o">:</span><span class="kt">integer</span> <span class="k">range</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">50</span><span class="p">;</span>    <span class="c1">--us��Ƶϵ��</span>
+</span></span><span class="line"><span class="cl">	<span class="k">signal</span> <span class="n">q_1ms</span> <span class="o">:</span><span class="kt">integer</span> <span class="k">range</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">1000</span><span class="p">;</span>  <span class="c1">--ms��Ƶϵ��</span>
+</span></span><span class="line"><span class="cl">	<span class="k">signal</span> <span class="n">q_10ms</span><span class="o">:</span><span class="kt">integer</span> <span class="k">range</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">10</span><span class="p">;</span>    <span class="c1">--10ms��Ƶϵ��</span>
+</span></span><span class="line"><span class="cl">	<span class="k">signal</span> <span class="n">q_100ms</span> <span class="o">:</span><span class="kt">integer</span> <span class="k">range</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">10</span><span class="p">;</span>  <span class="c1">--100ms��Ƶϵ��</span>
+</span></span><span class="line"><span class="cl">	<span class="k">signal</span> <span class="n">q_500ms</span><span class="o">:</span><span class="kt">integer</span> <span class="k">range</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">5</span><span class="p">;</span>    <span class="c1">--500ms��Ƶϵ��	</span>
+</span></span><span class="line"><span class="cl">	<span class="k">signal</span> <span class="n">q_1s</span> <span class="o">:</span><span class="kt">integer</span> <span class="k">range</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">1</span><span class="p">;</span>   <span class="c1">--����Ƶϵ��</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="k">SIGNAL</span> <span class="n">sig_second</span> <span class="o">:</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">SIGNAL</span> <span class="n">sig_500ms</span> <span class="o">:</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>	
+</span></span><span class="line"><span class="cl">	<span class="k">SIGNAL</span> <span class="n">sig_100ms</span> <span class="o">:</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>	
+</span></span><span class="line"><span class="cl">	<span class="k">SIGNAL</span> <span class="n">sig_ms</span> <span class="o">:</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">SIGNAL</span> <span class="n">sig_10ms</span> <span class="o">:</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">SIGNAL</span> <span class="n">sig_us</span> <span class="o">:</span> <span class="kt">STD_LOGIC</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="c1">-------------------------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="k">begin</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">output_clock</span><span class="o">:</span><span class="k">process</span><span class="p">(</span><span class="n">clk</span><span class="p">)</span>                     
+</span></span><span class="line"><span class="cl"><span class="k">begin</span>	
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> 	<span class="n">clk</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">clk</span><span class="o">=</span><span class="sc">&#39;1&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">		<span class="n">clk_us</span>     <span class="o">&lt;=</span> <span class="n">sig_us</span><span class="p">;</span>	
+</span></span><span class="line"><span class="cl">		<span class="n">clk_ms</span>     <span class="o">&lt;=</span> <span class="n">sig_ms</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">clk_10ms</span>   <span class="o">&lt;=</span> <span class="n">sig_10ms</span><span class="p">;</span><span class="n">clk_100ms</span>   <span class="o">&lt;=</span> <span class="n">sig_100ms</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">clk_second</span> <span class="o">&lt;=</span> <span class="n">sig_second</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">process</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">-------------------------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="c1">----**************��Ƶ�� 1 us clock*******************	</span>
+</span></span><span class="line"><span class="cl"><span class="n">u_second</span><span class="o">:</span><span class="k">process</span><span class="p">(</span><span class="n">clk</span><span class="p">)</span>         
+</span></span><span class="line"><span class="cl"><span class="k">begin</span>	
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> 	<span class="n">clk</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">clk</span><span class="o">=</span><span class="sc">&#39;1&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span>  <span class="n">q_1us</span> <span class="o">&lt;</span> <span class="mi">49</span>	<span class="k">then</span>
+</span></span><span class="line"><span class="cl">			<span class="n">q_1us</span> <span class="o">&lt;=</span>  <span class="n">q_1us</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">sig_us</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span>  
+</span></span><span class="line"><span class="cl">			<span class="n">q_1us</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">sig_us</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			
+</span></span><span class="line"><span class="cl">		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">process</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">-------------------------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="c1">----**************��Ƶ�� 1 ms clock*******************</span>
+</span></span><span class="line"><span class="cl"><span class="n">m_second</span><span class="o">:</span><span class="k">process</span><span class="p">(</span><span class="n">sig_us</span><span class="p">)</span>                    
+</span></span><span class="line"><span class="cl"><span class="k">begin</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="n">sig_us</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">sig_us</span><span class="o">=</span><span class="sc">&#39;1&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span>  <span class="n">q_1ms</span> <span class="o">&lt;</span> <span class="mi">999</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">			<span class="n">q_1ms</span> <span class="o">&lt;=</span>  <span class="n">q_1ms</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">sig_ms</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span>
+</span></span><span class="line"><span class="cl">			<span class="n">q_1ms</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">sig_ms</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">process</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">-------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="c1">-------------------------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="c1">----**************��Ƶ�� 10 ms clock*******************</span>
+</span></span><span class="line"><span class="cl"><span class="n">m_second10</span><span class="o">:</span><span class="k">process</span><span class="p">(</span><span class="n">sig_ms</span><span class="p">)</span>                    
+</span></span><span class="line"><span class="cl"><span class="k">begin</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="n">sig_ms</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">sig_ms</span><span class="o">=</span><span class="sc">&#39;1&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span>  <span class="n">q_10ms</span> <span class="o">&lt;</span> <span class="mi">9</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">			<span class="n">q_10ms</span> <span class="o">&lt;=</span>  <span class="n">q_10ms</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">sig_10ms</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span>
+</span></span><span class="line"><span class="cl">			<span class="n">q_10ms</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">sig_10ms</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">process</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">-------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="c1">-------------------------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="c1">----**************��Ƶ�� 100 ms clock*******************</span>
+</span></span><span class="line"><span class="cl"><span class="n">m_second100</span><span class="o">:</span><span class="k">process</span><span class="p">(</span><span class="n">sig_10ms</span><span class="p">)</span>                    
+</span></span><span class="line"><span class="cl"><span class="k">begin</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="n">sig_10ms</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">sig_10ms</span><span class="o">=</span><span class="sc">&#39;1&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span>  <span class="n">q_100ms</span> <span class="o">&lt;</span> <span class="mi">9</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">			<span class="n">q_100ms</span> <span class="o">&lt;=</span>  <span class="n">q_100ms</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">sig_100ms</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span>
+</span></span><span class="line"><span class="cl">			<span class="n">q_100ms</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">sig_100ms</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">process</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">-------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="c1">-------------------------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="c1">----**************��Ƶ�� 500 ms clock*******************</span>
+</span></span><span class="line"><span class="cl"><span class="n">m_second500</span><span class="o">:</span><span class="k">process</span><span class="p">(</span><span class="n">sig_100ms</span><span class="p">)</span>                    
+</span></span><span class="line"><span class="cl"><span class="k">begin</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="n">sig_100ms</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">sig_100ms</span><span class="o">=</span><span class="sc">&#39;1&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span>  <span class="n">q_500ms</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">			<span class="n">q_500ms</span> <span class="o">&lt;=</span>  <span class="n">q_500ms</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">sig_500ms</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span>
+</span></span><span class="line"><span class="cl">			<span class="n">q_500ms</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">sig_500ms</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">process</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">-------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="c1">----**************��Ƶ�� 1 second clock*******************</span>
+</span></span><span class="line"><span class="cl"><span class="n">second</span><span class="o">:</span><span class="k">process</span><span class="p">(</span><span class="n">sig_500ms</span><span class="p">)</span>                    
+</span></span><span class="line"><span class="cl"><span class="k">begin</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> 	<span class="n">sig_500ms</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">sig_500ms</span><span class="o">=</span><span class="sc">&#39;1&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span>  <span class="n">q_1s</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">			<span class="n">q_1s</span> <span class="o">&lt;=</span> <span class="n">q_1s</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">sig_second</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span>
+</span></span><span class="line"><span class="cl">			<span class="n">q_1s</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">sig_second</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">process</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">-------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="k">END</span> <span class="nc">behav</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">------------------------------------------------------------------------------------------	</span>
+</span></span></code></pre></div><h2 id="计数器模块">计数器模块</h2>
 <p>十进制计数器，带有复位端、进位端。在实现秒表时，需要将最后一个计数器改为六进制。</p>
-<div class="highlight"><pre class="chroma"><code class="language-vhdl" data-lang="vhdl"><span class="k">library</span> <span class="nn">ieee</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">ieee.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">ieee.std_logic_unsigned.</span><span class="k">all</span><span class="p">;</span>
-<span class="k">entity</span> <span class="nc">cnt</span> <span class="k">is</span>
-	<span class="k">port</span><span class="p">(</span>
-		<span class="n">reset</span><span class="p">,</span> <span class="n">clk</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
-		<span class="n">carry</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span><span class="p">;</span>
-		<span class="n">nums</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>
-	<span class="p">);</span>
-<span class="k">end</span> <span class="k">entity</span> <span class="nc">cnt</span><span class="p">;</span>
-
-<span class="k">architecture</span> <span class="nc">rtl</span> <span class="k">of</span> <span class="nc">cnt</span> <span class="k">is</span>
-<span class="k">begin</span>
-	<span class="k">process</span><span class="p">(</span><span class="n">clk</span><span class="p">,</span> <span class="n">reset</span><span class="p">)</span>
-	<span class="k">variable</span> <span class="n">temp</span> <span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-	<span class="k">begin</span>
-		<span class="k">if</span> <span class="n">reset</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="k">then</span>
-			<span class="n">temp</span> <span class="o">:=</span> <span class="p">(</span><span class="k">others</span> <span class="o">=&gt;</span> <span class="sc">&#39;0&#39;</span><span class="p">);</span>
-		<span class="k">elsif</span> <span class="n">clk</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">clk</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">then</span>
-			<span class="k">if</span> <span class="n">temp</span> <span class="o">&gt;=</span> <span class="s">&#34;1001&#34;</span> <span class="k">then</span>
-				<span class="n">temp</span> <span class="o">:=</span> <span class="p">(</span><span class="k">others</span> <span class="o">=&gt;</span> <span class="sc">&#39;0&#39;</span><span class="p">);</span>
-				<span class="n">carry</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
-			<span class="k">else</span>
-				<span class="n">temp</span> <span class="o">:=</span> <span class="n">temp</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-				<span class="n">carry</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
-			<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-		<span class="n">nums</span> <span class="o">&lt;=</span> <span class="n">temp</span><span class="p">;</span>
-	<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
-<span class="k">end</span> <span class="k">architecture</span> <span class="nc">rtl</span><span class="p">;</span>
-</code></pre></div><h2 id="译码器模块">译码器模块</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-vhdl" data-lang="vhdl"><span class="line"><span class="cl"><span class="k">library</span> <span class="nn">ieee</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nn">ieee.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nn">ieee.std_logic_unsigned.</span><span class="k">all</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">entity</span> <span class="nc">cnt</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">	<span class="k">port</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="n">reset</span><span class="p">,</span> <span class="n">clk</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">carry</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">nums</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">entity</span> <span class="nc">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">architecture</span> <span class="nc">rtl</span> <span class="k">of</span> <span class="nc">cnt</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl"><span class="k">begin</span>
+</span></span><span class="line"><span class="cl">	<span class="k">process</span><span class="p">(</span><span class="n">clk</span><span class="p">,</span> <span class="n">reset</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">variable</span> <span class="n">temp</span> <span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">begin</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="n">reset</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">			<span class="n">temp</span> <span class="o">:=</span> <span class="p">(</span><span class="k">others</span> <span class="o">=&gt;</span> <span class="sc">&#39;0&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">elsif</span> <span class="n">clk</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">clk</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="n">temp</span> <span class="o">&gt;=</span> <span class="s">&#34;1001&#34;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">				<span class="n">temp</span> <span class="o">:=</span> <span class="p">(</span><span class="k">others</span> <span class="o">=&gt;</span> <span class="sc">&#39;0&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">carry</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">else</span>
+</span></span><span class="line"><span class="cl">				<span class="n">temp</span> <span class="o">:=</span> <span class="n">temp</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">				<span class="n">carry</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">nums</span> <span class="o">&lt;=</span> <span class="n">temp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">architecture</span> <span class="nc">rtl</span><span class="p">;</span>
+</span></span></code></pre></div><h2 id="译码器模块">译码器模块</h2>
 <p>输入为四位二进制数，输出为对应的七段译码管数组。</p>
-<div class="highlight"><pre class="chroma"><code class="language-vhdl" data-lang="vhdl"><span class="k">library</span> <span class="nn">ieee</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">ieee.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
-
-<span class="k">entity</span> <span class="nc">dec</span> <span class="k">is</span>
-	<span class="k">port</span><span class="p">(</span>
-		<span class="n">nums</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-		<span class="n">res</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>
-	<span class="p">);</span>
-<span class="k">end</span> <span class="k">entity</span> <span class="nc">dec</span><span class="p">;</span>
-
-<span class="k">architecture</span> <span class="nc">rtl</span> <span class="k">of</span> <span class="nc">dec</span> <span class="k">is</span>
-<span class="k">begin</span>
-	<span class="k">process</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-	<span class="k">begin</span>
-		<span class="k">case</span> <span class="n">nums</span> <span class="k">is</span>
-			<span class="k">when</span> <span class="s">&#34;0000&#34;</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1100_0000&#34;</span><span class="p">;</span>
-			<span class="k">when</span> <span class="s">&#34;0001&#34;</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1111_1001&#34;</span><span class="p">;</span>
-			<span class="k">when</span> <span class="s">&#34;0010&#34;</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1010_0100&#34;</span><span class="p">;</span>
-			<span class="k">when</span> <span class="s">&#34;0011&#34;</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1011_0000&#34;</span><span class="p">;</span>
-			<span class="k">when</span> <span class="s">&#34;0100&#34;</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1001_1001&#34;</span><span class="p">;</span>
-			<span class="k">when</span> <span class="s">&#34;0101&#34;</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1001_0010&#34;</span><span class="p">;</span>
-			<span class="k">when</span> <span class="s">&#34;0110&#34;</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1000_0011&#34;</span><span class="p">;</span>
-			<span class="k">when</span> <span class="s">&#34;0111&#34;</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1111_1000&#34;</span><span class="p">;</span>
-			<span class="k">when</span> <span class="s">&#34;1000&#34;</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1000_0000&#34;</span><span class="p">;</span>
-			<span class="k">when</span> <span class="s">&#34;1001&#34;</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1001_1000&#34;</span><span class="p">;</span>
-			<span class="k">when</span> <span class="k">others</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1111_1111&#34;</span><span class="p">;</span>
-		<span class="k">end</span> <span class="k">case</span><span class="p">;</span>
-	<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
-<span class="k">end</span> <span class="k">architecture</span> <span class="nc">rtl</span><span class="p">;</span>
-</code></pre></div><h2 id="串行扫描模块">串行扫描模块</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-vhdl" data-lang="vhdl"><span class="line"><span class="cl"><span class="k">library</span> <span class="nn">ieee</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nn">ieee.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">entity</span> <span class="nc">dec</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">	<span class="k">port</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="n">nums</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">res</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">entity</span> <span class="nc">dec</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">architecture</span> <span class="nc">rtl</span> <span class="k">of</span> <span class="nc">dec</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl"><span class="k">begin</span>
+</span></span><span class="line"><span class="cl">	<span class="k">process</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">begin</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="n">nums</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">			<span class="k">when</span> <span class="s">&#34;0000&#34;</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1100_0000&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">when</span> <span class="s">&#34;0001&#34;</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1111_1001&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">when</span> <span class="s">&#34;0010&#34;</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1010_0100&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">when</span> <span class="s">&#34;0011&#34;</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1011_0000&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">when</span> <span class="s">&#34;0100&#34;</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1001_1001&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">when</span> <span class="s">&#34;0101&#34;</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1001_0010&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">when</span> <span class="s">&#34;0110&#34;</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1000_0011&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">when</span> <span class="s">&#34;0111&#34;</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1111_1000&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">when</span> <span class="s">&#34;1000&#34;</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1000_0000&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">when</span> <span class="s">&#34;1001&#34;</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1001_1000&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">when</span> <span class="k">others</span> <span class="o">=&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mb">B&#34;1111_1111&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">end</span> <span class="k">case</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">architecture</span> <span class="nc">rtl</span><span class="p">;</span>
+</span></span></code></pre></div><h2 id="串行扫描模块">串行扫描模块</h2>
 <p>实现串行扫描功能，当st为零时会进入闪烁状态。</p>
-<div class="highlight"><pre class="chroma"><code class="language-vhdl" data-lang="vhdl"><span class="k">library</span> <span class="nn">ieee</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">ieee.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">ieee.std_logic_unsigned.</span><span class="k">all</span><span class="p">;</span>
-
-<span class="k">entity</span> <span class="nc">scan</span> <span class="k">is</span>
-	<span class="k">port</span><span class="p">(</span>
-		<span class="n">num0</span><span class="p">,</span> <span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="p">,</span> <span class="n">num3</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-		<span class="n">clk</span><span class="p">,</span> <span class="n">clk_l</span><span class="p">,</span> <span class="n">st</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
-		<span class="n">selector</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-		<span class="n">nums</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>
-	<span class="p">);</span>
-<span class="k">end</span> <span class="k">entity</span> <span class="nc">scan</span><span class="p">;</span>
-
-<span class="k">architecture</span> <span class="nc">rtl</span> <span class="k">of</span> <span class="nc">scan</span> <span class="k">is</span>
-	<span class="k">signal</span> <span class="n">flag</span> <span class="o">:</span><span class="kt">std_logic</span><span class="p">;</span>
-<span class="k">begin</span>
-	<span class="k">process</span><span class="p">(</span><span class="n">clk_l</span><span class="p">)</span>
-	<span class="k">begin</span>
-		<span class="k">if</span> <span class="n">clk_l</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">clk_l</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">then</span>
-			<span class="k">if</span> <span class="n">flag</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">and</span>  <span class="n">st</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="k">then</span>
-				<span class="n">flag</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
-			<span class="k">else</span>
-				<span class="n">flag</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
-			<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-	<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
-	
-	<span class="k">process</span><span class="p">(</span><span class="n">clk</span><span class="p">)</span>
-	<span class="k">variable</span> <span class="n">cur</span> <span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-	<span class="k">begin</span>
-		<span class="k">if</span> <span class="n">flag</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">then</span>
-		<span class="k">if</span> <span class="n">clk</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">clk</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">then</span>
-			<span class="k">case</span> <span class="n">cur</span> <span class="k">is</span>
-				<span class="k">when</span> <span class="s">&#34;00&#34;</span> <span class="o">=&gt;</span>
-					<span class="n">selector</span> <span class="o">&lt;=</span> <span class="s">&#34;1110&#34;</span><span class="p">;</span>
-					<span class="n">nums</span> <span class="o">&lt;=</span> <span class="n">num0</span><span class="p">;</span>
-				<span class="k">when</span> <span class="s">&#34;01&#34;</span> <span class="o">=&gt;</span>
-					<span class="n">selector</span> <span class="o">&lt;=</span> <span class="s">&#34;1101&#34;</span><span class="p">;</span>
-					<span class="n">nums</span> <span class="o">&lt;=</span> <span class="n">num1</span><span class="p">;</span>
-				<span class="k">when</span> <span class="s">&#34;10&#34;</span> <span class="o">=&gt;</span>
-					<span class="n">selector</span> <span class="o">&lt;=</span> <span class="s">&#34;1011&#34;</span><span class="p">;</span>
-					<span class="n">nums</span> <span class="o">&lt;=</span> <span class="n">num2</span><span class="p">;</span>
-				<span class="k">when</span> <span class="k">others</span> <span class="o">=&gt;</span>
-					<span class="n">selector</span> <span class="o">&lt;=</span> <span class="s">&#34;0111&#34;</span><span class="p">;</span>
-					<span class="n">nums</span> <span class="o">&lt;=</span> <span class="n">num3</span><span class="p">;</span>
-			<span class="k">end</span> <span class="k">case</span><span class="p">;</span>
-			<span class="n">cur</span> <span class="o">:=</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-		<span class="k">else</span>
-			<span class="n">selector</span> <span class="o">&lt;=</span> <span class="s">&#34;1111&#34;</span><span class="p">;</span>
-		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-	<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
-<span class="k">end</span> <span class="k">architecture</span> <span class="nc">rtl</span><span class="p">;</span>
-</code></pre></div><h2 id="寄存器模块">寄存器模块</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-vhdl" data-lang="vhdl"><span class="line"><span class="cl"><span class="k">library</span> <span class="nn">ieee</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nn">ieee.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nn">ieee.std_logic_unsigned.</span><span class="k">all</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">entity</span> <span class="nc">scan</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">	<span class="k">port</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="n">num0</span><span class="p">,</span> <span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="p">,</span> <span class="n">num3</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">clk</span><span class="p">,</span> <span class="n">clk_l</span><span class="p">,</span> <span class="n">st</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">selector</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">nums</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">entity</span> <span class="nc">scan</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">architecture</span> <span class="nc">rtl</span> <span class="k">of</span> <span class="nc">scan</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">	<span class="k">signal</span> <span class="n">flag</span> <span class="o">:</span><span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">begin</span>
+</span></span><span class="line"><span class="cl">	<span class="k">process</span><span class="p">(</span><span class="n">clk_l</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">begin</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="n">clk_l</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">clk_l</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="n">flag</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">and</span>  <span class="n">st</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">				<span class="n">flag</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">else</span>
+</span></span><span class="line"><span class="cl">				<span class="n">flag</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="k">process</span><span class="p">(</span><span class="n">clk</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">variable</span> <span class="n">cur</span> <span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">begin</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="n">flag</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="n">clk</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">clk</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">			<span class="k">case</span> <span class="n">cur</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">				<span class="k">when</span> <span class="s">&#34;00&#34;</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">					<span class="n">selector</span> <span class="o">&lt;=</span> <span class="s">&#34;1110&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">					<span class="n">nums</span> <span class="o">&lt;=</span> <span class="n">num0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">				<span class="k">when</span> <span class="s">&#34;01&#34;</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">					<span class="n">selector</span> <span class="o">&lt;=</span> <span class="s">&#34;1101&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">					<span class="n">nums</span> <span class="o">&lt;=</span> <span class="n">num1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">				<span class="k">when</span> <span class="s">&#34;10&#34;</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">					<span class="n">selector</span> <span class="o">&lt;=</span> <span class="s">&#34;1011&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">					<span class="n">nums</span> <span class="o">&lt;=</span> <span class="n">num2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">				<span class="k">when</span> <span class="k">others</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">					<span class="n">selector</span> <span class="o">&lt;=</span> <span class="s">&#34;0111&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">					<span class="n">nums</span> <span class="o">&lt;=</span> <span class="n">num3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">end</span> <span class="k">case</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">cur</span> <span class="o">:=</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span>
+</span></span><span class="line"><span class="cl">			<span class="n">selector</span> <span class="o">&lt;=</span> <span class="s">&#34;1111&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">architecture</span> <span class="nc">rtl</span><span class="p">;</span>
+</span></span></code></pre></div><h2 id="寄存器模块">寄存器模块</h2>
 <p>当秒表处于计时状态时，按下寄存器控制按键会将秒表当前的时间保存到计数器当中。当秒表处于暂停状态时，按下寄存器控制按键会将寄存器保存的数据逐个显示，在显示寄存器内部数据时，要求串行扫描闪烁。</p>
 <p>寄存器的输入为四个计数器当前的状态，内部能够根据秒表当下工作状态选择对应的数据交给译码器，设计相对复杂。</p>
-<div class="highlight"><pre class="chroma"><code class="language-vhdl" data-lang="vhdl"><span class="k">library</span> <span class="nn">ieee</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">ieee.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">ieee.std_logic_unsigned.</span><span class="k">all</span><span class="p">;</span>
-
-<span class="k">entity</span> <span class="nc">reg</span> <span class="k">is</span>
-	<span class="k">port</span><span class="p">(</span>
-		<span class="n">clk</span><span class="p">,</span> <span class="n">clear</span><span class="p">,</span> <span class="n">enable</span><span class="p">,</span> <span class="n">st</span><span class="o">:</span><span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
-		<span class="n">data</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-		<span class="n">l_st</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span><span class="p">;</span>
-		<span class="n">out_num0</span><span class="p">,</span> <span class="n">out_num1</span><span class="p">,</span> <span class="n">out_num2</span><span class="p">,</span> <span class="n">out_num3</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>
-	<span class="p">);</span>
-<span class="k">end</span> <span class="k">entity</span> <span class="nc">reg</span><span class="p">;</span>
-
-<span class="k">architecture</span> <span class="nc">rtl</span> <span class="k">of</span> <span class="nc">reg</span> <span class="k">is</span>
-	<span class="k">signal</span> <span class="n">num0</span><span class="p">,</span> <span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="o">:</span><span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-<span class="k">begin</span>
-	<span class="k">process</span><span class="p">(</span><span class="n">clk</span><span class="p">,</span> <span class="n">clear</span><span class="p">)</span>
-        <span class="k">variable</span> <span class="n">status</span><span class="o">:</span> <span class="kt">integer</span> <span class="k">range</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">3</span><span class="p">;</span>
-	<span class="k">begin</span>		
-		<span class="k">if</span> <span class="n">clear</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="k">then</span>
-			<span class="n">num0</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="k">others</span> <span class="o">=&gt;</span> <span class="sc">&#39;0&#39;</span><span class="p">);</span>
-			<span class="n">num1</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="k">others</span> <span class="o">=&gt;</span> <span class="sc">&#39;0&#39;</span><span class="p">);</span>
-			<span class="n">num2</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="k">others</span> <span class="o">=&gt;</span> <span class="sc">&#39;0&#39;</span><span class="p">);</span>
-			<span class="n">status</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span>
-		<span class="k">elsif</span> <span class="n">enable</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">then</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">clk</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">clk</span><span class="o">=</span><span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="k">then</span>
-					<span class="k">if</span> <span class="n">st</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">then</span>
-						<span class="n">num2</span> <span class="o">&lt;=</span> <span class="n">num1</span><span class="p">;</span>
-						<span class="n">num1</span> <span class="o">&lt;=</span> <span class="n">num0</span><span class="p">;</span>
-						<span class="n">num0</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">;</span>
-					<span class="k">else</span>
-						<span class="k">if</span> <span class="n">status</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="k">then</span>
-							<span class="n">status</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span>
-						<span class="k">else</span>
-							<span class="n">status</span> <span class="o">:=</span> <span class="n">status</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-						<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-					<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-				<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-		
-		<span class="k">if</span> <span class="n">st</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">then</span>
-			<span class="n">status</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span>
-		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-		
-		<span class="k">case</span> <span class="n">status</span> <span class="k">is</span>
-			<span class="k">when</span> <span class="mi">0</span> <span class="o">=&gt;</span>
-				<span class="n">out_num3</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">12</span><span class="p">);</span>
-				<span class="n">out_num2</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">(</span><span class="mi">11</span> <span class="k">downto</span> <span class="mi">8</span><span class="p">);</span>
-				<span class="n">out_num1</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">4</span><span class="p">);</span>
-				<span class="n">out_num0</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-				<span class="n">l_st</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
-			<span class="k">when</span> <span class="mi">1</span> <span class="o">=&gt;</span>
-				<span class="n">out_num3</span> <span class="o">&lt;=</span> <span class="n">num0</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">12</span><span class="p">);</span>
-				<span class="n">out_num2</span> <span class="o">&lt;=</span> <span class="n">num0</span><span class="p">(</span><span class="mi">11</span> <span class="k">downto</span> <span class="mi">8</span><span class="p">);</span>
-				<span class="n">out_num1</span> <span class="o">&lt;=</span> <span class="n">num0</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">4</span><span class="p">);</span>
-				<span class="n">out_num0</span> <span class="o">&lt;=</span> <span class="n">num0</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-				<span class="n">l_st</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
-			<span class="k">when</span> <span class="mi">2</span> <span class="o">=&gt;</span>
-				<span class="n">out_num3</span> <span class="o">&lt;=</span> <span class="n">num1</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">12</span><span class="p">);</span>
-				<span class="n">out_num2</span> <span class="o">&lt;=</span> <span class="n">num1</span><span class="p">(</span><span class="mi">11</span> <span class="k">downto</span> <span class="mi">8</span><span class="p">);</span>
-				<span class="n">out_num1</span> <span class="o">&lt;=</span> <span class="n">num1</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">4</span><span class="p">);</span>
-				<span class="n">out_num0</span> <span class="o">&lt;=</span> <span class="n">num1</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-				<span class="n">l_st</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
-			<span class="k">when</span> <span class="mi">3</span> <span class="o">=&gt;</span>
-				<span class="n">out_num3</span> <span class="o">&lt;=</span> <span class="n">num2</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">12</span><span class="p">);</span>
-				<span class="n">out_num2</span> <span class="o">&lt;=</span> <span class="n">num2</span><span class="p">(</span><span class="mi">11</span> <span class="k">downto</span> <span class="mi">8</span><span class="p">);</span>
-				<span class="n">out_num1</span> <span class="o">&lt;=</span> <span class="n">num2</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">4</span><span class="p">);</span>
-				<span class="n">out_num0</span> <span class="o">&lt;=</span> <span class="n">num2</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-				<span class="n">l_st</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
-			<span class="k">when</span> <span class="k">others</span><span class="o">=&gt;</span>
-				<span class="n">out_num3</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">12</span><span class="p">);</span>
-				<span class="n">out_num2</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">(</span><span class="mi">11</span> <span class="k">downto</span> <span class="mi">8</span><span class="p">);</span>
-				<span class="n">out_num1</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">4</span><span class="p">);</span>
-				<span class="n">out_num0</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-				<span class="n">l_st</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
-		<span class="k">end</span> <span class="k">case</span><span class="p">;</span>
-	<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
-<span class="k">end</span> <span class="nc">rtl</span><span class="p">;</span>
-</code></pre></div><h2 id="蜂鸣器">蜂鸣器</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-vhdl" data-lang="vhdl"><span class="line"><span class="cl"><span class="k">library</span> <span class="nn">ieee</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nn">ieee.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nn">ieee.std_logic_unsigned.</span><span class="k">all</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">entity</span> <span class="nc">reg</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">	<span class="k">port</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="n">clk</span><span class="p">,</span> <span class="n">clear</span><span class="p">,</span> <span class="n">enable</span><span class="p">,</span> <span class="n">st</span><span class="o">:</span><span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">data</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">l_st</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">out_num0</span><span class="p">,</span> <span class="n">out_num1</span><span class="p">,</span> <span class="n">out_num2</span><span class="p">,</span> <span class="n">out_num3</span><span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">entity</span> <span class="nc">reg</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">architecture</span> <span class="nc">rtl</span> <span class="k">of</span> <span class="nc">reg</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">	<span class="k">signal</span> <span class="n">num0</span><span class="p">,</span> <span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="o">:</span><span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">begin</span>
+</span></span><span class="line"><span class="cl">	<span class="k">process</span><span class="p">(</span><span class="n">clk</span><span class="p">,</span> <span class="n">clear</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">variable</span> <span class="n">status</span><span class="o">:</span> <span class="kt">integer</span> <span class="k">range</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">begin</span>		
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="n">clear</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">			<span class="n">num0</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="k">others</span> <span class="o">=&gt;</span> <span class="sc">&#39;0&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="n">num1</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="k">others</span> <span class="o">=&gt;</span> <span class="sc">&#39;0&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="n">num2</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="k">others</span> <span class="o">=&gt;</span> <span class="sc">&#39;0&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="n">status</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">elsif</span> <span class="n">enable</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">clk</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">clk</span><span class="o">=</span><span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">					<span class="k">if</span> <span class="n">st</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">						<span class="n">num2</span> <span class="o">&lt;=</span> <span class="n">num1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">						<span class="n">num1</span> <span class="o">&lt;=</span> <span class="n">num0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">						<span class="n">num0</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">					<span class="k">else</span>
+</span></span><span class="line"><span class="cl">						<span class="k">if</span> <span class="n">status</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">							<span class="n">status</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">						<span class="k">else</span>
+</span></span><span class="line"><span class="cl">							<span class="n">status</span> <span class="o">:=</span> <span class="n">status</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">						<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">					<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">				<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="n">st</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">			<span class="n">status</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="n">status</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">			<span class="k">when</span> <span class="mi">0</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">				<span class="n">out_num3</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">12</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">out_num2</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">(</span><span class="mi">11</span> <span class="k">downto</span> <span class="mi">8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">out_num1</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">out_num0</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">l_st</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">when</span> <span class="mi">1</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">				<span class="n">out_num3</span> <span class="o">&lt;=</span> <span class="n">num0</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">12</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">out_num2</span> <span class="o">&lt;=</span> <span class="n">num0</span><span class="p">(</span><span class="mi">11</span> <span class="k">downto</span> <span class="mi">8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">out_num1</span> <span class="o">&lt;=</span> <span class="n">num0</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">out_num0</span> <span class="o">&lt;=</span> <span class="n">num0</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">l_st</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">when</span> <span class="mi">2</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">				<span class="n">out_num3</span> <span class="o">&lt;=</span> <span class="n">num1</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">12</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">out_num2</span> <span class="o">&lt;=</span> <span class="n">num1</span><span class="p">(</span><span class="mi">11</span> <span class="k">downto</span> <span class="mi">8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">out_num1</span> <span class="o">&lt;=</span> <span class="n">num1</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">out_num0</span> <span class="o">&lt;=</span> <span class="n">num1</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">l_st</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">when</span> <span class="mi">3</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">				<span class="n">out_num3</span> <span class="o">&lt;=</span> <span class="n">num2</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">12</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">out_num2</span> <span class="o">&lt;=</span> <span class="n">num2</span><span class="p">(</span><span class="mi">11</span> <span class="k">downto</span> <span class="mi">8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">out_num1</span> <span class="o">&lt;=</span> <span class="n">num2</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">out_num0</span> <span class="o">&lt;=</span> <span class="n">num2</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">l_st</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">when</span> <span class="k">others</span><span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">				<span class="n">out_num3</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">12</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">out_num2</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">(</span><span class="mi">11</span> <span class="k">downto</span> <span class="mi">8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">out_num1</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">out_num0</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">l_st</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">end</span> <span class="k">case</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="nc">rtl</span><span class="p">;</span>
+</span></span></code></pre></div><h2 id="蜂鸣器">蜂鸣器</h2>
 <p>蜂鸣器的工作方式是当按键按下时鸣叫，当按键松开后，鸣叫会持续0.2秒。在我的设计当中，蜂鸣器使用了两个时钟输入，clk1用于控制蜂鸣器的发声频率，clk2（100ms）用来进行按键松开后的计时。</p>
-<div class="highlight"><pre class="chroma"><code class="language-vhdl" data-lang="vhdl"><span class="k">library</span> <span class="nn">ieee</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">ieee.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">ieee.std_logic_unsigned.</span><span class="k">all</span><span class="p">;</span>
-
-<span class="k">entity</span> <span class="nc">ling</span> <span class="k">is</span>
-	<span class="k">port</span><span class="p">(</span>
-		<span class="n">enable</span><span class="p">,</span> <span class="n">clk1</span><span class="p">,</span> <span class="n">clk2</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
-		<span class="n">clk_out</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span>
-	<span class="p">);</span>
-<span class="k">end</span> <span class="k">entity</span><span class="p">;</span>
-
-<span class="k">architecture</span> <span class="nc">rtl</span> <span class="k">of</span> <span class="nc">ling</span> <span class="k">is</span>
-	<span class="k">signal</span> <span class="n">flag</span><span class="o">:</span> <span class="kt">std_logic</span><span class="p">;</span>
-<span class="k">begin</span>
-	<span class="k">process</span><span class="p">(</span><span class="n">clk2</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span>
-	<span class="k">begin</span>
-		<span class="k">if</span> <span class="n">flag</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">then</span>
-			<span class="n">clk_out</span> <span class="o">&lt;=</span> <span class="n">clk2</span><span class="p">;</span>
-		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-	<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
-	
-	<span class="k">process</span><span class="p">(</span><span class="n">clk1</span><span class="p">,</span><span class="n">enable</span><span class="p">,</span> <span class="n">clk2</span><span class="p">)</span>
-		<span class="k">variable</span> <span class="n">num</span><span class="o">:</span> <span class="kt">integer</span> <span class="k">range</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">2000</span><span class="p">;</span>
-	<span class="k">begin</span>	
-		<span class="k">if</span> <span class="n">enable</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="k">then</span>
-			<span class="n">flag</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
-			<span class="n">num</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span>
-        
-		<span class="k">elsif</span> <span class="n">clk1</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">clk1</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">then</span>
-			<span class="k">if</span> <span class="n">flag</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">then</span>
-				<span class="k">if</span> <span class="n">num</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="k">then</span>
-					<span class="n">flag</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
-				<span class="k">else</span>
-					<span class="n">num</span> <span class="o">:=</span> <span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-				<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-			<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-	<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
-<span class="k">end</span> <span class="k">architecture</span> <span class="nc">rtl</span><span class="p">;</span>
-</code></pre></div></div><div class="post-footer" id="post-footer">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-vhdl" data-lang="vhdl"><span class="line"><span class="cl"><span class="k">library</span> <span class="nn">ieee</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nn">ieee.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nn">ieee.std_logic_unsigned.</span><span class="k">all</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">entity</span> <span class="nc">ling</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">	<span class="k">port</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="n">enable</span><span class="p">,</span> <span class="n">clk1</span><span class="p">,</span> <span class="n">clk2</span><span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">clk_out</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span>
+</span></span><span class="line"><span class="cl">	<span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">entity</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">architecture</span> <span class="nc">rtl</span> <span class="k">of</span> <span class="nc">ling</span> <span class="k">is</span>
+</span></span><span class="line"><span class="cl">	<span class="k">signal</span> <span class="n">flag</span><span class="o">:</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">begin</span>
+</span></span><span class="line"><span class="cl">	<span class="k">process</span><span class="p">(</span><span class="n">clk2</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">begin</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="n">flag</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">			<span class="n">clk_out</span> <span class="o">&lt;=</span> <span class="n">clk2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="k">process</span><span class="p">(</span><span class="n">clk1</span><span class="p">,</span><span class="n">enable</span><span class="p">,</span> <span class="n">clk2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">variable</span> <span class="n">num</span><span class="o">:</span> <span class="kt">integer</span> <span class="k">range</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">2000</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">begin</span>	
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="n">enable</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">			<span class="n">flag</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">num</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">		<span class="k">elsif</span> <span class="n">clk1</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">clk1</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="n">flag</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">				<span class="k">if</span> <span class="n">num</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">					<span class="n">flag</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">				<span class="k">else</span>
+</span></span><span class="line"><span class="cl">					<span class="n">num</span> <span class="o">:=</span> <span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">				<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">end</span> <span class="k">process</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">architecture</span> <span class="nc">rtl</span><span class="p">;</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
                 <span>更新于 2020-01-01</span>
-            </div>
-            <div class="post-info-license"></div>
-        </div>
+            </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/vhdl-miaobiao/" data-title="VHDL设计 秒表"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/vhdl-miaobiao/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/vhdl-miaobiao/" data-title="VHDL设计 秒表"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://localhost:1313/posts/vhdl-miaobiao/" data-title="VHDL设计 秒表"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/vhdl-miaobiao/" data-title="VHDL设计 秒表"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -712,20 +712,20 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/use-github/" class="prev" rel="prev" title="Git 及 Github 上手"><i class="fas fa-angle-left fa-fw"></i>Git 及 Github 上手</a>
-            <a href="/posts/special-dictionary/" class="next" rel="next" title="Flutter 词典APP">Flutter 词典APP<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/posts/use-github/" class="prev" rel="prev" title="Git 及 Github 上手"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Git 及 Github 上手</a>
+            <a href="/posts/special-dictionary/" class="next" rel="next" title="Flutter 词典APP">Flutter 词典APP<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.75.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.147.5">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
         </div>
     </footer></div>
 
         <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
-                <i class="fas fa-arrow-up fa-fw"></i>
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
             </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
-                <i class="fas fa-comment fa-fw"></i>
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
             </a>
-        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

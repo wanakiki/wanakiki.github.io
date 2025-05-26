@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-    <head>
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>数据结构作业七 Transport - Wanakiki`s Blog</title><meta name="Description" content=""><meta property="og:title" content="数据结构作业七 Transport" />
-<meta property="og:description" content="清华OJ广度优先搜索题目。 描述 某广播公司要在一个地区架设无线广播发射装置。该地区共有n个小镇，每个小镇都要安装一台发射机并播放各自的节目。 不过，该公司只获得了FM104.2和FM98.6两个波段的授权" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://wanakiki.github.io/posts/transport/" />
-<meta property="article:published_time" content="2019-05-17T09:47:43+08:00" />
-<meta property="article:modified_time" content="2019-05-17T09:47:43+08:00" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="数据结构作业七 Transport"/>
-<meta name="twitter:description" content="清华OJ广度优先搜索题目。 描述 某广播公司要在一个地区架设无线广播发射装置。该地区共有n个小镇，每个小镇都要安装一台发射机并播放各自的节目。 不过，该公司只获得了FM104.2和FM98.6两个波段的授权"/>
-<meta name="application-name" content="Wanakiki`s Blog">
-<meta name="apple-mobile-web-app-title" content="Wanakiki`s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <title>数据结构作业七 Transport - Wanakiki`s Blog</title><meta name="Description" content="This is my cool site"><meta property="og:url" content="http://localhost:1313/posts/transport/">
+  <meta property="og:site_name" content="Wanakiki`s Blog">
+  <meta property="og:title" content="数据结构作业七 Transport">
+  <meta property="og:description" content="清华OJ广度优先搜索题目。
+描述 某广播公司要在一个地区架设无线广播发射装置。该地区共有n个小镇，每个小镇都要安装一台发射机并播放各自的节目。
+不过，该公司只获得了FM104.2和FM98.6两个波段的授权，而使用同一波段的发射机会互相干扰。已知每台发射机的信号覆盖范围是以它为圆心，20km为半径的圆形区域，因此，如果距离小于20km的两个小镇使用同样的波段，那么它们就会由于波段干扰而无法正常收听节目。现在给出这些距离小于20km的小镇列表，试判断该公司能否使得整个地区的居民正常听到广播节目。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2019-05-17T09:47:43+08:00">
+    <meta property="article:modified_time" content="2019-05-17T09:47:43+08:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="数据结构作业七 Transport">
+  <meta name="twitter:description" content="清华OJ广度优先搜索题目。
+描述 某广播公司要在一个地区架设无线广播发射装置。该地区共有n个小镇，每个小镇都要安装一台发射机并播放各自的节目。
+不过，该公司只获得了FM104.2和FM98.6两个波段的授权，而使用同一波段的发射机会互相干扰。已知每台发射机的信号覆盖范围是以它为圆心，20km为半径的圆形区域，因此，如果距离小于20km的两个小镇使用同样的波段，那么它们就会由于波段干扰而无法正常收听节目。现在给出这些距离小于20km的小镇列表，试判断该公司能否使得整个地区的居民正常听到广播节目。">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://wanakiki.github.io/posts/transport/" /><link rel="prev" href="https://wanakiki.github.io/posts/shengsai-2019/" /><link rel="next" href="https://wanakiki.github.io/posts/latex-img/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/transport/" /><link rel="prev" href="http://localhost:1313/posts/shengsai-2019/" /><link rel="next" href="http://localhost:1313/posts/latex-img/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -25,63 +34,55 @@
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/wanakiki.github.io\/posts\/transport\/"
-        },"genre": "posts","wordcount":  2584 ,
-        "url": "https:\/\/wanakiki.github.io\/posts\/transport\/","datePublished": "2019-05-17T09:47:43+08:00","dateModified": "2019-05-17T09:47:43+08:00","publisher": {
+            "@id": "http:\/\/localhost:1313\/posts\/transport\/"
+        },"genre": "posts","wordcount":  2588 ,
+        "url": "http:\/\/localhost:1313\/posts\/transport\/","datePublished": "2019-05-17T09:47:43+08:00","dateModified": "2019-05-17T09:47:43+08:00","publisher": {
             "@type": "Organization",
-            "name": "wanakiki"},"author": {
+            "name": ""},"author": {
                 "@type": "Person",
                 "name": "wanakiki"
             },"description": ""
     }
     </script></head>
-    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+            <a href="/" title="Wanakiki`s Blog">🥰Wanakiki`s Blog</a>
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> Blog </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                    <i class="fas fa-adjust fa-fw"></i>
-                </a>
-            </div>
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
         </div>
     </div>
 </header><header class="mobile" id="header-mobile">
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="/" title="Wanakiki`s Blog">Wanakiki`s Blog</a>
+                <a href="/" title="Wanakiki`s Blog">🥰Wanakiki`s Blog</a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
             </div>
         </div>
         <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Blog</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                <i class="fas fa-adjust fa-fw"></i>
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a></div>
     </div>
-</header>
-<div class="search-dropdown desktop">
-    <div id="search-dropdown-desktop"></div>
-</div>
-<div class="search-dropdown mobile">
-    <div id="search-dropdown-mobile"></div>
-</div>
-<main class="main">
+</header><main class="main">
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">数据结构作业七 Transport</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wanakiki</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw"></i>数据结构</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-05-17">2019-05-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2584 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
-        </div><div class="details toc" id="toc-static"  kept="">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">数据结构作业七 Transport</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>wanakiki</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>数据结构</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2019-05-17">2019-05-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 2588 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
-                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
@@ -105,7 +106,6 @@
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>清华OJ广度优先搜索题目。</p>
-<!-- raw HTML omitted -->
 <h2 id="描述">描述</h2>
 <p>某广播公司要在一个地区架设无线广播发射装置。该地区共有n个小镇，每个小镇都要安装一台发射机并播放各自的节目。</p>
 <p>不过，该公司只获得了FM104.2和FM98.6两个波段的授权，而使用同一波段的发射机会互相干扰。已知每台发射机的信号覆盖范围是以它为圆心，20km为半径的圆形区域，因此，如果距离小于20km的两个小镇使用同样的波段，那么它们就会由于波段干扰而无法正常收听节目。现在给出这些距离小于20km的小镇列表，试判断该公司能否使得整个地区的居民正常听到广播节目。</p>
@@ -113,7 +113,7 @@
 <p>第一行为两个整数n，m，分别为小镇的个数以及接下来小于20km的小镇对的数目。 接下来的m行，每行2个整数，表示两个小镇的距离小于20km（编号从1开始）。</p>
 <h3 id="输出">输出</h3>
 <p>如果能够满足要求，输出1，否则输出-1。</p>
-<pre><code class="language-no" data-lang="no">输入样例
+<pre tabindex="0"><code class="language-no" data-lang="no">输入样例
 4 3
 1 2
 1 3
@@ -146,249 +146,248 @@ BFS</p>
 <p>另外一点，本次题目因为要在清华OJ上进行测试，没有stl标准库，如果要用到队列的话需要自己实现。我采用了链表和数组模拟两种方式对队列进行了实现，均通过了测试，代码将在下面给出。另外也一并附上stl版本。</p>
 <h2 id="编程实现">编程实现</h2>
 <h3 id="用链表实现队列">用链表实现队列</h3>
-<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span><span class="cp"></span><span class="c1">//#include &lt;queue&gt;
-</span><span class="c1"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-
-<span class="c1">//队列节点
-</span><span class="c1"></span><span class="k">struct</span> <span class="nc">node_of_queue</span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">del</span><span class="p">;</span>
-    <span class="n">node_of_queue</span><span class="o">*</span> <span class="n">next</span><span class="p">;</span>
-    <span class="n">node_of_queue</span><span class="p">(</span><span class="kt">int</span> <span class="n">v</span><span class="p">,</span> <span class="n">node_of_queue</span><span class="o">*</span> <span class="n">x</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">)</span><span class="o">:</span><span class="n">del</span><span class="p">(</span><span class="n">v</span><span class="p">),</span><span class="n">next</span><span class="p">(</span><span class="n">x</span><span class="p">){}</span>
-<span class="p">};</span>
-
-<span class="c1">//队列类
-</span><span class="c1"></span><span class="k">class</span> <span class="nc">myQueue</span><span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">node_of_queue</span><span class="o">*</span> <span class="n">front</span><span class="p">;</span>
-    <span class="n">node_of_queue</span><span class="o">*</span> <span class="n">back</span><span class="p">;</span>
-    <span class="n">myQueue</span><span class="p">()</span><span class="o">:</span><span class="n">front</span><span class="p">(</span><span class="nb">NULL</span><span class="p">),</span><span class="n">back</span><span class="p">(</span><span class="nb">NULL</span><span class="p">){}</span>
-    <span class="kt">int</span> <span class="nf">Front</span><span class="p">(){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">front</span><span class="p">)</span>
-            <span class="k">return</span> <span class="p">(</span><span class="n">front</span><span class="o">-&gt;</span><span class="n">del</span><span class="p">);</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="kt">void</span> <span class="nf">push</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-        <span class="n">node_of_queue</span><span class="o">*</span> <span class="n">tmp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">node_of_queue</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">front</span><span class="p">)</span>
-            <span class="n">front</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">back</span><span class="p">)</span>
-            <span class="n">back</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
-        <span class="k">else</span><span class="p">{</span>
-            <span class="n">back</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
-            <span class="n">back</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="p">;</span>
-    <span class="p">}</span>
-    <span class="kt">bool</span> <span class="nf">empty</span><span class="p">(){</span>
-        <span class="k">return</span> <span class="n">front</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="kt">void</span> <span class="nf">pop</span><span class="p">(){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">front</span><span class="p">){</span>
-            <span class="n">node_of_queue</span><span class="o">*</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">front</span><span class="p">;</span>
-            <span class="n">front</span> <span class="o">=</span> <span class="n">front</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">front</span><span class="p">)</span>
-                <span class="n">back</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-            <span class="k">delete</span> <span class="n">tmp</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="c1">//小镇节点
-</span><span class="c1"></span><span class="k">struct</span> <span class="nc">Node</span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_id</span><span class="p">;</span>
-    <span class="n">Node</span><span class="o">*</span> <span class="n">_next</span><span class="p">;</span>
-    <span class="n">Node</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="n">Node</span><span class="o">*</span> <span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">)</span><span class="o">:</span><span class="n">_id</span><span class="p">(</span><span class="n">id</span><span class="p">),</span> <span class="n">_next</span><span class="p">(</span><span class="n">next</span><span class="p">){}</span>
-<span class="p">};</span>
-
-<span class="c1">//小镇集合
-</span><span class="c1"></span><span class="k">struct</span> <span class="nc">Nodes</span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_ele</span><span class="p">;</span>
-    <span class="n">Node</span><span class="o">*</span> <span class="n">_next</span><span class="p">;</span>
-    <span class="n">Nodes</span><span class="p">()</span><span class="o">:</span><span class="n">_ele</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">_next</span><span class="p">(</span><span class="nb">NULL</span><span class="p">){}</span>
-    <span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">);</span>
-<span class="p">};</span>
-
-<span class="kt">void</span> <span class="n">Nodes</span><span class="o">::</span><span class="n">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">){</span>
-    <span class="n">_next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">_next</span><span class="p">);</span>
-    <span class="k">return</span> <span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="n">Nodes</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">10005</span><span class="p">];</span>
-    <span class="n">myQueue</span> <span class="n">myQ</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">;</span>
-    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">m</span><span class="o">--</span><span class="p">){</span>
-        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">v</span> <span class="o">&gt;&gt;</span> <span class="n">u</span><span class="p">;</span>
-        <span class="n">nodes</span><span class="p">[</span><span class="n">v</span><span class="p">].</span><span class="n">insert</span><span class="p">(</span><span class="n">u</span><span class="p">);</span>
-        <span class="n">nodes</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">insert</span><span class="p">(</span><span class="n">v</span><span class="p">);</span> <span class="c1">//无向图需要两次插入
-</span><span class="c1"></span>    <span class="p">}</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">cur</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">cur</span><span class="o">++</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">nodes</span><span class="p">[</span><span class="n">cur</span><span class="p">].</span><span class="n">_ele</span><span class="p">){</span>
-            <span class="n">nodes</span><span class="p">[</span><span class="n">cur</span><span class="p">].</span><span class="n">_ele</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>    <span class="c1">//进行标记
-</span><span class="c1"></span>            <span class="n">myQ</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur</span><span class="p">);</span>
-
-            <span class="kt">int</span> <span class="n">tmp</span><span class="p">;</span>
-            <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">myQ</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
-                <span class="n">tmp</span> <span class="o">=</span> <span class="n">myQ</span><span class="p">.</span><span class="n">Front</span><span class="p">();</span>
-                <span class="n">myQ</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-
-                <span class="n">Node</span><span class="o">*</span> <span class="n">cur_node</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">tmp</span><span class="p">].</span><span class="n">_next</span><span class="p">;</span>
-                <span class="k">while</span><span class="p">(</span><span class="n">cur_node</span><span class="p">){</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">].</span><span class="n">_ele</span> <span class="o">==</span> <span class="n">nodes</span><span class="p">[</span><span class="n">tmp</span><span class="p">].</span><span class="n">_ele</span><span class="p">){</span>
-                        <span class="c1">//已放置同色
-</span><span class="c1"></span>                        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-                        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-                    <span class="p">}</span>
-                    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">nodes</span><span class="p">[</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">].</span><span class="n">_ele</span><span class="p">){</span>
-                        <span class="c1">//未放置
-</span><span class="c1"></span>                        <span class="n">nodes</span><span class="p">[</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">].</span><span class="n">_ele</span> <span class="o">=</span> <span class="o">-</span><span class="n">nodes</span><span class="p">[</span><span class="n">tmp</span><span class="p">].</span><span class="n">_ele</span><span class="p">;</span>
-                        <span class="n">myQ</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">);</span>    <span class="c1">//只入队没被访问过的点
-</span><span class="c1"></span>                    <span class="p">}</span>
-                    <span class="n">cur_node</span> <span class="o">=</span> <span class="n">cur_node</span> <span class="o">-&gt;</span><span class="n">_next</span><span class="p">;</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-
-</code></pre></div><h3 id="用数组模拟队列">用数组模拟队列</h3>
-<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span><span class="cp"></span><span class="c1">//#include &lt;queue&gt;
-</span><span class="c1"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">myQ</span><span class="p">[</span><span class="mi">10005</span><span class="p">],</span> <span class="n">front</span><span class="p">,</span> <span class="n">back</span><span class="p">;</span>    <span class="c1">//队列数组
-</span><span class="c1"></span>
-<span class="k">struct</span> <span class="nc">Node</span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_id</span><span class="p">;</span>
-    <span class="n">Node</span><span class="o">*</span> <span class="n">_next</span><span class="p">;</span>
-    <span class="n">Node</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="n">Node</span><span class="o">*</span> <span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">)</span><span class="o">:</span><span class="n">_id</span><span class="p">(</span><span class="n">id</span><span class="p">),</span> <span class="n">_next</span><span class="p">(</span><span class="n">next</span><span class="p">){}</span>
-<span class="p">};</span>
-<span class="k">struct</span> <span class="nc">Nodes</span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_ele</span><span class="p">;</span>
-    <span class="n">Node</span><span class="o">*</span> <span class="n">_next</span><span class="p">;</span>
-    <span class="n">Nodes</span><span class="p">()</span><span class="o">:</span><span class="n">_ele</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">_next</span><span class="p">(</span><span class="nb">NULL</span><span class="p">){}</span>
-    <span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">);</span>
-<span class="p">};</span>
-
-<span class="kt">void</span> <span class="n">Nodes</span><span class="o">::</span><span class="n">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">){</span>
-    <span class="n">_next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">_next</span><span class="p">);</span>
-    <span class="k">return</span> <span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="n">Nodes</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">10005</span><span class="p">];</span>
-    <span class="c1">//queue&lt;int&gt; myQ;
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">;</span>
-    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">m</span><span class="o">--</span><span class="p">){</span>
-        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">v</span> <span class="o">&gt;&gt;</span> <span class="n">u</span><span class="p">;</span>
-        <span class="n">nodes</span><span class="p">[</span><span class="n">v</span><span class="p">].</span><span class="n">insert</span><span class="p">(</span><span class="n">u</span><span class="p">);</span>
-        <span class="n">nodes</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">insert</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">cur</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">cur</span><span class="o">++</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">nodes</span><span class="p">[</span><span class="n">cur</span><span class="p">].</span><span class="n">_ele</span><span class="p">){</span>
-            <span class="n">nodes</span><span class="p">[</span><span class="n">cur</span><span class="p">].</span><span class="n">_ele</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>    <span class="c1">//进行标记
-</span><span class="c1"></span>            <span class="n">front</span> <span class="o">=</span> <span class="n">back</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="n">myQ</span><span class="p">[</span><span class="n">back</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur</span><span class="p">;</span>
-
-            <span class="kt">int</span> <span class="n">tmp</span><span class="p">;</span>
-            <span class="k">while</span><span class="p">(</span><span class="n">front</span> <span class="o">&lt;</span> <span class="n">back</span><span class="p">){</span>
-                <span class="n">tmp</span> <span class="o">=</span> <span class="n">myQ</span><span class="p">[</span><span class="n">front</span><span class="o">++</span><span class="p">];</span>
-
-                <span class="n">Node</span><span class="o">*</span> <span class="n">cur_node</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">tmp</span><span class="p">].</span><span class="n">_next</span><span class="p">;</span>
-                <span class="k">while</span><span class="p">(</span><span class="n">cur_node</span><span class="p">){</span>
-                    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">nodes</span><span class="p">[</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">].</span><span class="n">_ele</span><span class="p">){</span>
-                        <span class="c1">//未放置
-</span><span class="c1"></span>                        <span class="n">nodes</span><span class="p">[</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">].</span><span class="n">_ele</span> <span class="o">=</span> <span class="o">-</span><span class="n">nodes</span><span class="p">[</span><span class="n">tmp</span><span class="p">].</span><span class="n">_ele</span><span class="p">;</span>
-                        <span class="n">myQ</span><span class="p">[</span><span class="n">back</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">;</span>
-                    <span class="p">}</span>
-                    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">].</span><span class="n">_ele</span> <span class="o">==</span> <span class="n">nodes</span><span class="p">[</span><span class="n">tmp</span><span class="p">].</span><span class="n">_ele</span><span class="p">){</span>
-                        <span class="c1">//已放置同色
-</span><span class="c1"></span>                        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-                        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-                    <span class="p">}</span>
-                    <span class="n">cur_node</span> <span class="o">=</span> <span class="n">cur_node</span> <span class="o">-&gt;</span><span class="n">_next</span><span class="p">;</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div><h3 id="stl标准模板库">stl标准模板库</h3>
-<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp">
-</span><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-
-<span class="k">struct</span> <span class="nc">Node</span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_id</span><span class="p">;</span>
-    <span class="n">Node</span><span class="o">*</span> <span class="n">_next</span><span class="p">;</span>
-    <span class="n">Node</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="n">Node</span><span class="o">*</span> <span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">)</span><span class="o">:</span><span class="n">_id</span><span class="p">(</span><span class="n">id</span><span class="p">),</span> <span class="n">_next</span><span class="p">(</span><span class="n">next</span><span class="p">){}</span>
-<span class="p">};</span>
-<span class="k">struct</span> <span class="nc">Nodes</span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_ele</span><span class="p">;</span>
-    <span class="n">Node</span><span class="o">*</span> <span class="n">_next</span><span class="p">;</span>
-    <span class="n">Nodes</span><span class="p">()</span><span class="o">:</span><span class="n">_ele</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">_next</span><span class="p">(</span><span class="nb">NULL</span><span class="p">){}</span>
-    <span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">);</span>
-<span class="p">};</span>
-
-<span class="kt">void</span> <span class="n">Nodes</span><span class="o">::</span><span class="n">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">){</span>
-    <span class="n">_next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">_next</span><span class="p">);</span>
-    <span class="k">return</span> <span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="n">Nodes</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
-    <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">myQ</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">;</span>
-    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">m</span><span class="o">--</span><span class="p">){</span>
-        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">v</span> <span class="o">&gt;&gt;</span> <span class="n">u</span><span class="p">;</span>
-        <span class="n">nodes</span><span class="p">[</span><span class="n">v</span><span class="p">].</span><span class="n">insert</span><span class="p">(</span><span class="n">u</span><span class="p">);</span>
-        <span class="n">nodes</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">insert</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="kt">int</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
-    <span class="k">do</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">cur</span><span class="p">].</span><span class="n">_ele</span> <span class="o">==</span> <span class="mi">2</span><span class="p">){</span>
-            <span class="n">nodes</span><span class="p">[</span><span class="n">cur</span><span class="p">].</span><span class="n">_ele</span> <span class="o">=</span> <span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">cur</span><span class="p">].</span><span class="n">_ele</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span><span class="p">;</span>    <span class="c1">//进行标记
-</span><span class="c1"></span>            <span class="n">myQ</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur</span><span class="p">);</span>
-
-            <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">cur</span><span class="p">;</span>
-            <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">myQ</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
-                <span class="n">tmp</span> <span class="o">=</span> <span class="n">myQ</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
-                <span class="n">myQ</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-
-                <span class="n">Node</span><span class="o">*</span> <span class="n">cur_node</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">tmp</span><span class="p">].</span><span class="n">_next</span><span class="p">;</span>
-                <span class="k">while</span><span class="p">(</span><span class="n">cur_node</span><span class="p">){</span>
-                    <span class="k">if</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">].</span><span class="n">_ele</span> <span class="o">==</span> <span class="mi">2</span><span class="p">){</span>
-                        <span class="c1">//未放置
-</span><span class="c1"></span>                        <span class="n">nodes</span><span class="p">[</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">].</span><span class="n">_ele</span> <span class="o">=</span> <span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">tmp</span><span class="p">].</span><span class="n">_ele</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span><span class="p">;</span>
-                        <span class="n">myQ</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">);</span>
-                    <span class="p">}</span>
-                    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">].</span><span class="n">_ele</span> <span class="o">==</span> <span class="n">nodes</span><span class="p">[</span><span class="n">tmp</span><span class="p">].</span><span class="n">_ele</span><span class="p">){</span>
-                        <span class="c1">//以放置同色
-</span><span class="c1"></span>                        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-                        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-                    <span class="p">}</span>
-
-                    <span class="n">cur_node</span> <span class="o">=</span> <span class="n">cur_node</span> <span class="o">-&gt;</span><span class="n">_next</span><span class="p">;</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">s</span> <span class="o">!=</span> <span class="p">(</span><span class="n">cur</span> <span class="o">=</span> <span class="p">(</span><span class="o">++</span><span class="n">cur</span><span class="o">%</span><span class="n">n</span><span class="p">)));</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div><h2 id="结果分析">结果分析</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1">//#include &lt;queue&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//队列节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">node_of_queue</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">del</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">node_of_queue</span><span class="o">*</span> <span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">node_of_queue</span><span class="p">(</span><span class="kt">int</span> <span class="n">v</span><span class="p">,</span> <span class="n">node_of_queue</span><span class="o">*</span> <span class="n">x</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">)</span><span class="o">:</span><span class="n">del</span><span class="p">(</span><span class="n">v</span><span class="p">),</span><span class="n">next</span><span class="p">(</span><span class="n">x</span><span class="p">){}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//队列类
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">myQueue</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">node_of_queue</span><span class="o">*</span> <span class="n">front</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">node_of_queue</span><span class="o">*</span> <span class="n">back</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">myQueue</span><span class="p">()</span><span class="o">:</span><span class="n">front</span><span class="p">(</span><span class="nb">NULL</span><span class="p">),</span><span class="n">back</span><span class="p">(</span><span class="nb">NULL</span><span class="p">){}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">Front</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">front</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">(</span><span class="n">front</span><span class="o">-&gt;</span><span class="n">del</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">push</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node_of_queue</span><span class="o">*</span> <span class="n">tmp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">node_of_queue</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">front</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">front</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">back</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">back</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">back</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">back</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">empty</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">front</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">pop</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">front</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">node_of_queue</span><span class="o">*</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">front</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">front</span> <span class="o">=</span> <span class="n">front</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">front</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">back</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">delete</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//小镇节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">Node</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">_id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="o">*</span> <span class="n">_next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="n">Node</span><span class="o">*</span> <span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">)</span><span class="o">:</span><span class="n">_id</span><span class="p">(</span><span class="n">id</span><span class="p">),</span> <span class="n">_next</span><span class="p">(</span><span class="n">next</span><span class="p">){}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//小镇集合
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">Nodes</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">_ele</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="o">*</span> <span class="n">_next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Nodes</span><span class="p">()</span><span class="o">:</span><span class="n">_ele</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">_next</span><span class="p">(</span><span class="nb">NULL</span><span class="p">){}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">Nodes</span><span class="o">::</span><span class="n">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">_next</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Nodes</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">10005</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">myQueue</span> <span class="n">myQ</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">m</span><span class="o">--</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">v</span> <span class="o">&gt;&gt;</span> <span class="n">u</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">nodes</span><span class="p">[</span><span class="n">v</span><span class="p">].</span><span class="n">insert</span><span class="p">(</span><span class="n">u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">nodes</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">insert</span><span class="p">(</span><span class="n">v</span><span class="p">);</span> <span class="c1">//无向图需要两次插入
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">cur</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">cur</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">nodes</span><span class="p">[</span><span class="n">cur</span><span class="p">].</span><span class="n">_ele</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">nodes</span><span class="p">[</span><span class="n">cur</span><span class="p">].</span><span class="n">_ele</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>    <span class="c1">//进行标记
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">myQ</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">myQ</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tmp</span> <span class="o">=</span> <span class="n">myQ</span><span class="p">.</span><span class="n">Front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">myQ</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">Node</span><span class="o">*</span> <span class="n">cur_node</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">tmp</span><span class="p">].</span><span class="n">_next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">while</span><span class="p">(</span><span class="n">cur_node</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">].</span><span class="n">_ele</span> <span class="o">==</span> <span class="n">nodes</span><span class="p">[</span><span class="n">tmp</span><span class="p">].</span><span class="n">_ele</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1">//已放置同色
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">nodes</span><span class="p">[</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">].</span><span class="n">_ele</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1">//未放置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="n">nodes</span><span class="p">[</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">].</span><span class="n">_ele</span> <span class="o">=</span> <span class="o">-</span><span class="n">nodes</span><span class="p">[</span><span class="n">tmp</span><span class="p">].</span><span class="n">_ele</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">myQ</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">);</span>    <span class="c1">//只入队没被访问过的点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">cur_node</span> <span class="o">=</span> <span class="n">cur_node</span> <span class="o">-&gt;</span><span class="n">_next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="用数组模拟队列">用数组模拟队列</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1">//#include &lt;queue&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">myQ</span><span class="p">[</span><span class="mi">10005</span><span class="p">],</span> <span class="n">front</span><span class="p">,</span> <span class="n">back</span><span class="p">;</span>    <span class="c1">//队列数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">Node</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">_id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="o">*</span> <span class="n">_next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="n">Node</span><span class="o">*</span> <span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">)</span><span class="o">:</span><span class="n">_id</span><span class="p">(</span><span class="n">id</span><span class="p">),</span> <span class="n">_next</span><span class="p">(</span><span class="n">next</span><span class="p">){}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">Nodes</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">_ele</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="o">*</span> <span class="n">_next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Nodes</span><span class="p">()</span><span class="o">:</span><span class="n">_ele</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">_next</span><span class="p">(</span><span class="nb">NULL</span><span class="p">){}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">Nodes</span><span class="o">::</span><span class="n">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">_next</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Nodes</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">10005</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//queue&lt;int&gt; myQ;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">m</span><span class="o">--</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">v</span> <span class="o">&gt;&gt;</span> <span class="n">u</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">nodes</span><span class="p">[</span><span class="n">v</span><span class="p">].</span><span class="n">insert</span><span class="p">(</span><span class="n">u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">nodes</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">insert</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">cur</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">cur</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">nodes</span><span class="p">[</span><span class="n">cur</span><span class="p">].</span><span class="n">_ele</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">nodes</span><span class="p">[</span><span class="n">cur</span><span class="p">].</span><span class="n">_ele</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>    <span class="c1">//进行标记
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">front</span> <span class="o">=</span> <span class="n">back</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">myQ</span><span class="p">[</span><span class="n">back</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">front</span> <span class="o">&lt;</span> <span class="n">back</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tmp</span> <span class="o">=</span> <span class="n">myQ</span><span class="p">[</span><span class="n">front</span><span class="o">++</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">Node</span><span class="o">*</span> <span class="n">cur_node</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">tmp</span><span class="p">].</span><span class="n">_next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">while</span><span class="p">(</span><span class="n">cur_node</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">nodes</span><span class="p">[</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">].</span><span class="n">_ele</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1">//未放置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="n">nodes</span><span class="p">[</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">].</span><span class="n">_ele</span> <span class="o">=</span> <span class="o">-</span><span class="n">nodes</span><span class="p">[</span><span class="n">tmp</span><span class="p">].</span><span class="n">_ele</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">myQ</span><span class="p">[</span><span class="n">back</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">].</span><span class="n">_ele</span> <span class="o">==</span> <span class="n">nodes</span><span class="p">[</span><span class="n">tmp</span><span class="p">].</span><span class="n">_ele</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1">//已放置同色
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">cur_node</span> <span class="o">=</span> <span class="n">cur_node</span> <span class="o">-&gt;</span><span class="n">_next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="stl标准模板库">stl标准模板库</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">Node</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">_id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="o">*</span> <span class="n">_next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="n">Node</span><span class="o">*</span> <span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">)</span><span class="o">:</span><span class="n">_id</span><span class="p">(</span><span class="n">id</span><span class="p">),</span> <span class="n">_next</span><span class="p">(</span><span class="n">next</span><span class="p">){}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">Nodes</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">_ele</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="o">*</span> <span class="n">_next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Nodes</span><span class="p">()</span><span class="o">:</span><span class="n">_ele</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">_next</span><span class="p">(</span><span class="nb">NULL</span><span class="p">){}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">Nodes</span><span class="o">::</span><span class="n">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">_next</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Nodes</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">myQ</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">m</span><span class="o">--</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">v</span> <span class="o">&gt;&gt;</span> <span class="n">u</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">nodes</span><span class="p">[</span><span class="n">v</span><span class="p">].</span><span class="n">insert</span><span class="p">(</span><span class="n">u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">nodes</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">insert</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">cur</span><span class="p">].</span><span class="n">_ele</span> <span class="o">==</span> <span class="mi">2</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">nodes</span><span class="p">[</span><span class="n">cur</span><span class="p">].</span><span class="n">_ele</span> <span class="o">=</span> <span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">cur</span><span class="p">].</span><span class="n">_ele</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span><span class="p">;</span>    <span class="c1">//进行标记
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">myQ</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">cur</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">myQ</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tmp</span> <span class="o">=</span> <span class="n">myQ</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">myQ</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">Node</span><span class="o">*</span> <span class="n">cur_node</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">tmp</span><span class="p">].</span><span class="n">_next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">while</span><span class="p">(</span><span class="n">cur_node</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">].</span><span class="n">_ele</span> <span class="o">==</span> <span class="mi">2</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1">//未放置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="n">nodes</span><span class="p">[</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">].</span><span class="n">_ele</span> <span class="o">=</span> <span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">tmp</span><span class="p">].</span><span class="n">_ele</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">myQ</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">cur_node</span><span class="o">-&gt;</span><span class="n">_id</span><span class="p">].</span><span class="n">_ele</span> <span class="o">==</span> <span class="n">nodes</span><span class="p">[</span><span class="n">tmp</span><span class="p">].</span><span class="n">_ele</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1">//以放置同色
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    <span class="n">cur_node</span> <span class="o">=</span> <span class="n">cur_node</span> <span class="o">-&gt;</span><span class="n">_next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">s</span> <span class="o">!=</span> <span class="p">(</span><span class="n">cur</span> <span class="o">=</span> <span class="p">(</span><span class="o">++</span><span class="n">cur</span><span class="o">%</span><span class="n">n</span><span class="p">)));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="结果分析">结果分析</h2>
 <p>最开始的代码使用的标准模板库中的queue，但是提交发现不能编译，于是自己手写了一个队列进行提交，但是只通过了7个测试。第一反应是自己的队列写错了，但经过多组数据测试之后发现是BFS过程中对已经访问过的点进行了入队操作。改正之后成功提交。之后顺便写了用数组模拟队列的代码，也成功通过。</p>
 <h2 id="总结体会">总结体会</h2>
 <p>实现邻接表的时候发现自己对图的掌握程度相对较低，整个逻辑想了一会才能用代码写出来。这个程序一开始保存图的时候还保存成了有向图&hellip;</p>
@@ -400,13 +399,11 @@ BFS</p>
         <div class="post-info-line">
             <div class="post-info-mod">
                 <span>更新于 2019-05-17</span>
-            </div>
-            <div class="post-info-license"></div>
-        </div>
+            </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/transport/" data-title="数据结构作业七 Transport"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/transport/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/transport/" data-title="数据结构作业七 Transport"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://localhost:1313/posts/transport/" data-title="数据结构作业七 Transport"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/transport/" data-title="数据结构作业七 Transport"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -418,20 +415,20 @@ BFS</p>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/shengsai-2019/" class="prev" rel="prev" title="2019年山东省省赛回顾"><i class="fas fa-angle-left fa-fw"></i>2019年山东省省赛回顾</a>
-            <a href="/posts/latex-img/" class="next" rel="next" title="Latex 插入图片方式整理">Latex 插入图片方式整理<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/posts/shengsai-2019/" class="prev" rel="prev" title="2019年山东省省赛回顾"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>2019年山东省省赛回顾</a>
+            <a href="/posts/latex-img/" class="next" rel="next" title="Latex 插入图片方式整理">Latex 插入图片方式整理<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.75.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.147.5">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wanakiki</a></span></div>
         </div>
     </footer></div>
 
         <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
-                <i class="fas fa-arrow-up fa-fw"></i>
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
             </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
-                <i class="fas fa-comment fa-fw"></i>
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
             </a>
-        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>
