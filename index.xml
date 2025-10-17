@@ -3,9 +3,17 @@
         <title>Wanakiki`s Blog</title>
         <link>http://localhost:1313/</link>
         <description>This is my cool site</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 16 Mar 2025 16:28:21 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 17 Oct 2025 21:46:30 &#43;0800</lastBuildDate>
             <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>End of Pixel6</title>
+    <link>http://localhost:1313/posts/end-of-pixel6/</link>
+    <pubDate>Fri, 17 Oct 2025 21:46:30 &#43;0800</pubDate>
+    <author>wanakiki</author>
+    <guid>http://localhost:1313/posts/end-of-pixel6/</guid>
+    <description><![CDATA[<p>我用了大概两年的 Pixel 6 手机，忽然在一个早上，屏幕开胶，直接漏出来了电路板。检查原因发现是因为电池鼓包，把屏幕给顶了起来。仔细想了一下，这个手机可能很早就已经鼓包了，只是没有把屏幕顶起来，我只感觉电池不耐用。</p>]]></description>
+</item>
+<item>
     <title>桌游探店一周年，我有了哪些想法</title>
     <link>http://localhost:1313/posts/250316-tablegame-anniversary/</link>
     <pubDate>Sun, 16 Mar 2025 16:28:21 &#43;0800</pubDate>
@@ -105,15 +113,6 @@
     <guid>http://localhost:1313/posts/2023-qingdao-marathon/</guid>
     <description><![CDATA[<p>4月22号，完赛了半马，最终是以两小时二十分钟的净成绩通过了终点，排名6999。</p>
 <p>最初报名马拉松的原因是，年初新冠疫情在床上躺了很久，总感觉生命可能随时就要G掉。于是身体恢复之后，就开始有意识地去进行一些锻炼。刚好发现了这个机会，加上同学的洗脑，说两个月的训练就可以完整跑下来，头一热就报名了。现在想了下，他当时画的大饼是两个小时以内我就能跑完。</p>]]></description>
-</item>
-<item>
-    <title>使用 Playwright 获取大众点评店铺评论</title>
-    <link>http://localhost:1313/posts/dazhongdianping-spider/</link>
-    <pubDate>Wed, 22 Mar 2023 12:33:06 &#43;0800</pubDate>
-    <author>wanakiki</author>
-    <guid>http://localhost:1313/posts/dazhongdianping-spider/</guid>
-    <description><![CDATA[<p>简单记录使用<code>playwright</code>获取大众点评店铺评论的方法。</p>
-<p>大概一年前使用<code>playwright</code>替换了<code>selenium</code>写爬虫，使用<code>playwright</code>自带脚本生成简单的代码并且保存登陆状态更加方便。最近因为某个原因要写一下大众点评的爬虫，简单记录一下整个过程。</p>]]></description>
 </item>
 </channel>
 </rss>

@@ -6,8 +6,15 @@
     <description>Recent content in Pixel6 on Wanakiki`s Blog</description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 05 Mar 2023 22:04:11 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 17 Oct 2025 21:46:30 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/pixel6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>End of Pixel6</title>
+      <link>http://localhost:1313/posts/end-of-pixel6/</link>
+      <pubDate>Fri, 17 Oct 2025 21:46:30 +0800</pubDate>
+      <guid>http://localhost:1313/posts/end-of-pixel6/</guid>
+      <description>&lt;p&gt;我用了大概两年的 Pixel 6 手机，忽然在一个早上，屏幕开胶，直接漏出来了电路板。检查原因发现是因为电池鼓包，把屏幕给顶了起来。仔细想了一下，这个手机可能很早就已经鼓包了，只是没有把屏幕顶起来，我只感觉电池不耐用。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Pixel6 安装 Magisk</title>
       <link>http://localhost:1313/posts/pixel6-magisk/</link>
