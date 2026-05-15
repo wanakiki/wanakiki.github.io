@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的开发板收藏 | My Dev Board Collection</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card-bg: #161b22;
+      --card-border: #30363d;
+      --text: #e6edf3;
+      --text-secondary: #8b949e;
+      --accent: #58a6ff;
+      --accent-hover: #79c0ff;
+      --tag-bg: #1f2937;
+      --tag-text: #7ee787;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--accent), #d2a8ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* Filter bar */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      border: 1px solid var(--card-border);
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(88, 166, 255, 0.08);
+    }
+
+    /* Board cards */
+    .board-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .board-card {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .board-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .board-img-wrap {
+      position: relative;
+      overflow: hidden;
+      background: #0d1117;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+    }
+
+    .board-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .board-card:hover .board-img-wrap img {
+      transform: scale(1.05);
+    }
+
+    .board-info {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .board-info h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .board-category {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: 1rem;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      margin-bottom: 0.8rem;
+      width: fit-content;
+    }
+
+    .board-desc {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+
+    .board-features {
+      list-style: none;
+      margin-bottom: 1rem;
+    }
+
+    .board-features li {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      padding: 0.2rem 0;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .board-features li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .board-links {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+
+    .board-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-decoration: none;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid rgba(88, 166, 255, 0.3);
+      border-radius: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .board-links a:hover {
+      background: rgba(88, 166, 255, 0.1);
+      border-color: var(--accent);
+    }
+
+    .note-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 0.3rem;
+      background: rgba(210, 153, 34, 0.15);
+      color: #d29922;
+      margin-left: 0.5rem;
+      font-weight: 400;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--card-border);
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .board-card {
+        grid-template-columns: 1fr;
+      }
+
+      .board-img-wrap {
+        height: 220px;
+      }
+
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      .container {
+        padding: 1.2rem 1rem;
+      }
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 8px;
+      box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔧 我的开发板收藏</h1>
+      <p>记录曾经使用过的开发板与模组，留作参考与回忆</p>
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-num">13</div>
+          <div class="stat-label">开发板 / 模组</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">7</div>
+          <div class="stat-label">品牌厂商</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">5</div>
+          <div class="stat-label">应用场景</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterBoards('all')">全部</button>
+      <button class="filter-btn" onclick="filterBoards('mcu')">MCU 开发板</button>
+      <button class="filter-btn" onclick="filterBoards('iot')">物联网模组</button>
+      <button class="filter-btn" onclick="filterBoards('wireless')">无线通信</button>
+      <button class="filter-btn" onclick="filterBoards('sensor')">传感器</button>
+    </div>
+
+    <div class="board-grid" id="boardGrid">
+
+      <!-- 1. 合宙 Air780E -->
+      <div class="board-card" data-category="iot wireless">
+        <div class="board-img-wrap">
+          <img src="合宙air780e.jpg" alt="合宙 Air780E" loading="lazy" onclick="openLightbox(this)">
+        </div>
+        <div class="board-info">
+          <div>
+            <h2>合宙 Air780E</h2>
+            <span class="board-category">IoT 通信模组</span>
+            <p class="board-desc">
+              基于紫光展锐 EC618 平台的 LTE Cat.1 无线通信模组，支持全网通。内置 LuatOS 框架，支持 Lua 脚本二次开发，是 2G 替换方案的理想选择。
+            </p>
+            <ul class="board-features">
+              <li>紫光展锐 EC618 芯片，主频 533MHz</li>
+              <li>LTE Cat.1 全网通，下行 10Mbps / 上行 5Mbps</li>
+              <li>16MB Flash + 16MB RAM，支持 Lua 脚本开发</li>
+              <li>丰富外设：USB 2.0、SPI、I2C、UART、ADC、GPIO</li>
+              <li>支持 LuatOS 框架与 FOTA 远程升级</li>
+            </ul>
+          </div>
+          <div class="board-links">
+            <a href="https://wiki.luatos.com/chips/air780e/" target="_blank">📖 官方文档</a>
+            <a href="https://www.openluat.com/" target="_blank">🏢 合宙官网</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. 合宙 Air700E -->
+      <div class="board-card" data-category="iot wireless">
+        <div class="board-img-wrap">
+          <img src="合宙Air700E.jpg" alt="合宙 Air700E" loading="lazy" onclick="openLightbox(this)">
+        </div>
+        <div class="board-info">
+          <div>
+            <h2>合宙 Air700E</h2>
+            <span class="board-category">IoT 通信模组</span>
+            <p class="board-desc">
+              合宙推出的超小尺寸 LTE Cat.1 通信模组，主打极致性价比和小体积。基于 EC618 平台，适合对尺寸和成本有严格要求的物联网终端产品。
+            </p>
+            <ul class="board-features">
+              <li>基于紫光展锐 EC618 平台，LTE Cat.1 全网通</li>
+              <li>超小封装（17.7mm × 15.8mm），适合紧凑设计</li>
+              <li>16MB Flash + 16MB RAM，支持 LuatOS 开发</li>
+              <li>支持 FOTA 远程升级</li>
+              <li>高性价比，适合大规模物联网部署</li>
+            </ul>
+          </div>
+          <div class="board-links">
+            <a href="https://wiki.luatos.com/chips/air700e/" target="_blank">📖 官方文档</a>
+            <a href="https://www.openluat.com/" target="_blank">🏢 合宙官网</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. 合宙 Air001 -->
+      <div class="board-card" data-category="mcu">
+        <div class="board-img-wrap">
+          <img src="合宙air001.jpg" alt="合宙 Air001" loading="lazy" onclick="openLightbox(this)">
+        </div>
+        <div class="board-info">
+          <div>
+            <h2>合宙 Air001</h2>
+            <span class="board-category">MCU 开发板</span>
+            <p class="board-desc">
+              合宙推出的超低成本微控制器开发板，基于 ARM Cortex-M0+ 内核，主打极致性价比，适用于替代传统 8 位单片机的场景。
+            </p>
+            <ul class="board-features">
+              <li>ARM Cortex-M0+ 内核，主频 72MHz</li>
+              <li>32KB Flash + 4KB SRAM</li>
+              <li>极致低价，适合大批量低成本应用</li>
+              <li>支持 Keil MDK、IAR、GCC 开发工具链</li>
+              <li>外设：ADC、UART、SPI、I2C、TIM、GPIO</li>
+            </ul>
+          </div>
+          <div class="board-links">
+            <a href="https://wiki.luatos.com/chips/air001/" target="_blank">📖 官方文档</a>
+            <a href="https://www.openluat.com/" target="_blank">🏢 合宙官网</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. 树莓派 Pico -->
+      <div class="board-card" data-category="mcu">
+        <div class="board-img-wrap">
+          <img src="树莓派pico.jpg" alt="Raspberry Pi Pico" loading="lazy" onclick="openLightbox(this)">
+        </div>
+        <div class="board-info">
+          <div>
+            <h2>Raspberry Pi Pico</h2>
+            <span class="board-category">MCU 开发板</span>
+            <p class="board-desc">
+              树莓派基金会推出的基于 RP2040 芯片的低成本微控制器开发板。双核 Cortex-M0+ 架构，具备独特的 PIO 可编程 I/O 系统，支持 MicroPython 和 C/C++。
+            </p>
+            <ul class="board-features">
+              <li>RP2040 芯片：双核 ARM Cortex-M0+，133MHz</li>
+              <li>264KB SRAM + 2MB 板载 Flash</li>
+              <li>26 个多功能 GPIO，支持 SPI/I2C/UART/PWM/ADC</li>
+              <li>独特的 PIO 子系统，支持自定义通信协议</li>
+              <li>支持 MicroPython / C/C++ SDK，UF2 烧录</li>
+            </ul>
+          </div>
+          <div class="board-links">
+            <a href="https://www.raspberrypi.com/documentation/microcontrollers/" target="_blank">📖 官方文档</a>
+            <a href="https://www.raspberrypi.com/" target="_blank">🏢 树莓派官网</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Seeed Wio Terminal -->
+      <div class="board-card" data-category="mcu wireless">
+        <div class="board-img-wrap">
+          <img src="wio-terminal.jpg" alt="Seeed Wio Terminal" loading="lazy" onclick="openLightbox(this)">
+        </div>
+        <div class="board-info">
+          <div>
+            <h2>Seeed Wio Terminal</h2>
+            <span class="board-category">MCU 开发板</span>
+            <p class="board-desc">
+              基于 SAMD51 处理器的集成开发平台，配备 2.4 英寸 LCD 屏幕、Wi-Fi/蓝牙模块及多种传感器。兼容 Arduino 和 MicroPython，适合快速原型开发。
+            </p>
+            <ul class="board-features">
+              <li>ATSAMD51P19 MCU：ARM Cortex-M4，120MHz，4MB Flash</li>
+              <li>内置 2.4 英寸 320×240 TFT LCD 显示屏</li>
+              <li>集成 Realtek RTL8720DN 双频 Wi-Fi + 蓝牙 5.0</li>
+              <li>五向摇杆、侧边按键、加速度计、麦克风、红外</li>
+              <li>兼容 40-pin Raspberry Pi GPIO 和 Grove 接口</li>
+            </ul>
+          </div>
+          <div class="board-links">
+            <a href="https://wiki.seeedstudio.com/Wio-Terminal-Getting-Started/" target="_blank">📖 官方文档</a>
+            <a href="https://www.seeedstudio.com/" target="_blank">🏢 Seeed 官网</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Seeed XIAO ESP32-C3 -->
+      <div class="board-card" data-category="mcu wireless">
+        <div class="board-img-wrap">
+          <img src="seeed-xiao-esp32-c3.jpg" alt="Seeed XIAO ESP32-C3" loading="lazy" onclick="openLightbox(this)">
+        </div>
+        <div class="board-info">
+          <div>
+            <h2>Seeed XIAO ESP32-C3</h2>
+            <span class="board-category">MCU + Wi-Fi/BLE</span>
+            <p class="board-desc">
+              XIAO 系列中基于乐鑫 ESP32-C3 的超紧凑开发板，RISC-V 32 位单核处理器，集成 Wi-Fi 和蓝牙 5.0，尺寸仅拇指大小。
+            </p>
+            <ul class="board-features">
+              <li>乐鑫 ESP32-C3：RISC-V 32 位单核，160MHz</li>
+              <li>400KB SRAM + 4MB Flash</li>
+              <li>2.4GHz Wi-Fi (802.11 b/g/n) + 蓝牙 5.0 BLE</li>
+              <li>超小尺寸 21mm × 17.5mm</li>
+              <li>11 个数字 I/O、4 个模拟 I/O，USB-C 供电</li>
+            </ul>
+          </div>
+          <div class="board-links">
+            <a href="https://wiki.seeedstudio.com/XIAO_ESP32C3_Getting_Started/" target="_blank">📖 官方文档</a>
+            <a href="https://www.seeedstudio.com/" target="_blank">🏢 Seeed 官网</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Microchip AVR64DD32 Curiosity Nano -->
+      <div class="board-card" data-category="mcu">
+        <div class="board-img-wrap">
+          <img src="AVR64DD32-Curiosity-nano.jpg" alt="Microchip AVR64DD32 Curiosity Nano" loading="lazy" onclick="openLightbox(this)">
+        </div>
+        <div class="board-info">
+          <div>
+            <h2>Microchip AVR64DD32 Curiosity Nano</h2>
+            <span class="board-category">MCU 开发板</span>
+            <p class="board-desc">
+              Microchip Curiosity Nano 系列开发板，搭载 AVR64DD32 MCU。支持多电压 I/O（MVIO），内置调试器，开箱即用。
+            </p>
+            <ul class="board-features">
+              <li>AVR64DD32 MCU：64KB Flash、8KB SRAM、256B EEPROM</li>
+              <li>内置 nEDBG 调试器，支持 MPLAB X IDE</li>
+              <li>多电压 I/O（MVIO），处理不同电压电平信号</li>
+              <li>12-bit ADC、10-bit DAC、运算放大器</li>
+              <li>USB 供电，板载用户 LED 和按钮</li>
+            </ul>
+          </div>
+          <div class="board-links">
+            <a href="https://www.microchip.com/en-us/development-tool/ev59f82a" target="_blank">📖 官方文档</a>
+            <a href="https://www.microchip.com/" target="_blank">🏢 Microchip 官网</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. Silicon Labs EFR32xG24 -->
+      <div class="board-card" data-category="wireless mcu">
+        <div class="board-img-wrap">
+          <img src="erf32xg24.jpg" alt="Silicon Labs EFR32xG24" loading="lazy" onclick="openLightbox(this)">
+        </div>
+        <div class="board-info">
+          <div>
+            <h2>Silicon Labs EFR32xG24 Dev Kit</h2>
+            <span class="board-category">无线 SoC 开发板</span>
+            <p class="board-desc">
+              Silicon Labs 推出的 EFR32 Series 2 多协议无线 SoC 开发套件，支持 Matter、Zigbee、Thread、Bluetooth 等协议，具备 AI/ML 推理能力。
+            </p>
+            <ul class="board-features">
+              <li>EFR32MG24B 多协议无线 SoC（Series 2）</li>
+              <li>2.4 GHz 射频，+10 dBm 发射功率</li>
+              <li>1536 KB Flash + 256 KB RAM</li>
+              <li>SecureVault 高等级硬件安全认证</li>
+              <li>支持 Matter/Zigbee/Thread/Bluetooth + AI/ML</li>
+            </ul>
+          </div>
+          <div class="board-links">
+            <a href="https://www.silabs.com/development-tools/wireless/efr32xg24-dev-kit" target="_blank">📖 官方文档</a>
+            <a href="https://www.silabs.com/" target="_blank">🏢 Silicon Labs 官网</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. 米家 IoT 开发板 -->
+      <div class="board-card" data-category="iot">
+        <div class="board-img-wrap">
+          <img src="米家iot开发板.jpg" alt="米家 IoT 开发板" loading="lazy" onclick="openLightbox(this)">
+        </div>
+        <div class="board-info">
+          <div>
+            <h2>米家 IoT 开发板</h2>
+            <span class="board-category">IoT 平台</span>
+            <p class="board-desc">
+              小米智能家居生态链中的开发者工具，用于帮助开发者将智能设备接入小米米家生态系统。通过小米 IoT 开发者平台获取 SDK 和接入指南。
+            </p>
+            <ul class="board-features">
+              <li>接入小米米家智能家居生态系统</li>
+              <li>提供设备接入 SDK 和开发文档</li>
+              <li>支持 Wi-Fi、BLE 等无线连接</li>
+              <li>可通过米家 App 进行设备控制和管理</li>
+              <li>小米 IoT 开发者平台提供完整技术支持</li>
+            </ul>
+          </div>
+          <div class="board-links">
+            <a href="https://iot.mi.com/v2/new/doc/home" target="_blank">📖 官方文档</a>
+            <a href="https://www.mi.com/" target="_blank">🏢 小米官网</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10. Adafruit APDS9960 -->
+      <div class="board-card" data-category="sensor">
+        <div class="board-img-wrap">
+          <img src="adafruit-APDS9960.jpg" alt="Adafruit APDS9960" loading="lazy" onclick="openLightbox(this)">
+        </div>
+        <div class="board-info">
+          <div>
+            <h2>Adafruit APDS9960 传感器板</h2>
+            <span class="board-category">传感器模块</span>
+            <p class="board-desc">
+              集成 RGB 颜色检测、接近检测和手势识别的多功能传感器板。基于 Broadcom APDS9960 芯片，I2C 接口，可识别上下左右手势方向。
+            </p>
+            <ul class="board-features">
+              <li>集成 RGB 颜色 + 接近 + 手势传感器</li>
+              <li>支持上下左右四种手势方向检测</li>
+              <li>I2C 接口（地址 0x39），兼容 3.3V / 5V</li>
+              <li>板载稳压和电平转换电路</li>
+              <li>提供 Arduino / CircuitPython / MicroPython 库</li>
+            </ul>
+          </div>
+          <div class="board-links">
+            <a href="https://learn.adafruit.com/adafruit-apds9960-breakout" target="_blank">📖 官方文档</a>
+            <a href="https://www.adafruit.com/" target="_blank">🏢 Adafruit 官网</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11. EV54Y39A -->
+      <div class="board-card" data-category="iot wireless">
+        <div class="board-img-wrap">
+          <img src="EV54Y39A.jpg" alt="Microchip PIC-IOT-WA (EV54Y39A)" loading="lazy" onclick="openLightbox(this)">
+        </div>
+        <div class="board-info">
+          <div>
+            <h2>Microchip PIC-IOT-WA</h2>
+            <span class="board-category">IoT Wi-Fi 开发板</span>
+            <p class="board-desc">
+              Microchip 推出的 PIC-IOT WA 开发板（型号 EV54Y39A），搭载 16 位 PIC24FJ128GA705 微控制器，集成 Wi-Fi 连接功能，专为物联网原型开发设计，可快速接入 AWS IoT 等云平台。
+            </p>
+            <ul class="board-features">
+              <li>PIC24FJ128GA705 16 位 MCU，128KB Flash + 16KB RAM</li>
+              <li>集成 Wi-Fi 模组，支持物联网云端连接</li>
+              <li>支持接入 AWS IoT、Microchip 云平台</li>
+              <li>板载调试器，开箱即用</li>
+              <li>MPLAB X IDE + MPLAB Harmony 开发框架</li>
+            </ul>
+          </div>
+          <div class="board-links">
+            <a href="https://www.digikey.tw/zh/products/detail/microchip-technology/EV54Y39A/11594550" target="_blank">📖 DigiKey 产品页</a>
+            <a href="https://www.microchip.com/" target="_blank">🏢 Microchip 官网</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12. TPS65-201A-S 触控板 -->
+      <div class="board-card" data-category="sensor">
+        <div class="board-img-wrap">
+          <img src="TPS65-201A-S触控板.jpg" alt="Azoteq TPS65-201A-S 触控板" loading="lazy" onclick="openLightbox(this)">
+        </div>
+        <div class="board-info">
+          <div>
+            <h2>Azoteq TPS65-201A-S 触控板</h2>
+            <span class="board-category">电容触控模组</span>
+            <p class="board-desc">
+              Azoteq 推出的电容式触控板模组，基于 IQS550 触控控制器 IC，支持多点触控和手势识别。65mm × 49mm 矩形感应区域，分辨率高达 3072 × 2048，适合需要精确触控输入的嵌入式应用。
+            </p>
+            <ul class="board-features">
+              <li>基于 Azoteq IQS550 电容触控控制器</li>
+              <li>65mm × 49mm 矩形感应区域</li>
+              <li>3072 × 2048 高分辨率电容感应</li>
+              <li>支持 XY 坐标追踪和手势识别</li>
+              <li>I2C 接口，RoHS 认证</li>
+            </ul>
+          </div>
+          <div class="board-links">
+            <a href="https://www.mouser.com/ProductDetail/Azoteq/TPS65-201A-S" target="_blank">📖 Mouser 产品页</a>
+            <a href="https://www.azoteq.com/" target="_blank">🏢 Azoteq 官网</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 13. 十二指神探 -->
+      <div class="board-card" data-category="mcu">
+        <div class="board-img-wrap">
+          <img src="十二指神探.jpg" alt="十二指神探" loading="lazy" onclick="openLightbox(this)">
+        </div>
+        <div class="board-info">
+          <div>
+            <h2>十二指神探</h2>
+            <span class="board-category">多功能调试助手</span>
+            <p class="board-desc">
+              硬禾学堂推出的基于 RP2040 的多功能硬件调试助手。通过 12 根引脚（9 根 IO + 3.3V/5V/GND）提供灵活的调试功能，使用 MicroPython 编程，可实现逻辑分析仪、信号发生器、协议调试等多种用途。
+            </p>
+            <ul class="board-features">
+              <li>基于 RP2040 双核 Cortex-M0+，主频 133MHz（可超频至 250MHz）</li>
+              <li>2MB Flash，12MHz 晶体，板载 5V→3.3V 降压（800mA）</li>
+              <li>12 引脚设计：9 根 IO（GPIO20-28）+ 3.3V + 5V + GND</li>
+              <li>支持逻辑分析仪（PulseView）、PWM、SPI/I2C/UART、ADC 采集</li>
+              <li>可实现 DDS 波形发生、DAPLink 调试器、VGA/HDMI 信号生成等</li>
+              <li>Type-C USB 供电/下载/通信，支持 MicroPython 和 C/C++</li>
+            </ul>
+          </div>
+          <div class="board-links">
+            <a href="https://www.eetree.cn/platform/748" target="_blank">📖 项目主页</a>
+            <a href="https://www.eetree.cn/" target="_blank">🏢 硬禾学堂</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer>
+      <p>📌 最后更新：2025 年 5 月 15 日 · 图片均为实拍</p>
+    </footer>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <script>
+    // Filter
+    function filterBoards(category) {
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      document.querySelectorAll('.board-card').forEach(card => {
+        if (category === 'all' || card.dataset.category.includes(category)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Lightbox
+    function openLightbox(img) {
+      const lb = document.getElementById('lightbox');
+      document.getElementById('lightbox-img').src = img.src;
+      lb.classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+</body>
+</html>
